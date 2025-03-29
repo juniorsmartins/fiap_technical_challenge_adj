@@ -1,0 +1,22 @@
+tasks.register('acceptanceTest', Test) {
+
+    // configurações da tarefa
+    testClassesDirs = sourceSets.acceptanceTest.output.classesDirs
+    classpath = sourceSets.acceptanceTest.runtimeClasspath
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+
+    useJUnitPlatform()
+
+    // Configuração do Cucumber
+    systemProperty 'cucumber.features', 'classpath:features'
+    systemProperty 'cucumber.glue', 'cucumber.config,cucumber.steps'
+    systemProperty 'cucumber.plugin', 'pretty,html:src/acceptanceTest/cucumber-reports/cucumber.html,json:src/acceptanceTest/cucumber-reports/cucumber.json'
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('acceptanceTest')
+}
+
