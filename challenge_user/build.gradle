@@ -59,3 +59,8 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// Define estratégia de comportamento frente a resources duplicados - applications
+tasks.withType(Copy).all {
+	duplicatesStrategy = 'exclude'
+}
+
