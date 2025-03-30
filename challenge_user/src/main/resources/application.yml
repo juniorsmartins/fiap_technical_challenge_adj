@@ -24,6 +24,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Define a estrategia de nomeacao de tabelas/colunas.
     properties:
       hibernate: # Configuracoes avancadas do Hibernate.
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
         transaction:
           jta:
             platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
