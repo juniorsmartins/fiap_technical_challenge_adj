@@ -44,7 +44,7 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
-	// Testes
+	// ----- TESTES -----
 	implementation 'io.cucumber:cucumber-java:7.21.1'
 	testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.21.1'
 	testImplementation 'io.cucumber:cucumber-junit:7.21.1'

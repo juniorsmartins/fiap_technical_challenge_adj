@@ -9,5 +9,5 @@ public class ChallengeUserApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ChallengeUserApplication.class, args);
 	}
-
 }
+
