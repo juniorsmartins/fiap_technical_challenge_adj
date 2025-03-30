@@ -40,5 +40,3 @@ COPY --from=builder /build/libs/*.jar app.jar
 # Comandos
 ENTRYPOINT ["java","-jar","app.jar"]
 
-
-
