@@ -1,5 +1,14 @@
 name: fiap_technical_challenge_adj
 
+volumes:
+  database_user:
+    name: database_user
+
+networks:
+  net_applications: # conexão com infra-local com acesso a internet - tipo bridge
+    name: net_applications
+    driver: bridge
+
 services:
 
   challenge_data_user:
@@ -18,17 +27,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - data_user:/var/lib/postgresql/data
-    networks:
-      - general
-
-
-volumes:
-  data_user:
-    name: data_user
-
-networks:
-  general:
-    name: general
-    driver: bridge
+      - database_user:/var/lib/postgresql/data
+    network_mode: host
 
