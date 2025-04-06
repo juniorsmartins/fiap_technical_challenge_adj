@@ -55,5 +55,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - database_user:/var/lib/postgresql/data
-    network_mode: host
+    networks:
+      - net_applications
 
