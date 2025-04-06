@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface CentralMapper {
+public interface AdapterMapper {
 
     @Mapping(target = "usuarioId", ignore = true)
     Usuario toUsuario(UsuarioDtoRequest usuarioDtoRequest);

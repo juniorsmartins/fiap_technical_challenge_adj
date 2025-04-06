@@ -2,6 +2,7 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -30,9 +31,14 @@ public class UserControllerPostStep {
     @LocalServerPort // Esta anotação injeta a porta selecionada pelo Spring Boot
     int port;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     private Response response;
 
     private UsuarioDtoRequest usuarioDtoRequest;
+
+    private UsuarioDtoResponse usuarioDtoResponse;
 
     @Before
     public void setUp() {
@@ -77,14 +83,24 @@ public class UserControllerPostStep {
     public void com_user_dto_request_no_body_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
-        var body = response.as(UsuarioDtoResponse.class);
+        usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
 
-        assertThat(body).isNotNull();
-        assertThat(body.usuarioId()).isNotNull();
-        assertThat(body.nome()).isEqualTo(nome);
-        assertThat(body.email()).isEqualTo(email);
-        assertThat(body.login()).isEqualTo(login);
-        assertThat(body.senha()).isEqualTo(senha);
+        assertThat(usuarioDtoResponse).isNotNull();
+        assertThat(usuarioDtoResponse.usuarioId()).isNotNull();
+        assertThat(usuarioDtoResponse.nome()).isEqualTo(nome);
+        assertThat(usuarioDtoResponse.email()).isEqualTo(email);
+        assertThat(usuarioDtoResponse.login()).isEqualTo(login);
+        assertThat(usuarioDtoResponse.senha()).isEqualTo(senha);
+    }
+
+    @Entao("um User salvo no database, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_user_salvo_no_database_com_nome_e_email_e_login_e_senha(
+            String nome, String email, String login, String senha) {
+        var usuarioCreate = usuarioRepository.findById(usuarioDtoResponse.usuarioId()).get();
+        assertThat(usuarioCreate.getNome()).isEqualTo(nome);
+        assertThat(usuarioCreate.getEmail()).isEqualTo(email);
+        assertThat(usuarioCreate.getLogin()).isEqualTo(login);
+        assertThat(usuarioCreate.getSenha()).isEqualTo(senha);
     }
 }
 

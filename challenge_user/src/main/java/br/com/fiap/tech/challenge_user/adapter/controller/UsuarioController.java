@@ -2,8 +2,9 @@ package br.com.fiap.tech.challenge_user.adapter.controller;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.mapper.CentralMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,17 +26,17 @@ public class UsuarioController {
 
     private final UsuarioCreateInputPort usuarioCreateInputPort;
 
-    private final CentralMapper centralMapper;
+    private final AdapterMapper adapterMapper;
 
     @PostMapping
-    public ResponseEntity<UsuarioDtoResponse> create(@RequestBody UsuarioDtoRequest usuarioDtoRequest) {
+    public ResponseEntity<UsuarioDtoResponse> create(@RequestBody @Valid UsuarioDtoRequest usuarioDtoRequest) {
 
         log.info("UserController - requisição feita no create: {}", usuarioDtoRequest);
 
         var response = Optional.ofNullable(usuarioDtoRequest)
-                .map(centralMapper::toUsuario)
+                .map(adapterMapper::toUsuario)
                 .map(usuarioCreateInputPort::create)
-                .map(centralMapper::toUsuarioDtoResponse)
+                .map(adapterMapper::toUsuarioDtoResponse)
                 .orElseThrow();
 
         log.info("UserController - requisição concluída no create: {}", response);
