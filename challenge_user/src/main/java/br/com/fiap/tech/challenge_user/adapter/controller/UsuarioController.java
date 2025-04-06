@@ -4,17 +4,16 @@ import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -26,12 +25,14 @@ public class UsuarioController {
 
     private final UsuarioCreateInputPort usuarioCreateInputPort;
 
+    private final UsuarioFindByIdOutputPort usuarioFindByIdOutputPort;
+
     private final AdapterMapper adapterMapper;
 
     @PostMapping
     public ResponseEntity<UsuarioDtoResponse> create(@RequestBody @Valid UsuarioDtoRequest usuarioDtoRequest) {
 
-        log.info("UserController - requisição feita no create: {}", usuarioDtoRequest);
+        log.info("UsuarioController - requisição feita no create: {}", usuarioDtoRequest);
 
         var response = Optional.ofNullable(usuarioDtoRequest)
                 .map(adapterMapper::toUsuario)
@@ -39,10 +40,27 @@ public class UsuarioController {
                 .map(adapterMapper::toUsuarioDtoResponse)
                 .orElseThrow();
 
-        log.info("UserController - requisição concluída no create: {}", response);
+        log.info("UsuarioController - requisição concluída no create: {}", response);
 
         return ResponseEntity
                 .created(URI.create(URI_USUARIO + "/" + response.usuarioId()))
+                .body(response);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<UsuarioDtoResponse> findById(@PathVariable(name = "id") final UUID id) {
+
+        log.info("UsuarioController - requisição feita no findById: {}", id);
+
+        var response = Optional.of(id)
+                .map(usuarioFindByIdOutputPort::findById)
+                .map(adapterMapper::toUsuarioDtoResponse)
+                .orElseThrow();
+
+        log.info("UsuarioController - requisição concluída no findById: {}", response);
+
+        return ResponseEntity
+                .ok()
                 .body(response);
     }
 }
