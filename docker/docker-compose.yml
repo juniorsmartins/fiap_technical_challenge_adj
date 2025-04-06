@@ -29,9 +29,9 @@ services:
           cpus: '1.0'
           memory: 512M
     environment:
-      - DB_NAME=challenge_user
       - DB_HOST=challenge_data_user
       - DB_PORT=5432
+      - DB_NAME=challenge_user
     restart: on-failure
     networks:
       - net_applications
@@ -48,7 +48,7 @@ services:
         limits:
           cpus: '0.5'
           memory: 512M
-    restart: always
+    restart: unless-stopped
     environment:
       - POSTGRES_DB=challenge_user
       - POSTGRES_USER=postgres
