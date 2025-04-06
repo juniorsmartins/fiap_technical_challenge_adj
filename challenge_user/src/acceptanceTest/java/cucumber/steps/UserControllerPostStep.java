@@ -1,7 +1,7 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.UserDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.UserDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -32,7 +32,7 @@ public class UserControllerPostStep {
 
     private Response response;
 
-    private UserDtoRequest userDtoRequest;
+    private UsuarioDtoRequest usuarioDtoRequest;
 
     @Before
     public void setUp() {
@@ -54,8 +54,8 @@ public class UserControllerPostStep {
     @Dado("um UserDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
     public void um_user_dto_request_valido_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
-        userDtoRequest = new UserDtoRequest(nome, email, login, senha);
-        assertThat(userDtoRequest).isNotNull();
+        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha);
+        assertThat(usuarioDtoRequest).isNotNull();
     }
 
     @Quando("a requisição Post for feita no método create do UserController")
@@ -63,7 +63,7 @@ public class UserControllerPostStep {
         response = RestAssured
                 .given().spec(requestSpecification)
                     .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                    .body(userDtoRequest)
+                    .body(usuarioDtoRequest)
                 .when()
                     .post();
     }
@@ -77,10 +77,10 @@ public class UserControllerPostStep {
     public void com_user_dto_request_no_body_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
-        var body = response.as(UserDtoResponse.class);
+        var body = response.as(UsuarioDtoResponse.class);
 
         assertThat(body).isNotNull();
-        assertThat(body.userId()).isNotNull();
+        assertThat(body.usuarioId()).isNotNull();
         assertThat(body.nome()).isEqualTo(nome);
         assertThat(body.email()).isEqualTo(email);
         assertThat(body.login()).isEqualTo(login);
