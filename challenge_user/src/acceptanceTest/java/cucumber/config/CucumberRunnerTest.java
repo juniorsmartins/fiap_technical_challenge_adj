@@ -1,4 +1,4 @@
-package cucumber;
+package cucumber.config;
 
 import br.com.fiap.tech.challenge_user.ChallengeUserApplication;
 import io.cucumber.junit.Cucumber;
