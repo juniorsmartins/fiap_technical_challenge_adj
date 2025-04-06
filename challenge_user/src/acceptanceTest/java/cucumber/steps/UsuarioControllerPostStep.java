@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserControllerPostStep {
+public class UsuarioControllerPostStep {
 
     private static RequestSpecification requestSpecification;
 
@@ -57,30 +57,32 @@ public class UserControllerPostStep {
         assertThat(count).isNotNull();
     }
 
-    @Dado("um UserDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_user_dto_request_valido_com_nome_e_email_e_login_e_senha(
+    @Dado("um UsuarioDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_dto_request_valido_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
         usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha);
         assertThat(usuarioDtoRequest).isNotNull();
     }
 
-    @Quando("a requisição Post for feita no método create do UserController")
-    public void a_requisicao_post_for_feita_no_metodo_create_do_user_controller() {
+    @Quando("a requisição Post for feita no método create do UsuarioController")
+    public void a_requisicao_post_for_feita_no_metodo_create_do_usuario_controller() {
         response = RestAssured
                 .given().spec(requestSpecification)
                     .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                     .body(usuarioDtoRequest)
                 .when()
                     .post();
+
+        assertThat(response).isNotNull();
     }
 
-    @Entao("receber ResponseEntity com HTTP {int} do UserController")
-    public void receber_response_entity_com_http_do_user_controller(Integer status) {
+    @Entao("receber ResponseEntity com HTTP {int} do Post do UsuarioController")
+    public void receber_response_entity_com_http_do_post_do_usuario_controller(Integer status) {
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com UserDtoRequest no body, com nome {string} e email {string} e login {string} e senha {string}")
-    public void com_user_dto_request_no_body_com_nome_e_email_e_login_e_senha(
+    @Entao("com UsuarioDtoRequest no body, com nome {string} e email {string} e login {string} e senha {string}")
+    public void com_usuario_dto_request_no_body_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
@@ -93,8 +95,8 @@ public class UserControllerPostStep {
         assertThat(usuarioDtoResponse.senha()).isEqualTo(senha);
     }
 
-    @Entao("um User salvo no database, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_user_salvo_no_database_com_nome_e_email_e_login_e_senha(
+    @Entao("um Usuario salvo no database, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_salvo_no_database_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
         var usuarioCreate = usuarioRepository.findById(usuarioDtoResponse.usuarioId()).get();
         assertThat(usuarioCreate.getNome()).isEqualTo(nome);
