@@ -11,6 +11,33 @@ networks:
 
 services:
 
+  challenge_user:
+    container_name: challenge_user
+    image: juniorsmartins/challenge_user:v0.0.1
+    build:
+      context: ../challenge_user/
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: "challenge_user"
+        APP_VERSION: "v0.0.1"
+        APP_DESCRIPTION: "Serviço de Crud e Login de usuários."
+    ports:
+      - "9050:9050"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    environment:
+      - DB_NAME=challenge_user
+      - DB_HOST=challenge_data_user
+      - DB_PORT=5432
+    restart: on-failure
+    networks:
+      - net_applications
+    depends_on:
+      - challenge_data_user
+
   challenge_data_user:
     container_name: challenge_data_user
     image: postgres:16.0
