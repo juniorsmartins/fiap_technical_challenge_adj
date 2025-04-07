@@ -4,6 +4,7 @@ import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,6 +28,8 @@ public class UsuarioController {
     private final UsuarioCreateInputPort usuarioCreateInputPort;
 
     private final UsuarioFindByIdOutputPort usuarioFindByIdOutputPort;
+
+    private final UsuarioDeleteByIdInputPort usuarioDeleteByIdInputPort;
 
     private final AdapterMapper adapterMapper;
 
@@ -62,6 +66,25 @@ public class UsuarioController {
         return ResponseEntity
                 .ok()
                 .body(response);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable(name = "id") final UUID id) {
+
+        log.info("UsuarioController - requisição feita no deleteById: {}", id);
+
+        Optional.ofNullable(id)
+                .ifPresentOrElse(usuarioDeleteByIdInputPort::deleteById,
+                        () -> {
+                            throw new NoSuchElementException();
+                        }
+                );
+
+        log.info("UsuarioController - requisição concluída no deleteById: {}", id);
+
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }
 

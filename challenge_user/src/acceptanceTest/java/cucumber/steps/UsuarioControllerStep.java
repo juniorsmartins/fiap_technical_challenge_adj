@@ -22,7 +22,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioControllerGetStep {
+public class UsuarioControllerStep {
 
     private static RequestSpecification requestSpecification;
 
@@ -85,8 +85,8 @@ public class UsuarioControllerGetStep {
         assertThat(response).isNotNull();
     }
 
-    @Entao("receber ResponseEntity com HTTP {int} do Get do UsuarioController")
-    public void receber_response_entity_com_http_do_get_do_usuario_controller(Integer status) {
+    @Entao("receber ResponseEntity com HTTP {int} do UsuarioController")
+    public void receber_response_entity_com_http_do_usuario_controller(Integer status) {
         assertEquals(status, response.getStatusCode());
     }
 
@@ -100,6 +100,23 @@ public class UsuarioControllerGetStep {
         assertThat(usuarioDtoResponse.nome()).isEqualTo(nome);
         assertThat(usuarioDtoResponse.email()).isEqualTo(email);
         assertThat(usuarioDtoResponse.login()).isEqualTo(login);
+    }
+
+    @Quando("uma requisição Delete for feita no método deleteById do UsuarioController")
+    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_usuario_controller() {
+        response = RestAssured
+                .given().spec(requestSpecification)
+                    .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                    .delete("/" + usuarioEntity.getUsuarioId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Usuário foi apagado do banco de dados pelo UsuarioController")
+    public void o_usuario_foi_apagado_do_banco_de_dados_pelo_usuario_controller() {
+        var response = usuarioRepository.findById(usuarioEntity.getUsuarioId());
+        assertThat(response).isEmpty();
     }
 }
 

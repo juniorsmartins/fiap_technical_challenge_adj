@@ -14,6 +14,12 @@ Funcionalidade: testar operação GET para consultar usuário
   Cenario: Get para consultar Usuário com sucesso pelo UserController
     Dado um identificador ID de um usuário existente, com email "fowler@email.com"
     Quando uma requisição Get for feita no método findById do UsuarioController
-    Entao receber ResponseEntity com HTTP 200 do Get do UsuarioController
+    Entao receber ResponseEntity com HTTP 200 do UsuarioController
     E com UsuarioDtoResponse no body, com id e nome "Martin Fowler" e email "fowler@email.com" e login "mfowler"
+
+  Cenario: Delete para apagar Usuário com sucesso pelo UsuarioController
+    Dado um identificador ID de um usuário existente, com email "beck@proton.me"
+    Quando uma requisição Delete for feita no método deleteById do UsuarioController
+    Entao receber ResponseEntity com HTTP 204 do UsuarioController
+    E o Usuário foi apagado do banco de dados pelo UsuarioController
 
