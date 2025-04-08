@@ -1,7 +1,7 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
@@ -81,8 +81,8 @@ public class UsuarioControllerPostStep {
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com UsuarioDtoRequest no body, com nome {string} e email {string} e login {string} e senha {string}")
-    public void com_usuario_dto_request_no_body_com_nome_e_email_e_login_e_senha(
+    @Entao("com UsuarioDtoResponse no body, com nome {string} e email {string} e login {string} e senha {string}")
+    public void com_usuario_dto_response_no_body_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         usuarioDtoResponse = response.as(UsuarioDtoResponse.class);

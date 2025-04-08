@@ -11,6 +11,6 @@ Funcionalidade: testar operação POST para criar usuário
     Dado um UsuarioDtoRequest válido, com nome "Martin Fowler" e email "martin@email.com" e login "rmartin" e senha "mar123"
     Quando a requisição Post for feita no método create do UsuarioController
     Então receber ResponseEntity com HTTP 201 do Post do UsuarioController
-    E com UsuarioDtoRequest no body, com nome "Martin Fowler" e email "martin@email.com" e login "rmartin" e senha "mar123"
+    E com UsuarioDtoResponse no body, com nome "Martin Fowler" e email "martin@email.com" e login "rmartin" e senha "mar123"
     E um Usuario salvo no database, com nome "Martin Fowler" e email "martin@email.com" e login "rmartin" e senha "mar123"
 

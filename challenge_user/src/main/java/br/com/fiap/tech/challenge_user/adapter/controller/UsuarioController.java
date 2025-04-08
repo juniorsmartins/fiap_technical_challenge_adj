@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.controller;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;

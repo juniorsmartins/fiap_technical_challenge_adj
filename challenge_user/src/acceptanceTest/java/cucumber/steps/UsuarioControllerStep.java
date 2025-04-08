@@ -1,6 +1,7 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioUpdateDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioRepository;
 import cucumber.config.ConstantsTest;
@@ -38,6 +39,8 @@ public class UsuarioControllerStep {
     private Response response;
 
     private UsuarioDtoResponse usuarioDtoResponse;
+
+    private UsuarioUpdateDtoRequest usuarioUpdateDtoRequest;
 
     private UsuarioEntity usuarioEntity;
 
@@ -90,16 +93,17 @@ public class UsuarioControllerStep {
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com UsuarioDtoResponse no body, com id e nome {string} e email {string} e login {string}")
-    public void com_usuario_dto_response_no_body_com_id_e_nome_e_email_e_login(String nome, String email, String login) {
+    @Entao("com UsuarioDtoResponse no body, com id e nome {string} e email {string} e login {string} e senha {string}")
+    public void com_usuario_dto_response_no_body_com_id_e_nome_e_email_e_login_e_senha(
+            String nome, String email, String login, String senha) {
 
         usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
 
-        assertThat(usuarioDtoResponse).isNotNull();
         assertThat(usuarioDtoResponse.usuarioId()).isEqualTo(usuarioEntity.getUsuarioId());
         assertThat(usuarioDtoResponse.nome()).isEqualTo(nome);
         assertThat(usuarioDtoResponse.email()).isEqualTo(email);
         assertThat(usuarioDtoResponse.login()).isEqualTo(login);
+        assertThat(usuarioDtoResponse.senha()).isEqualTo(senha);
     }
 
     @Quando("uma requisição Delete for feita no método deleteById do UsuarioController")
@@ -117,6 +121,39 @@ public class UsuarioControllerStep {
     public void o_usuario_foi_apagado_do_banco_de_dados_pelo_usuario_controller() {
         var response = usuarioRepository.findById(usuarioEntity.getUsuarioId());
         assertThat(response).isEmpty();
+    }
+
+    @Dado("um UsuarioUpdateDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_update_dto_request_valido_com_nome_e_email_e_login_e_senha(
+            String nome, String email, String login, String senha) {
+
+        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha);
+        assertThat(usuarioUpdateDtoRequest).isNotNull();
+    }
+
+    @Quando("uma requisição Put for feita no método update do UsuarioController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_usuario_controller() {
+        response = RestAssured
+                .given().spec(requestSpecification)
+                    .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                    .body(usuarioUpdateDtoRequest)
+                .when()
+                    .put();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Usuário foi atualizado no banco, com nome {string} e email {string} e login {string} e senha {string}")
+    public void o_usuario_foi_atualizado_no_banco_com_nome_e_email_e_login_e_senha(
+            String nome, String email, String login, String senha) {
+
+        var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
+
+        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(usuarioEntity.getUsuarioId());
+        assertThat(usuarioAtualizado.getNome()).isEqualTo(nome);
+        assertThat(usuarioAtualizado.getEmail()).isEqualTo(email);
+        assertThat(usuarioAtualizado.getLogin()).isEqualTo(login);
+        assertThat(usuarioAtualizado.getSenha()).isEqualTo(senha);
     }
 }
 
