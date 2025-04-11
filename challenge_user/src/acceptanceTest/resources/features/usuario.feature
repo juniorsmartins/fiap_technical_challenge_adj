@@ -1,8 +1,8 @@
 # language: pt
-Funcionalidade: testar operação GET para consultar usuário
-  Como cliente dessa API Rest, desejo consultar um usuário por id
-  Dessa forma, ter resposta padrão de sucesso ou de erro
-  Para saber se meu sistema foi capaz de buscar o usuário no banco de dados
+Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DELETE
+  Como cliente dessa API Rest, desejo cadastrar, consultar, atualizar e deletar usuário
+  Dessa forma, ter respostas padrão de sucesso ou de erro
+  Para saber se meu sistema foi capaz de executar um CRUD de usuário
 
   Contexto:
     Dado ambiente de teste ativado para Challenge_User
@@ -11,6 +11,13 @@ Funcionalidade: testar operação GET para consultar usuário
     |  Martin Fowler    |   fowler@email.com    |   mfowler   |   fowler123   |
     |     Kent Beck     |     beck@proton.me    |     kbeck   |     beck123   |
     |  Jeff Sutherland  |     jeff@gmail.com    |   jsuther   |   suther234   |
+
+  Cenario: Post para criar Usuário com sucesso pelo UsuarioController
+    Dado um UsuarioDtoRequest válido, com nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123"
+    Quando a requisição Post for feita no método create do UsuarioController
+    Entao receber ResponseEntity com HTTP 201 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123"
+    E um Usuario salvo no database, com nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123"
 
   Cenario: Get para consultar Usuário com sucesso pelo UserController
     Dado um identificador ID de um usuário existente, com email "fowler@email.com"
