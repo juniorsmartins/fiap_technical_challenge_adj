@@ -1,13 +1,18 @@
-package br.com.fiap.tech.challenge_user.adapter.dto;
+package br.com.fiap.tech.challenge_user.adapter.dto.request;
 
-import br.com.fiap.tech.challenge_user.config.ConstantsValidation;
-import io.cucumber.java.ht.Le;
 import jakarta.validation.constraints.NotBlank;
+import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
-import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
+import java.util.UUID;
 
-public record UsuarioDtoRequest(
+import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
+import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.MAX_CARACTER_SENHA;
+
+public record UsuarioUpdateDtoRequest(
+
+        @NonNull
+        UUID usuarioId,
 
         @NotBlank
         @Length(max = MAX_CARACTER_NOME)

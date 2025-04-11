@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UserControllerPostStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerPostStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/user_create.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario_post.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerPostStep.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario_post.feature" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +61,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Dockerfile" />
+        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -83,46 +82,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Cucumber Java.Feature: create_user.executor": "Run",
-    "Cucumber Java.Feature: user_create.executor": "Run",
-    "Cucumber Java.Feature: user_post.executor": "Run",
-    "Cucumber Java.Feature: usuario_get.executor": "Run",
-    "Cucumber Java.Feature: usuario_post.executor": "Run",
-    "Docker.docker.challenge_data_user: Compose Deployment.executor": "Run",
-    "Gradle.Build challenge_user.executor": "Run",
-    "Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor": "Run",
-    "Gradle.challenge_user [acceptanceTest].executor": "Run",
-    "Gradle.challenge_user [build].executor": "Run",
-    "Gradle.challenge_user [clean].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/get-user",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/juniorsmartins/Workspace/fiap_technical_challenge_adj/challenge_user/src/test/resources"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cucumber Java.Feature: create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: user_create.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: user_post.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario_get.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario_post.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker.challenge_data_user: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build challenge_user.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [acceptanceTest].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/update-user&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/juniorsmartins/Workspace/fiap_technical_challenge_adj/challenge_user/src/test/resources&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/challenge_user/src/test/resources" />
       <recent name="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.com.fiap.tech.challenge_user.application.port.output" />
       <recent name="br.com.fiap.tech.challenge_user.adapter.dto" />
       <recent name="cucumber" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.challenge_user [build]">
-    <configuration name="Feature: user_post" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Cucumber Java.Feature: usuario">
+    <configuration name="Feature: usuario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/user_post.feature" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
       <option name="GLUE" value="cucumber.steps cucumber.config" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="challenge_user.acceptanceTest" />
       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
-      <option name="SUGGESTED_NAME" value="Feature: user_post" />
+      <option name="SUGGESTED_NAME" value="Feature: usuario" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -224,11 +225,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: usuario" />
+        <item itemvalue="Cucumber Java.Feature: usuario_post" />
+        <item itemvalue="Cucumber Java.Feature: usuario_get" />
         <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Gradle.challenge_user [clean]" />
-        <item itemvalue="Cucumber Java.Feature: usuario_get" />
-        <item itemvalue="Cucumber Java.Feature: usuario_post" />
-        <item itemvalue="Cucumber Java.Feature: user_post" />
       </list>
     </recent_temporary>
   </component>
