@@ -48,7 +48,7 @@ services:
         limits:
           cpus: '0.5'
           memory: 512M
-    restart: unless-stopped
+    restart: on-failure
     environment:
       - POSTGRES_DB=challenge_user
       - POSTGRES_USER=postgres
