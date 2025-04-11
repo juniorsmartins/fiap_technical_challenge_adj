@@ -1,11 +1,14 @@
 package br.com.fiap.tech.challenge_user.adapter.controller;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +33,8 @@ public class UsuarioController {
     private final UsuarioFindByIdOutputPort usuarioFindByIdOutputPort;
 
     private final UsuarioDeleteByIdInputPort usuarioDeleteByIdInputPort;
+
+    private final UsuarioUpdateInputPort usuarioUpdateInputPort;
 
     private final AdapterMapper adapterMapper;
 
@@ -56,10 +61,9 @@ public class UsuarioController {
 
         log.info("UsuarioController - requisição feita no findById: {}", id);
 
-        var response = Optional.of(id)
-                .map(usuarioFindByIdOutputPort::findById)
+        var response = usuarioFindByIdOutputPort.findById(id)
                 .map(adapterMapper::toUsuarioDtoResponse)
-                .orElseThrow();
+                .orElseThrow(() -> new UsuarioNotFoundException(id));
 
         log.info("UsuarioController - requisição concluída no findById: {}", response);
 
@@ -85,6 +89,24 @@ public class UsuarioController {
         return ResponseEntity
                 .noContent()
                 .build();
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDtoResponse> update(@RequestBody @Valid UsuarioUpdateDtoRequest usuarioUpdateDtoRequest) {
+
+        log.info("UsuarioController - requisição feita no update: {}", usuarioUpdateDtoRequest);
+
+        var response = Optional.ofNullable(usuarioUpdateDtoRequest)
+                .map(adapterMapper::toUsuario)
+                .map(usuarioUpdateInputPort::update)
+                .map(adapterMapper::toUsuarioDtoResponse)
+                .orElseThrow();
+
+        log.info("UsuarioController - requisição concluída no update: {}", response);
+
+        return ResponseEntity
+                .ok()
+                .body(response);
     }
 }
 
