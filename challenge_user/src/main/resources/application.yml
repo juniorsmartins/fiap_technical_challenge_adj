@@ -17,6 +17,8 @@ spring:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     topic:
       usuario-create: usuario-create
+      usuario-update: usuario-update
+      usuario-delete: usuario-delete
     consumer:
       group-id: ${spring.application.name}:-group
       auto-offset-reset: latest
