@@ -26,7 +26,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    protected static final String URI_USUARIO = "/api/v1/challenge-user/user";
+    protected static final String URI_USUARIO = "/api/v1/challenge-user/users";
 
     private final UsuarioCreateInputPort usuarioCreateInputPort;
 
