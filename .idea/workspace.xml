@@ -110,7 +110,7 @@
       <recent name="cucumber" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.challenge_user [build]">
+  <component name="RunManager" selected="Cucumber Java.Feature: usuario">
     <configuration name="Feature: usuario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
@@ -220,9 +220,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: usuario" />
         <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Gradle.challenge_user [clean]" />
-        <item itemvalue="Cucumber Java.Feature: usuario" />
         <item itemvalue="Cucumber Java.Feature: usuario_post" />
         <item itemvalue="Cucumber Java.Feature: usuario_get" />
       </list>
