@@ -19,3 +19,13 @@ spring:
       enabled: true
       path: /h2-console
 
+  kafka:
+    topic: usuario-create
+    producer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    admin:
+      properties:
+        bootstrap-servers: localhost:9092
+

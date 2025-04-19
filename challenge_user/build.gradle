@@ -4,9 +4,13 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-description = 'Desafio técnico da pós-graduação em Arquitetura e Desenvolvimento Java (Fiap - 2025).'
 group = 'br.com.fiap.tech'
 version = '0.0.1-SNAPSHOT'
+description = 'Desafio técnico de pós-graduação em Arquitetura e Desenvolvimento Java (Fiap - 2025).'
+
+apply from: 'gradle/config/source-sets.gradle' // o source-sets precisa vir antes do config - primeiro source-sets.
+apply from: 'gradle/config/config.gradle' // Segundo: configura extensões
+apply from: 'gradle/config/task.gradle' // Terceiro: define tarefas
 
 java {
 	toolchain {
@@ -14,16 +18,12 @@ java {
 	}
 }
 
-apply from: 'gradle/config/source-sets.gradle' // o source-sets precisa vir antes do config - primeiro source-sets.
-apply from: 'gradle/config/config.gradle' // Segundo: configura extensões
-apply from: 'gradle/config/task.gradle' // Terceiro: define tarefas
-
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	// Web
+	// Web (criar API Rest)
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	// Validação de dados
@@ -33,18 +33,22 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
 
+	// Mensageria
+	implementation 'org.springframework.kafka:spring-kafka'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+
 	// Ferramentas de suporte
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
-	// Conversor MapStruct
+	// Conversor de objetos
 	implementation 'org.mapstruct:mapstruct:1.6.3'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
-	// ----- TESTES -----
+	// ------------ TESTES ------------
 	implementation 'io.cucumber:cucumber-java:7.21.1'
 	testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.21.1'
 	testImplementation 'io.cucumber:cucumber-junit:7.21.1'
