@@ -21,9 +21,6 @@ spring:
 
   kafka:
     topic: "usuario-create"
-#      usuario-create: usuario-create
-#      usuario-update: usuario-update
-#      usuario-delete: usuario-delete
     producer:
       bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer

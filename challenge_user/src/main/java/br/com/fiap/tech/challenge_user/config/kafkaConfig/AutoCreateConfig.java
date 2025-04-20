@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.config.kafka;
+package br.com.fiap.tech.challenge_user.config.kafkaConfig;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;

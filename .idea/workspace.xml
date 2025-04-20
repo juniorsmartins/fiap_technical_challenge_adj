@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/config/CucumberRunnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/config/CucumberRunnerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/kafka/AutoCreateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/kafkaConfig/AutoCreateConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/test/java/br/com/fiap/tech/challenge_user/ChallengeUserApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/test/java/br/com/fiap/tech/challenge_user/ChallengeUserApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +65,8 @@
       <list>
         <option value="Dockerfile" />
         <option value="Record" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -126,7 +122,7 @@
       <recent name="cucumber" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ChallengeUserApplication">
+  <component name="RunManager" selected="Gradle.challenge_user [build]">
     <configuration name="ChallengeUserApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.com.fiap.tech.challenge_user.ChallengeUserApplication" />
       <module name="challenge_user.main" />
@@ -242,5 +238,15 @@
       <updated>1743277536464</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="com.fasterxml.jackson.core.JsonProcessingException" package="com.fasterxml.jackson.core" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
