@@ -177,8 +177,8 @@ public class UsuarioControllerStep {
         assertThat(response).isEmpty();
     }
 
-    @Dado("um UsuarioUpdateDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_usuario_update_dto_request_valido_com_nome_e_email_e_login_e_senha(
+    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_update_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha);
@@ -199,8 +199,8 @@ public class UsuarioControllerStep {
         assertThat(response).isNotNull();
     }
 
-    @Entao("o Usuário foi atualizado no banco, com nome {string} e email {string} e login {string} e senha {string}")
-    public void o_usuario_foi_atualizado_no_banco_com_nome_e_email_e_login_e_senha(
+    @Entao("o Usuário no banco, possui nome {string} e email {string} e login {string} e senha {string}")
+    public void o_usuario_no_banco_possui_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
