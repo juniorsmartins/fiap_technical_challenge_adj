@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.dto.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
@@ -18,7 +19,7 @@ public record UsuarioUpdateDtoRequest(
         @Length(max = MAX_CARACTER_NOME)
         String nome,
 
-        @NotBlank
+        @Email
         @Length(max = MAX_CARACTER_EMAIL)
         String email,
 
