@@ -19,7 +19,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com UsuarioDtoResponse no body, com id e nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123"
     E um Usuario salvo no database, com nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123"
 
-  Cenario: Get para consultar Usuário com sucesso pelo UserController
+  Cenario: Get para consultar Usuário com sucesso pelo UsuarioController
     Dado um identificador ID de um usuário existente, com email "fowler@email.com"
     Quando uma requisição Get for feita no método findById do UsuarioController
     Entao receber ResponseEntity com HTTP 200 do UsuarioController
@@ -38,5 +38,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 200 do UsuarioController
     E com UsuarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123"
     E o Usuário foi atualizado no banco, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123"
+
+  Cenario: Get para consultar Usuário não encontrado pelo UsuarioController
+    Dado um identificador ID de um usuário inexistente
+    Quando uma requisição Get for feita no método findById do UsuarioController
+    Entao receber ResponseEntity com HTTP 404 do UsuarioController
+
 
 

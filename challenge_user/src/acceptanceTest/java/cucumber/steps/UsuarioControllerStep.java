@@ -21,6 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -88,6 +89,7 @@ public class UsuarioControllerStep {
             String nome, String email, String login, String senha) {
 
         usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha);
+
         assertThat(usuarioDtoRequest).isNotNull();
     }
 
@@ -139,6 +141,7 @@ public class UsuarioControllerStep {
     public void um_identificador_id_de_um_usuario_existente_com_email(String email) {
 
         usuarioEntity = usuarioRepository.findByEmail(email).get();
+
         assertThat(usuarioEntity).isNotNull();
     }
 
@@ -170,6 +173,7 @@ public class UsuarioControllerStep {
     public void o_usuario_foi_apagado_do_banco_de_dados_pelo_usuario_controller() {
 
         var response = usuarioRepository.findById(usuarioEntity.getUsuarioId());
+
         assertThat(response).isEmpty();
     }
 
@@ -178,6 +182,7 @@ public class UsuarioControllerStep {
             String nome, String email, String login, String senha) {
 
         usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha);
+
         assertThat(usuarioUpdateDtoRequest).isNotNull();
     }
 
@@ -205,6 +210,16 @@ public class UsuarioControllerStep {
         assertThat(usuarioAtualizado.getEmail()).isEqualTo(email);
         assertThat(usuarioAtualizado.getLogin()).isEqualTo(login);
         assertThat(usuarioAtualizado.getSenha()).isEqualTo(senha);
+    }
+
+    @Dado("um identificador ID de um usuário inexistente")
+    public void um_identificador_id_de_um_usuario_inexistente() {
+
+        usuarioEntity = UsuarioEntity.builder()
+                .usuarioId(UUID.randomUUID())
+                .build();
+
+        assertThat(usuarioEntity.getUsuarioId()).isNotNull();
     }
 }
 

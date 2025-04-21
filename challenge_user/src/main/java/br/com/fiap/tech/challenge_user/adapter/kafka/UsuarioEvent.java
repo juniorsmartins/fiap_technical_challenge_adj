@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.adapter.kafka.producer;
+package br.com.fiap.tech.challenge_user.adapter.kafka;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
 

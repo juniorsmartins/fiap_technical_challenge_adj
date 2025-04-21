@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/kafka/AutoCreateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/kafkaConfig/AutoCreateConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/UsuarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/UsuarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/kafka/producer/UsuarioEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/kafka/UsuarioEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/kafka/producer/UsuarioEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/kafka/producer/UsuarioEventProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_pt_BR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_pt_BR.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +68,8 @@
       <list>
         <option value="Dockerfile" />
         <option value="Record" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -85,34 +88,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Cucumber Java.Feature: create_user.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: user_create.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: user_post.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: usuario.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: usuario_get.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: usuario_post.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker.challenge_data_user: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build challenge_user.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [acceptanceTest].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/kafka&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/juniorsmartins/Workspace/fiap_technical_challenge_adj/challenge_user/src/test/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cucumber Java.Feature: create_user.executor": "Run",
+    "Cucumber Java.Feature: user_create.executor": "Run",
+    "Cucumber Java.Feature: user_post.executor": "Run",
+    "Cucumber Java.Feature: usuario.executor": "Run",
+    "Cucumber Java.Feature: usuario_get.executor": "Run",
+    "Cucumber Java.Feature: usuario_post.executor": "Run",
+    "Docker.docker.challenge_data_user: Compose Deployment.executor": "Run",
+    "Gradle.Build challenge_user.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor": "Run",
+    "Gradle.challenge_user [acceptanceTest].executor": "Run",
+    "Gradle.challenge_user [build].executor": "Run",
+    "Gradle.challenge_user [clean].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "feature/kafka",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/juniorsmartins/Workspace/fiap_technical_challenge_adj/challenge_user/src/main/resources",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/challenge_user/src/main/resources" />
       <recent name="$PROJECT_DIR$/challenge_user/src/test/resources" />
       <recent name="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources" />
     </key>
@@ -122,20 +127,7 @@
       <recent name="cucumber" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.challenge_user [build]">
-    <configuration name="ChallengeUserApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="br.com.fiap.tech.challenge_user.ChallengeUserApplication" />
-      <module name="challenge_user.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="br.com.fiap.tech.challenge_user.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Cucumber Java.Feature: usuario">
     <configuration name="Feature: usuario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
@@ -154,6 +146,28 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="challenge_user [acceptanceTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/challenge_user" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="acceptanceTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
     </configuration>
     <configuration name="challenge_user [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -220,11 +234,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: usuario" />
+        <item itemvalue="Gradle.challenge_user [acceptanceTest]" />
         <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Gradle.challenge_user [clean]" />
-        <item itemvalue="Cucumber Java.Feature: usuario" />
         <item itemvalue="Docker.docker.challenge_data_user: Compose Deployment" />
-        <item itemvalue="Application.ChallengeUserApplication" />
       </list>
     </recent_temporary>
   </component>

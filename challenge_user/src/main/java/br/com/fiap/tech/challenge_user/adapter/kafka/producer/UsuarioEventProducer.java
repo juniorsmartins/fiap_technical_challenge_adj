@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.kafka.producer;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.kafka.UsuarioEvent;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioEventProducerOutputPort;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

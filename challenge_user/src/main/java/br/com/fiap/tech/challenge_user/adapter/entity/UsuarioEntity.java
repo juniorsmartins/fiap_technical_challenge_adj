@@ -1,6 +1,5 @@
 package br.com.fiap.tech.challenge_user.adapter.entity;
 
-import br.com.fiap.tech.challenge_user.config.ConstantsValidation;
 import jakarta.persistence.*;
 import lombok.*;
 
