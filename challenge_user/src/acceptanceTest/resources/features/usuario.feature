@@ -44,5 +44,10 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Get for feita no método findById do UsuarioController
     Entao receber ResponseEntity com HTTP 404 do UsuarioController
 
+  Cenario: Delete para apagar Usuário não encontrado pelo UsuarioController
+    Dado um identificador ID de um usuário inexistente
+    Quando uma requisição Delete for feita no método deleteById do UsuarioController
+    Entao receber ResponseEntity com HTTP 404 do UsuarioController
+
 
 

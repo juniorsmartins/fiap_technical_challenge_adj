@@ -5,7 +5,7 @@ volumes:
     name: database_user
 
 networks:
-  net_applications: # conexão com infra-local com acesso a internet - tipo bridge
+  net_applications: # conexão com infra-local e acesso a internet - tipo bridge
     name: net_applications
     driver: bridge
 

@@ -79,9 +79,7 @@ public class UsuarioController {
 
         Optional.ofNullable(id)
                 .ifPresentOrElse(usuarioDeleteByIdInputPort::deleteById,
-                        () -> {
-                            throw new NoSuchElementException();
-                        }
+                        () -> {throw new NoSuchElementException();}
                 );
 
         log.info("UsuarioController - requisição concluída no deleteById: {}", id);
