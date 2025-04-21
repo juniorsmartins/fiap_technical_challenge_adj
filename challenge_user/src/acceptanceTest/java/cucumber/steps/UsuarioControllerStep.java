@@ -84,8 +84,8 @@ public class UsuarioControllerStep {
         }
     }
 
-    @Dado("um UsuarioDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_usuario_dto_request_valido_com_nome_e_email_e_login_e_senha(
+    @Dado("um UsuarioDtoRequest, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha);
