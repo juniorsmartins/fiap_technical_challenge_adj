@@ -9,9 +9,29 @@ spring:
   profiles:
     active: default
 
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+
   docker:
     compose:
       file: /home/juniorsmartins/Workspace/fiap_technical_challenge_adj/docker/docker-compose.yml
+
+  kafka:
+    topic: "usuario-create"
+    producer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    admin:
+      properties:
+        bootstrap-servers: localhost:9092
+
+#    consumer:
+#      group-id: ${spring.application.name}:-group
+#      auto-offset-reset: earliest
 
   datasource: # Configura o datasource do banco de dados.
     driver-class-name: org.postgresql.Driver # Especifica o driver JDBC (neste caso, para Postgres).
@@ -46,4 +66,6 @@ spring:
             non_contextual_creation: true # Ajuda a rastrear conexoes criadas fora do contexto transacional (pode desligar em producao).
     open-in-view: false #  Define se o Hibernate deve manter a sessao aberta durante a renderizacao da view. O false e recomendado para evitar problemas de performance e lazy loading.
     show-sql: true
+
+
 

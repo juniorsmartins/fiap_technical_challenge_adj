@@ -26,7 +26,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    protected static final String URI_USUARIO = "/api/v1/challenge-user/user";
+    protected static final String URI_USUARIO = "/api/v1/challenge-user/users";
 
     private final UsuarioCreateInputPort usuarioCreateInputPort;
 
@@ -79,9 +79,7 @@ public class UsuarioController {
 
         Optional.ofNullable(id)
                 .ifPresentOrElse(usuarioDeleteByIdInputPort::deleteById,
-                        () -> {
-                            throw new NoSuchElementException();
-                        }
+                        () -> {throw new NoSuchElementException();}
                 );
 
         log.info("UsuarioController - requisição concluída no deleteById: {}", id);

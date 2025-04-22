@@ -21,6 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -83,11 +84,12 @@ public class UsuarioControllerStep {
         }
     }
 
-    @Dado("um UsuarioDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_usuario_dto_request_valido_com_nome_e_email_e_login_e_senha(
+    @Dado("um UsuarioDtoRequest, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha);
+
         assertThat(usuarioDtoRequest).isNotNull();
     }
 
@@ -139,6 +141,7 @@ public class UsuarioControllerStep {
     public void um_identificador_id_de_um_usuario_existente_com_email(String email) {
 
         usuarioEntity = usuarioRepository.findByEmail(email).get();
+
         assertThat(usuarioEntity).isNotNull();
     }
 
@@ -170,14 +173,16 @@ public class UsuarioControllerStep {
     public void o_usuario_foi_apagado_do_banco_de_dados_pelo_usuario_controller() {
 
         var response = usuarioRepository.findById(usuarioEntity.getUsuarioId());
+
         assertThat(response).isEmpty();
     }
 
-    @Dado("um UsuarioUpdateDtoRequest válido, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_usuario_update_dto_request_valido_com_nome_e_email_e_login_e_senha(
+    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string}")
+    public void um_usuario_update_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha);
+
         assertThat(usuarioUpdateDtoRequest).isNotNull();
     }
 
@@ -194,8 +199,8 @@ public class UsuarioControllerStep {
         assertThat(response).isNotNull();
     }
 
-    @Entao("o Usuário foi atualizado no banco, com nome {string} e email {string} e login {string} e senha {string}")
-    public void o_usuario_foi_atualizado_no_banco_com_nome_e_email_e_login_e_senha(
+    @Entao("o Usuário no banco, possui nome {string} e email {string} e login {string} e senha {string}")
+    public void o_usuario_no_banco_possui_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
         var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
@@ -205,6 +210,16 @@ public class UsuarioControllerStep {
         assertThat(usuarioAtualizado.getEmail()).isEqualTo(email);
         assertThat(usuarioAtualizado.getLogin()).isEqualTo(login);
         assertThat(usuarioAtualizado.getSenha()).isEqualTo(senha);
+    }
+
+    @Dado("um identificador ID de um usuário inexistente")
+    public void um_identificador_id_de_um_usuario_inexistente() {
+
+        usuarioEntity = UsuarioEntity.builder()
+                .usuarioId(UUID.randomUUID())
+                .build();
+
+        assertThat(usuarioEntity.getUsuarioId()).isNotNull();
     }
 }
 
