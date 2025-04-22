@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.net.URI;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -81,6 +82,20 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .body(problemDetail);
+    }
+
+    // ---------- 500 Internal Server Error ---------- //
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ProblemDetail> handleNoSuchElementException(NoSuchElementException ex, WebRequest webRequest) {
+
+        // ProblemDetail RFC 7807
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        problemDetail.setType(URI.create("https://paginax.com/erros/erro-interno-servidor"));
+        problemDetail.setTitle(this.getMessage("exception.internal.server.error"));
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(problemDetail);
     }
 }
