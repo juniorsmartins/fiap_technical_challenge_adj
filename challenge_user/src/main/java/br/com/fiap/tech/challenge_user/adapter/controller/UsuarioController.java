@@ -9,9 +9,15 @@ import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdI
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +26,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
+@Tag(name = "Usuários", description = "Contém os recursos de Cadastrar, Consultar, Atualizar e Deletar.")
 @Slf4j
 @RestController
 @RequestMapping(path = {UsuarioController.URI_USUARIO})
@@ -39,6 +46,21 @@ public class UsuarioController {
     private final AdapterMapper adapterMapper;
 
     @PostMapping
+    @Operation(summary = "Cadastrar", description = "Recurso para criar um novo Usuário.",
+        responses = {
+            @ApiResponse(responseCode = "201", description = "Recurso cadastrado com sucesso.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioDtoResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição mal formulada.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))),
+            @ApiResponse(responseCode = "403", description = "Cliente sem permissão para acessar recurso.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))),
+            @ApiResponse(responseCode = "409", description = "Conflito com regras de negócio.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))),
+            @ApiResponse(responseCode = "500", description = "Situação inesperada no servidor.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))),
+    })
     public ResponseEntity<UsuarioDtoResponse> create(@RequestBody @Valid UsuarioDtoRequest usuarioDtoRequest) {
 
         log.info("UsuarioController - requisição feita no create: {}", usuarioDtoRequest);
@@ -79,7 +101,9 @@ public class UsuarioController {
 
         Optional.ofNullable(id)
                 .ifPresentOrElse(usuarioDeleteByIdInputPort::deleteById,
-                        () -> {throw new NoSuchElementException();}
+                        () -> {
+                            throw new NoSuchElementException();
+                        }
                 );
 
         log.info("UsuarioController - requisição concluída no deleteById: {}", id);
