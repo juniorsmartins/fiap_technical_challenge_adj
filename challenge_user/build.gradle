@@ -48,6 +48,9 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
+	// Documentação Swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
+
 	// ------------ TESTES ------------
 	implementation 'io.cucumber:cucumber-java:7.21.1'
 	testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.21.1'
