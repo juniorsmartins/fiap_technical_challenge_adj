@@ -23,12 +23,13 @@ public record UsuarioDtoRequest(
 
         @Schema(name = "login", description = "Nickname para acessar a aplicação.", example = "rmartin")
         @NotBlank
-        @Size(min = MIN_CARACTER_LOGIN, max = MAX_CARACTER_LOGIN)
+        @Size(max = MAX_CARACTER_LOGIN)
         String login,
 
         @Schema(name = "senha", description = "Segredo para acessar a aplicação.", example = "rmartin!123")
         @NotBlank
-        @Size(min = MIN_CARACTER_SENHA, max = MAX_CARACTER_SENHA)
+        @Size(max = MAX_CARACTER_SENHA)
         String senha
-) { }
+) {
+}
 

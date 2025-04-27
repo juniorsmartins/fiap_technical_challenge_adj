@@ -54,11 +54,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando a requisição Post for feita no método create do UsuarioController
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
 
-  Cenario: Post para criar Usuário, com erro por login menor, pelo UsuarioController
-    Dado um UsuarioDtoRequest, com nome "Helga Weiss" e email "hel@email.com" e login "hel" e senha "12345"
-    Quando a requisição Post for feita no método create do UsuarioController
-    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-
   Cenario: Post para criar Usuário, com erro por senha vazia, pelo UsuarioController
     Dado um UsuarioDtoRequest, com nome "Helga Weiss" e email "hel@email.com" e login "helga" e senha "  "
     Quando a requisição Post for feita no método create do UsuarioController
@@ -66,11 +61,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Cenario: Post para criar Usuário, com erro por senha maior, pelo UsuarioController
     Dado um UsuarioDtoRequest, com nome "Helga Weiss" e email "hel@email.com" e login "helga" e senha "anne01234567890123456789012345678901234567890123456789"
-    Quando a requisição Post for feita no método create do UsuarioController
-    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-
-  Cenario: Post para criar Usuário, com erro por senha menor, pelo UsuarioController
-    Dado um UsuarioDtoRequest, com nome "Helga Weiss" e email "hel@email.com" e login "helga" e senha "a"
     Quando a requisição Post for feita no método create do UsuarioController
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
 
@@ -162,13 +152,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
     E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
 
-  Cenario: Put para atualizar Usuário, com erro por login menor, pelo UsuarioController
-    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "ann" e senha "anne1"
-    Quando uma requisição Put for feita no método update do UsuarioController
-    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-    E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
-
   Cenario: Put para atualizar Usuário, com erro por senha vazia, pelo UsuarioController
     Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
     E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "   "
@@ -183,10 +166,4 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
     E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
 
-  Cenario: Put para atualizar Usuário, com erro por senha menor, pelo UsuarioController
-    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "a"
-    Quando uma requisição Put for feita no método update do UsuarioController
-    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-    E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
 
