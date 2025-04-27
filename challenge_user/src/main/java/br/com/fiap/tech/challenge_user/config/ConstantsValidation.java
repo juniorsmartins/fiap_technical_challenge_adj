@@ -9,5 +9,11 @@ public final class ConstantsValidation {
     public static final int MAX_CARACTER_LOGIN = 50;
 
     public static final int MAX_CARACTER_SENHA = 50;
+
+    public static final int MIN_CARACTER_NOME = 2;
+
+    public static final int MIN_CARACTER_LOGIN = 4;
+
+    public static final int MIN_CARACTER_SENHA = 2;
 }
 

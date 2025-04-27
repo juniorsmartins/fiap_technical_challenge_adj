@@ -19,23 +19,22 @@ public record UsuarioUpdateDtoRequest(
 
         @Schema(name = "nome", description = "Nome do usuário.", example = "Martin Fowler")
         @NotBlank
-        @Size(min = 1, max = MAX_CARACTER_NOME)
+        @Size(min = MIN_CARACTER_NOME, max = MAX_CARACTER_NOME)
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "fowler@email.com")
-        @NotBlank
+        @NotNull
         @Email
-        @Size(min = 1, max = MAX_CARACTER_EMAIL)
         String email,
 
         @Schema(name = "login", description = "Nickname para acessar a aplicação.", example = "mfowler")
         @NotBlank
-        @Size(min = 1, max = MAX_CARACTER_LOGIN)
+        @Size(min = MIN_CARACTER_LOGIN, max = MAX_CARACTER_LOGIN)
         String login,
 
         @Schema(name = "senha", description = "Segredo para acessar a aplicação.", example = "fowler20")
         @NotBlank
-        @Size(min = 1, max = MAX_CARACTER_SENHA)
+        @Size(min = MIN_CARACTER_SENHA, max = MAX_CARACTER_SENHA)
         String senha
 ) { }
 
