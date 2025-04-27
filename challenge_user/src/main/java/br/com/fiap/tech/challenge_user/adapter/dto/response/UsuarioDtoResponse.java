@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.UUID;
 
-@Schema(name = "UsuarioDtoResponse", description = "Transportador de dados de saída em requisições.")
+@Schema(name = "UsuarioDtoResponse", description = "Transportador de dados de saída.")
 public record UsuarioDtoResponse(
 
         @Schema(name = "usuarioId", description = "Identificador único do recurso.", example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748")

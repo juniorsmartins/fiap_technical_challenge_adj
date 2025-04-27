@@ -76,7 +76,7 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
         var id = ex.getId();
 
         var mensagem = this.messageSource
-                .getMessage(ex.getMessageKey(), new Object[]{}, LocaleContextHolder.getLocale());
+                .getMessage(ex.getMessageKey(), new Object[]{id.toString()}, LocaleContextHolder.getLocale());
 
         problemDetail.setTitle(mensagem);
 

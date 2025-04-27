@@ -26,6 +26,7 @@ public class InternationalMessageConfig implements WebMvcConfigurer {
 
     // Define como receber a escolha do idioma do usuário (pode armazenar em Cookie, Sessão ou via requisição - Accept-Language)
     // Também define a localização padrão
+    @Bean
     public LocaleResolver localeResolver() {
         AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
         localeResolver.setDefaultLocale(new Locale.Builder().setLanguage("pt").setRegion("BR").build());

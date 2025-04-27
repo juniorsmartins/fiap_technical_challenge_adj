@@ -42,7 +42,7 @@ spring:
   jpa: # Configura o JPA/Hibernate.
     database: POSTGRESQL # Especifica o banco usado.
     hibernate:
-      ddl-auto: update # Define como o Hibernate gerencia o esquema do banco (usar none em producao).
+      ddl-auto: create-drop # Define como o Hibernate gerencia o esquema do banco (usar none em producao).
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Define a estrategia de nomeacao de tabelas/colunas.
     properties:
@@ -67,9 +67,15 @@ spring:
     open-in-view: false #  Define se o Hibernate deve manter a sessao aberta durante a renderizacao da view. O false e recomendado para evitar problemas de performance e lazy loading.
     show-sql: true
 
-# swagger-ui custom path
-springdoc:
+  sql: # Esta propriedade controla quando e como o Spring Boot inicializa o banco de dados com scripts SQL
+    init:
+      mode: always
+
+springdoc: # swagger-ui custom path
+  api-docs:
+    enabled: true
   swagger-ui:
+    enabled: true
     path: /swagger-ui.html
 
 

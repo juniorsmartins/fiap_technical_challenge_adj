@@ -31,7 +31,7 @@ public final class UsuarioEntity implements Serializable {
     @Column(name = "nome", length = MAX_CARACTER_NOME, nullable = false)
     private String nome;
 
-    @Column(name = "email", length = MAX_CARACTER_EMAIL, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "login", length = MAX_CARACTER_LOGIN, nullable = false)
