@@ -13,7 +13,7 @@ public record UsuarioDtoRequest(
 
         @Schema(name = "nome", description = "Nome do usuário.", example = "Robert Martin")
         @NotBlank
-        @Size(min = MIN_CARACTER_NOME, max = MAX_CARACTER_NOME)
+        @Size(max = MAX_CARACTER_NOME)
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "martin@email.com")

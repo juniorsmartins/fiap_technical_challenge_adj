@@ -29,11 +29,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando a requisição Post for feita no método create do UsuarioController
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
 
-  Cenario: Post para criar Usuário, com erro por nome menor, pelo UsuarioController
-    Dado um UsuarioDtoRequest, com nome "h" e email "hel@email.com" e login "helga" e senha "12345"
-    Quando a requisição Post for feita no método create do UsuarioController
-    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-
   Cenario: Post para criar Usuário, com erro por email vazio, pelo UsuarioController
     Dado um UsuarioDtoRequest, com nome "Helga Weiss" e email " " e login "helga" e senha "12345"
     Quando a requisição Post for feita no método create do UsuarioController
@@ -113,13 +108,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
   Cenario: Put para atualizar Usuário, com erro por nome maior, pelo UsuarioController
     Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
     E um UsuarioUpdateDtoRequest, com nome "Anne Frank abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "anne@email.com" e login "annee" e senha "anne1"
-    Quando uma requisição Put for feita no método update do UsuarioController
-    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-    E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
-
-  Cenario: Put para atualizar Usuário, com erro por nome menor, pelo UsuarioController
-    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-    E um UsuarioUpdateDtoRequest, com nome "A" e email "anne@email.com" e login "annee" e senha "anne1"
     Quando uma requisição Put for feita no método update do UsuarioController
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
     E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
