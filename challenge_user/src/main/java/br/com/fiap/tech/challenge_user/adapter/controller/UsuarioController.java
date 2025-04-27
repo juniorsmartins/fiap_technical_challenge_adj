@@ -175,8 +175,38 @@ public class UsuarioController {
                 .build();
     }
 
-    @PutMapping
-    public ResponseEntity<UsuarioDtoResponse> update(@RequestBody @Valid UsuarioUpdateDtoRequest usuarioUpdateDtoRequest) {
+    @PutMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    @Operation(summary = "Atualizar", description = "Recurso para atualizar Editoria.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.",
+                content = {@Content(mediaType = "application/json",
+                        schema = @Schema(implementation = UsuarioDtoResponse.class))}
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal formulada.",
+                content = {@Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ProblemDetail.class))}
+            ),
+            @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado no banco de dados.",
+                content = {@Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ProblemDetail.class))}
+            ),
+            @ApiResponse(responseCode = "409", description = "Conflict - violação de regras de negócio.",
+                content = {@Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ProblemDetail.class))}
+            ),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.",
+                content = {@Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ProblemDetail.class))}
+            ),
+        }
+    )
+    public ResponseEntity<UsuarioDtoResponse> update(
+            @Parameter(name = "UsuarioUpdateDtoRequest", description = "Objeto para transporte de dados de entrada.",
+                    required = true)
+            @RequestBody @Valid UsuarioUpdateDtoRequest usuarioUpdateDtoRequest) {
 
         log.info("UsuarioController - requisição feita no update: {}", usuarioUpdateDtoRequest);
 

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 
-@Schema(name = "UsuarioDtoRequest", description = "Transportador de dados de entrada em requisições do Usuário.")
+@Schema(name = "UsuarioDtoRequest", description = "Transportador de dados de entrada em requisições.")
 public record UsuarioDtoRequest(
 
         @Schema(name = "nome", description = "Nome do usuário.", example = "Robert Martin")
