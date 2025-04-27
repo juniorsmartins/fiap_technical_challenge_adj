@@ -3,6 +3,7 @@ package br.com.fiap.tech.challenge_user.adapter.dto.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
@@ -16,7 +17,7 @@ public record UsuarioDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "martin@email.com")
-        @NotBlank
+        @NotNull
         @Email
         @Size(min = 2, max = MAX_CARACTER_EMAIL)
         String email,
