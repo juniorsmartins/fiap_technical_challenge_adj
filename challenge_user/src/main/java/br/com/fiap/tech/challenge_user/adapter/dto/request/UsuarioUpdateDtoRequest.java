@@ -23,6 +23,7 @@ public record UsuarioUpdateDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "fowler@email.com")
+        @NotBlank
         @Email
         @Size(min = 1, max = MAX_CARACTER_EMAIL)
         String email,

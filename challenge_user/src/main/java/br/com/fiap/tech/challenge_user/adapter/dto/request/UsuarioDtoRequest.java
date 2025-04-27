@@ -16,6 +16,7 @@ public record UsuarioDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "martin@email.com")
+        @NotBlank
         @Email
         @Size(min = 1, max = MAX_CARACTER_EMAIL)
         String email,
