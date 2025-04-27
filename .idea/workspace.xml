@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/exceptions/GlobalHandlerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/exceptions/GlobalHandlerException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_en_US.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_pt_BR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_pt_BR.properties" afterDir="false" />
     </list>
