@@ -17,8 +17,8 @@ import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"email"})
-public final class UsuarioEntity implements Serializable {
+@EqualsAndHashCode(of = {"usuarioId"}, callSuper = false)
+public final class UsuarioEntity extends AbstractAuditingEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

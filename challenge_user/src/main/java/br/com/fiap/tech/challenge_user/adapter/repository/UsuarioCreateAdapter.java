@@ -22,7 +22,7 @@ public class UsuarioCreateAdapter implements UsuarioCreateOutputPort {
     @Modifying
     @Override
     public UsuarioEntity save(@NonNull final UsuarioEntity usuarioEntity) {
-        return usuarioRepository.save(usuarioEntity);
+        return usuarioRepository.saveAndFlush(usuarioEntity);
     }
 }
 
