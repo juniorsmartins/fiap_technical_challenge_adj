@@ -6,7 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/UsuarioControllerStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioUpdateDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioUpdateDtoRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/UsuarioDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/UsuarioDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/UsuarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/UsuarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/mapper/ApplicationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/mapper/ApplicationMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/UsuarioUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/UsuarioUpdateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/import.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +70,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Dockerfile" />
+        <option value="Class" />
         <option value="Record" />
         <option value="Interface" />
-        <option value="Class" />
       </list>
     </option>
   </component>
@@ -119,7 +130,7 @@
       <recent name="cucumber" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: usuario">
+  <component name="RunManager" selected="Gradle.challenge_user [build]">
     <configuration name="Feature: usuario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
@@ -226,9 +237,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Cucumber Java.Feature: usuario" />
         <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Gradle.challenge_user [clean]" />
+        <item itemvalue="Cucumber Java.Feature: usuario" />
         <item itemvalue="Docker.docker.challenge_data_user: Compose Deployment" />
         <item itemvalue="Gradle.challenge_user [acceptanceTest]" />
       </list>

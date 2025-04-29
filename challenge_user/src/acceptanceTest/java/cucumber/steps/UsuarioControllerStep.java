@@ -88,7 +88,7 @@ public class UsuarioControllerStep {
     public void um_usuario_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
-        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha);
+        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, null);
 
         assertThat(usuarioDtoRequest).isNotNull();
     }
@@ -181,7 +181,7 @@ public class UsuarioControllerStep {
     public void um_usuario_update_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha) {
 
-        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha);
+        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha, null);
 
         assertThat(usuarioUpdateDtoRequest).isNotNull();
     }

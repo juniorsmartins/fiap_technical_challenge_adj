@@ -39,5 +39,9 @@ public final class UsuarioEntity extends AbstractAuditingEntity implements Seria
 
     @Column(name = "senha", length = MAX_CARACTER_SENHA, nullable = false)
     private String senha;
+
+    @OneToOne(targetEntity = EnderecoEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true, orphanRemoval = true)
+    @JoinColumn(name = "endereco_id", unique = true)
+    private EnderecoEntity endereco;
 }
 

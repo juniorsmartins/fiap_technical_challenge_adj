@@ -35,7 +35,9 @@ public record UsuarioUpdateDtoRequest(
         @Schema(name = "senha", description = "Segredo para acessar a aplicação.", example = "fowler20")
         @NotBlank
         @Size(max = MAX_CARACTER_SENHA)
-        String senha
-) {
-}
+        String senha,
+
+        @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
+        EnderecoDtoRequest endereco
+) { }
 
