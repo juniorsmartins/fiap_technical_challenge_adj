@@ -16,6 +16,8 @@ public interface AdapterMapper {
 
     Usuario toUsuario(UsuarioUpdateDtoRequest usuarioUpdateDtoRequest);
 
+    @Mapping(target = "dataHoraCriacao", ignore = true)
+    @Mapping(target = "dataHoraEdicao", ignore = true)
     UsuarioDtoResponse toUsuarioDtoResponse(Usuario usuario);
 
     UsuarioDtoResponse toUsuarioDtoResponse(UsuarioEntity usuarioEntity);
