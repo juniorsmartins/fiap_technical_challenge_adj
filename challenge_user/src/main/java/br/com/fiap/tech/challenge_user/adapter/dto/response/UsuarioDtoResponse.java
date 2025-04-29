@@ -1,11 +1,13 @@
 package br.com.fiap.tech.challenge_user.adapter.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Schema(name = "UsuarioDtoResponse", description = "Transportador de dados de saída.")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record UsuarioDtoResponse(
 
         @Schema(name = "usuarioId", description = "Identificador único do recurso.", example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748")
