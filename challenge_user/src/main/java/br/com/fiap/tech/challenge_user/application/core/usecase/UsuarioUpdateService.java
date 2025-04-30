@@ -35,7 +35,10 @@ public class UsuarioUpdateService implements UsuarioUpdateInputPort {
 
         var usuarioUpdated = usuarioFindByIdOutputPort.findById(id)
                 .map(entity -> {
-                    BeanUtils.copyProperties(usuario, entity, "usuarioId");
+                    BeanUtils.copyProperties(usuario, entity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "enderecoId");
+                    if (usuario.getEndereco() != null) {
+                        BeanUtils.copyProperties(usuario.getEndereco(), entity.getEndereco(), "enderecoId");
+                    }
                     return entity;
                 })
                 .map(applicationMapper::toUsuario)
