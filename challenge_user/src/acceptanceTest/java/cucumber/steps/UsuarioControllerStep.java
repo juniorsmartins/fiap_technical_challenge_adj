@@ -1,9 +1,13 @@
 package cucumber.steps;
 
+import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioUpdateDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.repository.EnderecoRepository;
 import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
@@ -39,6 +43,9 @@ public class UsuarioControllerStep {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     private Response response;
 
     private UsuarioDtoRequest usuarioDtoRequest;
@@ -48,6 +55,8 @@ public class UsuarioControllerStep {
     private UsuarioUpdateDtoRequest usuarioUpdateDtoRequest;
 
     private UsuarioEntity usuarioEntity;
+
+    private EnderecoDtoResponse enderecoDtoResponse;
 
     @Before
     public void setUp() {
@@ -73,12 +82,22 @@ public class UsuarioControllerStep {
         List<Map<String, String>> usuariosData = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> row : usuariosData) {
+
             var usuarioEntity = UsuarioEntity.builder()
                     .nome(row.get("nome"))
                     .email(row.get("email"))
                     .login(row.get("login"))
                     .senha(row.get("senha"))
                     .build();
+
+            if (!row.get("cep").isEmpty()) {
+                var enderecoEntity = EnderecoEntity.builder()
+                        .cep(row.get("cep"))
+                        .logradouro(row.get("logradouro"))
+                        .numero(row.get("numero"))
+                        .build();
+                usuarioEntity.setEndereco(enderecoEntity);
+            }
 
             usuarioRepository.save(usuarioEntity);
         }
@@ -150,9 +169,9 @@ public class UsuarioControllerStep {
 
         response = RestAssured
                 .given().spec(requestSpecification)
-                    .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                    .get("/" + usuarioEntity.getUsuarioId());
+                .get("/" + usuarioEntity.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -162,9 +181,9 @@ public class UsuarioControllerStep {
 
         response = RestAssured
                 .given().spec(requestSpecification)
-                    .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                    .delete("/" + usuarioEntity.getUsuarioId());
+                .delete("/" + usuarioEntity.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -191,10 +210,10 @@ public class UsuarioControllerStep {
 
         response = RestAssured
                 .given().spec(requestSpecification)
-                    .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                    .body(usuarioUpdateDtoRequest)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(usuarioUpdateDtoRequest)
                 .when()
-                    .put();
+                .put();
 
         assertThat(response).isNotNull();
     }
@@ -220,6 +239,67 @@ public class UsuarioControllerStep {
                 .build();
 
         assertThat(usuarioEntity.getUsuarioId()).isNotNull();
+    }
+
+    @Dado("um UsuarioDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_usuario_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
+            String nome, String email, String login, String senha, String cep, String logradouro, String numero) {
+
+        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, new EnderecoDtoRequest(cep, logradouro, numero));
+
+        assertThat(usuarioDtoRequest).isNotNull();
+        assertThat(usuarioDtoRequest.endereco()).isNotNull();
+    }
+
+    @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}")
+    public void com_endereco_dto_response_no_body_com_id_e_cep_e_logradouro_e_numero(
+            String cep, String logradouro, String numero) {
+
+        enderecoDtoResponse = usuarioDtoResponse.endereco();
+
+        assertThat(enderecoDtoResponse.enderecoId()).isNotNull();
+        assertThat(enderecoDtoResponse.cep()).isEqualTo(cep);
+        assertThat(enderecoDtoResponse.logradouro()).isEqualTo(logradouro);
+        assertThat(enderecoDtoResponse.numero()).isEqualTo(numero);
+    }
+
+    @Entao("um Endereço salvo no database, com cep {string} e logradouro {string} e número {string}")
+    public void um_endereco_salvo_no_database_com_cep_e_logradouro_e_numero(String cep, String logradouro, String numero) {
+
+        var enderecoSalvo = enderecoRepository.findById(enderecoDtoResponse.enderecoId()).get();
+
+        assertThat(enderecoSalvo.getCep()).isEqualTo(cep);
+        assertThat(enderecoSalvo.getLogradouro()).isEqualTo(logradouro);
+        assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
+    }
+
+    @Dado("um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_usuario_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
+            String nome, String email, String login, String senha, String cep, String logradouro, String numero) {
+
+        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity
+                .getUsuarioId(), nome, email, login, senha, new EnderecoDtoRequest(cep, logradouro, numero));
+
+        assertThat(usuarioUpdateDtoRequest).isNotNull();
+        assertThat(usuarioUpdateDtoRequest.endereco()).isNotNull();
+    }
+
+    @Entao("sem EnderecoDtoResponse no body")
+    public void sem_endereco_dto_response_no_body() {
+
+        usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
+
+        assertThat(usuarioDtoResponse.usuarioId()).isNotNull();
+        assertThat(usuarioDtoResponse.endereco()).isNull();
+    }
+
+    @Entao("sem Endereço salvo no database")
+    public void sem_endereço_salvo_no_database() {
+
+        var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
+
+        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(usuarioEntity.getUsuarioId());
+        assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
 }
 

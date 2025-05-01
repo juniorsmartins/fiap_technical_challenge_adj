@@ -33,6 +33,6 @@ public record UsuarioDtoResponse(
         Date dataHoraEdicao,
 
         @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
-        Endereco endereco
+        EnderecoDtoResponse endereco
 ) { }
 

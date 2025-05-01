@@ -7,10 +7,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
   Contexto:
     Dado ambiente de teste ativado para Challenge_User
     Dado cadastros de Usuarios disponíveis no banco de dados
-    |       nome        |         email         |     login   |     senha     |
-    |  Martin Fowler    |   fowler@email.com    |   mfowler   |   fowler123   |
-    |     Kent Beck     |     beck@proton.me    |     kbeck   |     beck123   |
-    |  Jeff Sutherland  |     jeff@gmail.com    |   jsuther   |   suther234   |
+    |       nome        |         email         |     login   |     senha     |     cep     |  logradouro  |   numero   |
+    |  Martin Fowler    |   fowler@email.com    |   mfowler   |   fowler123   |     null    |      null    |    null    |
+    |     Kent Beck     |     beck@proton.me    |     kbeck   |     beck123   |     null    |      null    |    null    |
+    |  Jeff Sutherland  |     jeff@gmail.com    |   jsuther   |   suther234   |     null    |      null    |    null    |
+    |    James Clear    |    james@gmail.com    |    james    |    james12    |  78098-179  |     Rua L    |     300    |
 
   Cenario: Post para criar Usuário, com sucesso, pelo UsuarioController
     Dado um UsuarioDtoRequest, com nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123"
@@ -58,6 +59,15 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Dado um UsuarioDtoRequest, com nome "Helga Weiss" e email "hel@email.com" e login "helga" e senha "anne01234567890123456789012345678901234567890123456789"
     Quando a requisição Post for feita no método create do UsuarioController
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
+
+  Cenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController
+    Dado um UsuarioDtoRequest e EnderecoDtoRequest, com nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+    Quando a requisição Post for feita no método create do UsuarioController
+    Entao receber ResponseEntity com HTTP 201 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12"
+    E com EnderecoDtoResponse no body, com id e cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+    E um Usuario salvo no database, com nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12"
+    E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
 
 
   Cenario: Get para consultar Usuário, com sucesso, pelo UsuarioController
@@ -154,4 +164,32 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 400 do UsuarioController
     E o Usuário no banco, possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234"
 
+  Cenario: Put para atualizar Usuário e remover Endereço (cenário 2), com sucesso, pelo UsuarioController
+    Dado um identificador ID de um usuário existente, com email "james@gmail.com"
+    E um UsuarioUpdateDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12"
+    Quando uma requisição Put for feita no método update do UsuarioController
+    Entao receber ResponseEntity com HTTP 200 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12"
+    E sem EnderecoDtoResponse no body
+    E o Usuário no banco, possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12"
+    E sem Endereço salvo no database
 
+  Cenario: Put para atualizar Usuário e criar Endereço (cenário 3), com sucesso, pelo UsuarioController
+    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
+    E um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    Quando uma requisição Put for feita no método update do UsuarioController
+    Entao receber ResponseEntity com HTTP 200 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123"
+    E com EnderecoDtoResponse no body, com id e cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    E o Usuário no banco, possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123"
+    E um Endereço salvo no database, com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+
+  Cenario: Put para atualizar Usuário e atualizar Endereço (cenário 4), com sucesso, pelo UsuarioController
+    Dado um identificador ID de um usuário existente, com email "james@gmail.com"
+    E um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    Quando uma requisição Put for feita no método update do UsuarioController
+    Entao receber ResponseEntity com HTTP 200 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12"
+    E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    E o Usuário no banco, possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12"
+    E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
