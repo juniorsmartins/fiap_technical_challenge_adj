@@ -21,6 +21,8 @@ public class Usuario {
 
     private String senha;
 
+    private TipoUsuarioEnum tipo;
+
     private Endereco endereco;
 }
 

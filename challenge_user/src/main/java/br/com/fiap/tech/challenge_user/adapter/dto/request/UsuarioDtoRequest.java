@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.dto.request;
 
+import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -30,6 +31,10 @@ public record UsuarioDtoRequest(
         @NotBlank
         @Size(max = MAX_CARACTER_SENHA)
         String senha,
+
+        @Schema(name = "tipo", description = "Define se o usuário é do tipo Cliente ou do tipo Proprietário.", example = "CLIENTE")
+        @NotNull
+        TipoUsuarioEnum tipo,
 
         @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
         EnderecoDtoRequest endereco

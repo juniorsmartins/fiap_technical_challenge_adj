@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.dto.response;
 
 import br.com.fiap.tech.challenge_user.application.core.domain.Endereco;
+import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -25,6 +26,9 @@ public record UsuarioDtoResponse(
 
         @Schema(name = "senha", description = "Segredo para acessar a aplicação.", example = "jeffs!10")
         String senha,
+
+        @Schema(name = "tipo", description = "Define o tipo de usuário: CLIENTE ou PROPRIETARIO.", example = "CLIENTE")
+        TipoUsuarioEnum tipo,
 
         @Schema(name = "dataHoraCriacao", description = "Registro de data e hora do cadastro.", example = "2023-10-01T12:10:20.000+00:00")
         Date dataHoraCriacao,

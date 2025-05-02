@@ -9,6 +9,7 @@ import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.repository.EnderecoRepository;
 import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioRepository;
+import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -88,6 +89,7 @@ public class UsuarioControllerStep {
                     .email(row.get("email"))
                     .login(row.get("login"))
                     .senha(row.get("senha"))
+                    .tipo(TipoUsuarioEnum.valueOf(row.get("tipo")))
                     .build();
 
             if (!row.get("cep").isEmpty()) {
@@ -103,11 +105,11 @@ public class UsuarioControllerStep {
         }
     }
 
-    @Dado("um UsuarioDtoRequest, com nome {string} e email {string} e login {string} e senha {string}")
+    @Dado("um UsuarioDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
     public void um_usuario_dto_request_com_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha) {
+            String nome, String email, String login, String senha, String tipo) {
 
-        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, null);
+        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, TipoUsuarioEnum.valueOf(tipo), null);
 
         assertThat(usuarioDtoRequest).isNotNull();
     }
@@ -127,13 +129,12 @@ public class UsuarioControllerStep {
 
     @Entao("receber ResponseEntity com HTTP {int} do UsuarioController")
     public void receber_response_entity_com_http_do_usuario_controller(Integer status) {
-
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com UsuarioDtoResponse no body, com id e nome {string} e email {string} e login {string} e senha {string}")
+    @Entao("com UsuarioDtoResponse no body, com id e nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
     public void com_usuario_dto_response_no_body_com_id_e_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha) {
+            String nome, String email, String login, String senha, String tipo) {
 
         usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
 
@@ -142,18 +143,33 @@ public class UsuarioControllerStep {
         assertThat(usuarioDtoResponse.email()).isEqualTo(email);
         assertThat(usuarioDtoResponse.login()).isEqualTo(login);
         assertThat(usuarioDtoResponse.senha()).isEqualTo(senha);
+        assertThat(usuarioDtoResponse.tipo().getValue()).isEqualTo(tipo);
     }
 
-    @Entao("um Usuario salvo no database, com nome {string} e email {string} e login {string} e senha {string}")
-    public void um_usuario_salvo_no_database_com_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha) {
+    @Entao("o Usuário cadastrado no banco de dados possui nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
+    public void o_usuario_no_banco_possui_nome_e_email_e_login_e_senha(
+            String nome, String email, String login, String senha, String tipo) {
 
-        var usuarioCreate = usuarioRepository.findById(usuarioDtoResponse.usuarioId()).get();
+        var usuario = usuarioRepository.findById(usuarioDtoResponse.usuarioId()).get();
 
-        assertThat(usuarioCreate.getNome()).isEqualTo(nome);
-        assertThat(usuarioCreate.getEmail()).isEqualTo(email);
-        assertThat(usuarioCreate.getLogin()).isEqualTo(login);
-        assertThat(usuarioCreate.getSenha()).isEqualTo(senha);
+        assertThat(usuario.getNome()).isEqualTo(nome);
+        assertThat(usuario.getEmail()).isEqualTo(email);
+        assertThat(usuario.getLogin()).isEqualTo(login);
+        assertThat(usuario.getSenha()).isEqualTo(senha);
+        assertThat(usuario.getTipo().getValue()).isEqualTo(tipo);
+    }
+
+    @Entao("o Usuário no database possui nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
+    public void o_usuário_no_database_possui_nome_e_email_e_login_e_senha(
+            String nome, String email, String login, String senha, String tipo) {
+
+        var usuario = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
+
+        assertThat(usuario.getNome()).isEqualTo(nome);
+        assertThat(usuario.getEmail()).isEqualTo(email);
+        assertThat(usuario.getLogin()).isEqualTo(login);
+        assertThat(usuario.getSenha()).isEqualTo(senha);
+        assertThat(usuario.getTipo().getValue()).isEqualTo(tipo);
     }
 
     @Dado("um identificador ID de um usuário existente, com email {string}")
@@ -196,11 +212,12 @@ public class UsuarioControllerStep {
         assertThat(response).isEmpty();
     }
 
-    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string}")
+    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
     public void um_usuario_update_dto_request_com_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha) {
+            String nome, String email, String login, String senha, String tipo) {
 
-        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha, null);
+        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity
+                .getUsuarioId(), nome, email, login, senha, TipoUsuarioEnum.valueOf(tipo), null);
 
         assertThat(usuarioUpdateDtoRequest).isNotNull();
     }
@@ -218,19 +235,6 @@ public class UsuarioControllerStep {
         assertThat(response).isNotNull();
     }
 
-    @Entao("o Usuário no banco, possui nome {string} e email {string} e login {string} e senha {string}")
-    public void o_usuario_no_banco_possui_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha) {
-
-        var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
-
-        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(usuarioEntity.getUsuarioId());
-        assertThat(usuarioAtualizado.getNome()).isEqualTo(nome);
-        assertThat(usuarioAtualizado.getEmail()).isEqualTo(email);
-        assertThat(usuarioAtualizado.getLogin()).isEqualTo(login);
-        assertThat(usuarioAtualizado.getSenha()).isEqualTo(senha);
-    }
-
     @Dado("um identificador ID de um usuário inexistente")
     public void um_identificador_id_de_um_usuario_inexistente() {
 
@@ -241,11 +245,12 @@ public class UsuarioControllerStep {
         assertThat(usuarioEntity.getUsuarioId()).isNotNull();
     }
 
-    @Dado("um UsuarioDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e com cep {string} e logradouro {string} e número {string}")
+    @Dado("um UsuarioDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string} e com cep {string} e logradouro {string} e número {string}")
     public void um_usuario_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
-            String nome, String email, String login, String senha, String cep, String logradouro, String numero) {
+            String nome, String email, String login, String senha, String tipo, String cep, String logradouro, String numero) {
 
-        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, new EnderecoDtoRequest(cep, logradouro, numero));
+        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, TipoUsuarioEnum.valueOf(tipo),
+                new EnderecoDtoRequest(cep, logradouro, numero));
 
         assertThat(usuarioDtoRequest).isNotNull();
         assertThat(usuarioDtoRequest.endereco()).isNotNull();
@@ -273,12 +278,12 @@ public class UsuarioControllerStep {
         assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
     }
 
-    @Dado("um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e com cep {string} e logradouro {string} e número {string}")
+    @Dado("um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string} e com cep {string} e logradouro {string} e número {string}")
     public void um_usuario_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
-            String nome, String email, String login, String senha, String cep, String logradouro, String numero) {
+            String nome, String email, String login, String senha, String tipo, String cep, String logradouro, String numero) {
 
-        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity
-                .getUsuarioId(), nome, email, login, senha, new EnderecoDtoRequest(cep, logradouro, numero));
+        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha,
+                TipoUsuarioEnum.valueOf(tipo), new EnderecoDtoRequest(cep, logradouro, numero));
 
         assertThat(usuarioUpdateDtoRequest).isNotNull();
         assertThat(usuarioUpdateDtoRequest.endereco()).isNotNull();
@@ -294,7 +299,7 @@ public class UsuarioControllerStep {
     }
 
     @Entao("sem Endereço salvo no database")
-    public void sem_endereço_salvo_no_database() {
+    public void sem_endereco_salvo_no_database() {
 
         var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
 
