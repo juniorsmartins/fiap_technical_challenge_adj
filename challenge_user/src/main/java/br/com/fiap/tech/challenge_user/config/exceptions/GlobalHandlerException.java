@@ -91,7 +91,7 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
         return super.handleExceptionInternal(ex, problemDetail, httpHeaders, httpStatusCode, webRequest);
     }
 
-    // ---------- Métodos assessórios ---------- //
+    // ---------- MÉTODOS ÚTEIS ---------- //
     private Map<String, String> getFields(BindException ex) {
         return ex.getBindingResult()
                 .getAllErrors()
@@ -117,6 +117,25 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
     private String getMessage(final String messageKey) {
         return this.messageSource.getMessage(messageKey, new Object[]{}, LocaleContextHolder.getLocale());
+    }
+
+    // ---------- TRATAMENTO GERAL - acionado se nenhuma exceção específica capturar ---------- //
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ProblemDetail> handleGenericException(Exception ex, WebRequest webRequest) {
+
+        log.info("class = GlobalHandlerException e método = handleGenericException", ex);
+
+        var mensagem = this.getMessage("exception.internal.server.error");
+
+        var problemDetail = createProblemDetail(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "https://paginax.com/erros/erro-interno-servidor",
+                mensagem,
+                null);
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(problemDetail);
     }
 }
 

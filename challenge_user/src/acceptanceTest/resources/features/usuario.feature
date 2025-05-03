@@ -101,13 +101,21 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do UsuarioController
 
 
-  Cenario: Put para atualizar Usuário, com sucesso, pelo UsuarioController
+  Cenario: Put para atualizar Usuário Cliente, com sucesso, pelo UsuarioController
     Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-    E um UsuarioUpdateDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "CLIENTE"
+    E um UsuarioUpdateDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "PROPRIETARIO"
     Quando uma requisição Put for feita no método update do UsuarioController
     Entao receber ResponseEntity com HTTP 200 do UsuarioController
-    E com UsuarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "CLIENTE"
-    E o Usuário cadastrado no banco de dados possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "CLIENTE"
+    E com UsuarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "PROPRIETARIO"
+    E o Usuário cadastrado no banco de dados possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "PROPRIETARIO"
+
+  Cenario: Put para atualizar Usuário Proprietário, com sucesso, pelo UsuarioController
+    Dado um identificador ID de um usuário existente, com email "beck@proton.me"
+    E um UsuarioUpdateDtoRequest, com nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
+    Quando uma requisição Put for feita no método update do UsuarioController
+    Entao receber ResponseEntity com HTTP 200 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
+    E o Usuário cadastrado no banco de dados possui nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
 
   Cenario: Put para atualizar Usuário não encontrado pelo UsuarioController
     Dado um identificador ID de um usuário inexistente
