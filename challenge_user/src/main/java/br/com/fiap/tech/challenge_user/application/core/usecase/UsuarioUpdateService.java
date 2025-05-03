@@ -1,8 +1,13 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
+import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioCreateAdapter;
+import br.com.fiap.tech.challenge_user.application.core.domain.Endereco;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
 import br.com.fiap.tech.challenge_user.application.core.mapper.ApplicationMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import lombok.NonNull;
@@ -22,6 +27,8 @@ public class UsuarioUpdateService implements UsuarioUpdateInputPort {
 
     private final UsuarioFindByIdOutputPort usuarioFindByIdOutputPort;
 
+    private final UsuarioCreateOutputPort usuarioCreateOutputPort;
+
     private final ApplicationMapper applicationMapper;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
@@ -34,16 +41,47 @@ public class UsuarioUpdateService implements UsuarioUpdateInputPort {
         var id = usuario.getUsuarioId();
 
         var usuarioUpdated = usuarioFindByIdOutputPort.findById(id)
-                .map(entity -> {
-                    BeanUtils.copyProperties(usuario, entity, "usuarioId");
-                    return entity;
-                })
+                .map(entity -> atualizarUsuario(usuario, entity))
+                .map(entity -> atualizarEndereco(usuario, entity))
+                .map(usuarioCreateOutputPort::save)
                 .map(applicationMapper::toUsuario)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
 
         log.info("UsuarioUpdateService - concluído serviço de update: {}", usuarioUpdated);
 
         return usuarioUpdated;
+    }
+
+    private UsuarioEntity atualizarUsuario(Usuario usuario, UsuarioEntity usuarioEntity) {
+        BeanUtils.copyProperties(usuario, usuarioEntity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "endereco");
+        return usuarioEntity;
+    }
+
+    private UsuarioEntity atualizarEndereco(Usuario usuario, UsuarioEntity usuarioEntity) {
+
+        if (usuario.getEndereco() == null && usuarioEntity.getEndereco() == null) {
+            // Cenário 1: Requisição sem endereço, usuário sem endereço → Não fazer nada
+            return usuarioEntity;
+
+        } else if (usuario.getEndereco() == null && usuarioEntity.getEndereco() != null) {
+            // Cenário 2: Requisição sem endereço, usuário com endereço → Remover endereço
+            usuarioEntity.setEndereco(null); // orphanRemoval = true remove o endereço do banco
+
+        } else if (usuario.getEndereco() != null && usuarioEntity.getEndereco() == null) {
+            // Cenário 3: Requisição com endereço, usuário sem endereço → Criar novo endereço
+            usuarioEntity.setEndereco(EnderecoEntity.builder()
+                    .cep(usuario.getEndereco().getCep())
+                    .logradouro(usuario.getEndereco().getLogradouro())
+                    .numero(usuario.getEndereco().getNumero())
+                    .build()
+            );
+
+        } else if (usuario.getEndereco() != null && usuarioEntity.getEndereco() != null) {
+            // Cenário 4: Requisição com endereço, usuário com endereço → Atualizar endereço
+            BeanUtils.copyProperties(usuario.getEndereco(), usuarioEntity.getEndereco(), "enderecoId");
+        }
+
+        return usuarioEntity;
     }
 }
 

@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioUpdateDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/UsuarioUpdateDtoRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/UsuarioDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/UsuarioDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/TipoUsuarioEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/TipoUsuarioEnum.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +63,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Dockerfile" />
+        <option value="Class" />
         <option value="Record" />
         <option value="Interface" />
-        <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -88,6 +93,8 @@
     &quot;Cucumber Java.Feature: usuario.executor&quot;: &quot;Run&quot;,
     &quot;Cucumber Java.Feature: usuario_get.executor&quot;: &quot;Run&quot;,
     &quot;Cucumber Java.Feature: usuario_post.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker.challenge_data_user: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build challenge_user.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
@@ -139,27 +146,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="challenge_user [acceptanceTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/challenge_user" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="acceptanceTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
+    <configuration name="Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
+      <option name="GLUE" value="cucumber.steps cucumber.config" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="challenge_user.acceptanceTest" />
+      <option name="NAME_FILTER" value="^Post para criar Usuário e Endereço\, com sucesso\, pelo UsuarioController$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Post para criar Usuário e Endereço\, com sucesso\, pelo UsuarioController$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
+      <option name="GLUE" value="cucumber.steps cucumber.config" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="challenge_user.acceptanceTest" />
+      <option name="NAME_FILTER" value="^Put para atualizar Usuário e Endereço\, com sucesso\, pelo UsuarioController$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Put para atualizar Usuário e Endereço\, com sucesso\, pelo UsuarioController$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="challenge_user [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -211,26 +236,13 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker.challenge_data_user: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="challenge_data_user" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Cucumber Java.Feature: usuario" />
+        <item itemvalue="Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController" />
+        <item itemvalue="Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController" />
         <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Gradle.challenge_user [clean]" />
-        <item itemvalue="Docker.docker.challenge_data_user: Compose Deployment" />
-        <item itemvalue="Gradle.challenge_user [acceptanceTest]" />
       </list>
     </recent_temporary>
   </component>

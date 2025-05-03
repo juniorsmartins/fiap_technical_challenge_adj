@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.entity;
 
+import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,5 +40,13 @@ public final class UsuarioEntity extends AbstractAuditingEntity implements Seria
 
     @Column(name = "senha", length = MAX_CARACTER_SENHA, nullable = false)
     private String senha;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo", nullable = false)
+    private TipoUsuarioEnum tipo;
+
+    @OneToOne(targetEntity = EnderecoEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true, orphanRemoval = true)
+    @JoinColumn(name = "endereco_id", unique = true)
+    private EnderecoEntity endereco;
 }
 
