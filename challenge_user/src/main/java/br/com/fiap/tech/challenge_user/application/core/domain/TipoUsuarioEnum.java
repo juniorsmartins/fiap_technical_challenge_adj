@@ -1,5 +1,8 @@
 package br.com.fiap.tech.challenge_user.application.core.domain;
 
+import lombok.Getter;
+
+@Getter
 public enum TipoUsuarioEnum {
 
     CLIENTE("CLIENTE"),
@@ -9,10 +12,6 @@ public enum TipoUsuarioEnum {
 
     TipoUsuarioEnum(String value) {
         this.value = value;
-    }
-
-    public String getValue() {
-        return this.value;
     }
 }
 

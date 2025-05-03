@@ -27,7 +27,7 @@ public record UsuarioDtoResponse(
         @Schema(name = "senha", description = "Segredo para acessar a aplicação.", example = "jeffs!10")
         String senha,
 
-        @Schema(name = "tipo", description = "Define o tipo de usuário: CLIENTE ou PROPRIETARIO.", example = "CLIENTE")
+        @Schema(name = "tipo", description = "Define o tipo de Usuário.", allowableValues = {"CLIENTE", "PROPRIETARIO"}, example = "CLIENTE")
         TipoUsuarioEnum tipo,
 
         @Schema(name = "dataHoraCriacao", description = "Registro de data e hora do cadastro.", example = "2023-10-01T12:10:20.000+00:00")

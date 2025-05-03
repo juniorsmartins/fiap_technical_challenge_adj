@@ -38,7 +38,7 @@ public record UsuarioUpdateDtoRequest(
         @Size(max = MAX_CARACTER_SENHA)
         String senha,
 
-        @Schema(name = "tipo", description = "Define o tipo de usuário: CLIENTE ou PROPRIETARIO.", example = "CLIENTE")
+        @Schema(name = "tipo", description = "Define o tipo de Usuário.", allowableValues = {"CLIENTE", "PROPRIETARIO"}, example = "CLIENTE")
         @NotNull
         TipoUsuarioEnum tipo,
 

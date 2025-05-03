@@ -13,12 +13,19 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     |  Jeff Sutherland  |     jeff@gmail.com    |   jsuther   |   suther234   |    CLIENTE   |      null    |      null    |    null    |
     |    James Clear    |    james@gmail.com    |    james    |    james12    |    CLIENTE   |   78098-179  |     Rua L    |     300    |
 
-  Cenario: Post para criar Usuário, com sucesso, pelo UsuarioController
+  Cenario: Post para criar Usuário Cliente, com sucesso, pelo UsuarioController
     Dado um UsuarioDtoRequest, com nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e tipo "CLIENTE"
     Quando a requisição Post for feita no método create do UsuarioController
     Entao receber ResponseEntity com HTTP 201 do UsuarioController
     E com UsuarioDtoResponse no body, com id e nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e tipo "CLIENTE"
     E o Usuário cadastrado no banco de dados possui nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e tipo "CLIENTE"
+
+  Cenario: Post para criar Usuário Proprietário, com sucesso, pelo UsuarioController
+    Dado um UsuarioDtoRequest, com nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e tipo "PROPRIETARIO"
+    Quando a requisição Post for feita no método create do UsuarioController
+    Entao receber ResponseEntity com HTTP 201 do UsuarioController
+    E com UsuarioDtoResponse no body, com id e nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e tipo "PROPRIETARIO"
+    E o Usuário cadastrado no banco de dados possui nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e tipo "PROPRIETARIO"
 
   Cenario: Post para criar Usuário, com erro por nome vazio, pelo UsuarioController
     Dado um UsuarioDtoRequest, com nome "   " e email "hel@email.com" e login "helga" e senha "12345" e tipo "CLIENTE"
