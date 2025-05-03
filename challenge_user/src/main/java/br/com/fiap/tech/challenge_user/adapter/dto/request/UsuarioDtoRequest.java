@@ -18,7 +18,7 @@ public record UsuarioDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "martin@email.com")
-        @NotNull
+        @NotBlank
         @Email
         String email,
 

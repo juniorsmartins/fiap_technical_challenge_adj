@@ -15,9 +15,10 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
@@ -86,30 +87,41 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
                 httpStatusCode,
                 "https://paginax.com/erros/campos-invalidos",
                 mensagem,
-                fields);
+                Map.of("fields", fields));
 
         return super.handleExceptionInternal(ex, problemDetail, httpHeaders, httpStatusCode, webRequest);
     }
 
     // ---------- MÉTODOS ÚTEIS ---------- //
-    private Map<String, String> getFields(BindException ex) {
+    private List<Map<String, String>> getFields(BindException ex) {
         return ex.getBindingResult()
                 .getAllErrors()
                 .stream()
-                .collect(Collectors.toMap(objectError -> ((FieldError) objectError).getField(),
-                        objectError -> this.messageSource.getMessage(objectError,
-                                LocaleContextHolder.getLocale())));
+                .map(error -> {
+                    Map<String, String> errorDetails = new HashMap<>();
+
+                    if (error instanceof FieldError fieldError) {
+                        errorDetails.put("field", fieldError.getField());
+                        errorDetails.put("rejectedValue", String.valueOf(fieldError.getRejectedValue()));
+                    } else {
+                        errorDetails.put("field", error.getObjectName());
+                    }
+                    errorDetails.put("message", this.messageSource.getMessage(error, LocaleContextHolder.getLocale()));
+
+                    return errorDetails;
+                })
+                .toList();
     }
 
-    private ProblemDetail createProblemDetail(HttpStatusCode status, String typeUri, String title, Map<String, String> fields) {
+    private ProblemDetail createProblemDetail(HttpStatusCode status, String typeUri, String title, Map<String, Object> properties) {
 
         // ProblemDetail RFC 7807
         ProblemDetail problemDetail = ProblemDetail.forStatus(status);
         problemDetail.setType(URI.create(typeUri));
         problemDetail.setTitle(title);
 
-        if (fields != null) {
-            problemDetail.setProperty("fields", fields);
+        if (properties != null) {
+            properties.forEach(problemDetail::setProperty);
         }
 
         return problemDetail;
