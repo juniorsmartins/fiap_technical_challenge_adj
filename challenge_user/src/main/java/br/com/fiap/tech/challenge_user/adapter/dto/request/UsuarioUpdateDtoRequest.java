@@ -24,7 +24,7 @@ public record UsuarioUpdateDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "fowler@email.com")
-        @NotNull
+        @NotBlank
         @Email
         String email,
 
@@ -44,5 +44,6 @@ public record UsuarioUpdateDtoRequest(
 
         @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
         EnderecoDtoRequest endereco
-) { }
+) {
+}
 

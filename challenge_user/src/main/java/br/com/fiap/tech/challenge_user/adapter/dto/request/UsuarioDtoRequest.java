@@ -38,5 +38,6 @@ public record UsuarioDtoRequest(
 
         @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
         EnderecoDtoRequest endereco
-) { }
+) {
+}
 

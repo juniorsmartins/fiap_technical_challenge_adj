@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.*;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,10 +16,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.time.Instant;
+import java.util.*;
 
 @Slf4j
 @RestControllerAdvice
@@ -36,17 +35,18 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
         var id = ex.getId();
 
+        var httpStatus = HttpStatus.NOT_FOUND;
         var mensagem = this.messageSource
                 .getMessage(ex.getMessageKey(), new Object[]{id.toString()}, LocaleContextHolder.getLocale());
 
         var problemDetail = createProblemDetail(
-                HttpStatus.NOT_FOUND,
+                httpStatus,
                 "https://paginax.com/erros/recurso-nao-encontrado",
                 mensagem,
                 null);
 
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(httpStatus)
                 .body(problemDetail);
     }
 
@@ -56,16 +56,17 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
         log.info("class = GlobalHandlerException e método = handleNoSuchElementException", ex);
 
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         var mensagem = this.getMessage("exception.internal.server.error");
 
         var problemDetail = createProblemDetail(
-                HttpStatus.INTERNAL_SERVER_ERROR,
+                httpStatus,
                 "https://paginax.com/erros/erro-interno-servidor",
                 mensagem,
                 null);
 
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(httpStatus)
                 .body(problemDetail);
     }
 
@@ -119,6 +120,8 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
         ProblemDetail problemDetail = ProblemDetail.forStatus(status);
         problemDetail.setType(URI.create(typeUri));
         problemDetail.setTitle(title);
+        problemDetail.setProperty("errorId", UUID.randomUUID().toString());
+        problemDetail.setProperty("timestamp", Instant.now().toString());
 
         if (properties != null) {
             properties.forEach(problemDetail::setProperty);
@@ -137,16 +140,17 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
         log.info("class = GlobalHandlerException e método = handleGenericException", ex);
 
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         var mensagem = this.getMessage("exception.internal.server.error");
 
         var problemDetail = createProblemDetail(
-                HttpStatus.INTERNAL_SERVER_ERROR,
+                httpStatus,
                 "https://paginax.com/erros/erro-interno-servidor",
                 mensagem,
                 null);
 
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(httpStatus)
                 .body(problemDetail);
     }
 }
