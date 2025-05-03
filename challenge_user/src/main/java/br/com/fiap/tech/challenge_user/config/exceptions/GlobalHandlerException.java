@@ -26,59 +26,23 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
     private final MessageSource messageSource;
 
-    // ---------- TRATAMENTO DE EXCEÇÕES DEFAULT ---------- //
-    // ---------- Sobreescrever metodo de ResponseEntityExceptionHandler para customizar ---------- //
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders httpHeaders,
-                                                                  HttpStatusCode httpStatusCode,
-                                                                  WebRequest webRequest) {
-
-        log.info("class = GlobalHandlerException e método = handleMethodArgumentNotValid");
-
-        // ProblemDetail RFC 7807
-        ProblemDetail problemDetail = ProblemDetail.forStatus(httpStatusCode);
-        problemDetail.setType(URI.create("https://paginax.com/erros/campos-invalidos"));
-        problemDetail.setTitle(this.getMessage("exception.request.attribute.invalid"));
-
-        var fields = this.getFields(ex);
-
-        problemDetail.setProperty("fields", fields);
-
-        return super.handleExceptionInternal(ex, problemDetail, httpHeaders, httpStatusCode, webRequest);
-    }
-
-    // ---------- Métodos assessórios ---------- //
-    private String getMessage(final String messageKey) {
-        return this.messageSource.getMessage(messageKey, new Object[]{}, LocaleContextHolder.getLocale());
-    }
-
-    private Map<String, String> getFields(BindException ex) {
-        return ex.getBindingResult()
-                .getAllErrors()
-                .stream()
-                .collect(Collectors.toMap(objectError -> ((FieldError) objectError).getField(),
-                        objectError -> this.messageSource.getMessage(objectError,
-                                LocaleContextHolder.getLocale())));
-    }
-
     // ---------- TRATAMENTO DE EXCEÇÕES CUSTOMIZADAS ---------- //
     // ---------- 404 Not Found ---------- //
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ProblemDetail> handleResourceNotFound(ResourceNotFoundException ex, WebRequest webRequest) {
 
-        log.info("class = GlobalHandlerException e método = handleResourceNotFound");
-
-        // ProblemDetail RFC 7807
-        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        problemDetail.setType(URI.create("https://paginax.com/erros/recurso-nao-encontrado"));
+        log.info("class = GlobalHandlerException e método = handleResourceNotFound", ex);
 
         var id = ex.getId();
 
         var mensagem = this.messageSource
                 .getMessage(ex.getMessageKey(), new Object[]{id.toString()}, LocaleContextHolder.getLocale());
 
-        problemDetail.setTitle(mensagem);
+        var problemDetail = createProblemDetail(
+                HttpStatus.NOT_FOUND,
+                "https://paginax.com/erros/recurso-nao-encontrado",
+                mensagem,
+                null);
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
@@ -89,14 +53,70 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ProblemDetail> handleNoSuchElementException(NoSuchElementException ex, WebRequest webRequest) {
 
-        // ProblemDetail RFC 7807
-        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        problemDetail.setType(URI.create("https://paginax.com/erros/erro-interno-servidor"));
-        problemDetail.setTitle(this.getMessage("exception.internal.server.error"));
+        log.info("class = GlobalHandlerException e método = handleNoSuchElementException", ex);
+
+        var mensagem = this.getMessage("exception.internal.server.error");
+
+        var problemDetail = createProblemDetail(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "https://paginax.com/erros/erro-interno-servidor",
+                mensagem,
+                null);
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(problemDetail);
+    }
+
+    // ---------- TRATAMENTO DE EXCEÇÕES DEFAULT ---------- //
+    // ---------- Sobreescrever metodo de ResponseEntityExceptionHandler para customizar ---------- //
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders httpHeaders,
+                                                                  HttpStatusCode httpStatusCode,
+                                                                  WebRequest webRequest) {
+
+        log.info("class = GlobalHandlerException e método = handleMethodArgumentNotValid", ex);
+
+        var fields = this.getFields(ex);
+
+        var mensagem = this.getMessage("exception.request.attribute.invalid");
+
+        var problemDetail = createProblemDetail(
+                httpStatusCode,
+                "https://paginax.com/erros/campos-invalidos",
+                mensagem,
+                fields);
+
+        return super.handleExceptionInternal(ex, problemDetail, httpHeaders, httpStatusCode, webRequest);
+    }
+
+    // ---------- Métodos assessórios ---------- //
+    private Map<String, String> getFields(BindException ex) {
+        return ex.getBindingResult()
+                .getAllErrors()
+                .stream()
+                .collect(Collectors.toMap(objectError -> ((FieldError) objectError).getField(),
+                        objectError -> this.messageSource.getMessage(objectError,
+                                LocaleContextHolder.getLocale())));
+    }
+
+    private ProblemDetail createProblemDetail(HttpStatusCode status, String typeUri, String title, Map<String, String> fields) {
+
+        // ProblemDetail RFC 7807
+        ProblemDetail problemDetail = ProblemDetail.forStatus(status);
+        problemDetail.setType(URI.create(typeUri));
+        problemDetail.setTitle(title);
+
+        if (fields != null) {
+            problemDetail.setProperty("fields", fields);
+        }
+
+        return problemDetail;
+    }
+
+    private String getMessage(final String messageKey) {
+        return this.messageSource.getMessage(messageKey, new Object[]{}, LocaleContextHolder.getLocale());
     }
 }
 
