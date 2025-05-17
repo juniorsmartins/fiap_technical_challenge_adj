@@ -32,7 +32,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioControllerStep {
+public class ClienteControllerStep {
 
     private static RequestSpecification requestSpecification;
 
@@ -217,8 +217,8 @@ public class UsuarioControllerStep {
         assertThat(response).isEmpty();
     }
 
-    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
-    public void um_usuario_update_dto_request_com_nome_e_email_e_login_e_senha(
+    @Dado("um ClienteUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
+    public void um_cliente_update_dto_request_com_nome_e_email_e_login_e_senha(
             String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
         clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(clienteEntity
@@ -227,8 +227,8 @@ public class UsuarioControllerStep {
         assertThat(clienteUpdateDtoRequest).isNotNull();
     }
 
-    @Quando("uma requisição Put for feita no método update do UsuarioController")
-    public void uma_requisicao_put_for_feita_no_metodo_update_do_usuario_controller() {
+    @Quando("uma requisição Put for feita no método update do ClienteController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_cliente_controller() {
 
         response = RestAssured
                 .given().spec(requestSpecification)

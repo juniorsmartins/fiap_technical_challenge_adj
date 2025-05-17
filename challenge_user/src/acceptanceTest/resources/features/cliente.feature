@@ -101,14 +101,14 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do ClienteController
 
 
-#  Cenario: Put para atualizar Usuário Cliente, com sucesso, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "PROPRIETARIO"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 200 do UsuarioController
-#    E com UsuarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "PROPRIETARIO"
-#    E o Usuário cadastrado no banco de dados possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "PROPRIETARIO"
-#
+  Cenario: Put para atualizar Usuário Cliente, com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
+    E o Cliente cadastrado no banco de dados possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
+
 #  Cenario: Put para atualizar Usuário Proprietário, com sucesso, pelo UsuarioController
 #    Dado um identificador ID de um usuário existente, com email "beck@proton.me"
 #    E um UsuarioUpdateDtoRequest, com nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
@@ -116,62 +116,62 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 #    Entao receber ResponseEntity com HTTP 200 do UsuarioController
 #    E com UsuarioDtoResponse no body, com id e nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
 #    E o Usuário cadastrado no banco de dados possui nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário não encontrado pelo UsuarioController
-#    Dado um identificador ID de um usuário inexistente
-#    E um UsuarioUpdateDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 404 do UsuarioController
-#
-#  Cenario: Put para atualizar Usuário, com erro por nome vazio, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "  " e email "anne@email.com" e login "annee" e senha "anne1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário, com erro por nome maior, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "anne@email.com" e login "annee" e senha "anne1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário, com erro por email vazio, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "   " e login "anne" e senha "anne1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário, com erro por email incorreto, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne.com" e login "anne" e senha "anne1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário, com erro por login vazio, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "   " e senha "anne1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário, com erro por login maior, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annefrank1annefrank1annefrank1annefrank1annefrank12" e senha "anne1" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário, com erro por senha vazia, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "   " e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
+
+  Cenario: Put para atualizar Cliente não encontrado pelo ClienteController
+    Dado um identificador ID de um cliente inexistente
+    E um ClienteUpdateDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e numeroCartaoFidelidade "1234-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 404 do ClienteController
+
+  Cenario: Put para atualizar Cliente, com erro por nome vazio, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "  " e email "anne@email.com" e login "annee" e senha "anne1" e numeroCartaoFidelidade "1234-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por nome maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "anne@email.com" e login "annee" e senha "anne1" e numeroCartaoFidelidade "1234-8888-003"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por email vazio, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank" e email "   " e login "anne" e senha "anne1" e numeroCartaoFidelidade "1234-8888-004"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por email incorreto, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank" e email "anne.com" e login "anne" e senha "anne1" e numeroCartaoFidelidade "1234-8888-005"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por login vazio, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "   " e senha "anne1" e numeroCartaoFidelidade "1234-8888-006"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por login maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annefrank1annefrank1annefrank1annefrank1annefrank12" e senha "anne1" e numeroCartaoFidelidade "1234-8888-007"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por senha vazia, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "   " e numeroCartaoFidelidade "1234-8888-008"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
 #  Cenario: Put para atualizar Usuário, com erro por senha maior, pelo UsuarioController
 #    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
 #    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "anne1234567890123456789012345678901234567890123456789" e tipo "CLIENTE"
