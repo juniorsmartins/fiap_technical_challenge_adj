@@ -1,15 +1,14 @@
 package cucumber.steps;
 
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.UsuarioUpdateDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.repository.ClienteRepository;
 import br.com.fiap.tech.challenge_user.adapter.repository.EnderecoRepository;
-import br.com.fiap.tech.challenge_user.adapter.repository.UsuarioRepository;
-import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -24,6 +23,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -42,20 +43,20 @@ public class UsuarioControllerStep {
     int port;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private ClienteRepository clienteRepository;
 
     @Autowired
     private EnderecoRepository enderecoRepository;
 
     private Response response;
 
-    private UsuarioDtoRequest usuarioDtoRequest;
+    private ClienteDtoRequest clienteDtoRequest;
 
-    private UsuarioDtoResponse usuarioDtoResponse;
+    private ClienteDtoResponse clienteDtoResponse;
 
-    private UsuarioUpdateDtoRequest usuarioUpdateDtoRequest;
+    private ClienteUpdateDtoRequest clienteUpdateDtoRequest;
 
-    private UsuarioEntity usuarioEntity;
+    private ClienteEntity clienteEntity;
 
     private EnderecoDtoResponse enderecoDtoResponse;
 
@@ -63,7 +64,7 @@ public class UsuarioControllerStep {
     public void setUp() {
         requestSpecification = new RequestSpecBuilder()
                 .addHeader(ConstantsTest.HEADER_PARAM_ORIGIN, ConstantsTest.ORIGIN_FIAP)
-                .setBasePath(ConstantsTest.PATH_CHALLENGE_USER)
+                .setBasePath(ConstantsTest.PATH_CHALLENGE_CLIENTE)
                 .setPort(port)
                 .build();
     }
@@ -76,150 +77,154 @@ public class UsuarioControllerStep {
         assertThat(count).isNotNull();
     }
 
-    @Dado("cadastros de Usuarios disponíveis no banco de dados")
-    public void cadastros_de_usuarios_disponiveis_no_banco_de_dados(io.cucumber.datatable.DataTable dataTable) {
-        usuarioRepository.deleteAll();
+    @Dado("cadastros de Clientes disponíveis no banco de dados")
+    public void cadastros_de_clientes_disponiveis_no_banco_de_dados(io.cucumber.datatable.DataTable dataTable) {
+        clienteRepository.deleteAll();
 
         List<Map<String, String>> usuariosData = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> row : usuariosData) {
 
-            var usuarioEntity = UsuarioEntity.builder()
-                    .nome(row.get("nome"))
-                    .email(row.get("email"))
-                    .login(row.get("login"))
-                    .senha(row.get("senha"))
-                    .tipo(TipoUsuarioEnum.valueOf(row.get("tipo")))
-                    .build();
+            EnderecoEntity enderecoEntity = null;
 
             if (!row.get("cep").isEmpty()) {
-                var enderecoEntity = EnderecoEntity.builder()
+                enderecoEntity = EnderecoEntity.builder()
                         .cep(row.get("cep"))
                         .logradouro(row.get("logradouro"))
                         .numero(row.get("numero"))
                         .build();
-                usuarioEntity.setEndereco(enderecoEntity);
             }
 
-            usuarioRepository.save(usuarioEntity);
+            var clienteEntidade = new ClienteEntity(
+                    row.get("nome"),
+                    row.get("email"),
+                    row.get("login"),
+                    row.get("senha"),
+                    enderecoEntity,
+                    row.get("numeroCartaoFidelidade"),
+                    Date.from(Instant.now()),
+                    null
+            );
+
+            clienteRepository.save(clienteEntidade);
         }
     }
 
-    @Dado("um UsuarioDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
-    public void um_usuario_dto_request_com_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha, String tipo) {
+    @Dado("um ClienteDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
+    public void um_usuario_dto_request_com_nome_e_email_e_login_e_senha_e_numero_cartao_fidelidade(
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
-        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, TipoUsuarioEnum.valueOf(tipo), null);
+        clienteDtoRequest = new ClienteDtoRequest(nome, email, login, senha, null, numeroCartaoFidelidade);
 
-        assertThat(usuarioDtoRequest).isNotNull();
+        assertThat(clienteDtoRequest).isNotNull();
     }
 
-    @Quando("a requisição Post for feita no método create do UsuarioController")
-    public void a_requisicao_post_for_feita_no_metodo_create_do_usuario_controller() {
+    @Quando("a requisição Post for feita no método create do ClienteController")
+    public void a_requisicao_post_for_feita_no_metodo_create_do_cliente_controller() {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                .body(usuarioDtoRequest)
+                .body(clienteDtoRequest)
                 .when()
                 .post();
 
         assertThat(response).isNotNull();
     }
 
-    @Entao("receber ResponseEntity com HTTP {int} do UsuarioController")
-    public void receber_response_entity_com_http_do_usuario_controller(Integer status) {
+    @Entao("receber ResponseEntity com HTTP {int} do ClienteController")
+    public void receber_response_entity_com_http_do_cliente_controller(Integer status) {
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com UsuarioDtoResponse no body, com id e nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
-    public void com_usuario_dto_response_no_body_com_id_e_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha, String tipo) {
+    @Entao("com ClienteDtoResponse no body, com id e nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
+    public void com_usuario_dto_response_no_body_com_id_e_nome_e_email_e_login_e_senha_e_numero_cartao_fidelidade(
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
-        usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
+        clienteDtoResponse = response.as(ClienteDtoResponse.class);
 
-        assertThat(usuarioDtoResponse.usuarioId()).isNotNull();
-        assertThat(usuarioDtoResponse.nome()).isEqualTo(nome);
-        assertThat(usuarioDtoResponse.email()).isEqualTo(email);
-        assertThat(usuarioDtoResponse.login()).isEqualTo(login);
-        assertThat(usuarioDtoResponse.senha()).isEqualTo(senha);
-        assertThat(usuarioDtoResponse.tipo().getValue()).isEqualTo(tipo);
+        assertThat(clienteDtoResponse.usuarioId()).isNotNull();
+        assertThat(clienteDtoResponse.nome()).isEqualTo(nome);
+        assertThat(clienteDtoResponse.email()).isEqualTo(email);
+        assertThat(clienteDtoResponse.login()).isEqualTo(login);
+        assertThat(clienteDtoResponse.senha()).isEqualTo(senha);
+        assertThat(clienteDtoResponse.numeroCartaoFidelidade()).isEqualTo(numeroCartaoFidelidade);
     }
 
-    @Entao("o Usuário cadastrado no banco de dados possui nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
-    public void o_usuario_no_banco_possui_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha, String tipo) {
+    @Entao("o Cliente cadastrado no banco de dados possui nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
+    public void o_cliente_no_banco_possui_nome_e_email_e_login_e_senha_e_numero_cartao_fidelidade(
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
-        var usuario = usuarioRepository.findById(usuarioDtoResponse.usuarioId()).get();
+        var usuario = clienteRepository.findById(clienteDtoResponse.usuarioId()).get();
 
         assertThat(usuario.getNome()).isEqualTo(nome);
         assertThat(usuario.getEmail()).isEqualTo(email);
         assertThat(usuario.getLogin()).isEqualTo(login);
         assertThat(usuario.getSenha()).isEqualTo(senha);
-        assertThat(usuario.getTipo().getValue()).isEqualTo(tipo);
+        assertThat(usuario.getNumeroCartaoFidelidade()).isEqualTo(numeroCartaoFidelidade);
     }
 
-    @Entao("o Usuário no database possui nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
-    public void o_usuário_no_database_possui_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha, String tipo) {
+    @Entao("o Cliente no database possui nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
+    public void o_cliente_no_database_possui_nome_e_email_e_login_e_senha_numero_cartao_fidelidade(
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
-        var usuario = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
+        var cliente = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
 
-        assertThat(usuario.getNome()).isEqualTo(nome);
-        assertThat(usuario.getEmail()).isEqualTo(email);
-        assertThat(usuario.getLogin()).isEqualTo(login);
-        assertThat(usuario.getSenha()).isEqualTo(senha);
-        assertThat(usuario.getTipo().getValue()).isEqualTo(tipo);
+        assertThat(cliente.getNome()).isEqualTo(nome);
+        assertThat(cliente.getEmail()).isEqualTo(email);
+        assertThat(cliente.getLogin()).isEqualTo(login);
+        assertThat(cliente.getSenha()).isEqualTo(senha);
+        assertThat(cliente.getNumeroCartaoFidelidade()).isEqualTo(numeroCartaoFidelidade);
     }
 
-    @Dado("um identificador ID de um usuário existente, com email {string}")
-    public void um_identificador_id_de_um_usuario_existente_com_email(String email) {
+    @Dado("um identificador ID de um cliente existente, com email {string}")
+    public void um_identificador_id_de_um_cliente_existente_com_email(String email) {
 
-        usuarioEntity = usuarioRepository.findByEmail(email).get();
+        clienteEntity = clienteRepository.findByEmail(email).get();
 
-        assertThat(usuarioEntity).isNotNull();
+        assertThat(clienteEntity).isNotNull();
     }
 
-    @Quando("uma requisição Get for feita no método findById do UsuarioController")
-    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_usuario_controller() {
+    @Quando("uma requisição Get for feita no método findById do ClienteController")
+    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_cliente_controller() {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                .get("/" + usuarioEntity.getUsuarioId());
+                .get("/" + clienteEntity.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
 
-    @Quando("uma requisição Delete for feita no método deleteById do UsuarioController")
-    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_usuario_controller() {
+    @Quando("uma requisição Delete for feita no método deleteById do ClienteController")
+    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_cliente_controller() {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                .delete("/" + usuarioEntity.getUsuarioId());
+                .delete("/" + clienteEntity.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
 
-    @Entao("o Usuário foi apagado do banco de dados pelo UsuarioController")
-    public void o_usuario_foi_apagado_do_banco_de_dados_pelo_usuario_controller() {
+    @Entao("o Cliente foi apagado do banco de dados pelo ClienteController")
+    public void o_cliente_foi_apagado_do_banco_de_dados_pelo_cliente_controller() {
 
-        var response = usuarioRepository.findById(usuarioEntity.getUsuarioId());
+        var response = clienteRepository.findById(clienteEntity.getUsuarioId());
 
         assertThat(response).isEmpty();
     }
 
-    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string}")
+    @Dado("um UsuarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
     public void um_usuario_update_dto_request_com_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha, String tipo) {
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
-        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity
-                .getUsuarioId(), nome, email, login, senha, TipoUsuarioEnum.valueOf(tipo), null);
+        clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(clienteEntity
+                .getUsuarioId(), nome, email, login, senha, null, numeroCartaoFidelidade);
 
-        assertThat(usuarioUpdateDtoRequest).isNotNull();
+        assertThat(clienteUpdateDtoRequest).isNotNull();
     }
 
     @Quando("uma requisição Put for feita no método update do UsuarioController")
@@ -228,39 +233,48 @@ public class UsuarioControllerStep {
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                .body(usuarioUpdateDtoRequest)
+                .body(clienteUpdateDtoRequest)
                 .when()
                 .put();
 
         assertThat(response).isNotNull();
     }
 
-    @Dado("um identificador ID de um usuário inexistente")
-    public void um_identificador_id_de_um_usuario_inexistente() {
+    @Dado("um identificador ID de um cliente inexistente")
+    public void um_identificador_id_de_um_cliente_inexistente() {
 
-        usuarioEntity = UsuarioEntity.builder()
-                .usuarioId(UUID.randomUUID())
-                .build();
+        clienteEntity = new ClienteEntity(
+                UUID.randomUUID(),
+                "nomeTeste",
+                "emailTeste",
+                "loginTeste",
+                "senhaTeste",
+                null,
+                "1234-777-000",
+                null,
+                null
+        );
 
-        assertThat(usuarioEntity.getUsuarioId()).isNotNull();
+        assertThat(clienteEntity.getUsuarioId()).isNotNull();
     }
 
-    @Dado("um UsuarioDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string} e com cep {string} e logradouro {string} e número {string}")
-    public void um_usuario_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
-            String nome, String email, String login, String senha, String tipo, String cep, String logradouro, String numero) {
+    @Dado("um ClienteDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_cliente_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade, String cep, String logradouro, String numero) {
 
-        usuarioDtoRequest = new UsuarioDtoRequest(nome, email, login, senha, TipoUsuarioEnum.valueOf(tipo),
-                new EnderecoDtoRequest(cep, logradouro, numero));
+        clienteDtoRequest = new ClienteDtoRequest(nome, email, login, senha,
+                new EnderecoDtoRequest(cep, logradouro, numero),
+                numeroCartaoFidelidade);
 
-        assertThat(usuarioDtoRequest).isNotNull();
-        assertThat(usuarioDtoRequest.endereco()).isNotNull();
+        assertThat(clienteDtoRequest).isNotNull();
+        assertThat(clienteDtoRequest.endereco()).isNotNull();
     }
 
     @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}")
     public void com_endereco_dto_response_no_body_com_id_e_cep_e_logradouro_e_numero(
             String cep, String logradouro, String numero) {
 
-        enderecoDtoResponse = usuarioDtoResponse.endereco();
+        enderecoDtoResponse = clienteDtoResponse.endereco();
 
         assertThat(enderecoDtoResponse.enderecoId()).isNotNull();
         assertThat(enderecoDtoResponse.cep()).isEqualTo(cep);
@@ -278,32 +292,39 @@ public class UsuarioControllerStep {
         assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
     }
 
-    @Dado("um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e tipo {string} e com cep {string} e logradouro {string} e número {string}")
-    public void um_usuario_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
-            String nome, String email, String login, String senha, String tipo, String cep, String logradouro, String numero) {
+    @Dado("um ClienteUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_cliente_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
+            String nome, String email, String login, String senha, String numeroCartaoFidelidade, String cep, String logradouro, String numero) {
 
-        usuarioUpdateDtoRequest = new UsuarioUpdateDtoRequest(usuarioEntity.getUsuarioId(), nome, email, login, senha,
-                TipoUsuarioEnum.valueOf(tipo), new EnderecoDtoRequest(cep, logradouro, numero));
+        clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(
+                clienteEntity.getUsuarioId(),
+                nome,
+                email,
+                login,
+                senha,
+                new EnderecoDtoRequest(cep, logradouro, numero),
+                numeroCartaoFidelidade
+        );
 
-        assertThat(usuarioUpdateDtoRequest).isNotNull();
-        assertThat(usuarioUpdateDtoRequest.endereco()).isNotNull();
+        assertThat(clienteUpdateDtoRequest).isNotNull();
+        assertThat(clienteUpdateDtoRequest.endereco()).isNotNull();
     }
 
     @Entao("sem EnderecoDtoResponse no body")
     public void sem_endereco_dto_response_no_body() {
 
-        usuarioDtoResponse = response.as(UsuarioDtoResponse.class);
+        clienteDtoResponse = response.as(ClienteDtoResponse.class);
 
-        assertThat(usuarioDtoResponse.usuarioId()).isNotNull();
-        assertThat(usuarioDtoResponse.endereco()).isNull();
+        assertThat(clienteDtoResponse.usuarioId()).isNotNull();
+        assertThat(clienteDtoResponse.endereco()).isNull();
     }
 
     @Entao("sem Endereço salvo no database")
     public void sem_endereco_salvo_no_database() {
 
-        var usuarioAtualizado = usuarioRepository.findById(usuarioEntity.getUsuarioId()).get();
+        var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
 
-        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(usuarioEntity.getUsuarioId());
+        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
 }

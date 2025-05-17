@@ -1,15 +1,15 @@
 package br.com.fiap.tech.challenge_user.application.core.domain;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
-@Builder
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"usuarioId"})
-public class Usuario {
+public abstract class Usuario {
 
     private UUID usuarioId;
 
@@ -21,8 +21,31 @@ public class Usuario {
 
     private String senha;
 
-    private TipoUsuarioEnum tipo;
-
     private Endereco endereco;
+
+    protected Usuario() {
+    }
+
+    public Usuario(String nome,
+                   String email,
+                   String login,
+                   String senha,
+                   Endereco endereco) {
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
+        this.endereco = endereco;
+    }
+
+    public Usuario(UUID usuarioId,
+                   String nome,
+                   String email,
+                   String login,
+                   String senha,
+                   Endereco endereco) {
+        this(nome, email, login, senha, endereco);
+        this.usuarioId = usuarioId;
+    }
 }
 

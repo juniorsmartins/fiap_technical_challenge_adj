@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
-import br.com.fiap.tech.challenge_user.application.port.output.UsuarioDeleteByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.ClienteDeleteByIdOutputPort;
 import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +16,16 @@ import java.util.UUID;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class UsuarioDeleteAdapter implements UsuarioDeleteByIdOutputPort {
+public class ClienteDeleteAdapter implements ClienteDeleteByIdOutputPort {
 
-    private final UsuarioRepository usuarioRepository;
+    private final ClienteRepository clienteRepository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     @Modifying
     @Override
     public void deleteById(@NonNull final UUID id) {
-        usuarioRepository.findById(id)
-                .ifPresentOrElse(usuarioRepository::delete,
+        clienteRepository.findById(id)
+                .ifPresentOrElse(clienteRepository::delete,
                         () -> {throw new UsuarioNotFoundException(id);}
                 );
     }
