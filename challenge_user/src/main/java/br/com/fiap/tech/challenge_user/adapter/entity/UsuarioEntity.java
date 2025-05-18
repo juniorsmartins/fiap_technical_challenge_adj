@@ -1,25 +1,23 @@
 package br.com.fiap.tech.challenge_user.adapter.entity;
 
-import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 
 @Entity
-@Table(name = "usuarios")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"usuarioId"}, callSuper = false)
-public final class UsuarioEntity extends AbstractAuditingEntity implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class UsuarioEntity extends AbstractAuditingEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -41,12 +39,50 @@ public final class UsuarioEntity extends AbstractAuditingEntity implements Seria
     @Column(name = "senha", length = MAX_CARACTER_SENHA, nullable = false)
     private String senha;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo", nullable = false)
-    private TipoUsuarioEnum tipo;
-
     @OneToOne(targetEntity = EnderecoEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", unique = true)
     private EnderecoEntity endereco;
+
+    protected UsuarioEntity() {
+    }
+
+    public UsuarioEntity(
+            String nome,
+            String email,
+            String login,
+            String senha,
+            EnderecoEntity endereco) {
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
+        this.endereco = endereco;
+    }
+
+    public UsuarioEntity(
+            String nome,
+            String email,
+            String login,
+            String senha,
+            EnderecoEntity endereco,
+            Date dataHoraCriacao,
+            Date dataHoraEdicao) {
+        this(nome, email, login, senha, endereco);
+        this.setDataHoraCriacao(dataHoraCriacao);
+        this.setDataHoraEdicao(dataHoraEdicao);
+    }
+
+    public UsuarioEntity(
+            UUID usuarioId,
+            String nome,
+            String email,
+            String login,
+            String senha,
+            EnderecoEntity endereco,
+            Date dataHoraCriacao,
+            Date dataHoraEdicao) {
+        this(nome, email, login, senha, endereco, dataHoraCriacao, dataHoraEdicao);
+        this.usuarioId = usuarioId;
+    }
 }
 

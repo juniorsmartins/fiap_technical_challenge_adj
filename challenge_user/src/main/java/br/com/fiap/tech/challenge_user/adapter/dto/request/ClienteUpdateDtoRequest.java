@@ -1,6 +1,5 @@
 package br.com.fiap.tech.challenge_user.adapter.dto.request;
 
-import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -11,10 +10,11 @@ import java.util.UUID;
 
 import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 
-@Schema(name = "UsuarioUpdateDtoRequest", description = "Transportador de dados de entrada em requisições.")
-public record UsuarioUpdateDtoRequest(
+@Schema(name = "ClienteUpdateDtoRequest", description = "Transportador de dados de entrada em requisições.")
+public record ClienteUpdateDtoRequest(
 
-        @Schema(name = "usuarioId", description = "Identificador único do recurso.", example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748")
+        @Schema(name = "usuarioId", description = "Identificador único do recurso.",
+                example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748")
         @NotNull
         UUID usuarioId,
 
@@ -24,7 +24,7 @@ public record UsuarioUpdateDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "fowler@email.com")
-        @NotNull
+        @NotBlank
         @Email
         String email,
 
@@ -38,11 +38,12 @@ public record UsuarioUpdateDtoRequest(
         @Size(max = MAX_CARACTER_SENHA)
         String senha,
 
-        @Schema(name = "tipo", description = "Define o tipo de Usuário.", allowableValues = {"CLIENTE", "PROPRIETARIO"}, example = "CLIENTE")
-        @NotNull
-        TipoUsuarioEnum tipo,
+        @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
+        EnderecoDtoRequest endereco,
 
-        @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
-        EnderecoDtoRequest endereco
-) { }
+        @Schema(name = "numero_cartao_fidelidade", description = "Registro em programa de fidelidade para benefícios.",
+                example = "12345-6789-3245")
+        String numeroCartaoFidelidade
+) {
+}
 

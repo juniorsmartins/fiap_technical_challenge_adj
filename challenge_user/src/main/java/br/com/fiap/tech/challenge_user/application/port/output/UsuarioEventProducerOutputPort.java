@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.port.output;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.response.UsuarioDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 
 public interface UsuarioEventProducerOutputPort {
 
-    UsuarioDtoResponse sendUsuario(UsuarioDtoResponse usuarioDtoResponse);
+    ClienteDtoResponse sendUsuario(ClienteDtoResponse clienteDtoResponse);
 }
 

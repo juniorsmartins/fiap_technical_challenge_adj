@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
-import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.application.port.output.ClienteCreateOutputPort;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,15 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class UsuarioCreateAdapter implements UsuarioCreateOutputPort {
+public class ClienteCreateAdapter implements ClienteCreateOutputPort {
 
-    private final UsuarioRepository usuarioRepository;
+    private final ClienteRepository clienteRepository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     @Modifying
     @Override
-    public UsuarioEntity save(@NonNull final UsuarioEntity usuarioEntity) {
-        return usuarioRepository.saveAndFlush(usuarioEntity);
+    public ClienteEntity save(@NonNull final ClienteEntity clienteEntity) {
+        return clienteRepository.saveAndFlush(clienteEntity);
     }
 }
 

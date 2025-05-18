@@ -13,7 +13,9 @@ public class ConstantsTest {
 
     public static final String ORIGIN_NAO_PERMITIDA = "https://naopermitido.com";
 
-    public static final String PATH_CHALLENGE_USER = "/api/v1/challenge-user/users";
+    public static final String PATH_CHALLENGE_CLIENTE = "/api/v1/challenge-user/clientes";
+
+    public static final String PATH_CHALLENGE_PROPRIETARIO = "/api/v1/challenge-user/proprietarios";
 
     public static final String CONTENT_TYPE_JSON = "application/json";
 

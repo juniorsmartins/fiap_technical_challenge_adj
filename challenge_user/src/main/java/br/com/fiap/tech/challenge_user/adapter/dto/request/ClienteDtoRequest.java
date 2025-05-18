@@ -1,16 +1,14 @@
 package br.com.fiap.tech.challenge_user.adapter.dto.request;
 
-import br.com.fiap.tech.challenge_user.application.core.domain.TipoUsuarioEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 
-@Schema(name = "UsuarioDtoRequest", description = "Transportador de dados de entrada em requisições.")
-public record UsuarioDtoRequest(
+@Schema(name = "ClienteDtoRequest", description = "Transportador de dados de entrada em requisições.")
+public record ClienteDtoRequest(
 
         @Schema(name = "nome", description = "Nome do usuário.", example = "Robert Martin")
         @NotBlank
@@ -18,7 +16,7 @@ public record UsuarioDtoRequest(
         String nome,
 
         @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "martin@email.com")
-        @NotNull
+        @NotBlank
         @Email
         String email,
 
@@ -32,11 +30,12 @@ public record UsuarioDtoRequest(
         @Size(max = MAX_CARACTER_SENHA)
         String senha,
 
-        @Schema(name = "tipo", description = "Define o tipo de Usuário.", allowableValues = {"CLIENTE", "PROPRIETARIO"}, example = "CLIENTE")
-        @NotNull
-        TipoUsuarioEnum tipo,
+        @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
+        EnderecoDtoRequest endereco,
 
-        @Schema(name = "endereco", description = "Descrição completa para identificar a localização física de um imóvel.")
-        EnderecoDtoRequest endereco
-) { }
+        @Schema(name = "numeroCartaoFidelidade", description = "Registro em programa de fidelidade para benefícios.",
+                example = "12345-6789-3245")
+        String numeroCartaoFidelidade
+) {
+}
 
