@@ -2,8 +2,10 @@ package br.com.fiap.tech.challenge_user.application.core.mapper;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.core.domain.Endereco;
+import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -19,5 +21,11 @@ public interface ApplicationMapper {
     Cliente toCliente(ClienteEntity clienteEntity);
 
     Endereco toEndereco(EnderecoEntity enderecoEntity);
+
+    @Mapping(target = "dataHoraCriacao", ignore = true)
+    @Mapping(target = "dataHoraEdicao", ignore = true)
+    ProprietarioEntity toProprietarioEntity(Proprietario proprietario);
+
+    Proprietario toProprietario(ProprietarioEntity proprietarioEntity);
 }
 

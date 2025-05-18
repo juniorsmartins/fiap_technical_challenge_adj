@@ -28,14 +28,14 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
-@Tag(name = "Clientes", description = "Contém os recursos de Cadastrar, Consultar, Atualizar e Deletar.")
+@Tag(name = "Clientes", description = "Contém os recursos de cadastrar, consultar, atualizar e deletar.")
 @Slf4j
 @RestController
-@RequestMapping(path = {ClienteController.URI_USUARIO})
+@RequestMapping(path = {ClienteController.URI_CLIENTE})
 @RequiredArgsConstructor
 public class ClienteController {
 
-    protected static final String URI_USUARIO = "/api/v1/challenge-user/clientes";
+    protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 
     private final ClienteCreateInputPort clienteCreateInputPort;
 
@@ -91,7 +91,7 @@ public class ClienteController {
         log.info("ClienteController - requisição concluída no create: {}", response);
 
         return ResponseEntity
-                .created(URI.create(URI_USUARIO + "/" + response.usuarioId()))
+                .created(URI.create(URI_CLIENTE + "/" + response.usuarioId()))
                 .body(response);
     }
 

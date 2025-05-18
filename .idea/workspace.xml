@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/proprietario.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/proprietario.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ProprietarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ProprietarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/mapper/ApplicationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/mapper/ApplicationMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/import.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +67,8 @@
         <option value="Dockerfile" />
         <option value="Record" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,38 +87,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Cucumber Java.Feature: cliente.executor": "Run",
-    "Cucumber Java.Feature: create_user.executor": "Run",
-    "Cucumber Java.Feature: proprietario.executor": "Run",
-    "Cucumber Java.Feature: user_create.executor": "Run",
-    "Cucumber Java.Feature: user_post.executor": "Run",
-    "Cucumber Java.Feature: usuario.executor": "Run",
-    "Cucumber Java.Feature: usuario_get.executor": "Run",
-    "Cucumber Java.Feature: usuario_post.executor": "Run",
-    "Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController.executor": "Run",
-    "Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor": "Run",
-    "Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor": "Run",
-    "Docker.docker.challenge_data_user: Compose Deployment.executor": "Run",
-    "Gradle.Build challenge_user.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor": "Run",
-    "Gradle.challenge_user [acceptanceTest].executor": "Run",
-    "Gradle.challenge_user [build].executor": "Run",
-    "Gradle.challenge_user [clean].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/heranca",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/juniorsmartins/Workspace/backend-develop",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cucumber Java.Feature: cliente.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: proprietario.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: user_create.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: user_post.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario_get.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario_post.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker.challenge_data_user: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build challenge_user.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [acceptanceTest].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/heranca&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/juniorsmartins/Workspace/backend-develop&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/challenge_user/src/main/resources" />
@@ -123,9 +126,11 @@
       <recent name="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.com.fiap.tech.challenge_user.adapter.repository" />
       <recent name="br.com.fiap.tech.challenge_user.application.port.output" />
-      <recent name="br.com.fiap.tech.challenge_user.adapter.dto" />
-      <recent name="cucumber" />
+      <recent name="br.com.fiap.tech.challenge_user.application.core.usecase" />
+      <recent name="br.com.fiap.tech.challenge_user.application.port.input" />
+      <recent name="br.com.fiap.tech.challenge_user.adapter.dto.response" />
     </key>
   </component>
   <component name="RunManager" selected="Cucumber Java.Feature: proprietario">
