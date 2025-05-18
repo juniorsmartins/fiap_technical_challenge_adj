@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "cliente")
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
@@ -17,8 +18,6 @@ public final class ClienteEntity extends UsuarioEntity {
 
     @Column(name = "numero_cartao_fidelidade", nullable = true)
     private String numeroCartaoFidelidade;
-
-    public ClienteEntity() {}
 
     public ClienteEntity(
             String nome, String email, String login, String senha,

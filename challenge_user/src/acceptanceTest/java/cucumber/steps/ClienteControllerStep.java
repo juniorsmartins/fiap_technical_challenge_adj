@@ -32,7 +32,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ClienteControllerStep {
+public final class ClienteControllerStep {
 
     private static RequestSpecification requestSpecification;
 
@@ -84,7 +84,6 @@ public class ClienteControllerStep {
         List<Map<String, String>> usuariosData = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> row : usuariosData) {
-
             EnderecoEntity enderecoEntity = null;
 
             if (!row.get("cep").isEmpty()) {
@@ -115,7 +114,6 @@ public class ClienteControllerStep {
             String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
         clienteDtoRequest = new ClienteDtoRequest(nome, email, login, senha, null, numeroCartaoFidelidade);
-
         assertThat(clienteDtoRequest).isNotNull();
     }
 

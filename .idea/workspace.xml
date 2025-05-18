@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="" />
+    <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ProprietarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ProprietarioEntity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,9 +63,9 @@
       <list>
         <option value="Dockerfile" />
         <option value="Record" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -82,6 +88,7 @@
   "keyToString": {
     "Cucumber Java.Feature: cliente.executor": "Run",
     "Cucumber Java.Feature: create_user.executor": "Run",
+    "Cucumber Java.Feature: proprietario.executor": "Run",
     "Cucumber Java.Feature: user_create.executor": "Run",
     "Cucumber Java.Feature: user_post.executor": "Run",
     "Cucumber Java.Feature: usuario.executor": "Run",
@@ -121,7 +128,7 @@
       <recent name="cucumber" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: cliente">
+  <component name="RunManager" selected="Cucumber Java.Feature: proprietario">
     <configuration name="Feature: cliente" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" />
@@ -130,6 +137,25 @@
       <module name="challenge_user.acceptanceTest" />
       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
       <option name="SUGGESTED_NAME" value="Feature: cliente" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Feature: proprietario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/proprietario.feature" />
+      <option name="GLUE" value="cucumber.steps cucumber.config" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="challenge_user.acceptanceTest" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+      <option name="SUGGESTED_NAME" value="Feature: proprietario" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -179,26 +205,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/usuario.feature" />
-      <option name="GLUE" value="cucumber.steps cucumber.config" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="challenge_user.acceptanceTest" />
-      <option name="NAME_FILTER" value="^Put para atualizar Usuário e Endereço\, com sucesso\, pelo UsuarioController$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Put para atualizar Usuário e Endereço\, com sucesso\, pelo UsuarioController$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="challenge_user [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -229,11 +235,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: proprietario" />
         <item itemvalue="Cucumber Java.Feature: cliente" />
         <item itemvalue="Cucumber Java.Feature: usuario" />
         <item itemvalue="Gradle.challenge_user [clean]" />
         <item itemvalue="Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController" />
-        <item itemvalue="Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController" />
       </list>
     </recent_temporary>
   </component>

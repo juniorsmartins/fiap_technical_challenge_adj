@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import java.util.UUID;
 
-@Schema(name = "ClienteDtoResponse", description = "Transportador de dados de saída.")
+@Schema(name = "ProprietarioDtoResponse", description = "Transportador de dados de saída.")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record ClienteDtoResponse(
+public record ProprietarioDtoResponse(
 
         @Schema(name = "usuarioId", description = "Identificador único do recurso.",
                 example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748")
@@ -37,9 +37,8 @@ public record ClienteDtoResponse(
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
         EnderecoDtoResponse endereco,
 
-        @Schema(name = "numeroCartaoFidelidade", description = "Registro em programa de fidelidade para benefícios.",
-                example = "12345-6789-3245")
-        String numeroCartaoFidelidade
+        @Schema(name = "descricao", description = "Espaço livre para anotações.", example = "Está na empresa toda quinta.")
+        String descricao
 ) {
 }
 

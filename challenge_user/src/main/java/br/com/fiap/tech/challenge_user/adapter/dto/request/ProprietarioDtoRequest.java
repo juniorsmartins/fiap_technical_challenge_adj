@@ -7,8 +7,8 @@ import jakarta.validation.constraints.Size;
 
 import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 
-@Schema(name = "ClienteDtoRequest", description = "Transportador de dados de entrada em requisições.")
-public record ClienteDtoRequest(
+@Schema(name = "ProprietarioDtoRequest", description = "Transportador de dados de entrada em requisições.")
+public record ProprietarioDtoRequest(
 
         @Schema(name = "nome", description = "Nome do usuário.", example = "Robert Martin")
         @NotBlank
@@ -33,9 +33,8 @@ public record ClienteDtoRequest(
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
         EnderecoDtoRequest endereco,
 
-        @Schema(name = "numeroCartaoFidelidade", description = "Registro em programa de fidelidade para benefícios.",
-                example = "12345-6789-3245")
-        String numeroCartaoFidelidade
+        @Schema(name = "descricao", description = "Espaço livre para anotações.", example = "Atua como contador da empresa.")
+        String descricao
 ) {
 }
 
