@@ -49,7 +49,7 @@ services:
           memory: 512M
     environment:
       - DB_HOST=challenge_data_user
-      - DB_NAME=database_user
+      - DB_NAME=challenge_user
       - DB_PORT=5432
     restart: on-failure
     networks:
@@ -72,7 +72,7 @@ services:
           memory: 512M
     restart: on-failure
     environment:
-      - POSTGRES_DB=database_user
+      - POSTGRES_DB=challenge_user
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
