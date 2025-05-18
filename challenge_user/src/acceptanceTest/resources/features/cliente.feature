@@ -172,40 +172,40 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 400 do ClienteController
     E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
 
-#  Cenario: Put para atualizar Usuário, com erro por senha maior, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "anne1234567890123456789012345678901234567890123456789" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 400 do UsuarioController
-#    E o Usuário no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e tipo "CLIENTE"
-#
-#  Cenario: Put para atualizar Usuário e remover Endereço (cenário 2), com sucesso, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "james@gmail.com"
-#    E um UsuarioUpdateDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 200 do UsuarioController
-#    E com UsuarioDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e tipo "CLIENTE"
-#    E sem EnderecoDtoResponse no body
-#    E o Usuário no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e tipo "CLIENTE"
-#    E sem Endereço salvo no database
-#
-#  Cenario: Put para atualizar Usuário e criar Endereço (cenário 3), com sucesso, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "jeff@gmail.com"
-#    E um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "CLIENTE" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 200 do UsuarioController
-#    E com UsuarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "CLIENTE"
-#    E com EnderecoDtoResponse no body, com id e cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
-#    E o Usuário no database possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e tipo "CLIENTE"
-#    E um Endereço salvo no database, com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
-#
-#  Cenario: Put para atualizar Usuário e atualizar Endereço (cenário 4), com sucesso, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "james@gmail.com"
-#    E um UsuarioUpdateDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e tipo "PROPRIETARIO" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 200 do UsuarioController
-#    E com UsuarioDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e tipo "PROPRIETARIO"
-#    E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
-#    E o Usuário no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e tipo "PROPRIETARIO"
-#    E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+  Cenario: Put para atualizar Cliente, com erro por senha maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "anne1234567890123456789012345678901234567890123456789" e numeroCartaoFidelidade "1234-8888-009"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente e remover Endereço (cenário 2), com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
+    E um ClienteUpdateDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0010"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0010"
+    E sem EnderecoDtoResponse no body
+    E o Cliente no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0010"
+    E sem Endereço salvo no database
+
+  Cenario: Put para atualizar Cliente e criar Endereço (cenário 3), com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
+    E um ClienteUpdateDtoRequest e EnderecoDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-0011" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-0011"
+    E com EnderecoDtoResponse no body, com id e cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    E o Cliente no database possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-0011"
+    E um Endereço salvo no database, com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+
+  Cenario: Put para atualizar Cliente e atualizar Endereço (cenário 4), com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
+    E um ClienteUpdateDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012"
+    E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    E o Cliente no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012"
+    E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
 
