@@ -1,9 +1,12 @@
 package cucumber.steps;
 
+import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.repository.EnderecoRepository;
 import br.com.fiap.tech.challenge_user.adapter.repository.ProprietarioRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
@@ -40,11 +43,16 @@ public final class ProprietarioControllerStep {
     @Autowired
     private ProprietarioRepository proprietarioRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     private Response response;
 
     private ProprietarioDtoRequest proprietarioDtoRequest;
 
     private ProprietarioDtoResponse proprietarioDtoResponse;
+
+    private EnderecoDtoResponse enderecoDtoResponse;
 
     @Before
     public void setUp() {
@@ -147,6 +155,43 @@ public final class ProprietarioControllerStep {
         assertThat(proprietario.getLogin()).isEqualTo(login);
         assertThat(proprietario.getSenha()).isEqualTo(senha);
         assertThat(proprietario.getDescricao()).isEqualTo(descricao);
+    }
+
+    @Dado("um ProprietarioDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e descricao {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_proprietario_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_descricao_e_com_cep_e_logradouro_e_nuúmero(
+            String nome, String email, String login, String senha, String descricao, String cep, String logradouro, String numero) {
+
+        proprietarioDtoRequest = new ProprietarioDtoRequest(
+                nome, email, login, senha,
+                new EnderecoDtoRequest(cep, logradouro, numero),
+                descricao
+        );
+
+        assertThat(proprietarioDtoRequest).isNotNull();
+        assertThat(proprietarioDtoRequest.endereco()).isNotNull();
+    }
+
+    @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}, pelo ProprietarioController")
+    public void com_endereco_dto_response_no_body_com_id_e_cep_e_logradouro_e_número_pelo_proprietario_controller(
+            String cep, String logradouro, String numero) {
+
+        enderecoDtoResponse = proprietarioDtoResponse.endereco();
+
+        assertThat(enderecoDtoResponse.enderecoId()).isNotNull();
+        assertThat(enderecoDtoResponse.cep()).isEqualTo(cep);
+        assertThat(enderecoDtoResponse.logradouro()).isEqualTo(logradouro);
+        assertThat(enderecoDtoResponse.numero()).isEqualTo(numero);
+    }
+
+    @Entao("um Endereço salvo no database, com cep {string} e logradouro {string} e número {string}, pelo ProprietarioController")
+    public void um_endereco_salvo_no_database_com_cep_e_logradouro_e_numero_pelo_proprietario_controller(
+            String cep, String logradouro, String numero) {
+
+        var enderecoSalvo = enderecoRepository.findById(enderecoDtoResponse.enderecoId()).get();
+
+        assertThat(enderecoSalvo.getCep()).isEqualTo(cep);
+        assertThat(enderecoSalvo.getLogradouro()).isEqualTo(logradouro);
+        assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
     }
 }
 
