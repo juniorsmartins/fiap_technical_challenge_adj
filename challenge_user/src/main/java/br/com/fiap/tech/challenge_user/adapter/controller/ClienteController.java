@@ -37,6 +37,8 @@ public class ClienteController {
 
     protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 
+    private final AdapterMapper adapterMapper;
+
     private final ClienteCreateInputPort clienteCreateInputPort;
 
     private final ClienteUpdateInputPort clienteUpdateInputPort;
@@ -44,8 +46,6 @@ public class ClienteController {
     private final ClienteFindByIdOutputPort clienteFindByIdOutputPort;
 
     private final ClienteDeleteByIdInputPort clienteDeleteByIdInputPort;
-
-    private final AdapterMapper adapterMapper;
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
