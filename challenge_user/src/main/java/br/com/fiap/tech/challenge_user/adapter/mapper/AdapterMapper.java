@@ -9,6 +9,7 @@ import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.core.domain.Endereco;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
@@ -42,5 +43,7 @@ public interface AdapterMapper {
     @Mapping(target = "dataHoraCriacao", ignore = true)
     @Mapping(target = "dataHoraEdicao", ignore = true)
     ProprietarioDtoResponse toProprietarioDtoResponse(Proprietario proprietario);
+
+    ProprietarioDtoResponse toProprietarioDtoResponse(ProprietarioEntity proprietarioEntity);
 }
 

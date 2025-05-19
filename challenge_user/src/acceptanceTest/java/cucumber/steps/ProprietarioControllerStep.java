@@ -23,9 +23,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,6 +51,8 @@ public final class ProprietarioControllerStep {
     private ProprietarioDtoResponse proprietarioDtoResponse;
 
     private EnderecoDtoResponse enderecoDtoResponse;
+
+    private ProprietarioEntity proprietarioEntity;
 
     @Before
     public void setUp() {
@@ -192,6 +192,62 @@ public final class ProprietarioControllerStep {
         assertThat(enderecoSalvo.getCep()).isEqualTo(cep);
         assertThat(enderecoSalvo.getLogradouro()).isEqualTo(logradouro);
         assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
+    }
+
+    @Dado("um identificador ID de um proprietario existente, com email {string}")
+    public void um_identificador_id_de_um_proprietario_existente_com_email(String email) {
+
+        proprietarioEntity = proprietarioRepository.findByEmail(email).get();
+        assertThat(proprietarioEntity).isNotNull();
+    }
+
+    @Quando("uma requisição Get for feita no método findById do ProprietarioController")
+    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_proprietario_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .get("/" + proprietarioEntity.getUsuarioId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Dado("um identificador ID de um proprietario inexistente")
+    public void um_identificador_id_de_um_proprietario_inexistente() {
+
+        proprietarioEntity = new ProprietarioEntity(
+                UUID.randomUUID(),
+                "nomeTeste",
+                "emailTeste",
+                "loginTeste",
+                "senhaTeste",
+                null,
+                "Advogado",
+                null,
+                null
+        );
+
+        assertThat(proprietarioEntity.getUsuarioId()).isNotNull();
+    }
+
+    @Quando("uma requisição Delete for feita no método deleteById do ProprietarioController")
+    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_proprietario_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .delete("/" + proprietarioEntity.getUsuarioId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Proprietario foi apagado do banco de dados pelo ProprietarioController")
+    public void o_proprietario_foi_apagado_do_banco_de_dados_pelo_proprietario_controller() {
+
+        var response = proprietarioRepository.findById(proprietarioEntity.getUsuarioId());
+        assertThat(response).isEmpty();
     }
 }
 

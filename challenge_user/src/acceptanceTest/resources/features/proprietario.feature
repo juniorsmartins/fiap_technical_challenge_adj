@@ -70,5 +70,27 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700", pelo ProprietarioController
 
 
+  Cenario: Get para consultar Proprietario, com sucesso, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "fowler@email.com"
+    Quando uma requisição Get for feita no método findById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 200 do ProprietarioController
+    E com ProprietarioDtoResponse no body, com id e nome "Martin Fowler" e email "fowler@email.com" e login "mfowler" e senha "fowler123" e descricao "gerente geral"
+
+  Cenario: Get para consultar Proprietario não encontrado pelo ProprietarioController
+    Dado um identificador ID de um proprietario inexistente
+    Quando uma requisição Get for feita no método findById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 404 do ProprietarioController
+
+
+  Cenario: Delete para apagar Proprietario, com sucesso, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "beck@proton.me"
+    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 204 do ProprietarioController
+    E o Proprietario foi apagado do banco de dados pelo ProprietarioController
+
+  Cenario: Delete para apagar Proprietario não encontrado pelo ProprietarioController
+    Dado um identificador ID de um proprietario inexistente
+    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 
 

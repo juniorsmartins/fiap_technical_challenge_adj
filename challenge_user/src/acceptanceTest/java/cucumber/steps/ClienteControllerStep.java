@@ -179,7 +179,6 @@ public final class ClienteControllerStep {
     public void um_identificador_id_de_um_cliente_existente_com_email(String email) {
 
         clienteEntity = clienteRepository.findByEmail(email).get();
-
         assertThat(clienteEntity).isNotNull();
     }
 
@@ -211,7 +210,6 @@ public final class ClienteControllerStep {
     public void o_cliente_foi_apagado_do_banco_de_dados_pelo_cliente_controller() {
 
         var response = clienteRepository.findById(clienteEntity.getUsuarioId());
-
         assertThat(response).isEmpty();
     }
 
