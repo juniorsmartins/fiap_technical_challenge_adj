@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/proprietario.feature" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/proprietario.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ProprietarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ProprietarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/mapper/AdapterMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

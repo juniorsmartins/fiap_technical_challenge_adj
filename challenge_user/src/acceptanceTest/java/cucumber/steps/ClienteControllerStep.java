@@ -309,7 +309,6 @@ public final class ClienteControllerStep {
     public void sem_endereco_dto_response_no_body() {
 
         clienteDtoResponse = response.as(ClienteDtoResponse.class);
-
         assertThat(clienteDtoResponse.usuarioId()).isNotNull();
         assertThat(clienteDtoResponse.endereco()).isNull();
     }
@@ -318,7 +317,6 @@ public final class ClienteControllerStep {
     public void sem_endereco_salvo_no_database() {
 
         var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
-
         assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
