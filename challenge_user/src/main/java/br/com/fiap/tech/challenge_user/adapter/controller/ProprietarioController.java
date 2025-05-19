@@ -1,11 +1,13 @@
 package br.com.fiap.tech.challenge_user.adapter.controller;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioDeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,6 +41,8 @@ public class ProprietarioController {
     private final AdapterMapper adapterMapper;
 
     private final ProprietarioCreateInputPort proprietarioCreateInputPort;
+
+    private final ProprietarioUpdateInputPort proprietarioUpdateInputPort;
 
     private final ProprietarioFindByIdOutputPort proprietarioFindByIdOutputPort;
 
@@ -88,6 +92,55 @@ public class ProprietarioController {
 
         return ResponseEntity
                 .created(URI.create(URI_PROPRIETARIO + "/" + response.usuarioId()))
+                .body(response);
+    }
+
+    @PutMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    @Operation(summary = "Atualizar", description = "Modificar dados de um recurso.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ClienteDtoResponse.class))}
+                    ),
+                    @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal formulada.",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProblemDetail.class))}
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado no banco de dados.",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProblemDetail.class))}
+                    ),
+                    @ApiResponse(responseCode = "409", description = "Conflict - violação de regras de negócio.",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProblemDetail.class))}
+                    ),
+                    @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProblemDetail.class))}
+                    ),
+            }
+    )
+    public ResponseEntity<ProprietarioDtoResponse> update(
+            @Parameter(name = "ProprietarioUpdateDtoRequest", description = "Objeto para transporte de dados de entrada.",
+                    required = true)
+            @RequestBody @Valid ProprietarioUpdateDtoRequest proprietarioUpdateDtoRequest
+    ) {
+
+        log.info("ProprietarioController - requisição feita no update: {}", proprietarioUpdateDtoRequest);
+
+        var response = Optional.ofNullable(proprietarioUpdateDtoRequest)
+                .map(adapterMapper::toProprietario)
+                .map(proprietarioUpdateInputPort::update)
+                .map(adapterMapper::toProprietarioDtoResponse)
+                .orElseThrow();
+
+        log.info("ProprietarioController - requisição concluída no update: {}", response);
+
+        return ResponseEntity
+                .ok()
                 .body(response);
     }
 

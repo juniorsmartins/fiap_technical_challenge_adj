@@ -94,3 +94,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 
 
+  Cenario: Put para atualizar Proprietario, com sucesso, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "beck@proton.me"
+    E um ProprietarioUpdateDtoRequest, com nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e descricao "atendente chefe"
+    Quando uma requisição Put for feita no método update do ProprietarioController
+    Entao receber ResponseEntity com HTTP 200 do ProprietarioController
+    E com ProprietarioDtoResponse no body, com id e nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e descricao "atendente chefe"
+    E o Proprietario cadastrado no banco de dados possui nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e descricao "atendente chefe"
+

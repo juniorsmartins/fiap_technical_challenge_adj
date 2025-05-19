@@ -1,9 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.mapper;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.*;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
@@ -45,5 +42,7 @@ public interface AdapterMapper {
     ProprietarioDtoResponse toProprietarioDtoResponse(Proprietario proprietario);
 
     ProprietarioDtoResponse toProprietarioDtoResponse(ProprietarioEntity proprietarioEntity);
+
+    Proprietario toProprietario(ProprietarioUpdateDtoRequest proprietarioUpdateDtoRequest);
 }
 

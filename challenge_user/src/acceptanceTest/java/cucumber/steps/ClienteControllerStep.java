@@ -219,7 +219,6 @@ public final class ClienteControllerStep {
 
         clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(clienteEntity
                 .getUsuarioId(), nome, email, login, senha, null, numeroCartaoFidelidade);
-
         assertThat(clienteUpdateDtoRequest).isNotNull();
     }
 
