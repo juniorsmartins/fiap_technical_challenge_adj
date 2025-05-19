@@ -8,7 +8,8 @@ import br.com.fiap.tech.challenge_user.application.port.input.ClienteCreateInput
 import br.com.fiap.tech.challenge_user.application.port.input.ClienteDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.ClienteUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ClienteFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.ClienteNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,6 +37,8 @@ public class ClienteController {
 
     protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 
+    private final AdapterMapper adapterMapper;
+
     private final ClienteCreateInputPort clienteCreateInputPort;
 
     private final ClienteUpdateInputPort clienteUpdateInputPort;
@@ -44,8 +46,6 @@ public class ClienteController {
     private final ClienteFindByIdOutputPort clienteFindByIdOutputPort;
 
     private final ClienteDeleteByIdInputPort clienteDeleteByIdInputPort;
-
-    private final AdapterMapper adapterMapper;
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -86,7 +86,10 @@ public class ClienteController {
                 .map(adapterMapper::toCliente)
                 .map(clienteCreateInputPort::create)
                 .map(adapterMapper::toClienteDtoResponse)
-                .orElseThrow();
+                .orElseThrow(() -> {
+                    log.error("ClienteController - Erro interno do servidor no método create.");
+                    return new InternalServerProblemException();
+                });
 
         log.info("ClienteController - requisição concluída no create: {}", response);
 
@@ -134,7 +137,10 @@ public class ClienteController {
                 .map(adapterMapper::toCliente)
                 .map(clienteUpdateInputPort::update)
                 .map(adapterMapper::toClienteDtoResponse)
-                .orElseThrow();
+                .orElseThrow(() -> {
+                    log.error("ClienteController - Erro interno do servidor no método update.");
+                    return new InternalServerProblemException();
+                });
 
         log.info("ClienteController - requisição concluída no update: {}", response);
 
@@ -169,7 +175,10 @@ public class ClienteController {
 
         var response = clienteFindByIdOutputPort.findById(id)
                 .map(adapterMapper::toClienteDtoResponse)
-                .orElseThrow(() -> new UsuarioNotFoundException(id));
+                .orElseThrow(() -> {
+                    log.error("ClienteController - Erro interno do servidor no método findById.");
+                    return new ClienteNotFoundException(id);
+                });
 
         log.info("ClienteController - requisição concluída no findById: {}", response);
 
@@ -210,11 +219,10 @@ public class ClienteController {
         log.info("ClienteController - requisição feita no deleteById: {}", id);
 
         Optional.ofNullable(id)
-                .ifPresentOrElse(clienteDeleteByIdInputPort::deleteById,
-                        () -> {
-                            throw new NoSuchElementException();
-                        }
-                );
+                .ifPresentOrElse(clienteDeleteByIdInputPort::deleteById, () -> {
+                    log.error("ClienteController - Erro interno do servidor no método deleteById.");
+                    throw new InternalServerProblemException();
+                });
 
         log.info("ClienteController - requisição concluída no deleteById: {}", id);
 

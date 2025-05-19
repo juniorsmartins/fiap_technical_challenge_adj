@@ -102,14 +102,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com ClienteDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
     E o Cliente cadastrado no banco de dados possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
 
-#  Cenario: Put para atualizar Usuário Proprietário, com sucesso, pelo UsuarioController
-#    Dado um identificador ID de um usuário existente, com email "beck@proton.me"
-#    E um UsuarioUpdateDtoRequest, com nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
-#    Quando uma requisição Put for feita no método update do UsuarioController
-#    Entao receber ResponseEntity com HTTP 200 do UsuarioController
-#    E com UsuarioDtoResponse no body, com id e nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
-#    E o Usuário cadastrado no banco de dados possui nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e tipo "CLIENTE"
-
   Cenario: Put para atualizar Cliente não encontrado pelo ClienteController
     Dado um identificador ID de um cliente inexistente
     E um ClienteUpdateDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e numeroCartaoFidelidade "1234-8888-002"

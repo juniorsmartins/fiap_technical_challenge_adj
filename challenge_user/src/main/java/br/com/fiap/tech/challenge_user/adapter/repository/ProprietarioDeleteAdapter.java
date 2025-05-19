@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
-import br.com.fiap.tech.challenge_user.application.port.output.ClienteDeleteByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioDeleteByIdOutputPort;
 import br.com.fiap.tech.challenge_user.config.exceptions.http404.ClienteNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +16,16 @@ import java.util.UUID;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class ClienteDeleteAdapter implements ClienteDeleteByIdOutputPort {
+public class ProprietarioDeleteAdapter implements ProprietarioDeleteByIdOutputPort {
 
-    private final ClienteRepository clienteRepository;
+    private final ProprietarioRepository proprietarioRepository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     @Modifying
     @Override
     public void deleteById(@NonNull final UUID id) {
-        clienteRepository.findById(id)
-                .ifPresentOrElse(clienteRepository::delete,
+        proprietarioRepository.findById(id)
+                .ifPresentOrElse(proprietarioRepository::delete,
                         () -> {
                             throw new ClienteNotFoundException(id);
                         }

@@ -4,6 +4,7 @@ import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.core.mapper.ApplicationMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.ClienteCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ClienteCreateOutputPort;
+import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,10 @@ public class ClienteCreateService implements ClienteCreateInputPort {
                 .map(applicationMapper::toClienteEntity)
                 .map(clienteCreateOutputPort::save)
                 .map(applicationMapper::toCliente)
-                .orElseThrow();
+                .orElseThrow(() -> {
+                    log.error("ClienteCreateService - Erro interno do servidor no método create.");
+                    return new InternalServerProblemException();
+                });
 
         log.info("ClienteCreateService - concluído serviço de create: {}", usuarioCreated);
 

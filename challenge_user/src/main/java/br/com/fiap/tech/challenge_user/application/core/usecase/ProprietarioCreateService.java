@@ -4,6 +4,7 @@ import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
 import br.com.fiap.tech.challenge_user.application.core.mapper.ApplicationMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,10 @@ public class ProprietarioCreateService implements ProprietarioCreateInputPort {
                 .map(applicationMapper::toProprietarioEntity)
                 .map(proprietarioCreateOutputPort::save)
                 .map(applicationMapper::toProprietario)
-                .orElseThrow();
+                .orElseThrow(() -> {
+                    log.error("ProprietarioCreateService - Erro interno do servidor no método create.");
+                    return new InternalServerProblemException();
+                });
 
         log.info("ProprietarioCreateService - concluído serviço de create: {}", proprietarioCreated);
 

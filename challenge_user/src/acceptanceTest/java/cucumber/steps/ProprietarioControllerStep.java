@@ -1,9 +1,13 @@
 package cucumber.steps;
 
+import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.repository.EnderecoRepository;
 import br.com.fiap.tech.challenge_user.adapter.repository.ProprietarioRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
@@ -20,9 +24,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,11 +42,20 @@ public final class ProprietarioControllerStep {
     @Autowired
     private ProprietarioRepository proprietarioRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     private Response response;
 
     private ProprietarioDtoRequest proprietarioDtoRequest;
 
     private ProprietarioDtoResponse proprietarioDtoResponse;
+
+    private EnderecoDtoResponse enderecoDtoResponse;
+
+    private ProprietarioEntity proprietarioEntity;
+
+    private ProprietarioUpdateDtoRequest proprietarioUpdateDtoRequest;
 
     @Before
     public void setUp() {
@@ -147,6 +158,169 @@ public final class ProprietarioControllerStep {
         assertThat(proprietario.getLogin()).isEqualTo(login);
         assertThat(proprietario.getSenha()).isEqualTo(senha);
         assertThat(proprietario.getDescricao()).isEqualTo(descricao);
+    }
+
+    @Dado("um ProprietarioDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e descricao {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_proprietario_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_descricao_e_com_cep_e_logradouro_e_nuúmero(
+            String nome, String email, String login, String senha, String descricao, String cep, String logradouro, String numero) {
+
+        proprietarioDtoRequest = new ProprietarioDtoRequest(
+                nome, email, login, senha,
+                new EnderecoDtoRequest(cep, logradouro, numero),
+                descricao
+        );
+
+        assertThat(proprietarioDtoRequest).isNotNull();
+        assertThat(proprietarioDtoRequest.endereco()).isNotNull();
+    }
+
+    @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}, pelo ProprietarioController")
+    public void com_endereco_dto_response_no_body_com_id_e_cep_e_logradouro_e_número_pelo_proprietario_controller(
+            String cep, String logradouro, String numero) {
+
+        enderecoDtoResponse = proprietarioDtoResponse.endereco();
+
+        assertThat(enderecoDtoResponse.enderecoId()).isNotNull();
+        assertThat(enderecoDtoResponse.cep()).isEqualTo(cep);
+        assertThat(enderecoDtoResponse.logradouro()).isEqualTo(logradouro);
+        assertThat(enderecoDtoResponse.numero()).isEqualTo(numero);
+    }
+
+    @Entao("um Endereço salvo no database, com cep {string} e logradouro {string} e número {string}, pelo ProprietarioController")
+    public void um_endereco_salvo_no_database_com_cep_e_logradouro_e_numero_pelo_proprietario_controller(
+            String cep, String logradouro, String numero) {
+
+        var enderecoSalvo = enderecoRepository.findById(enderecoDtoResponse.enderecoId()).get();
+
+        assertThat(enderecoSalvo.getCep()).isEqualTo(cep);
+        assertThat(enderecoSalvo.getLogradouro()).isEqualTo(logradouro);
+        assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
+    }
+
+    @Dado("um identificador ID de um proprietario existente, com email {string}")
+    public void um_identificador_id_de_um_proprietario_existente_com_email(String email) {
+
+        proprietarioEntity = proprietarioRepository.findByEmail(email).get();
+        assertThat(proprietarioEntity).isNotNull();
+    }
+
+    @Quando("uma requisição Get for feita no método findById do ProprietarioController")
+    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_proprietario_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .get("/" + proprietarioEntity.getUsuarioId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Dado("um identificador ID de um proprietario inexistente")
+    public void um_identificador_id_de_um_proprietario_inexistente() {
+
+        proprietarioEntity = new ProprietarioEntity(
+                UUID.randomUUID(),
+                "nomeTeste",
+                "emailTeste",
+                "loginTeste",
+                "senhaTeste",
+                null,
+                "Advogado",
+                null,
+                null
+        );
+
+        assertThat(proprietarioEntity.getUsuarioId()).isNotNull();
+    }
+
+    @Quando("uma requisição Delete for feita no método deleteById do ProprietarioController")
+    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_proprietario_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .delete("/" + proprietarioEntity.getUsuarioId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Proprietario foi apagado do banco de dados pelo ProprietarioController")
+    public void o_proprietario_foi_apagado_do_banco_de_dados_pelo_proprietario_controller() {
+
+        var response = proprietarioRepository.findById(proprietarioEntity.getUsuarioId());
+        assertThat(response).isEmpty();
+    }
+
+    @Dado("um ProprietarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e descricao {string}")
+    public void um_proprietario_update_dto_request_com_nome_e_email_e_login_e_senha_e_descricao(
+            String nome, String email, String login, String senha, String descricao) {
+
+        proprietarioUpdateDtoRequest = new ProprietarioUpdateDtoRequest(proprietarioEntity
+                .getUsuarioId(), nome, email, login, senha, null, descricao);
+        assertThat(proprietarioUpdateDtoRequest).isNotNull();
+    }
+
+    @Quando("uma requisição Put for feita no método update do ProprietarioController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_proprietario_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(proprietarioUpdateDtoRequest)
+                .when()
+                .put();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Proprietario no database possui nome {string} e email {string} e login {string} e senha {string} e descricao {string}")
+    public void o_proprietario_no_database_possui_nome_e_email_e_login_e_senha_e_descricao(
+            String nome, String email, String login, String senha, String descricao) {
+
+        var proprietario = proprietarioRepository.findById(proprietarioEntity.getUsuarioId()).get();
+
+        assertThat(proprietario.getNome()).isEqualTo(nome);
+        assertThat(proprietario.getEmail()).isEqualTo(email);
+        assertThat(proprietario.getLogin()).isEqualTo(login);
+        assertThat(proprietario.getSenha()).isEqualTo(senha);
+        assertThat(proprietario.getDescricao()).isEqualTo(descricao);
+    }
+
+    @Entao("sem EnderecoDtoResponse no body pelo ProprietarioController")
+    public void sem_endereco_dto_response_no_body_pelo_proprietario_controller() {
+
+        proprietarioDtoResponse = response.as(ProprietarioDtoResponse.class);
+        assertThat(proprietarioDtoResponse.usuarioId()).isNotNull();
+        assertThat(proprietarioDtoResponse.endereco()).isNull();
+    }
+
+    @Entao("sem Endereço salvo no database pelo ProprietarioController")
+    public void sem_endereco_salvo_no_database_pelo_proprietario_controller() {
+
+        var proprietarioAtualizado = proprietarioRepository
+                .findById(proprietarioEntity.getUsuarioId()).get();
+        assertThat(proprietarioAtualizado.getUsuarioId()).isEqualTo(proprietarioEntity.getUsuarioId());
+        assertThat(proprietarioAtualizado.getEndereco()).isNull();
+    }
+
+    @Dado("um ProprietarioUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e descricao {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_proprietario_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_descricao_e_com_cep_e_logradouro_e_numero(
+            String nome, String email, String login, String senha, String descricao, String cep, String logradouro, String numero) {
+
+        proprietarioUpdateDtoRequest = new ProprietarioUpdateDtoRequest(
+                proprietarioEntity.getUsuarioId(),
+                nome,
+                email,
+                login,
+                senha,
+                new EnderecoDtoRequest(cep, logradouro, numero),
+                descricao
+        );
+
+        assertThat(proprietarioUpdateDtoRequest).isNotNull();
+        assertThat(proprietarioUpdateDtoRequest.endereco()).isNotNull();
     }
 }
 

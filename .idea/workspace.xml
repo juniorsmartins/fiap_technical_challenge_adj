@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +61,9 @@
         <option value="Dockerfile" />
         <option value="Record" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -121,11 +121,11 @@
       <recent name="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="br.com.fiap.tech.challenge_user.adapter.repository" />
-      <recent name="br.com.fiap.tech.challenge_user.application.port.output" />
+      <recent name="br.com.fiap.tech.challenge_user.config.exceptions.http404" />
       <recent name="br.com.fiap.tech.challenge_user.application.core.usecase" />
       <recent name="br.com.fiap.tech.challenge_user.application.port.input" />
-      <recent name="br.com.fiap.tech.challenge_user.adapter.dto.response" />
+      <recent name="br.com.fiap.tech.challenge_user.adapter.dto.request" />
+      <recent name="br.com.fiap.tech.challenge_user.application.port.output" />
     </key>
   </component>
   <component name="RunManager" selected="Cucumber Java.Feature: proprietario">

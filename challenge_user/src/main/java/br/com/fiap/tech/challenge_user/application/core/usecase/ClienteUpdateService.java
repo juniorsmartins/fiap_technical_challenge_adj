@@ -7,7 +7,7 @@ import br.com.fiap.tech.challenge_user.application.core.mapper.ApplicationMapper
 import br.com.fiap.tech.challenge_user.application.port.input.ClienteUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ClienteCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ClienteFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.ClienteNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,10 @@ public class ClienteUpdateService implements ClienteUpdateInputPort {
                 .map(entity -> atualizarEndereco(cliente, entity))
                 .map(clienteCreateOutputPort::save)
                 .map(applicationMapper::toCliente)
-                .orElseThrow(() -> new UsuarioNotFoundException(id));
+                .orElseThrow(() -> {
+                    log.error("ClienteUpdateService - Cliente não encontrado por id: {}.", id);
+                    return new ClienteNotFoundException(id);
+                });
 
         log.info("ClienteUpdateService - concluído serviço de update: {}", clienteUpdated);
 

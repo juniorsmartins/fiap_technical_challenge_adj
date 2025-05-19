@@ -179,7 +179,6 @@ public final class ClienteControllerStep {
     public void um_identificador_id_de_um_cliente_existente_com_email(String email) {
 
         clienteEntity = clienteRepository.findByEmail(email).get();
-
         assertThat(clienteEntity).isNotNull();
     }
 
@@ -211,7 +210,6 @@ public final class ClienteControllerStep {
     public void o_cliente_foi_apagado_do_banco_de_dados_pelo_cliente_controller() {
 
         var response = clienteRepository.findById(clienteEntity.getUsuarioId());
-
         assertThat(response).isEmpty();
     }
 
@@ -221,7 +219,6 @@ public final class ClienteControllerStep {
 
         clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(clienteEntity
                 .getUsuarioId(), nome, email, login, senha, null, numeroCartaoFidelidade);
-
         assertThat(clienteUpdateDtoRequest).isNotNull();
     }
 
@@ -312,7 +309,6 @@ public final class ClienteControllerStep {
     public void sem_endereco_dto_response_no_body() {
 
         clienteDtoResponse = response.as(ClienteDtoResponse.class);
-
         assertThat(clienteDtoResponse.usuarioId()).isNotNull();
         assertThat(clienteDtoResponse.endereco()).isNull();
     }
@@ -321,7 +317,6 @@ public final class ClienteControllerStep {
     public void sem_endereco_salvo_no_database() {
 
         var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
-
         assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
