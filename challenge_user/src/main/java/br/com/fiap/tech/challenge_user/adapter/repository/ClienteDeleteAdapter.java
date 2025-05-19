@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
 import br.com.fiap.tech.challenge_user.application.port.output.ClienteDeleteByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.ClienteNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,9 @@ public class ClienteDeleteAdapter implements ClienteDeleteByIdOutputPort {
     public void deleteById(@NonNull final UUID id) {
         clienteRepository.findById(id)
                 .ifPresentOrElse(clienteRepository::delete,
-                        () -> {throw new UsuarioNotFoundException(id);}
+                        () -> {
+                            throw new ClienteNotFoundException(id);
+                        }
                 );
     }
 }

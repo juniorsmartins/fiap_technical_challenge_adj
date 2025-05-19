@@ -7,7 +7,8 @@ import br.com.fiap.tech.challenge_user.application.core.mapper.ApplicationMapper
 import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.ClienteNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.ProprietarioNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,10 @@ public class ProprietarioUpdateService implements ProprietarioUpdateInputPort {
                 .map(entity -> atualizarEndereco(proprietario, entity))
                 .map(proprietarioCreateOutputPort::save)
                 .map(applicationMapper::toProprietario)
-                .orElseThrow(() -> new UsuarioNotFoundException(id));
+                .orElseThrow(() -> {
+                    log.error("ProprietarioUpdateService - Proprietário não encontrado por id: {}.", id);
+                    return new ProprietarioNotFoundException(id);
+                });
 
         log.info("ProprietarioUpdateService - concluído serviço de update: {}", proprietarioUpdated);
 

@@ -9,7 +9,8 @@ import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioCreate
 import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,7 +26,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -86,7 +86,10 @@ public class ProprietarioController {
                 .map(adapterMapper::toProprietario)
                 .map(proprietarioCreateInputPort::create)
                 .map(adapterMapper::toProprietarioDtoResponse)
-                .orElseThrow();
+                .orElseThrow(() -> {
+                    log.error("ProprietarioController - Erro interno do servidor no método create.");
+                    return new InternalServerProblemException();
+                });
 
         log.info("ProprietarioController - requisição concluída no create: {}", response);
 
@@ -135,7 +138,10 @@ public class ProprietarioController {
                 .map(adapterMapper::toProprietario)
                 .map(proprietarioUpdateInputPort::update)
                 .map(adapterMapper::toProprietarioDtoResponse)
-                .orElseThrow();
+                .orElseThrow(() -> {
+                    log.error("ProprietarioController - Erro interno do servidor no método update.");
+                    return new InternalServerProblemException();
+                });
 
         log.info("ProprietarioController - requisição concluída no update: {}", response);
 
@@ -171,7 +177,10 @@ public class ProprietarioController {
 
         var response = proprietarioFindByIdOutputPort.findById(id)
                 .map(adapterMapper::toProprietarioDtoResponse)
-                .orElseThrow(() -> new UsuarioNotFoundException(id));
+                .orElseThrow(() -> {
+                    log.error("ProprietarioController - Proprietário não encontrado por id: {}.", id);
+                    return new ProprietarioNotFoundException(id);
+                });
 
         log.info("ProprietarioController - requisição concluída no findById: {}", response);
 
@@ -213,11 +222,10 @@ public class ProprietarioController {
         log.info("ProprietarioController - requisição feita no deleteById: {}", id);
 
         Optional.ofNullable(id)
-                .ifPresentOrElse(proprietarioDeleteByIdInputPort::deleteById,
-                        () -> {
-                            throw new NoSuchElementException();
-                        }
-                );
+                .ifPresentOrElse(proprietarioDeleteByIdInputPort::deleteById, () -> {
+                    log.error("ClienteController - Erro interno do servidor no método deleteById.");
+                    throw new InternalServerProblemException();
+                });
 
         log.info("ProprietarioController - requisição concluída no deleteById: {}", id);
 

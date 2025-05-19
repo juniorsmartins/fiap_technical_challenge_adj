@@ -1,12 +1,12 @@
 package br.com.fiap.tech.challenge_user.config.exceptions;
 
 import br.com.fiap.tech.challenge_user.config.exceptions.http404.ResourceNotFoundException;
+import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.*;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,7 +17,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.net.URI;
 import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @RestControllerAdvice
@@ -51,10 +54,10 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
     }
 
     // ---------- 500 Internal Server Error ---------- //
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ProblemDetail> handleNoSuchElementException(NoSuchElementException ex, WebRequest webRequest) {
+    @ExceptionHandler(InternalServerProblemException.class)
+    public ResponseEntity<ProblemDetail> handleInternalServerProblem(InternalServerProblemException ex, WebRequest webRequest) {
 
-        log.info("class = GlobalHandlerException e método = handleNoSuchElementException", ex);
+        log.info("class = GlobalHandlerException e método = handleInternalServerProblem", ex);
 
         var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         var mensagem = this.getMessage("exception.internal.server.error");
