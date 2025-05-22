@@ -2,56 +2,43 @@ package br.com.fiap.tech.challenge_user.application.core.usecase;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
-import br.com.fiap.tech.challenge_user.application.core.mapper.ApplicationMapper;
-import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioUpdateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioCreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.ClienteNotFoundException;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProprietarioUpdateService implements ProprietarioUpdateInputPort {
+public class Proprietario2UpdateService implements UsuarioUpdateInputPort<Proprietario> {
 
-    private final ProprietarioFindByIdOutputPort proprietarioFindByIdOutputPort;
+    private final UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
 
-    private final ProprietarioCreateOutputPort proprietarioCreateOutputPort;
+    private final UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort;
 
-    private final ApplicationMapper applicationMapper;
+    private final AbstractUsuarioMapper<?, ?, Proprietario, ProprietarioEntity> mapper;
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    @Modifying
     @Override
-    public Proprietario update(@NonNull final Proprietario proprietario) {
+    public Proprietario update(@NonNull Proprietario usuario) {
 
-        log.info("ProprietarioUpdateService - entrada no service de update: {}", proprietario);
+        var id = usuario.getUsuarioId();
 
-        var id = proprietario.getUsuarioId();
-
-        var proprietarioUpdated = proprietarioFindByIdOutputPort.findById(id)
-                .map(entity -> atualizarUsuario(proprietario, entity))
-                .map(entity -> atualizarEndereco(proprietario, entity))
-                .map(proprietarioCreateOutputPort::save)
-                .map(applicationMapper::toProprietario)
+        return findByIdOutputPort.findById(id)
+                .map(entity -> atualizarUsuario(usuario, entity))
+                .map(entity -> atualizarEndereco(usuario, entity))
+                .map(createOutputPort::save)
+                .map(mapper::toUsuarioOut)
                 .orElseThrow(() -> {
-                    log.error("ProprietarioUpdateService - Proprietário não encontrado por id: {}.", id);
-                    return new ProprietarioNotFoundException(id);
+                    log.error("Proprietario2UpdateService - Usuário não encontrado por id: {}.", id);
+                    return new UsuarioNotFoundException(id);
                 });
-
-        log.info("ProprietarioUpdateService - concluído serviço de update: {}", proprietarioUpdated);
-
-        return proprietarioUpdated;
     }
 
     private ProprietarioEntity atualizarUsuario(Proprietario proprietario, ProprietarioEntity proprietarioEntity) {

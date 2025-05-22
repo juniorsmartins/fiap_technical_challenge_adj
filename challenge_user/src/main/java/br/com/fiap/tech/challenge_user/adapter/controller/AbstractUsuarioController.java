@@ -1,15 +1,12 @@
 package br.com.fiap.tech.challenge_user.adapter.controller;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AdapterMapper;
-import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioCreateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioDeleteByIdInputPort;
-import br.com.fiap.tech.challenge_user.application.port.input.ProprietarioUpdateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.output.ProprietarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,33 +17,29 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
 
-@Tag(name = "Proprietário", description = "Contém recursos de cadastrar, consultar, atualizar e deletar.")
+@Tag(name = "Usuários", description = "Contém recursos de cadastrar, consultar, atualizar e deletar.")
 @Slf4j
-@RestController
-@RequestMapping(path = {ProprietarioController.URI_PROPRIETARIO})
 @RequiredArgsConstructor
-public class ProprietarioController {
+public abstract class AbstractUsuarioController<I, O, T, E> {
 
-    protected static final String URI_PROPRIETARIO = "/api/v1/challenge-user/proprietarios";
+    private final AbstractUsuarioMapper<I, O, T, E> mapper;
 
-    private final AdapterMapper adapterMapper;
+    private final UsuarioCreateInputPort<T> createInputPort;
 
-    private final ProprietarioCreateInputPort proprietarioCreateInputPort;
+    private final UsuarioUpdateInputPort<T> updateInputPort;
 
-    private final ProprietarioUpdateInputPort proprietarioUpdateInputPort;
+    private final UsuarioFindByIdOutputPort<E> findByIdOutputPort;
 
-    private final ProprietarioFindByIdOutputPort proprietarioFindByIdOutputPort;
-
-    private final ProprietarioDeleteByIdInputPort proprietarioDeleteByIdInputPort;
+    private final UsuarioDeleteByIdInputPort<T> deleteByIdInputPort;
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -76,25 +69,21 @@ public class ProprietarioController {
                     )
             }
     )
-    public ResponseEntity<ProprietarioDtoResponse> create(
-            @Parameter(name = "ProprietarioDtoRequest", description = "Objeto para transporte de dados de entrada.",
-                    required = true) @RequestBody @Valid ProprietarioDtoRequest proprietarioDtoRequest) {
+    public ResponseEntity<O> create(
+            @Parameter(name = "DtoRequest", description = "Para transporte de dados de entrada.", required = true)
+            @RequestBody @Valid I dtoRequest) {
 
-        log.info("ProprietarioController - requisição feita no create: {}", proprietarioDtoRequest);
-
-        var response = Optional.ofNullable(proprietarioDtoRequest)
-                .map(adapterMapper::toProprietario)
-                .map(proprietarioCreateInputPort::create)
-                .map(adapterMapper::toProprietarioDtoResponse)
+        var response = Optional.ofNullable(dtoRequest)
+                .map(mapper::toUsuarioIn)
+                .map(createInputPort::create)
+                .map(mapper::toDtoResponse)
                 .orElseThrow(() -> {
-                    log.error("ProprietarioController - Erro interno do servidor no método create.");
+                    log.error("AbstractUsuarioController - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
                 });
 
-        log.info("ProprietarioController - requisição concluída no create: {}", response);
-
         return ResponseEntity
-                .created(URI.create(URI_PROPRIETARIO + "/" + response.usuarioId()))
+                .status(HttpStatus.CREATED)
                 .body(response);
     }
 
@@ -126,24 +115,18 @@ public class ProprietarioController {
                     ),
             }
     )
-    public ResponseEntity<ProprietarioDtoResponse> update(
-            @Parameter(name = "ProprietarioUpdateDtoRequest", description = "Objeto para transporte de dados de entrada.",
-                    required = true)
-            @RequestBody @Valid ProprietarioUpdateDtoRequest proprietarioUpdateDtoRequest
-    ) {
+    public ResponseEntity<O> update(
+            @Parameter(name = "UpdateDtoRequest", description = "Para transporte de dados de entrada.", required = true)
+            @RequestBody @Valid I updateDtoRequest) {
 
-        log.info("ProprietarioController - requisição feita no update: {}", proprietarioUpdateDtoRequest);
-
-        var response = Optional.ofNullable(proprietarioUpdateDtoRequest)
-                .map(adapterMapper::toProprietario)
-                .map(proprietarioUpdateInputPort::update)
-                .map(adapterMapper::toProprietarioDtoResponse)
+        var response = Optional.ofNullable(updateDtoRequest)
+                .map(mapper::toUsuarioIn)
+                .map(updateInputPort::update)
+                .map(mapper::toDtoResponse)
                 .orElseThrow(() -> {
-                    log.error("ProprietarioController - Erro interno do servidor no método update.");
+                    log.error("AbstractUsuarioController - Erro interno do servidor no método update.");
                     return new InternalServerProblemException();
                 });
-
-        log.info("ProprietarioController - requisição concluída no update: {}", response);
 
         return ResponseEntity
                 .ok()
@@ -167,22 +150,17 @@ public class ProprietarioController {
                     )
             }
     )
-    public ResponseEntity<ProprietarioDtoResponse> findById(
+    public ResponseEntity<O> findById(
             @Parameter(name = "id", description = "Identificador único do recurso.",
                     example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748", required = true)
-            @PathVariable(name = "id") final UUID id
-    ) {
+            @PathVariable(name = "id") final UUID id) {
 
-        log.info("ProprietarioController - requisição feita no findById: {}", id);
-
-        var response = proprietarioFindByIdOutputPort.findById(id)
-                .map(adapterMapper::toProprietarioDtoResponse)
+        var response = findByIdOutputPort.findById(id)
+                .map(mapper::toUsuarioDtoResponse)
                 .orElseThrow(() -> {
-                    log.error("ProprietarioController - Proprietário não encontrado por id: {}.", id);
-                    return new ProprietarioNotFoundException(id);
+                    log.error("AbstractUsuarioController - Usuário não encontrado por id: {}.", id);
+                    return new UsuarioNotFoundException(id);
                 });
-
-        log.info("ProprietarioController - requisição concluída no findById: {}", response);
 
         return ResponseEntity
                 .ok()
@@ -219,15 +197,11 @@ public class ProprietarioController {
             @PathVariable(name = "id") final UUID id
     ) {
 
-        log.info("ProprietarioController - requisição feita no deleteById: {}", id);
-
         Optional.ofNullable(id)
-                .ifPresentOrElse(proprietarioDeleteByIdInputPort::deleteById, () -> {
-                    log.error("ClienteController - Erro interno do servidor no método deleteById.");
+                .ifPresentOrElse(deleteByIdInputPort::deleteById, () -> {
+                    log.error("AbstractUsuarioController - Erro interno do servidor no método deleteById.");
                     throw new InternalServerProblemException();
                 });
-
-        log.info("ProprietarioController - requisição concluída no deleteById: {}", id);
 
         return ResponseEntity
                 .noContent()

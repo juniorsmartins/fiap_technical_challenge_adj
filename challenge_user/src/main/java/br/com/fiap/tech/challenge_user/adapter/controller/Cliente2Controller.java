@@ -1,0 +1,31 @@
+package br.com.fiap.tech.challenge_user.adapter.controller;
+
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = {Cliente2Controller.URI_CLIENTE})
+public class Cliente2Controller
+        extends AbstractUsuarioController<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteEntity> {
+
+    protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
+
+    public Cliente2Controller(
+            AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteEntity> mapper,
+            UsuarioCreateInputPort<Cliente> createInputPort,
+            UsuarioUpdateInputPort<Cliente> updateInputPort,
+            UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
+            UsuarioDeleteByIdInputPort<Cliente> deleteByIdInputPort) {
+        super(mapper, createInputPort, updateInputPort, findByIdOutputPort, deleteByIdInputPort);
+    }
+}
+

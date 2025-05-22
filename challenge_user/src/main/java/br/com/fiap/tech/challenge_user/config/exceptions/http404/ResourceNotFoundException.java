@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 public abstract sealed class ResourceNotFoundException extends RuntimeException
-        permits ClienteNotFoundException, ProprietarioNotFoundException {
+        permits ClienteNotFoundException, ProprietarioNotFoundException, UsuarioNotFoundException {
 
     @Serial
     private static final long serialVersionUID = 1L;
