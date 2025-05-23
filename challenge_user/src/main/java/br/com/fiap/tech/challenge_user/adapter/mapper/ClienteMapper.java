@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class Cliente2Mapper
+public class ClienteMapper
         implements AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> {
 
-    private final Endereco2Mapper mapper;
+    private final EnderecoMapper mapper;
 
     public Cliente toUsuarioIn(ClienteDtoRequest dto) {
         if (dto == null) {

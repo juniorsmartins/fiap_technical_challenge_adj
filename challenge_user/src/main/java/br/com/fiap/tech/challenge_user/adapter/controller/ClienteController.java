@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = {Cliente2Controller.URI_CLIENTE})
-public class Cliente2Controller
+@RequestMapping(path = {ClienteController.URI_CLIENTE})
+public class ClienteController
         extends AbstractUsuarioController<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> {
 
     protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 
-    public Cliente2Controller(
+    public ClienteController(
             AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> mapper,
             UsuarioCreateInputPort<Cliente> createInputPort,
             UsuarioUpdateInputPort<Cliente> updateInputPort,

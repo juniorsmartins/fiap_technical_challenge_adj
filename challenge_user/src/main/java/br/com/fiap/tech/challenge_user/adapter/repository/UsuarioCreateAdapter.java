@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
-import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.AbstractUsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioCreateAdapter<E extends UsuarioEntity> implements UsuarioCreateOutputPort<E> {
+public class UsuarioCreateAdapter<E extends AbstractUsuarioEntity> implements UsuarioCreateOutputPort<E> {
 
     private final UsuarioRepository repository;
 

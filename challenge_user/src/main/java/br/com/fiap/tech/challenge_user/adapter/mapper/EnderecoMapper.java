@@ -7,7 +7,7 @@ import br.com.fiap.tech.challenge_user.application.core.domain.Endereco;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class Endereco2Mapper {
+public final class EnderecoMapper {
 
     public Endereco toEnderecoIn(EnderecoDtoRequest dto) {
         if (dto == null) {

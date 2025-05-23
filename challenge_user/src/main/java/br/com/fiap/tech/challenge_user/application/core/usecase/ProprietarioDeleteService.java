@@ -3,18 +3,20 @@ package br.com.fiap.tech.challenge_user.application.core.usecase;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
-import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioDeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
-@Service
-public class Proprietario2CreateService extends AbstractUsuarioService<Proprietario, ProprietarioEntity>
-        implements UsuarioCreateInputPort<Proprietario> {
+import java.util.UUID;
 
-    public Proprietario2CreateService(
+@Service
+public class ProprietarioDeleteService extends AbstractUsuarioService<Proprietario, ProprietarioEntity>
+        implements UsuarioDeleteByIdInputPort<Proprietario> {
+
+    public ProprietarioDeleteService(
             AbstractUsuarioMapper<?, ?, ?, Proprietario, ProprietarioEntity> mapper,
             UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
@@ -23,8 +25,7 @@ public class Proprietario2CreateService extends AbstractUsuarioService<Proprieta
     }
 
     @Override
-    public Proprietario create(@NonNull final Proprietario usuario) {
-        return super.create(usuario);
+    public void deleteById(@NonNull final UUID id) {
+        super.deleteById(id);
     }
 }
-

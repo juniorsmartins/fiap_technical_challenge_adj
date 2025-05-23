@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
-import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
-import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
+import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioDeleteOutputPort;
@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class Proprietario2DeleteService extends AbstractUsuarioService<Proprietario, ProprietarioEntity>
-        implements UsuarioDeleteByIdInputPort<Proprietario> {
+public class ClienteDeleteService extends AbstractUsuarioService<Cliente, ClienteEntity>
+        implements UsuarioDeleteByIdInputPort<Cliente> {
 
-    public Proprietario2DeleteService(
-            AbstractUsuarioMapper<?, ?, ?, Proprietario, ProprietarioEntity> mapper,
-            UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
-            UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
-            UsuarioDeleteOutputPort<ProprietarioEntity> deleteOutputPort) {
+    public ClienteDeleteService(
+            AbstractUsuarioMapper<?, ?, ?, Cliente, ClienteEntity> mapper,
+            UsuarioCreateOutputPort<ClienteEntity> createOutputPort,
+            UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
+            UsuarioDeleteOutputPort<ClienteEntity> deleteOutputPort) {
         super(mapper, createOutputPort, findByIdOutputPort, deleteOutputPort);
     }
 
@@ -29,3 +29,4 @@ public class Proprietario2DeleteService extends AbstractUsuarioService<Proprieta
         super.deleteById(id);
     }
 }
+

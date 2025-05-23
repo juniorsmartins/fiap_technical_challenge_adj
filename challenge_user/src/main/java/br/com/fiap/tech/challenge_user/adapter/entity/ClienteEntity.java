@@ -3,7 +3,10 @@ package br.com.fiap.tech.challenge_user.adapter.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.UUID;
@@ -14,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public final class ClienteEntity extends UsuarioEntity {
+public final class ClienteEntity extends AbstractUsuarioEntity {
 
     @Column(name = "numero_cartao_fidelidade", nullable = true)
     private String numeroCartaoFidelidade;
