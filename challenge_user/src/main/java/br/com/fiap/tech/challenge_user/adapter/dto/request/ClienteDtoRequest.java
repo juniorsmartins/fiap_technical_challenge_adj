@@ -36,6 +36,7 @@ public record ClienteDtoRequest(
         @Schema(name = "numeroCartaoFidelidade", description = "Registro em programa de fidelidade para benefícios.",
                 example = "12345-6789-3245")
         String numeroCartaoFidelidade
+
 ) {
 }
 

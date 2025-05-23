@@ -1,0 +1,10 @@
+package br.com.fiap.tech.challenge_user.application.port.output;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public interface UsuarioFindByIdOutputPort<E> {
+
+    Optional<E> findById(UUID id);
+}
+
