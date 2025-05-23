@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.mapper;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Cliente2Mapper
-        implements AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteEntity> {
+        implements AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> {
 
     private final Endereco2Mapper mapper;
 
@@ -86,6 +87,23 @@ public class Cliente2Mapper
                 entity.getDataHoraCriacao(), entity.getDataHoraEdicao(), mapper.toEnderecoDtoResponse(entity.getEndereco()),
                 entity.getNumeroCartaoFidelidade()
         );
+    }
+
+    public Cliente toUsuarioIn2(ClienteUpdateDtoRequest usuario) {
+        if (usuario == null) {
+            return null;
+        }
+
+        var cliente = new Cliente();
+        cliente.setUsuarioId(usuario.usuarioId());
+        cliente.setNome(usuario.nome());
+        cliente.setEmail(usuario.email());
+        cliente.setLogin(usuario.login());
+        cliente.setSenha(usuario.senha());
+        cliente.setEndereco(mapper.toEnderecoIn(usuario.endereco()));
+        cliente.setNumeroCartaoFidelidade(usuario.numeroCartaoFidelidade());
+
+        return cliente;
     }
 }
 

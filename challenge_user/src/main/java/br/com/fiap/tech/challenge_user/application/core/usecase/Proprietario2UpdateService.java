@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class Proprietario2UpdateService implements UsuarioUpdateInputPort<Proprietario> {
 
+    private final AbstractUsuarioMapper<?, ?, ?, Proprietario, ProprietarioEntity> mapper;
+
     private final UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
 
     private final UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort;
-
-    private final AbstractUsuarioMapper<?, ?, Proprietario, ProprietarioEntity> mapper;
 
     @Override
     public Proprietario update(@NonNull Proprietario usuario) {

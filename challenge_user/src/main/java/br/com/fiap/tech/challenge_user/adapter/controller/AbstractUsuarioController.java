@@ -29,9 +29,9 @@ import java.util.UUID;
 @Tag(name = "Usuários", description = "Contém recursos de cadastrar, consultar, atualizar e deletar.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioController<I, O, T, E> {
+public abstract class AbstractUsuarioController<I, O, U, T, E> {
 
-    private final AbstractUsuarioMapper<I, O, T, E> mapper;
+    private final AbstractUsuarioMapper<I, O, U, T, E> mapper;
 
     private final UsuarioCreateInputPort<T> createInputPort;
 
@@ -117,10 +117,10 @@ public abstract class AbstractUsuarioController<I, O, T, E> {
     )
     public ResponseEntity<O> update(
             @Parameter(name = "UpdateDtoRequest", description = "Para transporte de dados de entrada.", required = true)
-            @RequestBody @Valid I updateDtoRequest) {
+            @RequestBody @Valid U updateDtoRequest) {
 
         var response = Optional.ofNullable(updateDtoRequest)
-                .map(mapper::toUsuarioIn)
+                .map(mapper::toUsuarioIn2)
                 .map(updateInputPort::update)
                 .map(mapper::toDtoResponse)
                 .orElseThrow(() -> {

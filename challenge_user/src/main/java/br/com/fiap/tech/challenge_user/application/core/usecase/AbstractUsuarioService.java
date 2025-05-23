@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioService<T, E> {
 
-    private final AbstractUsuarioMapper<?, ?, T, E> mapper;
+    private final AbstractUsuarioMapper<?, ?, ?, T, E> mapper;
 
     private final UsuarioCreateOutputPort<E> createOutputPort;
 

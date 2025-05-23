@@ -17,7 +17,7 @@ public class Proprietario2DeleteService extends AbstractUsuarioService<Proprieta
         implements UsuarioDeleteByIdInputPort<Proprietario> {
 
     public Proprietario2DeleteService(
-            AbstractUsuarioMapper<?, ?, Proprietario, ProprietarioEntity> mapper,
+            AbstractUsuarioMapper<?, ?, ?, Proprietario, ProprietarioEntity> mapper,
             UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ProprietarioEntity> deleteOutputPort) {

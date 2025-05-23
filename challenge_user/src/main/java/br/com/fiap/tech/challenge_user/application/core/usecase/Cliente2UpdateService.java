@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class Cliente2UpdateService implements UsuarioUpdateInputPort<Cliente> {
 
+    private final AbstractUsuarioMapper<?, ?, ?, Cliente, ClienteEntity> mapper;
+
     private final UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort;
 
     private final UsuarioCreateOutputPort<ClienteEntity> createOutputPort;
-
-    private final AbstractUsuarioMapper<?, ?, Cliente, ClienteEntity> mapper;
 
     @Override
     public Cliente update(@NonNull Cliente usuario) {

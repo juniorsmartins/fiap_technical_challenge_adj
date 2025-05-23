@@ -15,7 +15,7 @@ public class Cliente2CreateService extends AbstractUsuarioService<Cliente, Clien
         implements UsuarioCreateInputPort<Cliente> {
 
     public Cliente2CreateService(
-            AbstractUsuarioMapper<?, ?, Cliente, ClienteEntity> mapper,
+            AbstractUsuarioMapper<?, ?, ?, Cliente, ClienteEntity> mapper,
             UsuarioCreateOutputPort<ClienteEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ClienteEntity> deleteOutputPort) {

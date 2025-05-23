@@ -17,7 +17,7 @@ public class Cliente2DeleteService extends AbstractUsuarioService<Cliente, Clien
         implements UsuarioDeleteByIdInputPort<Cliente> {
 
     public Cliente2DeleteService(
-            AbstractUsuarioMapper<?, ?, Cliente, ClienteEntity> mapper,
+            AbstractUsuarioMapper<?, ?, ?, Cliente, ClienteEntity> mapper,
             UsuarioCreateOutputPort<ClienteEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ClienteEntity> deleteOutputPort) {

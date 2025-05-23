@@ -15,7 +15,7 @@ public class Proprietario2CreateService extends AbstractUsuarioService<Proprieta
         implements UsuarioCreateInputPort<Proprietario> {
 
     public Proprietario2CreateService(
-            AbstractUsuarioMapper<?, ?, Proprietario, ProprietarioEntity> mapper,
+            AbstractUsuarioMapper<?, ?, ?, Proprietario, ProprietarioEntity> mapper,
             UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ProprietarioEntity> deleteOutputPort) {

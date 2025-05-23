@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.controller;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = {Cliente2Controller.URI_CLIENTE})
 public class Cliente2Controller
-        extends AbstractUsuarioController<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteEntity> {
+        extends AbstractUsuarioController<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> {
 
     protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 
     public Cliente2Controller(
-            AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteEntity> mapper,
+            AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> mapper,
             UsuarioCreateInputPort<Cliente> createInputPort,
             UsuarioUpdateInputPort<Cliente> updateInputPort,
             UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,

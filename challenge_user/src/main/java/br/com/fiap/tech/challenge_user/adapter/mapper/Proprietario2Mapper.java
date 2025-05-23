@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.adapter.mapper;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Proprietario2Mapper
-        implements AbstractUsuarioMapper<ProprietarioDtoRequest, ProprietarioDtoResponse, Proprietario, ProprietarioEntity> {
+        implements AbstractUsuarioMapper<ProprietarioDtoRequest, ProprietarioDtoResponse, ProprietarioUpdateDtoRequest, Proprietario, ProprietarioEntity> {
 
     private final Endereco2Mapper mapper;
 
@@ -86,6 +87,23 @@ public class Proprietario2Mapper
                 entity.getSenha(), entity.getDataHoraCriacao(), entity.getDataHoraEdicao(),
                 mapper.toEnderecoDtoResponse(entity.getEndereco()), entity.getDescricao()
         );
+    }
+
+    public Proprietario toUsuarioIn2(ProprietarioUpdateDtoRequest usuario) {
+        if (usuario == null) {
+            return null;
+        }
+
+        var proprietario = new Proprietario();
+        proprietario.setUsuarioId(usuario.usuarioId());
+        proprietario.setNome(usuario.nome());
+        proprietario.setEmail(usuario.email());
+        proprietario.setLogin(usuario.login());
+        proprietario.setSenha(usuario.senha());
+        proprietario.setEndereco(mapper.toEnderecoIn(usuario.endereco()));
+        proprietario.setDescricao(usuario.descricao());
+
+        return proprietario;
     }
 }
 
