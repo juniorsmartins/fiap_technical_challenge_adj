@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.core.usecase;
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
-import br.com.fiap.tech.challenge_user.application.core.utils.UpdateUserAndAddress;
+import br.com.fiap.tech.challenge_user.application.core.utils.UsuarioUpdateUtils;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioDeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
@@ -31,7 +31,7 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
 
     private final UsuarioDeleteOutputPort<E> deleteOutputPort;
 
-    private final UpdateUserAndAddress<T, E> updateUserAndAddress;
+    private final UsuarioUpdateUtils<T, E> updateUser;
 
     public T create(@NotNull final T usuario) {
 
@@ -50,7 +50,7 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
         var id = usuario.getUsuarioId();
 
         return findByIdOutputPort.findById(id)
-                .map(entity -> updateUserAndAddress.upUsuario(usuario, entity))
+                .map(entity -> updateUser.up(usuario, entity))
                 .map(createOutputPort::save)
                 .map(mapper::toDomainOut)
                 .orElseThrow(() -> {

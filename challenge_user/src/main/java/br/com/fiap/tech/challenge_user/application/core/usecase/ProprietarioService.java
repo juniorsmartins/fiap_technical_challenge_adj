@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.core.usecase;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
-import br.com.fiap.tech.challenge_user.application.core.utils.UpdateUserAndAddress;
+import br.com.fiap.tech.challenge_user.application.core.utils.UsuarioUpdateUtils;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
@@ -24,8 +24,8 @@ public class ProprietarioService extends AbstractUsuarioService<Proprietario, Pr
             UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ProprietarioEntity> deleteOutputPort,
-            UpdateUserAndAddress<Proprietario, ProprietarioEntity> updateUserAndAddress) {
-        super(mapper, createOutputPort, findByIdOutputPort, deleteOutputPort, updateUserAndAddress);
+            UsuarioUpdateUtils<Proprietario, ProprietarioEntity> usuarioUpdateUtils) {
+        super(mapper, createOutputPort, findByIdOutputPort, deleteOutputPort, usuarioUpdateUtils);
     }
 
     @Override
