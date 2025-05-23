@@ -17,7 +17,7 @@ import static br.com.fiap.tech.challenge_user.config.ConstantsValidation.*;
 @Setter
 @EqualsAndHashCode(of = {"usuarioId"}, callSuper = false)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class AbstractUsuarioEntity extends AbstractAuditingEntity implements Serializable {
+public abstract class UsuarioEntity extends AbstractAuditingEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -43,10 +43,10 @@ public abstract class AbstractUsuarioEntity extends AbstractAuditingEntity imple
     @JoinColumn(name = "endereco_id", unique = true)
     private EnderecoEntity endereco;
 
-    protected AbstractUsuarioEntity() {
+    protected UsuarioEntity() {
     }
 
-    public AbstractUsuarioEntity(
+    public UsuarioEntity(
             String nome,
             String email,
             String login,
@@ -59,7 +59,7 @@ public abstract class AbstractUsuarioEntity extends AbstractAuditingEntity imple
         this.endereco = endereco;
     }
 
-    public AbstractUsuarioEntity(
+    public UsuarioEntity(
             String nome,
             String email,
             String login,
@@ -72,7 +72,7 @@ public abstract class AbstractUsuarioEntity extends AbstractAuditingEntity imple
         this.setDataHoraEdicao(dataHoraEdicao);
     }
 
-    public AbstractUsuarioEntity(
+    public UsuarioEntity(
             UUID usuarioId,
             String nome,
             String email,

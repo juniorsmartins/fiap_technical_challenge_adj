@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
-import br.com.fiap.tech.challenge_user.adapter.entity.AbstractUsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<AbstractUsuarioEntity, UUID> {
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UUID> {
 
-    Optional<AbstractUsuarioEntity> findByEmail(String email);
+    Optional<UsuarioEntity> findByEmail(String email);
 }
 

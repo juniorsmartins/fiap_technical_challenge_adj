@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public final class ClienteEntity extends AbstractUsuarioEntity {
+public final class ClienteEntity extends UsuarioEntity {
 
     @Column(name = "numero_cartao_fidelidade", nullable = true)
     private String numeroCartaoFidelidade;

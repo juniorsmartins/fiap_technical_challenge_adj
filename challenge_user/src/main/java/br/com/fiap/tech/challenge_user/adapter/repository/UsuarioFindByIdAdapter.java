@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.adapter.repository;
 
-import br.com.fiap.tech.challenge_user.adapter.entity.AbstractUsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioFindByIdAdapter<E extends AbstractUsuarioEntity> implements UsuarioFindByIdOutputPort<E> {
+public class UsuarioFindByIdAdapter<E extends UsuarioEntity> implements UsuarioFindByIdOutputPort<E> {
 
     private final UsuarioRepository repository;
 

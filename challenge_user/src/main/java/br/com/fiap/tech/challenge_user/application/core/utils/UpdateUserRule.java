@@ -1,13 +1,13 @@
 package br.com.fiap.tech.challenge_user.application.core.utils;
 
-import br.com.fiap.tech.challenge_user.adapter.entity.AbstractUsuarioEntity;
+import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class UpdateUserRule<T extends Usuario, E extends AbstractUsuarioEntity> {
+public final class UpdateUserRule<T extends Usuario, E extends UsuarioEntity> {
 
     public E upUsuario(T usuario, E entity) {
         BeanUtils.copyProperties(usuario, entity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "endereco");
