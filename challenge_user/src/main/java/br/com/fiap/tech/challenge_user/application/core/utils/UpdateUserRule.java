@@ -11,10 +11,10 @@ public final class UpdateUserRule<T extends Usuario, E extends UsuarioEntity> {
 
     public E upUsuario(T usuario, E entity) {
         BeanUtils.copyProperties(usuario, entity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "endereco");
-        return entity;
+        return upEndereco(usuario, entity);
     }
 
-    public E upEndereco(T usuario, E entity) {
+    private E upEndereco(T usuario, E entity) {
 
         if (usuario.getEndereco() == null && entity.getEndereco() == null) {
             // Cenário 1: Requisição sem endereço, usuário sem endereço → Não fazer nada

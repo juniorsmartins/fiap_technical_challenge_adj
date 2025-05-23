@@ -51,7 +51,6 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
 
         return findByIdOutputPort.findById(id)
                 .map(entity -> updateUserRule.upUsuario(usuario, entity))
-                .map(entity -> updateUserRule.upEndereco(usuario, entity))
                 .map(createOutputPort::save)
                 .map(mapper::toUsuarioOut)
                 .orElseThrow(() -> {
