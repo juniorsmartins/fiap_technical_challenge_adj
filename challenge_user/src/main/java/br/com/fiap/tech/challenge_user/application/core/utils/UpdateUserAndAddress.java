@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class UpdateUserRule<T extends Usuario, E extends UsuarioEntity> {
+public final class UpdateUserAndAddress<T extends Usuario, E extends UsuarioEntity> {
 
     public E upUsuario(T usuario, E entity) {
         BeanUtils.copyProperties(usuario, entity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "endereco");
@@ -16,16 +16,12 @@ public final class UpdateUserRule<T extends Usuario, E extends UsuarioEntity> {
 
     private E upEndereco(T usuario, E entity) {
 
-        if (usuario.getEndereco() == null && entity.getEndereco() == null) {
-            // Cenário 1: Requisição sem endereço, usuário sem endereço → Não fazer nada
-            return entity;
-
-        } else if (usuario.getEndereco() == null && entity.getEndereco() != null) {
-            // Cenário 2: Requisição sem endereço, usuário com endereço → Remover endereço
+        if (usuario.getEndereco() == null && entity.getEndereco() != null) {
+            // Cenário: Requisição sem endereço, usuário com endereço → Remover endereço
             entity.setEndereco(null); // orphanRemoval = true remove o endereço do banco
 
         } else if (usuario.getEndereco() != null && entity.getEndereco() == null) {
-            // Cenário 3: Requisição com endereço, usuário sem endereço → Criar novo endereço
+            // Cenário: Requisição com endereço e usuário sem endereço → Criar novo endereço
             entity.setEndereco(EnderecoEntity.builder()
                     .cep(usuario.getEndereco().getCep())
                     .logradouro(usuario.getEndereco().getLogradouro())
@@ -34,7 +30,7 @@ public final class UpdateUserRule<T extends Usuario, E extends UsuarioEntity> {
             );
 
         } else if (usuario.getEndereco() != null && entity.getEndereco() != null) {
-            // Cenário 4: Requisição com endereço, usuário com endereço → Atualizar endereço
+            // Cenário: Requisição com endereço e usuário com endereço → substituir endereço
             BeanUtils.copyProperties(usuario.getEndereco(), entity.getEndereco(), "enderecoId");
         }
 

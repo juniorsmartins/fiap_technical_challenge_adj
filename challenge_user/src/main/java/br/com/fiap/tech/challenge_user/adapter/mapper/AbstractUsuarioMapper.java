@@ -2,16 +2,16 @@ package br.com.fiap.tech.challenge_user.adapter.mapper;
 
 public interface AbstractUsuarioMapper<I, O, U, T, E> {
 
-    T toUsuarioIn(I usuario);
+    T toDomainIn(I usuario);
 
-    T toUsuarioOut(E usuario);
+    T toDomainOut(E usuario);
 
-    E toUsuarioEntity(T usuario);
+    E toEntity(T usuario);
 
     O toDtoResponse(T usuario);
 
     O toUsuarioDtoResponse(E usuario);
 
-    T toUsuarioIn2(U usuario);
+    T toDomainUpdate(U usuario);
 }
 
