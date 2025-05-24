@@ -81,7 +81,11 @@ Explicação: Uma classe deve ter apenas um motivo para mudar, ou seja, deve ter
 ```
 - Princípio Aberto/Fechado (OCP):
 ```
-Explicação: Entidades de software devem estar abertas para extensão, mas fechadas para modificação.
+Explicação: As classes devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades devem ser adicionadas por meio de extensões, sem alterar o código existente.
+
+Classes Abstratas (AbstractUsuarioController, AbstractUsuarioService): O uso de generics (T, E) permite adicionar novos tipos de usuários (como Admin ou Funcionario) criando subclasses (AdminController e AdminService ou FuncionarioController e FuncionarioService) sem modificar as classes base.
+
+Interfaces (UsuarioCreateInputPort, UsuarioUpdateInputPort e etc.): Novos tipos de usuários podem implementar essas interfaces sem alterar o código existente.
 
 ```
 - Princípio da Substituição de Liskov (LSP):
