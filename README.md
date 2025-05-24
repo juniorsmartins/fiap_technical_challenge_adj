@@ -76,8 +76,10 @@ seguro, escalável e de fácil manutenção.
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
 ```
-Explicação: Uma classe deve ter uma única responsabilidade e apenas um motivo para mudar, reduzindo acoplamento
-e facilitando manutenção.
+Explicação: 
+
+O Princípio da Responsabilidade Única estabelece que uma classe deve ter apenas uma razão para mudar. Isso reduz
+o acoplamento, facilita a manutenção e melhora a coesão do código.
 
 Exemplo:
 
@@ -92,13 +94,21 @@ enquanto as subclasses definem contextos específicos. Dessa forma, a subclasse 
 operações de Cliente e a subclasse ProprietarioService é responsável por operações de Proprietario. Ou seja, cada
 uma possui um único motivo para mudar. Elas mudarão apenas se mudarem as regras por seu tipo específico de usuário.
 
+Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter): Cada adaptador lida com uma única
+operação de acesso a dados (salvar, deletar, buscar), alinhando-se ao SRP.
+
+Regras de Atualização (DefaultUsuarioUpdateRule, DefaultEnderecoUpdateRule): A segregação das regras de atualização
+em UsuarioUpdateRule (para dados do usuário) e EnderecoUpdateRule (para endereços) demonstra uma clara separação de
+responsabilidades, com cada classe focada em uma tarefa específica.
+
 ```
 - Princípio Aberto/Fechado (OCP):
 ```
 Explicação:
 
-As classes devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades
-devem ser adicionadas por meio de extensões, sem alterar o código existente.
+O Princípio Aberto/Fechado determina que as classes devem estar abertas para extensão, mas fechadas para modificação.
+Novas funcionalidades são adicionadas por meio de extensões (como subclasses ou implementações), sem alterar o código
+existente.
 
 Exemplo:
 
