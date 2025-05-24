@@ -114,10 +114,26 @@ AbstractUsuarioUtils: A classe é genérica e funciona com qualquer tipo que est
 ```
 Explicação: Muitas interfaces específicas são melhores que uma interface geral.
 
+Interfaces Específicas (UsuarioCreateInputPort, UsuarioUpdateInputPort, etc.): Cada interface define uma única
+operação (create, update, delete, findById), permitindo que os clientes (como AbstractUsuarioController) dependam
+apenas do necessário.
+
+Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, etc.): Cada adaptador implementa uma interface
+específica (UsuarioCreateOutputPort, UsuarioDeleteOutputPort, etc.), garantindo dependências mínimas.
+
 ```
 - Princípio da Inversão de Dependência (DIP):
 ```
 Explicação: Dependa de abstrações, não de implementações concretas.
+
+Injeção de Dependências: O uso de @RequiredArgsConstructor para injetar interfaces (UsuarioCreateInputPort,
+UsuarioCreateOutputPort, AbstractUsuarioMapper, etc.) é uma boa prática. Controladores e serviços dependem de
+abstrações.
+
+Interfaces Genéricas: Interfaces como UsuarioCreateInputPort<T> e UsuarioCreateOutputPort<E> permitem que o código
+de alto nível use tipos genéricos, enquanto implementações específicas fornecem os detalhes.
+
+Mappers: A injeção de AbstractUsuarioMapper segue o DIP, dependendo de uma abstração.
 
 ```
 
