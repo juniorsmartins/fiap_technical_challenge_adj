@@ -94,7 +94,20 @@ essas interfaces sem alterar o código existente.
 ```
 - Princípio da Substituição de Liskov (LSP):
 ```
-Explicação: Objetos de uma superclasse devem poder ser substituídos por objetos de uma subclasse sem quebrar a aplicação.
+Explicação: Objetos de uma superclasse devem poder ser substituídos por objetos de uma subclasse sem quebrar a
+aplicação.
+
+Subclasses de AbstractUsuarioController: ClienteController e ProprietarioController herdam de
+AbstractUsuarioController e apenas configuram URIs, mantendo o comportamento dos métodos CRUD. São substituíveis
+pela classe base.
+
+Subclasses de AbstractUsuarioService: ClienteService e ProprietarioService delegam para a superclasse,
+garantindo comportamento consistente.
+
+Entidades e Modelos: ClienteEntity e ProprietarioEntity herdam de UsuarioEntity, e Cliente e Proprietario herdam
+de Usuario. Os métodos genéricos usam tipos parametrizados (T, E), garantindo substituição.
+
+AbstractUsuarioUtils: A classe é genérica e funciona com qualquer tipo que estenda Usuario e UsuarioEntity.
 
 ```
 - Princípio da Segregação de Interfaces (ISP):
