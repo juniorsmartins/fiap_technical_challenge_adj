@@ -81,7 +81,9 @@ Explicação: Uma classe deve ter apenas um motivo para mudar, ou seja, deve ter
 ```
 - Princípio Aberto/Fechado (OCP):
 ```
-Explicação: As classes devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades
+Explicação:
+
+As classes devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades
 devem ser adicionadas por meio de extensões, sem alterar o código existente.
 
 Classes Abstratas (AbstractUsuarioController, AbstractUsuarioService): O uso de generics (T, E) permite
@@ -91,6 +93,13 @@ AdminService ou FuncionarioController e FuncionarioService) sem modificar as cla
 Interfaces (UsuarioCreateInputPort, UsuarioUpdateInputPort e etc.): Novos tipos de usuários podem implementar
 essas interfaces sem alterar o código existente.
 
+Exemplo:
+
+Controladores (AbstractUsuarioController, ClienteController, ProprietarioController): A classe abstrata
+AbstractUsuarioController lida com operações CRUD (criar, atualizar, buscar, deletar) de forma genérica, enquanto
+as subclasses (ClienteController, ProprietarioController) definem endpoints específicos. Isso é uma boa separação,
+pois o controlador genérico centraliza a lógica comum, e as subclasses configuram o contexto específico. Cada
+controlador tem a responsabilidade clara de gerenciar requisições HTTP.
 ```
 - Princípio da Substituição de Liskov (LSP):
 ```
