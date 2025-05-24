@@ -15,7 +15,7 @@ public class ClienteMapper
 
     private final EnderecoMapper mapper;
 
-    public Cliente toUsuarioIn(ClienteDtoRequest dto) {
+    public Cliente toDomainIn(ClienteDtoRequest dto) {
         if (dto == null) {
             return null;
         }
@@ -31,7 +31,7 @@ public class ClienteMapper
         return cliente;
     }
 
-    public Cliente toUsuarioOut(ClienteEntity entity) {
+    public Cliente toDomainOut(ClienteEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -48,7 +48,7 @@ public class ClienteMapper
         return cliente;
     }
 
-    public ClienteEntity toUsuarioEntity(Cliente cliente) {
+    public ClienteEntity toEntity(Cliente cliente) {
         if (cliente == null) {
             return null;
         }
@@ -89,7 +89,7 @@ public class ClienteMapper
         );
     }
 
-    public Cliente toUsuarioIn2(ClienteUpdateDtoRequest usuario) {
+    public Cliente toDomainUpdate(ClienteUpdateDtoRequest usuario) {
         if (usuario == null) {
             return null;
         }

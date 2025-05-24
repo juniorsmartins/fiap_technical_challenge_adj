@@ -74,7 +74,7 @@ public abstract class AbstractUsuarioController<I, O, U, T, E> {
             @RequestBody @Valid I dtoRequest) {
 
         var response = Optional.ofNullable(dtoRequest)
-                .map(mapper::toUsuarioIn)
+                .map(mapper::toDomainIn)
                 .map(createInputPort::create)
                 .map(mapper::toDtoResponse)
                 .orElseThrow(() -> {
@@ -120,7 +120,7 @@ public abstract class AbstractUsuarioController<I, O, U, T, E> {
             @RequestBody @Valid U updateDtoRequest) {
 
         var response = Optional.ofNullable(updateDtoRequest)
-                .map(mapper::toUsuarioIn2)
+                .map(mapper::toDomainUpdate)
                 .map(updateInputPort::update)
                 .map(mapper::toDtoResponse)
                 .orElseThrow(() -> {

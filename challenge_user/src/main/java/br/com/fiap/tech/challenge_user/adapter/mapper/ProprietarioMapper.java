@@ -15,7 +15,7 @@ public class ProprietarioMapper
 
     private final EnderecoMapper mapper;
 
-    public Proprietario toUsuarioIn(ProprietarioDtoRequest dto) {
+    public Proprietario toDomainIn(ProprietarioDtoRequest dto) {
         if (dto == null) {
             return null;
         }
@@ -31,7 +31,7 @@ public class ProprietarioMapper
         return proprietario;
     }
 
-    public Proprietario toUsuarioOut(ProprietarioEntity entity) {
+    public Proprietario toDomainOut(ProprietarioEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -48,7 +48,7 @@ public class ProprietarioMapper
         return proprietario;
     }
 
-    public ProprietarioEntity toUsuarioEntity(Proprietario proprietario) {
+    public ProprietarioEntity toEntity(Proprietario proprietario) {
         if (proprietario == null) {
             return null;
         }
@@ -89,7 +89,7 @@ public class ProprietarioMapper
         );
     }
 
-    public Proprietario toUsuarioIn2(ProprietarioUpdateDtoRequest usuario) {
+    public Proprietario toDomainUpdate(ProprietarioUpdateDtoRequest usuario) {
         if (usuario == null) {
             return null;
         }

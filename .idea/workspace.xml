@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/utils/UpdateUserRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/utils/UpdateUserRule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,8 +61,8 @@
         <option value="Record" />
         <option value="Enum" />
         <option value="Exception" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -106,7 +104,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/polimorfismo&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/juniorsmartins/Workspace/backend-develop&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
@@ -125,14 +123,14 @@
       <recent name="br.com.fiap.tech.challenge_user.adapter.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.com.fiap.tech.challenge_user.application.core.utils" />
       <recent name="br.com.fiap.tech.challenge_user.application.port.output" />
       <recent name="br.com.fiap.tech.challenge_user.application.core.usecase" />
       <recent name="br.com.fiap.tech.challenge_user.application.port.input" />
       <recent name="br.com.fiap.tech.challenge_user.config.exceptions.http404" />
-      <recent name="br.com.fiap.tech.challenge_user.adapter.dto.request" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: cliente">
+  <component name="RunManager" selected="Cucumber Java.Feature: proprietario">
     <configuration name="Feature: cliente" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" />
@@ -242,8 +240,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Cucumber Java.Feature: cliente" />
         <item itemvalue="Cucumber Java.Feature: proprietario" />
+        <item itemvalue="Cucumber Java.Feature: cliente" />
         <item itemvalue="Gradle.challenge_user [clean]" />
         <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Cucumber Java.Feature: usuario" />
