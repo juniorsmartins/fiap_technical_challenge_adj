@@ -116,15 +116,23 @@ Classes Abstratas (AbstractUsuarioController, AbstractUsuarioService): O uso de 
 adicionar novos tipos de usuários (como Admin ou Funcionario) criando subclasses (AdminController e
 AdminService ou FuncionarioController e FuncionarioService) sem modificar as classes base.
 
-Interfaces (UsuarioCreateInputPort, UsuarioUpdateInputPort e etc.): Novos tipos de usuários podem implementar
-essas interfaces sem alterar o código existente.
+Interfaces Genéricas (UsuarioCreateInputPort, UsuarioUpdateInputPort e etc.): Novos tipos de usuários podem
+implementar essas interfaces sem alterar o código existente.
+
+Regras de Atualização (UsuarioUpdateRule, EnderecoUpdateRule): As interfaces permitem novas implementações para
+diferentes tipos de usuários ou regras específicas, sem modificar as classes base como DefaultUsuarioUpdateRule e
+DefaultEnderecoUpdateRule.
+
+Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter): Usam generics para suportar
+diferentes tipos de entidades (ClienteEntity, ProprietarioEntity), permitindo extensão para novos tipos.
 
 ```
 - Princípio da Substituição de Liskov (LSP):
 ```
 Explicação:
 
-Subclasses devem ser substituíveis por suas superclasses sem alterar o comportamento do programa.
+O Princípio da Substituição de Liskov estabelece que uma subclasse deve ser substituível por sua superclasse sem
+alterar o comportamento do programa. Isso garante que polimorfismo funcione corretamente.
 
 Exemplo:
 
@@ -143,7 +151,9 @@ de Usuario. Os métodos genéricos usam tipos parametrizados (T, E), garantindo 
 ```
 Explicação:
 
-Muitas interfaces específicas são melhores que uma interface geral. Clientes não devem depender de interfaces que não usam.
+O Princípio da Segregação de Interfaces determina que clientes não devem ser forçados a depender de interfaces que não
+utilizam. Interfaces devem ser específicas e focadas. Muitas interfaces específicas são melhores que uma interface geral.
+Clientes não devem depender de interfaces que não usam.
 
 Exemplo:
 
@@ -154,12 +164,16 @@ apenas do necessário.
 Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, etc.): Cada adaptador implementa uma interface
 específica (UsuarioCreateOutputPort, UsuarioDeleteOutputPort, etc.), garantindo dependências mínimas.
 
+Regras de Atualização (UsuarioUpdateRule, EnderecoUpdateRule): Interfaces segregadas garantem que implementações lidem com
+uma única responsabilidade (atualizar usuário ou endereço).
+
 ```
 - Princípio da Inversão de Dependência (DIP):
 ```
 Explicação:
 
-Módulos de alto nível devem depender de abstrações, não de implementações concretas.
+O Princípio da Inversão de Dependência estabelece que módulos de alto nível não devem depender de módulos de baixo nível;
+ambos devem depender de abstrações. Abstrações não devem depender de detalhes.
 
 Exemplo:
 
@@ -169,8 +183,6 @@ abstrações.
 
 Interfaces Genéricas: Interfaces como UsuarioCreateInputPort<T> e UsuarioCreateOutputPort<E> permitem que o código
 de alto nível use tipos genéricos, enquanto implementações específicas fornecem os detalhes.
-
-Mappers: A injeção de AbstractUsuarioMapper segue o DIP, dependendo de uma abstração.
 
 ```
 
