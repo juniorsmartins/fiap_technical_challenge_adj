@@ -1,5 +1,6 @@
 # PROJETO: Tech-Challenge-ADJ-Fiap
 
+
 ## Índice
 1. Introdução;
 2. Arquitetura do Sistema;
@@ -8,6 +9,7 @@
 5. Qualidade do Código;
 6. Collections para Teste;
 7. Notas.
+
 
 ## Introdução
 
@@ -46,20 +48,37 @@ segurança, de modo que o sistema seja não apenas funcional, mas também
 seguro, escalável e de fácil manutenção.
 
 
-
 ## Arquitetura do Sistema
+
+#### Descrição da Arquitetura 
+
+#### Diagrama da Arquitetura
 
 
 ## Descrição dos Endpoints da API
 
+#### Tabela de Endpoints
+
+#### Exemplos de requisição e resposta
+
 
 ## Configuração do Projeto
+
+#### Configuração do Docker Compose
+
+#### Instruções para execução local
 
 
 ## Qualidade do Código
 
+#### Boas Práticas Utilizadas
+
 
 ## Collections para Teste
+
+#### Link para a Collection do Postman
+
+#### Descrição dos Testes Manuais
 
 
 ## Notas
