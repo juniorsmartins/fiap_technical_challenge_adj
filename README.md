@@ -76,7 +76,21 @@ seguro, escalável e de fácil manutenção.
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
 ```
-Explicação: Uma classe deve ter apenas um motivo para mudar, ou seja, deve ter apenas uma responsabilidade.
+Explicação: Uma classe deve ter uma única responsabilidade e apenas um motivo para mudar, reduzindo acoplamento
+e facilitando manutenção.
+
+Exemplo:
+
+Controladores (AbstractUsuarioController, ClienteController, ProprietarioController): A classe abstrata
+AbstractUsuarioController lida com operações CRUD (criar, atualizar, buscar, deletar) de forma genérica, enquanto
+as subclasses (ClienteController, ProprietarioController) definem endpoints específicos. Isso é uma boa separação,
+pois o controlador genérico centraliza a lógica comum, e as subclasses configuram o contexto específico. Cada
+controlador tem a responsabilidade clara de gerenciar requisições HTTP.
+
+O mesmo padrão ocorre nos serviços. A classe abstrata AbstractUsuarioService lida com operações de forma genérica,
+enquanto as subclasses definem contextos específicos. Dessa forma, a subclasse ClienteService é responsável por
+operações de Cliente e a subclasse ProprietarioService é responsável por operações de Proprietario. Ou seja, cada
+uma possui um único motivo para mudar. Elas mudarão apenas se mudarem as regras por seu tipo específico de usuário.
 
 ```
 - Princípio Aberto/Fechado (OCP):
@@ -86,6 +100,8 @@ Explicação:
 As classes devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades
 devem ser adicionadas por meio de extensões, sem alterar o código existente.
 
+Exemplo:
+
 Classes Abstratas (AbstractUsuarioController, AbstractUsuarioService): O uso de generics (T, E) permite
 adicionar novos tipos de usuários (como Admin ou Funcionario) criando subclasses (AdminController e
 AdminService ou FuncionarioController e FuncionarioService) sem modificar as classes base.
@@ -93,21 +109,17 @@ AdminService ou FuncionarioController e FuncionarioService) sem modificar as cla
 Interfaces (UsuarioCreateInputPort, UsuarioUpdateInputPort e etc.): Novos tipos de usuários podem implementar
 essas interfaces sem alterar o código existente.
 
-Exemplo:
-
-Controladores (AbstractUsuarioController, ClienteController, ProprietarioController): A classe abstrata
-AbstractUsuarioController lida com operações CRUD (criar, atualizar, buscar, deletar) de forma genérica, enquanto
-as subclasses (ClienteController, ProprietarioController) definem endpoints específicos. Isso é uma boa separação,
-pois o controlador genérico centraliza a lógica comum, e as subclasses configuram o contexto específico. Cada
-controlador tem a responsabilidade clara de gerenciar requisições HTTP.
 ```
 - Princípio da Substituição de Liskov (LSP):
 ```
-Explicação: Objetos de uma superclasse devem poder ser substituídos por objetos de uma subclasse sem quebrar a
-aplicação.
+Explicação:
+
+Subclasses devem ser substituíveis por suas superclasses sem alterar o comportamento do programa.
+
+Exemplo:
 
 Subclasses de AbstractUsuarioController: ClienteController e ProprietarioController herdam de
-AbstractUsuarioController e apenas configuram URIs, mantendo o comportamento dos métodos CRUD. São substituíveis
+AbstractUsuarioController e configuram URIs, mantendo o comportamento dos métodos CRUD. São substituíveis
 pela classe base.
 
 Subclasses de AbstractUsuarioService: ClienteService e ProprietarioService delegam para a superclasse,
@@ -116,12 +128,14 @@ garantindo comportamento consistente.
 Entidades e Modelos: ClienteEntity e ProprietarioEntity herdam de UsuarioEntity, e Cliente e Proprietario herdam
 de Usuario. Os métodos genéricos usam tipos parametrizados (T, E), garantindo substituição.
 
-AbstractUsuarioUtils: A classe é genérica e funciona com qualquer tipo que estenda Usuario e UsuarioEntity.
-
 ```
 - Princípio da Segregação de Interfaces (ISP):
 ```
-Explicação: Muitas interfaces específicas são melhores que uma interface geral.
+Explicação:
+
+Muitas interfaces específicas são melhores que uma interface geral. Clientes não devem depender de interfaces que não usam.
+
+Exemplo:
 
 Interfaces Específicas (UsuarioCreateInputPort, UsuarioUpdateInputPort, etc.): Cada interface define uma única
 operação (create, update, delete, findById), permitindo que os clientes (como AbstractUsuarioController) dependam
@@ -133,7 +147,11 @@ específica (UsuarioCreateOutputPort, UsuarioDeleteOutputPort, etc.), garantindo
 ```
 - Princípio da Inversão de Dependência (DIP):
 ```
-Explicação: Dependa de abstrações, não de implementações concretas.
+Explicação:
+
+Módulos de alto nível devem depender de abstrações, não de implementações concretas.
+
+Exemplo:
 
 Injeção de Dependências: O uso de @RequiredArgsConstructor para injetar interfaces (UsuarioCreateInputPort,
 UsuarioCreateOutputPort, AbstractUsuarioMapper, etc.) é uma boa prática. Controladores e serviços dependem de
