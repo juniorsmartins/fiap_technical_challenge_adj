@@ -3,37 +3,31 @@ package br.com.fiap.tech.challenge_user.application.core.utils;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
-public abstract class AbstractUsuarioUtils<T extends Usuario, E extends UsuarioEntity> {
+public final class DefaultEnderecoUpdateRule<T extends Usuario, E extends UsuarioEntity> implements EnderecoUpdateRule<T, E> {
 
-    public E upUsuario(T usuario, E entity) {
-        BeanUtils.copyProperties(usuario, entity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "endereco");
-        return this.upEndereco(usuario, entity);
-    }
+    @Override
+    public E updateAddress(T domain, E entity) {
 
-    private E upEndereco(T usuario, E entity) {
-
-        if (usuario.getEndereco() == null && entity.getEndereco() != null) {
+        if (domain.getEndereco() == null && entity.getEndereco() != null) {
             // Cenário: Requisição sem endereço, usuário com endereço → Remover endereço
             entity.setEndereco(null); // orphanRemoval = true remove o endereço do banco
 
-        } else if (usuario.getEndereco() != null && entity.getEndereco() == null) {
+        } else if (domain.getEndereco() != null && entity.getEndereco() == null) {
             // Cenário: Requisição com endereço e usuário sem endereço → Criar novo endereço
             entity.setEndereco(EnderecoEntity.builder()
-                    .cep(usuario.getEndereco().getCep())
-                    .logradouro(usuario.getEndereco().getLogradouro())
-                    .numero(usuario.getEndereco().getNumero())
+                    .cep(domain.getEndereco().getCep())
+                    .logradouro(domain.getEndereco().getLogradouro())
+                    .numero(domain.getEndereco().getNumero())
                     .build()
             );
 
-        } else if (usuario.getEndereco() != null && entity.getEndereco() != null) {
+        } else if (domain.getEndereco() != null && entity.getEndereco() != null) {
             // Cenário: Requisição com endereço e usuário com endereço → substituir endereço
-            BeanUtils.copyProperties(usuario.getEndereco(), entity.getEndereco(), "enderecoId");
+            BeanUtils.copyProperties(domain.getEndereco(), entity.getEndereco(), "enderecoId");
         }
 
         // Cenário: Requisição sem endereço e usuário sem endereço -> não fazer nada

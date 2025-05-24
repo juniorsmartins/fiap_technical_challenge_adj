@@ -3,7 +3,8 @@ package br.com.fiap.tech.challenge_user.application.core.usecase;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
-import br.com.fiap.tech.challenge_user.application.core.utils.UsuarioUpdateUtils;
+import br.com.fiap.tech.challenge_user.application.core.utils.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.application.core.utils.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
@@ -24,8 +25,9 @@ public class ProprietarioService extends AbstractUsuarioService<Proprietario, Pr
             UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ProprietarioEntity> deleteOutputPort,
-            UsuarioUpdateUtils<Proprietario, ProprietarioEntity> usuarioUpdateUtils) {
-        super(mapper, createOutputPort, findByIdOutputPort, deleteOutputPort, usuarioUpdateUtils);
+            UsuarioUpdateRule<Proprietario, ProprietarioEntity> usuarioUpdateRule,
+            EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule) {
+        super(mapper, createOutputPort, findByIdOutputPort, deleteOutputPort, usuarioUpdateRule, enderecoUpdateRule);
     }
 
     @Override
