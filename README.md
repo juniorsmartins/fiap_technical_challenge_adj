@@ -73,6 +73,13 @@ seguro, escalável e de fácil manutenção.
 
 #### Boas Práticas Utilizadas
 
+##### SOLID
+- Princípio da Responsabilidade Única (SRP):
+- Princípio Aberto/Fechado (OCP):
+- Princípio da Substituição de Liskov (LSP):
+- Princípio da Segregação de Interfaces (ISP):
+- Princípio da Inversão de Dependência (DIP):
+
 
 ## Collections para Teste
 
