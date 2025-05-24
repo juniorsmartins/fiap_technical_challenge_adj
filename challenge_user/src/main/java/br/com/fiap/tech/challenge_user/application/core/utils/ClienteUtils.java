@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateCliente extends AbstractUpdateUser<Cliente, ClienteEntity>
+public class ClienteUtils extends AbstractUsuarioUtils<Cliente, ClienteEntity>
         implements UsuarioUpdateUtils<Cliente, ClienteEntity> {
 
     @Override

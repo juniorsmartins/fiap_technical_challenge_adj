@@ -31,7 +31,7 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
 
     private final UsuarioDeleteOutputPort<E> deleteOutputPort;
 
-    private final UsuarioUpdateUtils<T, E> updateUser;
+    private final UsuarioUpdateUtils<T, E> usuarioUpdateUtils;
 
     public T create(@NotNull final T usuario) {
 
@@ -50,7 +50,7 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
         var id = usuario.getUsuarioId();
 
         return findByIdOutputPort.findById(id)
-                .map(entity -> updateUser.up(usuario, entity))
+                .map(entity -> usuarioUpdateUtils.up(usuario, entity))
                 .map(createOutputPort::save)
                 .map(mapper::toDomainOut)
                 .orElseThrow(() -> {

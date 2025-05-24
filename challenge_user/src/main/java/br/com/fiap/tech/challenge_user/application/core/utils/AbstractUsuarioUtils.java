@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractUpdateUser<T extends Usuario, E extends UsuarioEntity> {
+public abstract class AbstractUsuarioUtils<T extends Usuario, E extends UsuarioEntity> {
 
     public E upUsuario(T usuario, E entity) {
         BeanUtils.copyProperties(usuario, entity, "usuarioId", "dataHoraCriacao", "dataHoraEdicao", "endereco");
@@ -36,6 +36,7 @@ public abstract class AbstractUpdateUser<T extends Usuario, E extends UsuarioEnt
             BeanUtils.copyProperties(usuario.getEndereco(), entity.getEndereco(), "enderecoId");
         }
 
+        // Cenário: Requisição sem endereço e usuário sem endereço -> não fazer nada
         return entity;
     }
 }

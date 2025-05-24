@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateProprietario extends AbstractUpdateUser<Proprietario, ProprietarioEntity>
+public class ProprietarioUtils extends AbstractUsuarioUtils<Proprietario, ProprietarioEntity>
         implements UsuarioUpdateUtils<Proprietario, ProprietarioEntity> {
 
     @Override
