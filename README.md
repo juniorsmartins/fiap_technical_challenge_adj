@@ -107,8 +107,8 @@ responsabilidades, com cada classe focada em uma tarefa específica.
 Explicação:
 
 O Princípio Aberto/Fechado determina que as classes devem estar abertas para extensão, mas fechadas para modificação.
-Novas funcionalidades são adicionadas por meio de extensões (como subclasses ou implementações), sem alterar o código
-existente.
+Novas funcionalidades são adicionadas por meio de extensões (como subclasses ou implementações), sem alterar o
+código existente.
 
 Exemplo:
 
