@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.core.utils;
+package br.com.fiap.tech.challenge_user.application.core.usecase.regras;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
