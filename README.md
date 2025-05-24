@@ -76,12 +76,29 @@ seguro, escalável e de fácil manutenção.
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
 ```
-teste
+Explicação: Uma classe deve ter apenas um motivo para mudar, ou seja, deve ter apenas uma responsabilidade.
+
 ```
 - Princípio Aberto/Fechado (OCP):
+```
+Explicação: Entidades de software devem estar abertas para extensão, mas fechadas para modificação.
+
+```
 - Princípio da Substituição de Liskov (LSP):
+```
+Explicação: Objetos de uma superclasse devem poder ser substituídos por objetos de uma subclasse sem quebrar a aplicação.
+
+```
 - Princípio da Segregação de Interfaces (ISP):
+```
+Explicação: Muitas interfaces específicas são melhores que uma interface geral.
+
+```
 - Princípio da Inversão de Dependência (DIP):
+```
+Explicação: Dependa de abstrações, não de implementações concretas.
+
+```
 
 
 ## Collections para Teste
