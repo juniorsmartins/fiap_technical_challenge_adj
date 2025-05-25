@@ -277,6 +277,8 @@ Conformidade: A flexibilidade dos generics garante que as interfaces sejam aplic
 ```
 - Princípio da Inversão de Dependência (DIP):
 ```
+
+
 Explicação:
 
 O Princípio da Inversão de Dependência estabelece que módulos de alto nível não devem depender de módulos de baixo nível;
