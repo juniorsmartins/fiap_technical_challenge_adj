@@ -76,6 +76,12 @@ seguro, escalável e de fácil manutenção.
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
 ```
+
+O Princípio da Responsabilidade Única (Single Responsibility Principle) estabelece que uma classe deve ter apenas
+um motivo para mudar, ou seja, deve ser responsável por uma única parte da funcionalidade do sistema, e essa
+responsabilidade deve ser totalmente encapsulada pela classe. Isso reduz o acoplamento, facilita a manutenção e
+melhora a legibilidade do código, já que mudanças em uma responsabilidade específica afetam apenas uma classe.
+
 1. Separação de Camadas
 
 A aplicação segue uma arquitetura em camadas, com responsabilidades bem definidas:
@@ -123,9 +129,8 @@ para operações específicas, garantindo que cada interface tenha uma única re
 
 As classes ClienteEntity e ProprietarioEntity são responsáveis apenas por representar os dados persistidos, sem conter
 lógica de negócio, o que está alinhado com o SRP.
-
-
 ```
+
 - Princípio Aberto/Fechado (OCP):
 ```
 
@@ -177,9 +182,8 @@ UsuarioEntity.
 
 Exemplo: A adição de uma nova entidade, como AdministradorEntity, pode ser feita criando uma nova classe que estende
 UsuarioEntity, sem modificar o código existente.
-
-
 ```
+
 - Princípio da Substituição de Liskov (LSP):
 ```
 
@@ -232,9 +236,8 @@ interfaces, garantindo que métodos como create(T usuario) ou deleteById(UUID id
 
 Conformidade: As implementações específicas não introduzem comportamentos inesperados, permitindo que qualquer código que dependa dessas
 interfaces utilize ClienteService ou ProprietarioService de forma intercambiável.
-
-
 ```
+
 - Princípio da Segregação de Interfaces (ISP):
 ```
 
@@ -272,29 +275,63 @@ Proprietario) sejam manipulados sem forçar a implementação de métodos irrele
 UsuarioCreateInputPort<Cliente>, que é específico para o tipo Cliente.
 
 Conformidade: A flexibilidade dos generics garante que as interfaces sejam aplicadas apenas aos tipos relevantes, mantendo a coesão.
-
-
 ```
+
 - Princípio da Inversão de Dependência (DIP):
 ```
 
-
-Explicação:
-
-O Princípio da Inversão de Dependência estabelece que módulos de alto nível não devem depender de módulos de baixo nível;
-ambos devem depender de abstrações. Abstrações não devem depender de detalhes.
-
-Exemplo:
-
-Injeção de Dependências: O uso de @RequiredArgsConstructor para injetar interfaces (UsuarioCreateInputPort,
-UsuarioCreateOutputPort, AbstractUsuarioMapper, etc.) é uma boa prática. Controladores e serviços dependem de
+O Princípio de Inversão de Dependência (Dependency Inversion Principle) estabelece que: Módulos de alto nível não devem depender de
+módulos de baixo nível; ambos devem depender de abstrações. Abstrações não devem depender de detalhes; detalhes devem depender de
 abstrações.
 
-Interfaces Genéricas: Interfaces como UsuarioCreateInputPort<T> e UsuarioCreateOutputPort<E> permitem que o código
-de alto nível use tipos genéricos, enquanto implementações específicas fornecem os detalhes.
+Isso significa que classes de alto nível (como controllers e serviços) devem interagir com dependências por meio de interfaces ou
+classes abstratas, em vez de classes concretas. Além disso, as implementações concretas devem depender de interfaces, promovendo baixo
+acoplamento, maior flexibilidade e facilidade de substituição de componentes.
 
+1. Uso de Interfaces para Portas:
+
+A aplicação utiliza interfaces como UsuarioCreateInputPort<T>, UsuarioUpdateInputPort<T>, UsuarioDeleteByIdInputPort<T>, e
+UsuarioFindByIdOutputPort<E> para definir contratos entre camadas. Essas interfaces são injetadas em classes de alto nível, como
+AbstractUsuarioController, que dependem dessas abstrações em vez de implementações concretas.
+
+Conformidade: AbstractUsuarioController depende de interfaces como UsuarioCreateInputPort<T> e OutputMapper<T, O, E>, enquanto as
+implementações concretas (ClienteService, ProprietarioService, ClienteMapper, ProprietarioMapper) são injetadas via injeção de
+dependências. Isso respeita o DIP, pois o controller (módulo de alto nível) não depende diretamente de classes concretas.
+
+Exemplo: No método create de AbstractUsuarioController, a lógica utiliza createInputPort.create e outputMapper.toDtoResponse, sem
+conhecer as implementações específicas (ClienteService ou ClienteMapper).
+
+2. Injeção de Dependências com Spring:
+
+A aplicação utiliza o framework Spring com anotações como @RequiredArgsConstructor (Lombok) para injetar dependências por meio de
+interfaces, garantindo que classes de alto nível dependam apenas de abstrações.
+
+Conformidade: Em AbstractUsuarioService, dependências como EntityMapper<T, E>, UsuarioCreateOutputPort<E>, e UsuarioFindByIdOutputPort<E>
+são injetadas como interfaces, permitindo que implementações concretas (como ClienteMapper ou UsuarioCreateAdapter) sejam fornecidas pelo
+contêiner do Spring sem acoplamento direto.
+
+Benefício: Isso facilita a substituição de implementações (por exemplo, trocar um adaptador de banco de dados por um mock em testes)
+sem alterar o código das classes consumidoras.
+
+3. Interfaces de Mapeamento:
+
+As interfaces InputMapper<I, U, T>, OutputMapper<T, O, E>, e EntityMapper<T, E> são usadas para definir contratos de mapeamento, e
+classes como ClienteMapper e ProprietarioMapper implementam essas abstrações.
+
+Conformidade: Classes de alto nível, como AbstractUsuarioController e AbstractUsuarioService, dependem dessas interfaces, enquanto as
+implementações concretas são injetadas. Isso segue o DIP, pois os detalhes (mapeadores concretos) dependem das abstrações
+(interfaces de mapeamento).
+
+4. Adaptadores de Repositório:
+
+Os adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter) implementam interfaces específicas
+(UsuarioCreateOutputPort<E>, UsuarioDeleteOutputPort<E>, UsuarioFindByIdOutputPort<E>), que são injetadas em AbstractUsuarioService. O
+repositório concreto (UsuarioRepository) é encapsulado pelos adaptadores, que dependem da abstração fornecida pelo Spring Data JPA
+(JpaRepository).
+
+Conformidade: A camada de serviço depende de interfaces de saída (UsuarioCreateOutputPort, etc.), enquanto os adaptadores dependem da
+interface UsuarioRepository, respeitando o DIP.
 ```
-
 
 ## Collections para Teste
 
