@@ -76,23 +76,56 @@ seguro, escalável e de fácil manutenção.
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
 ```
-Explicação: 
+1. Separação de Camadas
 
-O Princípio da Responsabilidade Única estabelece que uma classe deve ter apenas uma razão para mudar. Isso reduz
-o acoplamento, facilita a manutenção e melhora a coesão do código.
+A aplicação segue uma arquitetura em camadas, com responsabilidades bem definidas:
 
-Exemplo:
-
-Controladores (AbstractUsuarioController, ClienteController, ProprietarioController): A classe abstrata
+Controllers (AbstractUsuarioController, ClienteController, ProprietarioController): A classe abstrata
 AbstractUsuarioController lida com operações CRUD (criar, atualizar, buscar, deletar) de forma genérica, enquanto
 as subclasses (ClienteController, ProprietarioController) definem endpoints específicos. Isso é uma boa separação,
 pois o controlador genérico centraliza a lógica comum, e as subclasses configuram o contexto específico. Cada
 controlador tem a responsabilidade clara de gerenciar requisições HTTP.
 
-O mesmo padrão ocorre nos serviços. A classe abstrata AbstractUsuarioService lida com operações de forma genérica,
-enquanto as subclasses definem contextos específicos. Dessa forma, a subclasse ClienteService é responsável por
+Serviços (AbstractUsuarioService, ClienteService, ProprietarioService): Contêm a lógica de negócio para operações
+como criação, atualização e exclusão de usuários. A classe abstrata AbstractUsuarioService lida com operações de forma
+genérica,enquanto as subclasses definem contextos específicos. Dessa forma, a subclasse ClienteService é responsável por
 operações de Cliente e a subclasse ProprietarioService é responsável por operações de Proprietario. Ou seja, cada
 uma possui um único motivo para mudar. Elas mudarão apenas se mudarem as regras por seu tipo específico de usuário.
+
+Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter): Lidam com a persistência de dados,
+interagindo com o repositório JPA. Cada adaptador lida com uma única operação de acesso a dados (salvar, deletar, buscar),
+alinhando-se ao SRP.
+
+Mapeadores (ClienteMapper, ProprietarioMapper, EnderecoMapper): Responsáveis por transformar dados entre DTOs,
+objetos de domínio e entidades de persistência.
+
+Essa separação garante que cada camada tenha uma única responsabilidade, facilitando a manutenção e a escalabilidade.
+
+2. Mapeadores Específicos
+
+As classes ClienteMapper e ProprietarioMapper implementam métodos com responsabilidades únicas, por exemplo:
+
+toDomainIn: Converte DTOs de entrada em objetos de domínio.
+toEntity: Converte objetos de domínio em entidades de persistência.
+toDtoResponse: Converte objetos de domínio ou entidades em DTOs de saída.
+
+Cada método é focado em uma única tarefa, respeitando o SRP.
+
+3. Interfaces Específicas
+
+Interfaces como UsuarioCreateInputPort, UsuarioUpdateInputPort e UsuarioDeleteByIdInputPort definem contratos claros
+para operações específicas, garantindo que cada interface tenha uma única responsabilidade.
+
+4. Entidades
+
+As classes ClienteEntity e ProprietarioEntity são responsáveis apenas por representar os dados persistidos, sem conter
+lógica de negócio, o que está alinhado com o SRP.
+
+
+Exemplo:
+
+
+O mesmo padrão ocorre nos serviços. 
 
 Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter): Cada adaptador lida com uma única
 operação de acesso a dados (salvar, deletar, buscar), alinhando-se ao SRP.
