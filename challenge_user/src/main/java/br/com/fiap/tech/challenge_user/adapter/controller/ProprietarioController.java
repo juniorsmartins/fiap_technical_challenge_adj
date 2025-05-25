@@ -4,7 +4,8 @@ import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoReques
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.InputMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
@@ -21,12 +22,13 @@ public class ProprietarioController
     protected static final String URI_PROPRIETARIO = "/api/v1/challenge-user/proprietarios";
 
     public ProprietarioController(
-            AbstractUsuarioMapper<ProprietarioDtoRequest, ProprietarioDtoResponse, ProprietarioUpdateDtoRequest, Proprietario, ProprietarioEntity> mapper,
+            InputMapper<ProprietarioDtoRequest, ProprietarioUpdateDtoRequest, Proprietario> inputMapper,
+            OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper,
             UsuarioCreateInputPort<Proprietario> createInputPort,
             UsuarioUpdateInputPort<Proprietario> updateInputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioDeleteByIdInputPort<Proprietario> deleteByIdInputPort) {
-        super(mapper, createInputPort, updateInputPort, findByIdOutputPort, deleteByIdInputPort);
+        super(inputMapper, outputMapper, createInputPort, updateInputPort, findByIdOutputPort, deleteByIdInputPort);
     }
 }
 

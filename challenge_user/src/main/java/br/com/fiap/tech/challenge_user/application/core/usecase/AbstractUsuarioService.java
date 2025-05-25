@@ -1,9 +1,10 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
-import br.com.fiap.tech.challenge_user.application.core.utils.UsuarioUpdateUtils;
+import br.com.fiap.tech.challenge_user.application.core.usecase.regras.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.application.core.usecase.regras.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioDeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
@@ -23,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioService<T extends Usuario, E extends UsuarioEntity> {
 
-    private final AbstractUsuarioMapper<?, ?, ?, T, E> mapper;
+    private final EntityMapper<T, E> entityMapper;
 
     private final UsuarioCreateOutputPort<E> createOutputPort;
 
@@ -31,14 +32,16 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
 
     private final UsuarioDeleteOutputPort<E> deleteOutputPort;
 
-    private final UsuarioUpdateUtils<T, E> usuarioUpdateUtils;
+    private final UsuarioUpdateRule<T, E> usuarioUpdateRule;
+
+    private final EnderecoUpdateRule<T, E> enderecoUpdateRule;
 
     public T create(@NotNull final T usuario) {
 
         return Optional.of(usuario)
-                .map(mapper::toEntity)
+                .map(entityMapper::toEntity)
                 .map(createOutputPort::save)
-                .map(mapper::toDomainOut)
+                .map(entityMapper::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioService - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
@@ -50,9 +53,10 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
         var id = usuario.getUsuarioId();
 
         return findByIdOutputPort.findById(id)
-                .map(entity -> usuarioUpdateUtils.up(usuario, entity))
+                .map(entity -> usuarioUpdateRule.updateUser(usuario, entity))
+                .map(entity -> enderecoUpdateRule.updateAddress(usuario, entity))
                 .map(createOutputPort::save)
-                .map(mapper::toDomainOut)
+                .map(entityMapper::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioService - Usuário não encontrado por id: {}.", id);
                     return new UsuarioNotFoundException(id);
