@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.EntityMapper;
+import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.core.usecase.regras.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.application.core.usecase.regras.UsuarioUpdateRule;
