@@ -8,7 +8,8 @@
 4. Configuração do Projeto;
 5. Qualidade do Código;
 6. Collections para Teste;
-7. Notas.
+7. Notas;
+8. Autoria.
 
 
 ## Introdução
@@ -51,6 +52,34 @@ seguro, escalável e de fácil manutenção.
 ## Arquitetura do Sistema
 
 #### Descrição da Arquitetura 
+```
+
+Padrões Arquiteturais
+
+Ports and Adapters (Arquitetura Hexagonal):
+
+- A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
+etc.) definem contratos entre camadas, e os adaptadores (UsuarioCreateAdapter, ClienteController) implementam esses 
+contratos.
+
+- Portas de Entrada: Interfaces como UsuarioCreateInputPort permitem que a camada de apresentação acesse a lógica
+de negócio.
+
+- Portas de Saída: Interfaces como UsuarioCreateOutputPort permitem que a camada de negócio acesse a persistência sem
+depender de detalhes de implementação.
+
+- Adaptadores: ClienteController (adaptador de entrada) traduz requisições HTTP em chamadas às portas de entrada,
+enquanto UsuarioCreateAdapter (adaptador de saída) traduz chamadas das portas de saída em operações de banco de dados.
+
+Clean Architecture:
+
+- A aplicação segue princípios da Clean Architecture, com a camada de negócio (serviços) no centro, independente de
+frameworks e detalhes de infraestrutura. A camada de persistência e a camada de apresentação são externas e dependem
+do núcleo (negócio) por meio de interfaces.
+
+- Exemplo: A lógica de negócio em AbstractUsuarioService não depende diretamente de Spring Data JPA ou do framework HTTP,
+mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
+```
 
 #### Diagrama da Arquitetura
 
@@ -341,3 +370,8 @@ interface UsuarioRepository, respeitando o DIP.
 
 
 ## Notas
+
+
+## Autoria
+
+[Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
