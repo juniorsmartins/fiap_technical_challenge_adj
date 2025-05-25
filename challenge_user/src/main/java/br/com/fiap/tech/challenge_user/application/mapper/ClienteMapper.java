@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.adapter.mapper;
+package br.com.fiap.tech.challenge_user.application.mapper;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;

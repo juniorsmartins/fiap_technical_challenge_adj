@@ -4,8 +4,8 @@ import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoReques
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.InputMapper;
-import br.com.fiap.tech.challenge_user.adapter.mapper.OutputMapper;
+import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
+import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
