@@ -4,7 +4,8 @@ import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.InputMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
@@ -21,12 +22,13 @@ public class ClienteController
     protected static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 
     public ClienteController(
-            AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> mapper,
+            InputMapper<ClienteDtoRequest, ClienteUpdateDtoRequest, Cliente> inputMapper,
+            OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> outputMapper,
             UsuarioCreateInputPort<Cliente> createInputPort,
             UsuarioUpdateInputPort<Cliente> updateInputPort,
             UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
             UsuarioDeleteByIdInputPort<Cliente> deleteByIdInputPort) {
-        super(mapper, createInputPort, updateInputPort, findByIdOutputPort, deleteByIdInputPort);
+        super(inputMapper, outputMapper, createInputPort, updateInputPort, findByIdOutputPort, deleteByIdInputPort);
     }
 }
 

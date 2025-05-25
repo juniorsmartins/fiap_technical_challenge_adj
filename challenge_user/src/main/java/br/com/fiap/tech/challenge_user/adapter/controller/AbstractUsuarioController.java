@@ -1,7 +1,8 @@
 package br.com.fiap.tech.challenge_user.adapter.controller;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.InputMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioCreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.input.UsuarioUpdateInputPort;
@@ -31,7 +32,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioController<I, O, U, T, E> {
 
-    private final AbstractUsuarioMapper<I, O, U, T, E> mapper;
+    private final InputMapper<I, U, T> inputMapper;
+
+    private final OutputMapper<T, O, E> outputMapper;
 
     private final UsuarioCreateInputPort<T> createInputPort;
 
@@ -74,9 +77,9 @@ public abstract class AbstractUsuarioController<I, O, U, T, E> {
             @RequestBody @Valid I dtoRequest) {
 
         var response = Optional.ofNullable(dtoRequest)
-                .map(mapper::toDomainIn)
+                .map(inputMapper::toDomainIn)
                 .map(createInputPort::create)
-                .map(mapper::toDtoResponse)
+                .map(outputMapper::toDtoResponse)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioController - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
@@ -120,9 +123,9 @@ public abstract class AbstractUsuarioController<I, O, U, T, E> {
             @RequestBody @Valid U updateDtoRequest) {
 
         var response = Optional.ofNullable(updateDtoRequest)
-                .map(mapper::toDomainUpdate)
+                .map(inputMapper::toDomainUpdate)
                 .map(updateInputPort::update)
-                .map(mapper::toDtoResponse)
+                .map(outputMapper::toDtoResponse)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioController - Erro interno do servidor no método update.");
                     return new InternalServerProblemException();
@@ -156,7 +159,7 @@ public abstract class AbstractUsuarioController<I, O, U, T, E> {
             @PathVariable(name = "id") final UUID id) {
 
         var response = findByIdOutputPort.findById(id)
-                .map(mapper::toUsuarioDtoResponse)
+                .map(outputMapper::toResponse)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioController - Usuário não encontrado por id: {}.", id);
                     return new UsuarioNotFoundException(id);

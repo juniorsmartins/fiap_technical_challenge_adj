@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import br.com.fiap.tech.challenge_user.application.core.usecase.regras.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.application.core.usecase.regras.UsuarioUpdateRule;
@@ -21,13 +21,13 @@ public class ClienteService extends AbstractUsuarioService<Cliente, ClienteEntit
         implements UsuarioCreateInputPort<Cliente>, UsuarioUpdateInputPort<Cliente>, UsuarioDeleteByIdInputPort<Cliente> {
 
     public ClienteService(
-            AbstractUsuarioMapper<?, ?, ?, Cliente, ClienteEntity> mapper,
+            EntityMapper<Cliente, ClienteEntity> entityMapper,
             UsuarioCreateOutputPort<ClienteEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ClienteEntity> deleteOutputPort,
             UsuarioUpdateRule<Cliente, ClienteEntity> usuarioUpdateRule,
             EnderecoUpdateRule<Cliente, ClienteEntity> enderecoUpdateRule) {
-        super(mapper, createOutputPort, findByIdOutputPort, deleteOutputPort, usuarioUpdateRule, enderecoUpdateRule);
+        super(entityMapper, createOutputPort, findByIdOutputPort, deleteOutputPort, usuarioUpdateRule, enderecoUpdateRule);
     }
 
     @Override
@@ -45,3 +45,4 @@ public class ClienteService extends AbstractUsuarioService<Cliente, ClienteEntit
         super.deleteById(id);
     }
 }
+

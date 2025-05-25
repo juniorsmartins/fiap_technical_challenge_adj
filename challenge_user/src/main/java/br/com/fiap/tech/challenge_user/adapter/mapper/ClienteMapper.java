@@ -6,15 +6,16 @@ import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class ClienteMapper
-        implements AbstractUsuarioMapper<ClienteDtoRequest, ClienteDtoResponse, ClienteUpdateDtoRequest, Cliente, ClienteEntity> {
+public final class ClienteMapper implements InputMapper<ClienteDtoRequest, ClienteUpdateDtoRequest, Cliente>,
+        EntityMapper<Cliente, ClienteEntity>, OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> {
 
     private final EnderecoMapper mapper;
 
+    @Override
     public Cliente toDomainIn(ClienteDtoRequest dto) {
         if (dto == null) {
             return null;
@@ -25,29 +26,31 @@ public class ClienteMapper
         cliente.setEmail(dto.email());
         cliente.setLogin(dto.login());
         cliente.setSenha(dto.senha());
-        cliente.setEndereco(mapper.toEnderecoIn(dto.endereco()));
+        cliente.setEndereco(mapper.toEndereco(dto.endereco()));
         cliente.setNumeroCartaoFidelidade(dto.numeroCartaoFidelidade());
 
         return cliente;
     }
 
-    public Cliente toDomainOut(ClienteEntity entity) {
-        if (entity == null) {
+    @Override
+    public Cliente toDomainUpdate(ClienteUpdateDtoRequest dto) {
+        if (dto == null) {
             return null;
         }
 
         var cliente = new Cliente();
-        cliente.setUsuarioId(entity.getUsuarioId());
-        cliente.setNome(entity.getNome());
-        cliente.setEmail(entity.getEmail());
-        cliente.setLogin(entity.getLogin());
-        cliente.setSenha(entity.getSenha());
-        cliente.setEndereco(mapper.toEnderecoOut(entity.getEndereco()));
-        cliente.setNumeroCartaoFidelidade(entity.getNumeroCartaoFidelidade());
+        cliente.setUsuarioId(dto.usuarioId());
+        cliente.setNome(dto.nome());
+        cliente.setEmail(dto.email());
+        cliente.setLogin(dto.login());
+        cliente.setSenha(dto.senha());
+        cliente.setEndereco(mapper.toEndereco(dto.endereco()));
+        cliente.setNumeroCartaoFidelidade(dto.numeroCartaoFidelidade());
 
         return cliente;
     }
 
+    @Override
     public ClienteEntity toEntity(Cliente cliente) {
         if (cliente == null) {
             return null;
@@ -65,6 +68,25 @@ public class ClienteMapper
         return entity;
     }
 
+    @Override
+    public Cliente toDomain(ClienteEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        var cliente = new Cliente();
+        cliente.setUsuarioId(entity.getUsuarioId());
+        cliente.setNome(entity.getNome());
+        cliente.setEmail(entity.getEmail());
+        cliente.setLogin(entity.getLogin());
+        cliente.setSenha(entity.getSenha());
+        cliente.setEndereco(mapper.toEndereco(entity.getEndereco()));
+        cliente.setNumeroCartaoFidelidade(entity.getNumeroCartaoFidelidade());
+
+        return cliente;
+    }
+
+    @Override
     public ClienteDtoResponse toDtoResponse(Cliente cliente) {
         if (cliente == null) {
             return null;
@@ -77,7 +99,8 @@ public class ClienteMapper
         );
     }
 
-    public ClienteDtoResponse toUsuarioDtoResponse(ClienteEntity entity) {
+    @Override
+    public ClienteDtoResponse toResponse(ClienteEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -87,23 +110,6 @@ public class ClienteMapper
                 entity.getDataHoraCriacao(), entity.getDataHoraEdicao(), mapper.toEnderecoDtoResponse(entity.getEndereco()),
                 entity.getNumeroCartaoFidelidade()
         );
-    }
-
-    public Cliente toDomainUpdate(ClienteUpdateDtoRequest usuario) {
-        if (usuario == null) {
-            return null;
-        }
-
-        var cliente = new Cliente();
-        cliente.setUsuarioId(usuario.usuarioId());
-        cliente.setNome(usuario.nome());
-        cliente.setEmail(usuario.email());
-        cliente.setLogin(usuario.login());
-        cliente.setSenha(usuario.senha());
-        cliente.setEndereco(mapper.toEnderecoIn(usuario.endereco()));
-        cliente.setNumeroCartaoFidelidade(usuario.numeroCartaoFidelidade());
-
-        return cliente;
     }
 }
 

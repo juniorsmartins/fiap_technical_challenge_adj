@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.adapter.mapper.AbstractUsuarioMapper;
+import br.com.fiap.tech.challenge_user.adapter.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
 import br.com.fiap.tech.challenge_user.application.core.usecase.regras.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.application.core.usecase.regras.UsuarioUpdateRule;
@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioService<T extends Usuario, E extends UsuarioEntity> {
 
-    private final AbstractUsuarioMapper<?, ?, ?, T, E> mapper;
+    private final EntityMapper<T, E> entityMapper;
 
     private final UsuarioCreateOutputPort<E> createOutputPort;
 
@@ -39,9 +39,9 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
     public T create(@NotNull final T usuario) {
 
         return Optional.of(usuario)
-                .map(mapper::toEntity)
+                .map(entityMapper::toEntity)
                 .map(createOutputPort::save)
-                .map(mapper::toDomainOut)
+                .map(entityMapper::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioService - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
@@ -56,7 +56,7 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
                 .map(entity -> usuarioUpdateRule.updateUser(usuario, entity))
                 .map(entity -> enderecoUpdateRule.updateAddress(usuario, entity))
                 .map(createOutputPort::save)
-                .map(mapper::toDomainOut)
+                .map(entityMapper::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractUsuarioService - Usuário não encontrado por id: {}.", id);
                     return new UsuarioNotFoundException(id);
