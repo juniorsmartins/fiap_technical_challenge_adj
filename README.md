@@ -54,8 +54,6 @@ seguro, escalável e de fácil manutenção.
 #### Descrição da Arquitetura 
 ```
 
-Padrões Arquiteturais
-
 Ports and Adapters (Arquitetura Hexagonal):
 
 - A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
@@ -82,6 +80,8 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 ```
 
 #### Diagrama da Arquitetura
+
+![Screenshot from 2025-05-25 12-40-51](https://github.com/user-attachments/assets/38889228-7b2c-42c1-ae89-7d57e8f7de2f)
 
 
 ## Descrição dos Endpoints da API
