@@ -1,23 +1,16 @@
 package br.com.fiap.tech.challenge_user.application.core.usecase;
 
 import br.com.fiap.tech.challenge_user.adapter.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.core.domain.Usuario;
-import br.com.fiap.tech.challenge_user.application.core.usecase.regras.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.application.core.usecase.regras.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.output.UsuarioCreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.output.UsuarioDeleteOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.config.exceptions.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.config.exceptions.http500.InternalServerProblemException;
 import jakarta.validation.constraints.NotNull;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Slf4j
 @Service
