@@ -22,19 +22,11 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioService<T extends Usuario, E extends UsuarioEntity> {
+public abstract class AbstractUsuarioCreateService<T extends Usuario, E extends UsuarioEntity> {
 
     private final EntityMapper<T, E> entityMapper;
 
     private final UsuarioCreateOutputPort<E> createOutputPort;
-
-    private final UsuarioFindByIdOutputPort<E> findByIdOutputPort;
-
-    private final UsuarioDeleteOutputPort<E> deleteOutputPort;
-
-    private final UsuarioUpdateRule<T, E> usuarioUpdateRule;
-
-    private final EnderecoUpdateRule<T, E> enderecoUpdateRule;
 
     public T create(@NotNull final T usuario) {
 
@@ -43,32 +35,8 @@ public abstract class AbstractUsuarioService<T extends Usuario, E extends Usuari
                 .map(createOutputPort::save)
                 .map(entityMapper::toDomain)
                 .orElseThrow(() -> {
-                    log.error("AbstractUsuarioService - Erro interno do servidor no método create.");
+                    log.error("AbstractUsuarioCreateService - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
-                });
-    }
-
-    public T update(@NonNull T usuario) {
-
-        var id = usuario.getUsuarioId();
-
-        return findByIdOutputPort.findById(id)
-                .map(entity -> usuarioUpdateRule.updateUser(usuario, entity))
-                .map(entity -> enderecoUpdateRule.updateAddress(usuario, entity))
-                .map(createOutputPort::save)
-                .map(entityMapper::toDomain)
-                .orElseThrow(() -> {
-                    log.error("AbstractUsuarioService - Usuário não encontrado por id: {}.", id);
-                    return new UsuarioNotFoundException(id);
-                });
-    }
-
-    public void deleteById(@NonNull final UUID id) {
-
-        findByIdOutputPort.findById(id)
-                .ifPresentOrElse(deleteOutputPort::delete, () -> {
-                    log.error("AbstractUsuarioService - Usuário não encontrado por id: {}.", id);
-                    throw new UsuarioNotFoundException(id);
                 });
     }
 }
