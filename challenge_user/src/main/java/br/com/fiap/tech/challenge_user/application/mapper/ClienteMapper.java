@@ -21,15 +21,12 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
             return null;
         }
 
-        var cliente = new Cliente();
-        cliente.setNome(dto.nome());
-        cliente.setEmail(dto.email());
-        cliente.setLogin(dto.login());
-        cliente.setSenha(dto.senha());
-        cliente.setEndereco(mapper.toEndereco(dto.endereco()));
-        cliente.setNumeroCartaoFidelidade(dto.numeroCartaoFidelidade());
+        var endereco = mapper.toEndereco(dto.endereco());
 
-        return cliente;
+        return new Cliente(
+                dto.nome(), dto.email(), dto.login(), dto.senha(),
+                endereco, dto.numeroCartaoFidelidade()
+        );
     }
 
     @Override
@@ -38,16 +35,12 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
             return null;
         }
 
-        var cliente = new Cliente();
-        cliente.setUsuarioId(dto.usuarioId());
-        cliente.setNome(dto.nome());
-        cliente.setEmail(dto.email());
-        cliente.setLogin(dto.login());
-        cliente.setSenha(dto.senha());
-        cliente.setEndereco(mapper.toEndereco(dto.endereco()));
-        cliente.setNumeroCartaoFidelidade(dto.numeroCartaoFidelidade());
+        var endereco = mapper.toEndereco(dto.endereco());
 
-        return cliente;
+        return new Cliente(
+                dto.usuarioId(), dto.nome(), dto.email(), dto.login(), dto.senha(),
+                endereco, dto.numeroCartaoFidelidade()
+        );
     }
 
     @Override
@@ -56,16 +49,12 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
             return null;
         }
 
-        var entity = new ClienteEntity();
-        entity.setUsuarioId(cliente.getUsuarioId());
-        entity.setNome(cliente.getNome());
-        entity.setEmail(cliente.getEmail());
-        entity.setLogin(cliente.getLogin());
-        entity.setSenha(cliente.getSenha());
-        entity.setEndereco(mapper.toEnderecoEntity(cliente.getEndereco()));
-        entity.setNumeroCartaoFidelidade(cliente.getNumeroCartaoFidelidade());
+        var endereco = mapper.toEnderecoEntity(cliente.getEndereco());
 
-        return entity;
+        return new ClienteEntity(
+                cliente.getUsuarioId(), cliente.getNome(), cliente.getEmail(), cliente.getLogin(), cliente.getSenha(),
+                endereco, cliente.getNumeroCartaoFidelidade(), null, null
+        );
     }
 
     @Override
@@ -74,16 +63,12 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
             return null;
         }
 
-        var cliente = new Cliente();
-        cliente.setUsuarioId(entity.getUsuarioId());
-        cliente.setNome(entity.getNome());
-        cliente.setEmail(entity.getEmail());
-        cliente.setLogin(entity.getLogin());
-        cliente.setSenha(entity.getSenha());
-        cliente.setEndereco(mapper.toEndereco(entity.getEndereco()));
-        cliente.setNumeroCartaoFidelidade(entity.getNumeroCartaoFidelidade());
+        var endereco = mapper.toEndereco(entity.getEndereco());
 
-        return cliente;
+        return new Cliente(
+                entity.getUsuarioId(), entity.getNome(), entity.getEmail(), entity.getLogin(), entity.getSenha(),
+                endereco, entity.getNumeroCartaoFidelidade()
+        );
     }
 
     @Override
@@ -92,10 +77,11 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
             return null;
         }
 
+        var endereco = mapper.toEnderecoDtoResponse(cliente.getEndereco());
+
         return new ClienteDtoResponse(
                 cliente.getUsuarioId(), cliente.getNome(), cliente.getEmail(), cliente.getLogin(), cliente.getSenha(),
-                null, null, mapper.toEnderecoDtoResponse(cliente.getEndereco()),
-                cliente.getNumeroCartaoFidelidade()
+                null, null, endereco, cliente.getNumeroCartaoFidelidade()
         );
     }
 
@@ -105,9 +91,11 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
             return null;
         }
 
+        var endereco = mapper.toEnderecoDtoResponse(entity.getEndereco());
+
         return new ClienteDtoResponse(
                 entity.getUsuarioId(), entity.getNome(), entity.getEmail(), entity.getLogin(), entity.getSenha(),
-                entity.getDataHoraCriacao(), entity.getDataHoraEdicao(), mapper.toEnderecoDtoResponse(entity.getEndereco()),
+                entity.getDataHoraCriacao(), entity.getDataHoraEdicao(), endereco,
                 entity.getNumeroCartaoFidelidade()
         );
     }
