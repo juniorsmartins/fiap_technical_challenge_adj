@@ -51,6 +51,11 @@ seguro, escalável e de fácil manutenção.
 
 ## Arquitetura do Sistema
 
+```
+A aplicação é uma API REST para gerenciamento de usuários (Cliente e Proprietario), com operações CRUD (criar,
+atualizar, consultar, deletar).
+```
+
 #### Descrição da Arquitetura 
 ```
 
