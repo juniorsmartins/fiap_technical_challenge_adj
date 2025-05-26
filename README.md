@@ -367,6 +367,11 @@ Conformidade: A camada de serviço depende de interfaces de saída (UsuarioCreat
 interface UsuarioRepository, respeitando o DIP.
 ```
 
+
+##### TDD
+
+??????
+
 ## Collections para Teste
 
 #### Link para a Collection do Postman
