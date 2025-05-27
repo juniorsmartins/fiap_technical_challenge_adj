@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.application.domain.model.Cliente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.application.domain.model.Proprietario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
