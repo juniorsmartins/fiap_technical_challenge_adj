@@ -1,7 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Cliente;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public final class ClienteMapper implements InputMapper<ClienteDtoRequest, ClienteUpdateDtoRequest, Cliente>,
+public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Cliente>,
         EntityMapper<Cliente, ClienteEntity>, OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> {
 
     private final EnderecoMapper mapper;
@@ -25,20 +24,6 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
 
         return new Cliente(
                 dto.nome(), dto.email(), dto.login(), dto.senha(),
-                endereco, dto.numeroCartaoFidelidade()
-        );
-    }
-
-    @Override
-    public Cliente toDomainUpdate(ClienteUpdateDtoRequest dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        var endereco = mapper.toEndereco(dto.endereco());
-
-        return new Cliente(
-                dto.usuarioId(), dto.nome(), dto.email(), dto.login(), dto.senha(),
                 endereco, dto.numeroCartaoFidelidade()
         );
     }

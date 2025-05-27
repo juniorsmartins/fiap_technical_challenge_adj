@@ -96,7 +96,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Cenario: Put para atualizar Proprietario, com sucesso, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "beck@proton.me"
-    E um ProprietarioUpdateDtoRequest, com nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e descricao "atendente chefe"
+    E um ProprietarioDtoRequest, com nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e descricao "atendente chefe"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
     E com ProprietarioDtoResponse no body, com id e nome "Kent Beck Jr" e email "kbeck@proton.me" e login "kentbeck" e senha "kbeck12" e descricao "atendente chefe"
@@ -104,69 +104,69 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Cenario: Put para atualizar Proprietario não encontrado pelo ProprietarioController
     Dado um identificador ID de um proprietario inexistente
-    E um ProprietarioUpdateDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e descricao "É o contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e descricao "É o contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 
   Cenario: Put para atualizar Proprietario, com erro por nome vazio, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "  " e email "anne@email.com" e login "annee" e senha "anne1" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "  " e email "anne@email.com" e login "annee" e senha "anne1" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por nome maior, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "anne@email.com" e login "annee" e senha "anne1" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "anne@email.com" e login "annee" e senha "anne1" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por email vazio, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank" e email "   " e login "anne" e senha "anne1" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank" e email "   " e login "anne" e senha "anne1" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por email incorreto, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank" e email "anne.com" e login "anne" e senha "anne1" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank" e email "anne.com" e login "anne" e senha "anne1" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por login vazio, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "   " e senha "anne1" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "   " e senha "anne1" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por login maior, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annefrank1annefrank1annefrank1annefrank1annefrank12" e senha "anne1" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annefrank1annefrank1annefrank1annefrank1annefrank12" e senha "anne1" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por senha vazia, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "   " e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "   " e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario, com erro por senha maior, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "anne1234567890123456789012345678901234567890123456789" e descricao "Contador da empresa"
+    E um ProprietarioDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "anne1234567890123456789012345678901234567890123456789" e descricao "Contador da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 400 do ProprietarioController
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario e remover Endereço (cenário 2), com sucesso, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "james@gmail.com"
-    E um ProprietarioUpdateDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
+    E um ProprietarioDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
     E com ProprietarioDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
@@ -176,7 +176,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Cenario: Put para atualizar Proprietario e criar Endereço (cenário 3), com sucesso, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff@gmail.com"
-    E um ProprietarioUpdateDtoRequest e EnderecoDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e descricao "TI da empresa" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    E um ProprietarioDtoRequest e EnderecoDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e descricao "TI da empresa" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
     E com ProprietarioDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e descricao "TI da empresa"
@@ -186,7 +186,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Cenario: Put para atualizar Proprietario e atualizar Endereço (cenário 4), com sucesso, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "james@gmail.com"
-    E um ProprietarioUpdateDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    E um ProprietarioDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
     E com ProprietarioDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"

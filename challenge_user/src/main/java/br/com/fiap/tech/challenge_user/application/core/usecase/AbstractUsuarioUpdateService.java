@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -28,9 +30,7 @@ public abstract class AbstractUsuarioUpdateService<T extends Usuario, E extends 
 
     private final EnderecoUpdateRule<T, E> enderecoUpdateRule;
 
-    public T update(@NonNull T usuario) {
-
-        var id = usuario.getUsuarioId();
+    public T update(@NonNull UUID id, @NonNull T usuario) {
 
         return findByIdOutputPort.findById(id)
                 .map(entity -> usuarioUpdateRule.updateUser(usuario, entity))

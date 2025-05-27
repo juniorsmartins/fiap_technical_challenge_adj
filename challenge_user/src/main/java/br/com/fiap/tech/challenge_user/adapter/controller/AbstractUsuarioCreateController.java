@@ -26,9 +26,9 @@ import java.util.Optional;
 @Tag(name = "Usuários", description = "Contém recursos de cadastrar.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioCreateController<I, O, U, T, E> {
+public abstract class AbstractUsuarioCreateController<I, O, T, E> {
 
-    private final InputMapper<I, U, T> inputMapper;
+    private final InputMapper<I, T> inputMapper;
 
     private final OutputMapper<T, O, E> outputMapper;
 

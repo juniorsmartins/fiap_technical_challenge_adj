@@ -1,7 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.application.core.domain.Proprietario;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequest, ProprietarioUpdateDtoRequest, Proprietario>,
+public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequest, Proprietario>,
         EntityMapper<Proprietario, ProprietarioEntity>, OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> {
 
     private final EnderecoMapper mapper;
@@ -54,19 +53,6 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
 
         return new Proprietario(
                 dto.nome(), dto.email(), dto.login(), dto.senha(), endereco, dto.descricao()
-        );
-    }
-
-    @Override
-    public Proprietario toDomainUpdate(ProprietarioUpdateDtoRequest dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        var endereco = mapper.toEndereco(dto.endereco());
-
-        return new Proprietario(
-                dto.usuarioId(), dto.nome(), dto.email(), dto.login(), dto.senha(), endereco, dto.descricao()
         );
     }
 
