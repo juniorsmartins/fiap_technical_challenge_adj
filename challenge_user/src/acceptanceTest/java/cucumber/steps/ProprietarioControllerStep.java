@@ -2,7 +2,6 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ProprietarioUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
@@ -24,7 +23,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,8 +56,6 @@ public final class ProprietarioControllerStep {
     private EnderecoDtoResponse enderecoDtoResponse;
 
     private ProprietarioEntity proprietarioEntity;
-
-    private ProprietarioUpdateDtoRequest proprietarioUpdateDtoRequest;
 
     @Before
     public void setUp() {
@@ -253,24 +253,15 @@ public final class ProprietarioControllerStep {
         assertThat(response).isEmpty();
     }
 
-    @Dado("um ProprietarioUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e descricao {string}")
-    public void um_proprietario_update_dto_request_com_nome_e_email_e_login_e_senha_e_descricao(
-            String nome, String email, String login, String senha, String descricao) {
-
-        proprietarioUpdateDtoRequest = new ProprietarioUpdateDtoRequest(proprietarioEntity
-                .getUsuarioId(), nome, email, login, senha, null, descricao);
-        assertThat(proprietarioUpdateDtoRequest).isNotNull();
-    }
-
     @Quando("uma requisição Put for feita no método update do ProprietarioController")
     public void uma_requisicao_put_for_feita_no_metodo_update_do_proprietario_controller() {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                .body(proprietarioUpdateDtoRequest)
+                .body(proprietarioDtoRequest)
                 .when()
-                .put();
+                .put("/" + proprietarioEntity.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -303,24 +294,6 @@ public final class ProprietarioControllerStep {
                 .findById(proprietarioEntity.getUsuarioId()).get();
         assertThat(proprietarioAtualizado.getUsuarioId()).isEqualTo(proprietarioEntity.getUsuarioId());
         assertThat(proprietarioAtualizado.getEndereco()).isNull();
-    }
-
-    @Dado("um ProprietarioUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e descricao {string} e com cep {string} e logradouro {string} e número {string}")
-    public void um_proprietario_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_descricao_e_com_cep_e_logradouro_e_numero(
-            String nome, String email, String login, String senha, String descricao, String cep, String logradouro, String numero) {
-
-        proprietarioUpdateDtoRequest = new ProprietarioUpdateDtoRequest(
-                proprietarioEntity.getUsuarioId(),
-                nome,
-                email,
-                login,
-                senha,
-                new EnderecoDtoRequest(cep, logradouro, numero),
-                descricao
-        );
-
-        assertThat(proprietarioUpdateDtoRequest).isNotNull();
-        assertThat(proprietarioUpdateDtoRequest.endereco()).isNotNull();
     }
 }
 
