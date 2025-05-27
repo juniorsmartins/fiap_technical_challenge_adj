@@ -21,16 +21,13 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
             return null;
         }
 
-        var entity = new ProprietarioEntity();
-        entity.setUsuarioId(proprietario.getUsuarioId());
-        entity.setNome(proprietario.getNome());
-        entity.setEmail(proprietario.getEmail());
-        entity.setLogin(proprietario.getLogin());
-        entity.setSenha(proprietario.getSenha());
-        entity.setEndereco(mapper.toEnderecoEntity(proprietario.getEndereco()));
-        entity.setDescricao(proprietario.getDescricao());
+        var endereco = mapper.toEnderecoEntity(proprietario.getEndereco());
 
-        return entity;
+        return new ProprietarioEntity(
+                proprietario.getUsuarioId(),
+                proprietario.getNome(), proprietario.getEmail(), proprietario.getLogin(), proprietario.getSenha(),
+                endereco, proprietario.getDescricao(), null, null
+        );
     }
 
     @Override
@@ -39,16 +36,12 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
             return null;
         }
 
-        var proprietario = new Proprietario();
-        proprietario.setUsuarioId(entity.getUsuarioId());
-        proprietario.setNome(entity.getNome());
-        proprietario.setEmail(entity.getEmail());
-        proprietario.setLogin(entity.getLogin());
-        proprietario.setSenha(entity.getSenha());
-        proprietario.setEndereco(mapper.toEndereco(entity.getEndereco()));
-        proprietario.setDescricao(entity.getDescricao());
+        var endereco = mapper.toEndereco(entity.getEndereco());
 
-        return proprietario;
+        return new Proprietario(
+                entity.getUsuarioId(), entity.getNome(), entity.getEmail(), entity.getLogin(), entity.getSenha(),
+                endereco, entity.getDescricao()
+        );
     }
 
     @Override
@@ -57,15 +50,11 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
             return null;
         }
 
-        var proprietario = new Proprietario();
-        proprietario.setNome(dto.nome());
-        proprietario.setEmail(dto.email());
-        proprietario.setLogin(dto.login());
-        proprietario.setSenha(dto.senha());
-        proprietario.setEndereco(mapper.toEndereco(dto.endereco()));
-        proprietario.setDescricao(dto.descricao());
+        var endereco = mapper.toEndereco(dto.endereco());
 
-        return proprietario;
+        return new Proprietario(
+                dto.nome(), dto.email(), dto.login(), dto.senha(), endereco, dto.descricao()
+        );
     }
 
     @Override
@@ -74,16 +63,11 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
             return null;
         }
 
-        var proprietario = new Proprietario();
-        proprietario.setUsuarioId(dto.usuarioId());
-        proprietario.setNome(dto.nome());
-        proprietario.setEmail(dto.email());
-        proprietario.setLogin(dto.login());
-        proprietario.setSenha(dto.senha());
-        proprietario.setEndereco(mapper.toEndereco(dto.endereco()));
-        proprietario.setDescricao(dto.descricao());
+        var endereco = mapper.toEndereco(dto.endereco());
 
-        return proprietario;
+        return new Proprietario(
+                dto.usuarioId(), dto.nome(), dto.email(), dto.login(), dto.senha(), endereco, dto.descricao()
+        );
     }
 
     @Override
@@ -92,10 +76,12 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
             return null;
         }
 
+        var endereco = mapper.toEnderecoDtoResponse(proprietario.getEndereco());
+
         return new ProprietarioDtoResponse(
                 proprietario.getUsuarioId(), proprietario.getNome(), proprietario.getEmail(), proprietario.getLogin(),
                 proprietario.getSenha(), null, null,
-                mapper.toEnderecoDtoResponse(proprietario.getEndereco()), proprietario.getDescricao()
+                endereco, proprietario.getDescricao()
         );
     }
 
@@ -105,10 +91,12 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
             return null;
         }
 
+        var endereco = mapper.toEnderecoDtoResponse(entity.getEndereco());
+
         return new ProprietarioDtoResponse(
                 entity.getUsuarioId(), entity.getNome(), entity.getEmail(), entity.getLogin(),
                 entity.getSenha(), entity.getDataHoraCriacao(), entity.getDataHoraEdicao(),
-                mapper.toEnderecoDtoResponse(entity.getEndereco()), entity.getDescricao()
+                endereco, entity.getDescricao()
         );
     }
 }

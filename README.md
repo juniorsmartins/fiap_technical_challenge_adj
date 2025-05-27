@@ -51,6 +51,11 @@ seguro, escalável e de fácil manutenção.
 
 ## Arquitetura do Sistema
 
+```
+A aplicação é uma API REST para gerenciamento de usuários (Cliente e Proprietario), com operações CRUD (criar,
+atualizar, consultar, deletar).
+```
+
 #### Descrição da Arquitetura 
 ```
 
@@ -361,6 +366,11 @@ repositório concreto (UsuarioRepository) é encapsulado pelos adaptadores, que 
 Conformidade: A camada de serviço depende de interfaces de saída (UsuarioCreateOutputPort, etc.), enquanto os adaptadores dependem da
 interface UsuarioRepository, respeitando o DIP.
 ```
+
+
+##### TDD
+
+??????
 
 ## Collections para Teste
 
