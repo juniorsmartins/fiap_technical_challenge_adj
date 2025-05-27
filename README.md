@@ -92,6 +92,11 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Tabela de Endpoints
 
+|       Recurso       |       endpoint       |
+|---------------------|----------------------|
+| Cliente             |   | 
+| Proprietario        |   |
+
 #### Exemplos de requisição e resposta
 
 
