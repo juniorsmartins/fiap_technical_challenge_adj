@@ -1,13 +1,13 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.adapter.repository.ClienteRepository;
-import br.com.fiap.tech.challenge_user.adapter.repository.EnderecoRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.repository.ClienteRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.repository.EnderecoRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;

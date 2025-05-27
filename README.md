@@ -86,12 +86,16 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Diagrama da Arquitetura
 
-![Screenshot from 2025-05-25 12-40-51](https://github.com/user-attachments/assets/38889228-7b2c-42c1-ae89-7d57e8f7de2f)
-
+![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
 
 ## Descrição dos Endpoints da API
 
 #### Tabela de Endpoints
+
+|       Recurso       |               endpoint                |
+|---------------------|---------------------------------------|
+| Cliente             | /api/v1/challenge-user/clientes       | 
+| Proprietario        | /api/v1/challenge-user/proprietarios  |
 
 #### Exemplos de requisição e resposta
 

@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
-import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.adapter.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.application.core.domain.Endereco;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.application.domain.model.Endereco;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

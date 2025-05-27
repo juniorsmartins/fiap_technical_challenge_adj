@@ -5,15 +5,83 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/EnderecoUpdateRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/UsuarioUpdateRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioEventProducerOutputPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/kafka/UsuarioEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/AbstractUsuarioUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/AbstractUsuarioUpdateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioUpdateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ClienteUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ClienteUpdateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ProprietarioUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ProprietarioUpdateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/InputMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/InputMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/input/UsuarioUpdateInputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/input/UsuarioUpdateInputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/constant/ControllerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/constant/ControllerConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/AbstractUsuarioCreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioCreateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/AbstractUsuarioDeleteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioDeleteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/AbstractUsuarioFindController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioFindController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/AbstractUsuarioUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioUpdateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteCreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteCreateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteDeleteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteDeleteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteFindController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteFindController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ClienteUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteUpdateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ProprietarioCreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioCreateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ProprietarioDeleteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioDeleteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ProprietarioFindController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioFindController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/controller/ProprietarioUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioUpdateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/ClienteDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/in/ClienteDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/EnderecoDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/in/EnderecoDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/request/ProprietarioDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/in/ProprietarioDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/ClienteDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/out/ClienteDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/EnderecoDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/out/EnderecoDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/dto/response/ProprietarioDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/out/ProprietarioDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/AbstractAuditingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/AbstractAuditingEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/ClienteEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/EnderecoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/EnderecoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/ProprietarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/ProprietarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/entity/UsuarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/UsuarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/kafka/UsuarioEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/kafka/producer/UsuarioEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/kafka/producer/UsuarioEventProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ClienteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/EnderecoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/EnderecoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/ProprietarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ProprietarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/UsuarioCreateAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioCreateAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/UsuarioDeleteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioDeleteAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/UsuarioFindByIdAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioFindByIdAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/adapter/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Endereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/Proprietario.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Proprietario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/domain/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioCreateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/AbstractUsuarioCreateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioDeleteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/AbstractUsuarioDeleteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/AbstractUsuarioUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/AbstractUsuarioUpdateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ClienteCreateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ClienteCreateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ClienteDeleteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ClienteDeleteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ClienteUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ClienteUpdateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ProprietarioCreateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ProprietarioCreateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ProprietarioDeleteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ProprietarioDeleteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/ProprietarioUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ProprietarioUpdateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/regras/DefaultEnderecoUpdateRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/DefaultEnderecoUpdateRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/regras/DefaultUsuarioUpdateRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/DefaultUsuarioUpdateRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/regras/EnderecoUpdateRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/core/usecase/regras/UsuarioUpdateRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/ClienteMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/ClienteMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/EnderecoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/EnderecoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/ProprietarioMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/ProprietarioMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/input/UsuarioCreateInputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/in/UsuarioCreateInputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/input/UsuarioDeleteByIdInputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/in/UsuarioDeleteByIdInputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/input/UsuarioUpdateInputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/in/UsuarioUpdateInputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/output/UsuarioCreateOutputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioCreateOutputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/output/UsuarioDeleteOutputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioDeleteOutputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/output/UsuarioEventProducerOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/output/UsuarioFindByIdOutputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioFindByIdOutputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/ConstantsValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/constant/ConstantsValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/beans/InternationalMessageConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/beans/InternationalMessageConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/beans/SpringDocOpenApiConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/beans/SpringDocOpenApiConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/exceptions/GlobalHandlerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/GlobalHandlerException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/exceptions/http404/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/http404/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/exceptions/http404/UsuarioNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/http404/UsuarioNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/exceptions/http500/InternalServerProblemException.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/http500/InternalServerProblemException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/config/kafkaConfig/AutoCreateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/config/AutoCreateKafkaConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,38 +157,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Cucumber Java.Feature: cliente.executor": "Run",
-    "Cucumber Java.Feature: create_user.executor": "Run",
-    "Cucumber Java.Feature: proprietario.executor": "Run",
-    "Cucumber Java.Feature: user_create.executor": "Run",
-    "Cucumber Java.Feature: user_post.executor": "Run",
-    "Cucumber Java.Feature: usuario.executor": "Run",
-    "Cucumber Java.Feature: usuario_get.executor": "Run",
-    "Cucumber Java.Feature: usuario_post.executor": "Run",
-    "Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController.executor": "Run",
-    "Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor": "Run",
-    "Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor": "Run",
-    "Docker.docker.challenge_data_user: Compose Deployment.executor": "Run",
-    "Gradle.Build challenge_user.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor": "Run",
-    "Gradle.challenge_user [acceptanceTest].executor": "Run",
-    "Gradle.challenge_user [build].executor": "Run",
-    "Gradle.challenge_user [clean].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/update-simples",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/juniorsmartins/Workspace/backend-develop",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cucumber Java.Feature: cliente.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: create_user.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: proprietario.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: user_create.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: user_post.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario_get.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: usuario_post.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker.challenge_data_user: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build challenge_user.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [acceptanceTest].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.challenge_user [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/juniorsmartins/Workspace/backend-develop&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/challenge_user/src/main/resources" />
@@ -128,6 +196,7 @@
       <recent name="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="br.com.fiap.tech.challenge_user.domain" />
       <recent name="br.com.fiap.tech.challenge_user.adapter.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -138,7 +207,7 @@
       <recent name="br.com.fiap.tech.challenge_user.application.port.input" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: cliente">
+  <component name="RunManager" selected="Gradle.challenge_user [build]">
     <configuration name="Feature: cliente" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" />
@@ -248,10 +317,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.challenge_user [build]" />
+        <item itemvalue="Gradle.challenge_user [clean]" />
         <item itemvalue="Cucumber Java.Feature: cliente" />
         <item itemvalue="Cucumber Java.Feature: proprietario" />
-        <item itemvalue="Gradle.challenge_user [clean]" />
-        <item itemvalue="Gradle.challenge_user [build]" />
         <item itemvalue="Cucumber Java.Feature: usuario" />
       </list>
     </recent_temporary>
