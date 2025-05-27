@@ -1,7 +1,6 @@
 package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteDtoRequest;
-import br.com.fiap.tech.challenge_user.adapter.dto.request.ClienteUpdateDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.request.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.adapter.dto.response.EnderecoDtoResponse;
@@ -53,8 +52,6 @@ public final class ClienteControllerStep {
     private ClienteDtoRequest clienteDtoRequest;
 
     private ClienteDtoResponse clienteDtoResponse;
-
-    private ClienteUpdateDtoRequest clienteUpdateDtoRequest;
 
     private ClienteEntity clienteEntity;
 
@@ -213,24 +210,15 @@ public final class ClienteControllerStep {
         assertThat(response).isEmpty();
     }
 
-    @Dado("um ClienteUpdateDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string}")
-    public void um_cliente_update_dto_request_com_nome_e_email_e_login_e_senha(
-            String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
-
-        clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(clienteEntity
-                .getUsuarioId(), nome, email, login, senha, null, numeroCartaoFidelidade);
-        assertThat(clienteUpdateDtoRequest).isNotNull();
-    }
-
     @Quando("uma requisição Put for feita no método update do ClienteController")
     public void uma_requisicao_put_for_feita_no_metodo_update_do_cliente_controller() {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                .body(clienteUpdateDtoRequest)
+                .body(clienteDtoRequest)
                 .when()
-                .put();
+                .put("/" + clienteEntity.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -285,24 +273,6 @@ public final class ClienteControllerStep {
         assertThat(enderecoSalvo.getCep()).isEqualTo(cep);
         assertThat(enderecoSalvo.getLogradouro()).isEqualTo(logradouro);
         assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
-    }
-
-    @Dado("um ClienteUpdateDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string} e com cep {string} e logradouro {string} e número {string}")
-    public void um_cliente_update_dto_request_e_endereco_dto_request_com_nome_e_email_e_login_e_senha_e_com_cep_e_logradouro_e_numero(
-            String nome, String email, String login, String senha, String numeroCartaoFidelidade, String cep, String logradouro, String numero) {
-
-        clienteUpdateDtoRequest = new ClienteUpdateDtoRequest(
-                clienteEntity.getUsuarioId(),
-                nome,
-                email,
-                login,
-                senha,
-                new EnderecoDtoRequest(cep, logradouro, numero),
-                numeroCartaoFidelidade
-        );
-
-        assertThat(clienteUpdateDtoRequest).isNotNull();
-        assertThat(clienteUpdateDtoRequest.endereco()).isNotNull();
     }
 
     @Entao("sem EnderecoDtoResponse no body")

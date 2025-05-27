@@ -11,6 +11,8 @@ import br.com.fiap.tech.challenge_user.application.port.output.UsuarioFindByIdOu
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Proprietario, ProprietarioEntity>
         implements UsuarioUpdateInputPort<Proprietario> {
@@ -25,8 +27,8 @@ public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Prop
     }
 
     @Override
-    public Proprietario update(@NonNull Proprietario usuario) {
-        return super.update(usuario);
+    public Proprietario update(@NonNull UUID id, @NonNull Proprietario usuario) {
+        return super.update(id, usuario);
     }
 }
 
