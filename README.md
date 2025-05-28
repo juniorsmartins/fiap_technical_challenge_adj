@@ -104,6 +104,69 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Configuração do Docker Compose
 
+```
+name: fiap_technical_challenge_adj
+
+volumes:
+  database_user:
+    name: database_user
+
+networks:
+  net_applications: # conexão com infra-local e acesso a internet - tipo bridge
+    name: net_applications
+    driver: bridge
+
+services:
+
+  challenge_user:
+    container_name: challenge_user
+    image: juniorsmartins/challenge_user:v0.0.4
+    build:
+      context: ../challenge_user/
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: "challenge_user"
+        APP_VERSION: "v0.0.4"
+        APP_DESCRIPTION: "Serviço de Crud de usuários."
+    ports:
+      - "9050:9050"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    environment:
+      - DB_HOST=challenge_data_user
+      - DB_NAME=challenge_user
+      - DB_PORT=5432
+    restart: on-failure
+    networks:
+      - net_applications
+    depends_on:
+      challenge_data_user:
+        condition: service_started
+
+  challenge_data_user:
+    container_name: challenge_data_user
+    image: postgres:16.0
+    ports:
+      - "5501:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=challenge_user
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - database_user:/var/lib/postgresql/data
+    networks:
+      - net_applications
+```
+
 #### Instruções para execução local
 
 
