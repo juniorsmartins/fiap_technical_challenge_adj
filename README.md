@@ -570,7 +570,7 @@ interface UsuarioRepository, respeitando o DIP.
 
 #### Link para a Collection do Postman
 
-[Baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
 
 #### Descrição dos Testes Manuais
 
