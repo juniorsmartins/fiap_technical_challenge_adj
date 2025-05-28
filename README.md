@@ -99,14 +99,18 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Exemplos de requisição e resposta
 
-| Verbo  |                                Endpoint / Requisição                                        |             Resposta                     |
-|--------|---------------------------------------------------------------------------------------------|------------------------------------------|
-| Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d   |           204 No Content                 |
-|  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b   |    200 OK + Json no body (exemplo 1)     |
-|  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                        |  201 Created + Json no body (exemplo 2)  |
-|  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a   |    200 OK + Json no body (exemplo 2)     |
+| Verbo  |                                Endpoint / Requisição                                                                           |              Resposta                     |
+|--------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
+|  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
+|  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
+|  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
+| Delete | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
+|  Get   | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
+|  Post  | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
+|  Put   | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
 
-##### Exemplo 1 #####
+##### Resposta 1 #####
 ```
 {
     "usuarioId": "a546ef31-d9f4-4ff7-9665-4baed324920b",
@@ -126,7 +130,23 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 }
 ```
 
-##### Exemplo 2 #####
+##### Requisição 1 #####
+```
+{
+    "nome":"Rozenn Morgat",
+    "email":"morgat@email.com",
+    "login":"morgat",
+    "senha":"morgat123",
+    "numeroCartaoFidelidade": "1234-0000-5514",
+    "endereco": {
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    }
+}
+```
+
+##### Resposta 2 #####
 ```
 {
     "usuarioId": "2827fdc3-ffac-44d9-92ce-b49680914da4",
@@ -141,6 +161,60 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
         "numero": "100"
     },
     "numeroCartaoFidelidade": "1234-0000-5514"
+}
+```
+
+##### Resposta 3 #####
+```
+{
+    "usuarioId": "eb957f38-90c4-4ef2-850c-229fb1658fcd",
+    "nome": "Linus Pauling",
+    "email": "linus@email.com",
+    "login": "linus",
+    "senha": "linus123",
+    "dataHoraCriacao": "2023-10-01T12:00:00.000+00:00",
+    "dataHoraEdicao": "2024-11-03T12:00:00.000+00:00",
+    "endereco": {
+        "enderecoId": "eac614d5-c70b-4b36-b4c8-7560f6f0eef9",
+        "cep": "69905-169",
+        "logradouro": "Rua Antônio Francisco das Chagas",
+        "numero": "100"
+    },
+    "descricao": "Toda segunda na empresa"
+}
+```
+
+##### Requisição 2 #####
+```
+{
+    "nome": "Mike Beedle",
+    "email": "mike@email.com",
+    "login": "mike12",
+    "senha": "123456",
+    "descricao": "Presente pela tarde",
+    "endereco": {
+        "cep": "78050-120",
+        "logradouro": "Rua Centro 2",
+        "numero": "130"
+    }
+}
+```
+
+##### Resposta 4 #####
+```
+{
+    "usuarioId": "0bfad517-dd66-49b3-a485-a5d6b105fac7",
+    "nome": "Mike Beedle",
+    "email": "mike@email.com",
+    "login": "mike12",
+    "senha": "123456",
+    "endereco": {
+        "enderecoId": "3ed4a907-ac36-4ea6-b6e7-0d17ba24d7a9",
+        "cep": "78050-120",
+        "logradouro": "Rua Centro 2",
+        "numero": "130"
+    },
+    "descricao": "Presente pela tarde"
 }
 ```
 
