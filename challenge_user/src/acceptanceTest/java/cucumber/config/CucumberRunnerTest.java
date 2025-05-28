@@ -5,10 +5,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.kafka.test.EmbeddedKafkaBroker;
-import org.springframework.kafka.test.context.EmbeddedKafka;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -29,13 +26,7 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
         classes = ChallengeUserApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-@EmbeddedKafka(partitions = 1, brokerProperties = {
-        "listeners=PLAINTEXT://localhost:9092",
-        "port=9092"
-})
 public class CucumberRunnerTest {
 
-        @Autowired
-        private EmbeddedKafkaBroker embeddedKafkaBroker;
 }
 
