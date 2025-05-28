@@ -11,35 +11,16 @@ networks:
 
 services:
 
-  kafka-cluster:
-    image: landoop/fast-data-dev:latest
-    container_name: kafka-cluster
-    hostname: kafka-cluster
-    ports:
-      - 2181:2181              # ZooKeeper
-      - 3030:3030              # Landoop UI
-      - 8081-8083:8081-8083    # Rest Proxy, Schema Registry e Kafka Connect
-      - 9092:9092              # Kafka Broker
-      - 9581-9585:9581-9585    # JMX Ports
-    environment:
-      ADV_HOST: 127.0.0.1      # Define o endereço de host para 127.0.0.1 (localhost) - precisará ajustar isso para o IP do host ou o nome do serviço na rede Docker
-      RUNTESTS: 0              # Desativa testes iniciais para iniciar mais rápido
-      SAMPLEDATA: 0            # Desativa dados de exemplo
-      FORWARDLOGS: 0           # Desativa forwarding de logs
-      DEBUG: 0                 # Desabilita modo debug
-      CONNECT_HEAP: 512m       # Aloca heap para o Kafka Connect
-      DISABLE: azure-documentdb,blockchain,bloomberg,cassandra,coap,druid,elastic,elastic5,ftp,hazelcast,hbase,influxdb,jms,kudu,mongodb,mqtt,redis,rethink,voltdb,yahoo,hdfs,jdbc,elasticsearch,s3,twitter
-
   challenge_user:
     container_name: challenge_user
-    image: juniorsmartins/challenge_user:v0.0.3
+    image: juniorsmartins/challenge_user:v0.0.4
     build:
       context: ../challenge_user/
       dockerfile: Dockerfile
       args:
         APP_NAME: "challenge_user"
-        APP_VERSION: "v0.0.3"
-        APP_DESCRIPTION: "Serviço de Crud e de Login de usuários."
+        APP_VERSION: "v0.0.4"
+        APP_DESCRIPTION: "Serviço de Crud de usuários."
     ports:
       - "9050:9050"
     deploy:
@@ -56,8 +37,6 @@ services:
       - net_applications
     depends_on:
       challenge_data_user:
-        condition: service_started
-      kafka-cluster:
         condition: service_started
 
   challenge_data_user:
