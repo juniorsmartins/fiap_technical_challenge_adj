@@ -103,7 +103,7 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 |-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 |  Delete   | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d          |                          204 - No Content                               |
 |   Get     | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                          200 - OK                                       
-|           |                                                                                                    | <pre>  
+|           |                                                                                                    | <pre><code>  
 |           |                                                                                                    | {
 |           |                                                                                                    |      "usuarioId": "a546ef31-d9f4-4ff7-9665-4baed324920b",
 |           |                                                                                                    |      "nome": "Carl Friedrich Gauss",
@@ -120,7 +120,7 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 |           |                                                                                                    |      },
 |           |                                                                                                    |      "numeroCartaoFidelidade": "4321-1234-001"
 |           |                                                                                                    | }
-|           |                                                                                                    | </pre>
+|           |                                                                                                    | </code></pre>
 
 Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
