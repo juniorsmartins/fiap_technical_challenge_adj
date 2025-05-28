@@ -105,7 +105,6 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 |  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b   |    200 OK + Json no body (exemplo 1)     |
 |  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                        |  201 Created + Json no body (exemplo 2)  |
 |  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a   |    200 OK + Json no body (exemplo 2)     |
-|--------|---------------------------------------------------------------------------------------------|------------------------------------------|
 
 ##### Exemplo 1 #####
 ```
