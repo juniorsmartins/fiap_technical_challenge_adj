@@ -99,13 +99,13 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Exemplos de requisição e resposta
 
-|   Verbo   |                                      Endpoint / Requisição                                         |                              Resposta                                   |
-|-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-|  Delete   | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d          |                            204 No Content                               |
-|   Get     | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                     200 OK + Json no body (exemplo 1)                   |
-|   Post    | http://localhost:9050/api/v1/challenge-user/clientes                                               |                   201 Created + Json no body (exemplo 2)                |
-|   Put     | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a          |                     200 OK + Json no bocy (exemplo 2)                   |
-|-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| Verbo  |                                Endpoint / Requisição                                        |             Resposta                     |
+|--------|---------------------------------------------------------------------------------------------|------------------------------------------|
+| Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d   |           204 No Content                 |
+|  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b   |    200 OK + Json no body (exemplo 1)     |
+|  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                        |  201 Created + Json no body (exemplo 2)  |
+|  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a   |    200 OK + Json no body (exemplo 2)     |
+|--------|---------------------------------------------------------------------------------------------|------------------------------------------|
 
 ##### Exemplo 1 #####
 ```
