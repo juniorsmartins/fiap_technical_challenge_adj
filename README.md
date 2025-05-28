@@ -92,13 +92,19 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Tabela de Endpoints
 
-|       Recurso       |               endpoint                |
+|       Recurso       |               Endpoint                |
 |---------------------|---------------------------------------|
 | Cliente             | /api/v1/challenge-user/clientes       | 
 | Proprietario        | /api/v1/challenge-user/proprietarios  |
 
 #### Exemplos de requisição e resposta
 
+|     Verbo     |                                              Endpoint                                              |                          Requisição                       |
+|---------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+|      Get      | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                                                           |
+
+
+Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
 ## Configuração do Projeto
 
@@ -170,7 +176,11 @@ services:
 #### Instruções para execução local
 
 ```
-docker compose up --build -d
+Passo 1: clone o projeto;
+Passo 2: abra o projeto na IDEA;
+Passo 3: abra o terminal da IDEA;
+Passo 4: entre no diretório docker;
+Passo 5: rode o comando no diretório docker: docker compose up --build -d
 ```
 
 ## Qualidade do Código
