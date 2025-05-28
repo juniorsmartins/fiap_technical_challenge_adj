@@ -102,7 +102,10 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 |   Verbo   |                                      Endpoint / Requisição                                         |                              Resposta                                   |
 |-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 |  Delete   | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d          |                            204 No Content                               |
-|   Get     | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                            200 OK + Json no body (exemplo 1)            |
+|   Get     | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                     200 OK + Json no body (exemplo 1)                   |
+|   Post    | http://localhost:9050/api/v1/challenge-user/clientes                                               |                   201 Created + Json no body (exemplo 2)                |
+|   Put     | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a          |                     200 OK + Json no bocy (exemplo 2)                   |
+|-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 
 ##### Exemplo 1 #####
 ```
@@ -123,6 +126,25 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
     "numeroCartaoFidelidade": "4321-1234-001"
 }
 ```
+
+##### Exemplo 2 #####
+```
+{
+    "usuarioId": "2827fdc3-ffac-44d9-92ce-b49680914da4",
+    "nome": "Rozenn Morgat",
+    "email": "morgat@email.com",
+    "login": "morgat",
+    "senha": "morgat123",
+    "endereco": {
+        "enderecoId": "ea98e788-ab70-4439-a312-7627a8d70b8b",
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    },
+    "numeroCartaoFidelidade": "1234-0000-5514"
+}
+```
+
 
 Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
