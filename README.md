@@ -169,6 +169,9 @@ services:
 
 #### Instruções para execução local
 
+```
+docker compose up --build -d
+```
 
 ## Qualidade do Código
 
