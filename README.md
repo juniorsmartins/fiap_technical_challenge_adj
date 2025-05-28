@@ -99,10 +99,28 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Exemplos de requisição e resposta
 
-|     Verbo     |                                              Endpoint                                              |                          Requisição                       |
-|---------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-|      Get      | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                                                           |
-
+|   Verbo   |                                      Endpoint / Requisição                                         |                              Resposta                                   |
+|-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+|  Delete   | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d          |                          204 - No Content                               |
+|   Get     | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b          |                          200 - OK                                       |
+|           |                                                                                                    | ```  
+|           |                                                                                                    | {
+|           |                                                                                                    |      "usuarioId": "a546ef31-d9f4-4ff7-9665-4baed324920b",
+|           |                                                                                                    |      "nome": "Carl Friedrich Gauss",
+|           |                                                                                                    |      "email": "gauss@email.com",
+|           |                                                                                                    |      "login": "gauss",
+|           |                                                                                                    |      "senha": "gauss123",
+|           |                                                                                                    |      "dataHoraCriacao": "2023-10-01T12:00:00.000+00:00",
+|           |                                                                                                    |      "dataHoraEdicao": "2024-10-01T12:00:00.000+00:00",
+|           |                                                                                                    |      "endereco": {
+|           |                                                                                                    |          "enderecoId": "4f50648e-639d-423a-9a46-f4a8d1e96b07",
+|           |                                                                                                    |          "cep": "69905-169",
+|           |                                                                                                    |          "logradouro": "Travessa Nilo Bezerra",
+|           |                                                                                                    |          "numero": "500"
+|           |                                                                                                    |      },
+|           |                                                                                                    |      "numeroCartaoFidelidade": "4321-1234-001"
+|           |                                                                                                    | }
+|           |                                                                                                    | ```
 
 Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
