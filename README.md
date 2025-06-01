@@ -15,7 +15,7 @@ Equipe: Junior Martins (rm364241)
 
 ## Introdução
 
-#### Descrição do problema
+#### Descrição do problema:
 
 Na nossa região, um grupo de restaurantes decidiu contratar estudantes
 para construir um sistema de gestão para seus estabelecimentos. Essa decisão
@@ -35,7 +35,7 @@ A divisão em fases possibilitará uma implementação gradual e controlada,
 permitindo ajustes e melhorias contínuas conforme o sistema for sendo usado
 e avaliado tanto pelos restaurantes quanto pelos clientes.
 
-#### Objetivo do projeto
+#### Objetivo do projeto:
 
 Desenvolver um backend completo e robusto utilizando o framework
 Spring Boot, com foco no gerenciamento de usuários, incluindo operações de
@@ -94,7 +94,7 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 | Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para oeprações de CRUD de Proprietários  |
 
 
-| Método    |                                Endpoint / Requisição                                                                           |              Resposta                     |
+| Método    | Endpoint e Requisição                                                                                                          |              Resposta                     |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
 | Delete    | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
 | Get       | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
@@ -554,10 +554,11 @@ interface UsuarioRepository, respeitando o DIP.
 
 ##### TDD
 
-TDD: Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
+Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
 
 Cucumber: Ferramenta de Behavior-Driven Development (BDD) capaz de escrever especificações em linguagem natural (Gherkin) mapeadas para
 testes automatizados.
+
 - Via Gradle, foi criado um módulo, chamado acceptanceTest, para organizar os testes de aceitação;
 - Nesse módulo, foram escritos cenários em arquivos .feature para descrever o comportamento dos endpoints;
 - E passos Gherkin foram implementados em step definitions Java, interagindo com a API via RestAssured.
@@ -577,6 +578,8 @@ Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arqui
 
 [Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
 
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
+
 #### Descrição dos Testes Manuais
 
 Você precisa subir a aplicação com o comando docker compose up --build -d (mais informações na sessão "Instruções para execução local") e
@@ -588,7 +591,10 @@ para execução. A aplicação possui um arquivo, chamado import.sql, responsáv
 
 [Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
 
+https://github.com/juniorsmartins/fiap_technical_challenge_adj
 
 ## Autoria
 
 [Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
+
+https://www.linkedin.com/in/juniorsmartins/
