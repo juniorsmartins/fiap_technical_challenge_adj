@@ -1,5 +1,6 @@
 # PROJETO: Tech-Challenge-ADJ-Fiap
 
+Equipe: Junior Martins
 
 ## Índice
 1. Introdução;
@@ -8,9 +9,7 @@
 4. Configuração do Projeto;
 5. Qualidade do Código;
 6. Collections para Teste;
-7. Notas;
-8. Autoria.
-
+7. Autoria.
 
 ## Introdução
 
@@ -90,16 +89,13 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 ## Descrição dos Endpoints da API
 
-#### Tabela de Endpoints
+|       Recurso       |               Endpoint                |                     Descrição                     |
+|---------------------|---------------------------------------|---------------------------------------------------|
+| Cliente             | /api/v1/challenge-user/clientes       | Endpoint para operações de CRUD de Clientes       |
+| Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para oeprações de CRUD de Proprietários  |
 
-|       Recurso       |               Endpoint                |
-|---------------------|---------------------------------------|
-| Cliente             | /api/v1/challenge-user/clientes       | 
-| Proprietario        | /api/v1/challenge-user/proprietarios  |
 
-#### Exemplos de requisição e resposta
-
-| Verbo  |                                Endpoint / Requisição                                                                           |              Resposta                     |
+| Método |                                Endpoint / Requisição                                                                           |              Resposta                     |
 |--------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
 | Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
 |  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
@@ -564,7 +560,23 @@ interface UsuarioRepository, respeitando o DIP.
 
 ##### TDD
 
-??????
+```
+TDD: Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
+
+Cucumber: Ferramenta de Behavior-Driven Development (BDD) capaz de escrever especificações em linguagem natural (Gherkin) mapeadas para
+testes automatizados.
+- Via Gradle, foi criado um módulo, chamado acceptanceTest, para organizar os testes de aceitação;
+- Nesse módulo, foram escritos cenários em arquivos .feature para descrever o comportamento dos endpoints;
+- E passos Gherkin foram implementados em step definitions Java, interagindo com a API via RestAssured.
+
+Motivos para Considerar Boa Prática
+
+Colaboração: Gherkin permite que stakeholders não técnicos validem requisitos, promovendo uma linguagem ubíqua.
+Documentação Viva: Cenários .feature documentam o comportamento da API, úteis para onboarding e auditorias.
+Foco no Comportamento: Testes validam resultados visíveis (ex.: status 201), não detalhes internos.
+Integração com TDD: Testes de aceitação guiam o desenvolvimento iterativo.
+Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arquitetura Hexagonal.
+```
 
 ## Collections para Teste
 
@@ -574,9 +586,13 @@ interface UsuarioRepository, respeitando o DIP.
 
 #### Descrição dos Testes Manuais
 
+Você precisa subir a aplicação com o comando docker compose up --build -d (mais informações na sessão "Instruções para execução local") e
+depois baixar a coleção do Postman, importá-la no Postman e dar send nas requisições e ver a resposta. Todas as requisições estão prontas
+para execução. A aplicação possui um arquivo, chamado import.sql, responsável por gerar pequena massa de dados para os testes em questão.
 
-## Notas
+## Repositório do Código 
 
+[Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
 
 ## Autoria
 
