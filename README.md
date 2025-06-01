@@ -56,8 +56,8 @@ atualizar, consultar, deletar).
 ```
 
 #### Descrição da Arquitetura 
-```
 
+```
 Ports and Adapters (Arquitetura Hexagonal):
 
 - A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
