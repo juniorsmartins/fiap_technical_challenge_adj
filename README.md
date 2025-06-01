@@ -1,5 +1,6 @@
 # PROJETO: Tech-Challenge-ADJ-Fiap
 
+Equipe: Junior Martins
 
 ## Índice
 1. Introdução;
@@ -8,9 +9,7 @@
 4. Configuração do Projeto;
 5. Qualidade do Código;
 6. Collections para Teste;
-7. Notas;
-8. Autoria.
-
+7. Autoria.
 
 ## Introdução
 
@@ -57,8 +56,8 @@ atualizar, consultar, deletar).
 ```
 
 #### Descrição da Arquitetura 
-```
 
+```
 Ports and Adapters (Arquitetura Hexagonal):
 
 - A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
@@ -88,24 +87,212 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 ![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
 
-## Descrição dos Endpoints da API
+## Descrição dos Endpoints da API e exemplos
 
-#### Tabela de Endpoints
+|       Recurso       |               Endpoint                |                     Descrição                     |
+|---------------------|---------------------------------------|---------------------------------------------------|
+| Cliente             | /api/v1/challenge-user/clientes       | Endpoint para operações de CRUD de Clientes       |
+| Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para oeprações de CRUD de Proprietários  |
 
-|       Recurso       |               endpoint                |
-|---------------------|---------------------------------------|
-| Cliente             | /api/v1/challenge-user/clientes       | 
-| Proprietario        | /api/v1/challenge-user/proprietarios  |
 
-#### Exemplos de requisição e resposta
+| Método |                                Endpoint / Requisição                                                                           |              Resposta                     |
+|--------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
+|  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
+|  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
+|  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
+| Delete | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
+|  Get   | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
+|  Post  | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
+|  Put   | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
 
+##### Resposta 1 #####
+```
+{
+    "usuarioId": "a546ef31-d9f4-4ff7-9665-4baed324920b",
+    "nome": "Carl Friedrich Gauss",
+    "email": "gauss@email.com",
+    "login": "gauss",
+    "senha": "gauss123",
+    "dataHoraCriacao": "2023-10-01T12:00:00.000+00:00",
+    "dataHoraEdicao": "2024-10-01T12:00:00.000+00:00",
+    "endereco": {
+        "enderecoId": "4f50648e-639d-423a-9a46-f4a8d1e96b07",
+        "cep": "69905-169",
+        "logradouro": "Travessa Nilo Bezerra",
+        "numero": "500"
+    },
+    "numeroCartaoFidelidade": "4321-1234-001"
+}
+```
+
+##### Requisição 1 #####
+```
+{
+    "nome":"Rozenn Morgat",
+    "email":"morgat@email.com",
+    "login":"morgat",
+    "senha":"morgat123",
+    "numeroCartaoFidelidade": "1234-0000-5514",
+    "endereco": {
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    }
+}
+```
+
+##### Resposta 2 #####
+```
+{
+    "usuarioId": "2827fdc3-ffac-44d9-92ce-b49680914da4",
+    "nome": "Rozenn Morgat",
+    "email": "morgat@email.com",
+    "login": "morgat",
+    "senha": "morgat123",
+    "endereco": {
+        "enderecoId": "ea98e788-ab70-4439-a312-7627a8d70b8b",
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    },
+    "numeroCartaoFidelidade": "1234-0000-5514"
+}
+```
+
+##### Resposta 3 #####
+```
+{
+    "usuarioId": "eb957f38-90c4-4ef2-850c-229fb1658fcd",
+    "nome": "Linus Pauling",
+    "email": "linus@email.com",
+    "login": "linus",
+    "senha": "linus123",
+    "dataHoraCriacao": "2023-10-01T12:00:00.000+00:00",
+    "dataHoraEdicao": "2024-11-03T12:00:00.000+00:00",
+    "endereco": {
+        "enderecoId": "eac614d5-c70b-4b36-b4c8-7560f6f0eef9",
+        "cep": "69905-169",
+        "logradouro": "Rua Antônio Francisco das Chagas",
+        "numero": "100"
+    },
+    "descricao": "Toda segunda na empresa"
+}
+```
+
+##### Requisição 2 #####
+```
+{
+    "nome": "Mike Beedle",
+    "email": "mike@email.com",
+    "login": "mike12",
+    "senha": "123456",
+    "descricao": "Presente pela tarde",
+    "endereco": {
+        "cep": "78050-120",
+        "logradouro": "Rua Centro 2",
+        "numero": "130"
+    }
+}
+```
+
+##### Resposta 4 #####
+```
+{
+    "usuarioId": "0bfad517-dd66-49b3-a485-a5d6b105fac7",
+    "nome": "Mike Beedle",
+    "email": "mike@email.com",
+    "login": "mike12",
+    "senha": "123456",
+    "endereco": {
+        "enderecoId": "3ed4a907-ac36-4ea6-b6e7-0d17ba24d7a9",
+        "cep": "78050-120",
+        "logradouro": "Rua Centro 2",
+        "numero": "130"
+    },
+    "descricao": "Presente pela tarde"
+}
+```
+
+
+Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
 ## Configuração do Projeto
 
 #### Configuração do Docker Compose
 
+```
+name: fiap_technical_challenge_adj
+
+volumes:
+  database_user:
+    name: database_user
+
+networks:
+  net_applications: # conexão com infra-local e acesso a internet - tipo bridge
+    name: net_applications
+    driver: bridge
+
+services:
+
+  challenge_user:
+    container_name: challenge_user
+    image: juniorsmartins/challenge_user:v0.0.4
+    build:
+      context: ../challenge_user/
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: "challenge_user"
+        APP_VERSION: "v0.0.4"
+        APP_DESCRIPTION: "Serviço de Crud de usuários."
+    ports:
+      - "9050:9050"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    environment:
+      - DB_HOST=challenge_data_user
+      - DB_NAME=challenge_user
+      - DB_PORT=5432
+    restart: on-failure
+    networks:
+      - net_applications
+    depends_on:
+      challenge_data_user:
+        condition: service_started
+
+  challenge_data_user:
+    container_name: challenge_data_user
+    image: postgres:16.0
+    ports:
+      - "5501:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=challenge_user
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - database_user:/var/lib/postgresql/data
+    networks:
+      - net_applications
+```
+
 #### Instruções para execução local
 
+```
+Passo 1: clone o projeto;
+Passo 2: abra o projeto na IDEA;
+Passo 3: abra o terminal da IDEA;
+Passo 4: entre no diretório docker;
+Passo 5: rode o comando no diretório docker: docker compose up --build -d
+```
 
 ## Qualidade do Código
 
@@ -371,20 +558,41 @@ Conformidade: A camada de serviço depende de interfaces de saída (UsuarioCreat
 interface UsuarioRepository, respeitando o DIP.
 ```
 
-
 ##### TDD
 
-??????
+```
+TDD: Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
+
+Cucumber: Ferramenta de Behavior-Driven Development (BDD) capaz de escrever especificações em linguagem natural (Gherkin) mapeadas para
+testes automatizados.
+- Via Gradle, foi criado um módulo, chamado acceptanceTest, para organizar os testes de aceitação;
+- Nesse módulo, foram escritos cenários em arquivos .feature para descrever o comportamento dos endpoints;
+- E passos Gherkin foram implementados em step definitions Java, interagindo com a API via RestAssured.
+
+Motivos para Considerar Boa Prática
+
+Colaboração: Gherkin permite que stakeholders não técnicos validem requisitos, promovendo uma linguagem ubíqua.
+Documentação Viva: Cenários .feature documentam o comportamento da API, úteis para onboarding e auditorias.
+Foco no Comportamento: Testes validam resultados visíveis (ex.: status 201), não detalhes internos.
+Integração com TDD: Testes de aceitação guiam o desenvolvimento iterativo.
+Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arquitetura Hexagonal.
+```
 
 ## Collections para Teste
 
 #### Link para a Collection do Postman
 
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
+
 #### Descrição dos Testes Manuais
 
+Você precisa subir a aplicação com o comando docker compose up --build -d (mais informações na sessão "Instruções para execução local") e
+depois baixar a coleção do Postman, importá-la no Postman e dar send nas requisições e ver a resposta. Todas as requisições estão prontas
+para execução. A aplicação possui um arquivo, chamado import.sql, responsável por gerar pequena massa de dados para os testes em questão.
 
-## Notas
+## Repositório do Código 
 
+[Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
 
 ## Autoria
 

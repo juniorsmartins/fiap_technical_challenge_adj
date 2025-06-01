@@ -33,10 +33,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
 
-	// Mensageria
-	implementation 'org.springframework.kafka:spring-kafka'
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
-
 	// Ferramentas de suporte
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
