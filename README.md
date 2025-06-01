@@ -74,8 +74,8 @@ enquanto UsuarioCreateAdapter (adaptador de saída) traduz chamadas das portas d
 
 Clean Architecture:
 
-- A aplicação segue princípios da Clean Architecture, com a camada de negócio (serviços) no centro, independente de
-frameworks e detalhes de infraestrutura. A camada de persistência e a camada de apresentação são externas e dependem
+- A aplicação segue princípios da Clean Architecture, com a camada de negócio (serviços) no centro, independente de 
+detalhes de infraestrutura. A camada de persistência e a camada de apresentação são externas e dependem
 do núcleo (negócio) por meio de interfaces.
 
 - Exemplo: A lógica de negócio em AbstractUsuarioService não depende diretamente de Spring Data JPA ou do framework HTTP,
@@ -94,16 +94,16 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 | Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para oeprações de CRUD de Proprietários  |
 
 
-| Método |                                Endpoint / Requisição                                                                           |              Resposta                     |
-|--------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
-|  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
-|  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
-|  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
-| Delete | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
-|  Get   | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
-|  Post  | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
-|  Put   | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
+| Método    |                                Endpoint / Requisição                                                                           |              Resposta                     |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| Delete    | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
+| Get       | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
+| Post      | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
+| Put       | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
+| Delete    | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
+| Get       | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
+| Post      | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
+| Put       | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
 
 ##### Resposta 1 #####
 ```
@@ -229,7 +229,7 @@ volumes:
     name: database_user
 
 networks:
-  net_applications: # conexão com infra-local e acesso a internet - tipo bridge
+  net_applications: 
     name: net_applications
     driver: bridge
 
@@ -286,11 +286,11 @@ services:
 
 #### Instruções para execução local
 
-Passo 1: clone o projeto;
-Passo 2: abra o projeto na IDEA;
-Passo 3: abra o terminal da IDEA;
-Passo 4: entre no diretório docker;
-Passo 5: rode o comando no diretório docker: docker compose up --build -d
+- Passo 1: clone o projeto;
+- Passo 2: abra o projeto na IDEA;
+- Passo 3: abra o terminal da IDEA;
+- Passo 4: entre no diretório docker;
+- Passo 5: rode o comando no diretório docker: docker compose up --build -d
 
 
 ## Qualidade do Código
