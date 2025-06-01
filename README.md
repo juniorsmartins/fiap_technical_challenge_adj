@@ -87,7 +87,7 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 ![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
 
-## Descrição dos Endpoints da API
+## Descrição dos Endpoints da API e exemplos
 
 |       Recurso       |               Endpoint                |                     Descrição                     |
 |---------------------|---------------------------------------|---------------------------------------------------|
