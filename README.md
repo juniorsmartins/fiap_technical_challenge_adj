@@ -1,6 +1,7 @@
 # PROJETO: Tech-Challenge-ADJ-Fiap
 
-Equipe: Junior Martins
+Equipe: Junior Martins (rm364241)
+
 
 ## Índice
 1. Introdução;
@@ -10,6 +11,7 @@ Equipe: Junior Martins
 5. Qualidade do Código;
 6. Collections para Teste;
 7. Autoria.
+
 
 ## Introdução
 
@@ -30,7 +32,7 @@ realizada em fases, garantindo que cada etapa seja desenvolvida de forma
 cuidadosa e eficaz.
 
 A divisão em fases possibilitará uma implementação gradual e controlada,
-permitindo ajustes e melhorias contínuas conforme o sistema for sendo utilizado
+permitindo ajustes e melhorias contínuas conforme o sistema for sendo usado
 e avaliado tanto pelos restaurantes quanto pelos clientes.
 
 #### Objetivo do projeto
@@ -50,14 +52,11 @@ seguro, escalável e de fácil manutenção.
 
 ## Arquitetura do Sistema
 
-```
 A aplicação é uma API REST para gerenciamento de usuários (Cliente e Proprietario), com operações CRUD (criar,
 atualizar, consultar, deletar).
-```
 
 #### Descrição da Arquitetura 
 
-```
 Ports and Adapters (Arquitetura Hexagonal):
 
 - A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
@@ -81,11 +80,11 @@ do núcleo (negócio) por meio de interfaces.
 
 - Exemplo: A lógica de negócio em AbstractUsuarioService não depende diretamente de Spring Data JPA ou do framework HTTP,
 mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
-```
 
 #### Diagrama da Arquitetura
 
 ![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
+
 
 ## Descrição dos Endpoints da API e exemplos
 
@@ -217,6 +216,7 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
+
 ## Configuração do Projeto
 
 #### Configuração do Docker Compose
@@ -286,13 +286,12 @@ services:
 
 #### Instruções para execução local
 
-```
 Passo 1: clone o projeto;
 Passo 2: abra o projeto na IDEA;
 Passo 3: abra o terminal da IDEA;
 Passo 4: entre no diretório docker;
 Passo 5: rode o comando no diretório docker: docker compose up --build -d
-```
+
 
 ## Qualidade do Código
 
@@ -300,7 +299,6 @@ Passo 5: rode o comando no diretório docker: docker compose up --build -d
 
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
-```
 
 O Princípio da Responsabilidade Única (Single Responsibility Principle) estabelece que uma classe deve ter apenas
 um motivo para mudar, ou seja, deve ser responsável por uma única parte da funcionalidade do sistema, e essa
@@ -354,10 +352,9 @@ para operações específicas, garantindo que cada interface tenha uma única re
 
 As classes ClienteEntity e ProprietarioEntity são responsáveis apenas por representar os dados persistidos, sem conter
 lógica de negócio, o que está alinhado com o SRP.
-```
+
 
 - Princípio Aberto/Fechado (OCP):
-```
 
 O Princípio Aberto/Fechado (Open/Closed Principle) estabelece que as entidades de software (classes, módulos, funções e
 etc.) devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades são adicionadas por meio
@@ -407,10 +404,9 @@ UsuarioEntity.
 
 Exemplo: A adição de uma nova entidade, como AdministradorEntity, pode ser feita criando uma nova classe que estende
 UsuarioEntity, sem modificar o código existente.
-```
+
 
 - Princípio da Substituição de Liskov (LSP):
-```
 
 O Princípio de Substituição de Liskov (Liskov Substitution Principle) estabelece que objetos de uma classe derivada devem poder
 substituir objetos da classe base sem alterar o comportamento correto do programa. Em outras palavras, uma subclasse deve ser
@@ -461,10 +457,9 @@ interfaces, garantindo que métodos como create(T usuario) ou deleteById(UUID id
 
 Conformidade: As implementações específicas não introduzem comportamentos inesperados, permitindo que qualquer código que dependa dessas
 interfaces utilize ClienteService ou ProprietarioService de forma intercambiável.
-```
+
 
 - Princípio da Segregação de Interfaces (ISP):
-```
 
 O Princípio de Segregação de Interfaces (Interface Segregation Principle) estabelece que os clientes não devem ser forçados a depender
 de interfaces que não utilizam. Em outras palavras, uma classe não deve ser obrigada a implementar métodos que não são relevantes para
@@ -500,10 +495,9 @@ Proprietario) sejam manipulados sem forçar a implementação de métodos irrele
 UsuarioCreateInputPort<Cliente>, que é específico para o tipo Cliente.
 
 Conformidade: A flexibilidade dos generics garante que as interfaces sejam aplicadas apenas aos tipos relevantes, mantendo a coesão.
-```
+
 
 - Princípio da Inversão de Dependência (DIP):
-```
 
 O Princípio de Inversão de Dependência (Dependency Inversion Principle) estabelece que: Módulos de alto nível não devem depender de
 módulos de baixo nível; ambos devem depender de abstrações. Abstrações não devem depender de detalhes; detalhes devem depender de
@@ -556,11 +550,10 @@ repositório concreto (UsuarioRepository) é encapsulado pelos adaptadores, que 
 
 Conformidade: A camada de serviço depende de interfaces de saída (UsuarioCreateOutputPort, etc.), enquanto os adaptadores dependem da
 interface UsuarioRepository, respeitando o DIP.
-```
+
 
 ##### TDD
 
-```
 TDD: Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
 
 Cucumber: Ferramenta de Behavior-Driven Development (BDD) capaz de escrever especificações em linguagem natural (Gherkin) mapeadas para
@@ -576,7 +569,7 @@ Documentação Viva: Cenários .feature documentam o comportamento da API, útei
 Foco no Comportamento: Testes validam resultados visíveis (ex.: status 201), não detalhes internos.
 Integração com TDD: Testes de aceitação guiam o desenvolvimento iterativo.
 Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arquitetura Hexagonal.
-```
+
 
 ## Collections para Teste
 
@@ -590,9 +583,11 @@ Você precisa subir a aplicação com o comando docker compose up --build -d (ma
 depois baixar a coleção do Postman, importá-la no Postman e dar send nas requisições e ver a resposta. Todas as requisições estão prontas
 para execução. A aplicação possui um arquivo, chamado import.sql, responsável por gerar pequena massa de dados para os testes em questão.
 
+
 ## Repositório do Código 
 
 [Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
+
 
 ## Autoria
 
