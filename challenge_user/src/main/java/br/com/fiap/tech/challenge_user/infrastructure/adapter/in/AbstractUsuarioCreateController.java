@@ -41,8 +41,7 @@ public abstract class AbstractUsuarioCreateController<I, O, T, E> {
     @Operation(summary = "Cadastrar", description = "Criar um novo recurso.",
             responses = {
                     @ApiResponse(responseCode = "201", description = "Created - recurso cadastrado com sucesso.",
-                            content = {@Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = ClienteDtoResponse.class))}
+                            content = {@Content(mediaType = "application/json")}
                     ),
                     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal formulada.",
                             content = {@Content(mediaType = "application/json",

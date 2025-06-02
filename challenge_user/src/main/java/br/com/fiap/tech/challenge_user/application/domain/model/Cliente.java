@@ -1,7 +1,5 @@
 package br.com.fiap.tech.challenge_user.application.domain.model;
 
-import br.com.fiap.tech.challenge_user.application.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
