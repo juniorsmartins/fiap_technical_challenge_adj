@@ -83,6 +83,8 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Diagrama da Arquitetura
 
+A imagem da arquitetura foi desenvolvida via software StarUML pelo autor do projeto.
+
 ![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
 
 
