@@ -15,7 +15,7 @@ Equipe: Junior Martins (rm364241)
 
 ## Introdução
 
-#### Descrição do problema
+#### Descrição do problema:
 
 Na nossa região, um grupo de restaurantes decidiu contratar estudantes
 para construir um sistema de gestão para seus estabelecimentos. Essa decisão
@@ -35,7 +35,7 @@ A divisão em fases possibilitará uma implementação gradual e controlada,
 permitindo ajustes e melhorias contínuas conforme o sistema for sendo usado
 e avaliado tanto pelos restaurantes quanto pelos clientes.
 
-#### Objetivo do projeto
+#### Objetivo do projeto:
 
 Desenvolver um backend completo e robusto utilizando o framework
 Spring Boot, com foco no gerenciamento de usuários, incluindo operações de
@@ -57,34 +57,37 @@ atualizar, consultar, deletar).
 
 #### Descrição da Arquitetura 
 
-Ports and Adapters (Arquitetura Hexagonal):
+- Ports and Adapters (Arquitetura Hexagonal):
 
-- A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
+A aplicação utiliza o padrão Ports and Adapters, onde as portas (UsuarioCreateInputPort, UsuarioCreateOutputPort e 
 etc.) definem contratos entre camadas, e os adaptadores (UsuarioCreateAdapter, ClienteController) implementam esses 
 contratos.
 
-- Portas de Entrada: Interfaces como UsuarioCreateInputPort permitem que a camada de apresentação acesse a lógica
+Portas de Entrada: Interfaces como UsuarioCreateInputPort permitem que a camada de apresentação acesse a lógica
 de negócio.
 
-- Portas de Saída: Interfaces como UsuarioCreateOutputPort permitem que a camada de negócio acesse a persistência sem
+Portas de Saída: Interfaces como UsuarioCreateOutputPort permitem que a camada de negócio acesse a persistência sem
 depender de detalhes de implementação.
 
-- Adaptadores: ClienteController (adaptador de entrada) traduz requisições HTTP em chamadas às portas de entrada,
+Adaptadores: ClienteController (adaptador de entrada) traduz requisições HTTP em chamadas às portas de entrada,
 enquanto UsuarioCreateAdapter (adaptador de saída) traduz chamadas das portas de saída em operações de banco de dados.
 
-Clean Architecture:
+- Clean Architecture:
 
-- A aplicação segue princípios da Clean Architecture, com a camada de negócio (serviços) no centro, independente de
-frameworks e detalhes de infraestrutura. A camada de persistência e a camada de apresentação são externas e dependem
+A aplicação segue princípios da Clean Architecture, com a camada de negócio (serviços) no centro, independente de 
+detalhes de infraestrutura. A camada de persistência e a camada de apresentação são externas e dependem
 do núcleo (negócio) por meio de interfaces.
 
-- Exemplo: A lógica de negócio em AbstractUsuarioService não depende diretamente de Spring Data JPA ou do framework HTTP,
+Exemplo: A lógica de negócio em AbstractUsuarioService não depende diretamente de Spring Data JPA ou do framework HTTP,
 mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Diagrama da Arquitetura
 
 ![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
 
+Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. Ela reflete a arquitetura da
+aplicação de forma simplificada. Mostra a parte das regras de negócio separada das partes de infraestrutura de entrada e
+de saída. Bem como mostra como foram organizados os princípios Solid.
 
 ## Descrição dos Endpoints da API e exemplos
 
@@ -94,16 +97,16 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 | Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para oeprações de CRUD de Proprietários  |
 
 
-| Método |                                Endpoint / Requisição                                                                           |              Resposta                     |
-|--------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| Delete | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
-|  Get   | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
-|  Post  | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
-|  Put   | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
-| Delete | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
-|  Get   | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
-|  Post  | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
-|  Put   | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
+| Método    | Endpoint e Requisição                                                                                                          |              Resposta                     |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| Delete    | http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d                                      |           204 No Content                  |
+| Get       | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
+| Post      | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
+| Put       | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
+| Delete    | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
+| Get       | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
+| Post      | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
+| Put       | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
 
 ##### Resposta 1 #####
 ```
@@ -229,7 +232,7 @@ volumes:
     name: database_user
 
 networks:
-  net_applications: # conexão com infra-local e acesso a internet - tipo bridge
+  net_applications: 
     name: net_applications
     driver: bridge
 
@@ -286,11 +289,11 @@ services:
 
 #### Instruções para execução local
 
-Passo 1: clone o projeto;
-Passo 2: abra o projeto na IDEA;
-Passo 3: abra o terminal da IDEA;
-Passo 4: entre no diretório docker;
-Passo 5: rode o comando no diretório docker: docker compose up --build -d
+- Passo 1: clone o projeto;
+- Passo 2: abra o projeto na IDEA;
+- Passo 3: abra o terminal da IDEA;
+- Passo 4: entre no diretório docker;
+- Passo 5: rode o comando no diretório docker: docker compose up --build -d
 
 
 ## Qualidade do Código
@@ -554,10 +557,11 @@ interface UsuarioRepository, respeitando o DIP.
 
 ##### TDD
 
-TDD: Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
+Prática ágil onde testes são escritos antes do código, seguindo o ciclo Red-Green-Refactor.
 
 Cucumber: Ferramenta de Behavior-Driven Development (BDD) capaz de escrever especificações em linguagem natural (Gherkin) mapeadas para
 testes automatizados.
+
 - Via Gradle, foi criado um módulo, chamado acceptanceTest, para organizar os testes de aceitação;
 - Nesse módulo, foram escritos cenários em arquivos .feature para descrever o comportamento dos endpoints;
 - E passos Gherkin foram implementados em step definitions Java, interagindo com a API via RestAssured.
@@ -577,6 +581,8 @@ Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arqui
 
 [Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
 
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
+
 #### Descrição dos Testes Manuais
 
 Você precisa subir a aplicação com o comando docker compose up --build -d (mais informações na sessão "Instruções para execução local") e
@@ -588,7 +594,10 @@ para execução. A aplicação possui um arquivo, chamado import.sql, responsáv
 
 [Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
 
+https://github.com/juniorsmartins/fiap_technical_challenge_adj
 
 ## Autoria
 
 [Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
+
+https://www.linkedin.com/in/juniorsmartins/
