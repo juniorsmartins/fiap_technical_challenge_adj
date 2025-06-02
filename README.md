@@ -83,7 +83,13 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Diagrama da Arquitetura
 
-A imagem da arquitetura foi desenvolvida via software StarUML pelo autor do projeto.
+```
+
+Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. Ela reflete a arquitetura da
+aplicação de forma simplificada. Mostra a parte das regras de negócio separada das partes de infraestrutura de entrada e
+de saída. Bem como mostra como foram organizados os princípios Solid.
+
+```
 
 ![TechChallenge3](https://github.com/user-attachments/assets/4a9fcb71-bd00-466e-a3be-15d95ead8975)
 
