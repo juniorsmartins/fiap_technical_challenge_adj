@@ -20,8 +20,8 @@ public class UsuarioDeleteAdapter<E extends UsuarioEntity> implements UsuarioDel
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     @Modifying
     @Override
-    public void delete(@NonNull final E usuairo) {
-        repository.delete(usuairo);
+    public void delete(@NonNull final E usuario) {
+        repository.delete(usuario);
     }
 }
 
