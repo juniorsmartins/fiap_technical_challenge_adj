@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  sql:
+    init:
+      mode: never
+      data-locations: []

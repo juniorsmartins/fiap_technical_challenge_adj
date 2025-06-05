@@ -23,10 +23,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -289,6 +286,34 @@ public final class ClienteControllerStep {
         var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
         assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
+    }
+
+    @Quando("uma requisição Get for feita, com nome {string} no filtro, no método search do ClienteController")
+    public void uma_requisicao_get_for_feita_com_nome_no_filtro_no_metodo_search_do_cliente_controller(String nome) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("nome", nome)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas clientes, com nome {string}, no método search do ClienteController")
+    public void a_resposta_deve_conter_apenas_clientes_com_nome_no_metodo_search_do_cliente_controller(String nome) {
+
+        var nomesEsperados = Arrays.asList(nome.trim().split(","));
+
+        List<ClienteDtoResponse> content = response.jsonPath()
+                .getList("content", ClienteDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto -> nomesEsperados.contains(dto.nome()))
+                .extracting(ClienteDtoResponse::nome)
+                .containsOnlyOnceElementsOf(nomesEsperados);
     }
 }
 

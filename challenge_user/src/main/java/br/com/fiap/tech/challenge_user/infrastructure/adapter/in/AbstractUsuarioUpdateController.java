@@ -1,10 +1,10 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
-import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Optional;
 import java.util.UUID;
 
-@Tag(name = "Usuários", description = "Contém recursos de atualizar.")
+@Tag(name = "Usuários", description = "Contém recurso de atualizar.")
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioUpdateController<I, O, T, E> {
@@ -42,8 +42,7 @@ public abstract class AbstractUsuarioUpdateController<I, O, T, E> {
     @Operation(summary = "Atualizar", description = "Modificar dados de um recurso.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.",
-                            content = {@Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = ClienteDtoResponse.class))}
+                            content = {@Content(mediaType = "application/json")}
                     ),
                     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal formulada.",
                             content = {@Content(mediaType = "application/json",
