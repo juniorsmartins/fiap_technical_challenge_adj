@@ -56,6 +56,7 @@ spring:
   sql: # Esta propriedade controla quando e como o Spring Boot inicializa o banco de dados com scripts SQL
     init:
       mode: always
+      data-locations: classpath:db/import.sql
 
 springdoc: # swagger-ui custom path
   api-docs:

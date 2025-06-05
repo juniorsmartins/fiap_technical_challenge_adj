@@ -1,11 +1,15 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
+import br.com.fiap.tech.challenge_user.application.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Proprietario;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -84,6 +88,17 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
                 entity.getSenha(), entity.getDataHoraCriacao(), entity.getDataHoraEdicao(),
                 endereco, entity.getDescricao()
         );
+    }
+
+    @Override
+    public Page<ProprietarioDtoResponse> toPageResponse(Page<ProprietarioEntity> entityPage) {
+
+        List<ProprietarioDtoResponse> dtos = entityPage.getContent()
+                .stream()
+                .map(this::toResponse)
+                .toList();
+
+        return new PageImpl<>(dtos, entityPage.getPageable(), entityPage.getTotalElements());
     }
 }
 
