@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
+import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.application.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
@@ -14,8 +15,9 @@ public class ClienteCreateService extends AbstractUsuarioCreateService<Cliente, 
 
     public ClienteCreateService(
             EntityMapper<Cliente, ClienteEntity> entityMapper,
-            UsuarioCreateOutputPort<ClienteEntity> createOutputPort) {
-        super(entityMapper, createOutputPort);
+            UsuarioCreateOutputPort<ClienteEntity> createOutputPort,
+            UsuarioRulesStrategy rulesStrategy) {
+        super(entityMapper, createOutputPort, rulesStrategy);
     }
 
     @Override

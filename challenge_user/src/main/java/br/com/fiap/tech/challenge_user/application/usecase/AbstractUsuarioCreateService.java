@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
+import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
@@ -21,9 +22,12 @@ public abstract class AbstractUsuarioCreateService<T extends Usuario, E extends 
 
     private final UsuarioCreateOutputPort<E> createOutputPort;
 
+    private final UsuarioRulesStrategy rulesStrategy;
+
     public T create(@NotNull final T usuario) {
 
         return Optional.of(usuario)
+                .map(rulesStrategy::executar)
                 .map(entityMapper::toEntity)
                 .map(createOutputPort::save)
                 .map(entityMapper::toDomain)

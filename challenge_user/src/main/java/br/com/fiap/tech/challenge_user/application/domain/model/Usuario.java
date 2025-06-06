@@ -21,7 +21,7 @@ public abstract class Usuario {
 
     private String senha;
 
-    private br.com.fiap.tech.challenge_user.application.domain.model.Endereco endereco;
+    private Endereco endereco;
 
     protected Usuario() {
     }

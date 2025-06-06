@@ -20,6 +20,20 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com ClienteDtoResponse no body, com id e nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e numeroCartaoFidelidade "1234-6666-004"
     E o Cliente cadastrado no banco de dados possui nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e numeroCartaoFidelidade "1234-6666-004"
 
+  Cenario: Post para criar Cliente e Endereço, com sucesso, pelo ClienteController
+    Dado um ClienteDtoRequest e EnderecoDtoRequest, com nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013" e com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 201 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
+    E com EnderecoDtoResponse no body, com id e cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+    E o Cliente cadastrado no banco de dados possui nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
+    E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+
+  Cenario: Post para criar Cliente, com erro por email não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Alistair Cockburn" e email "fowler@email.com" e login "alistair" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+
   Cenario: Post para criar Cliente, com erro por nome vazio, pelo ClienteController
     Dado um ClienteDtoRequest, com nome "   " e email "hel@email.com" e login "helga" e senha "12345" e numeroCartaoFidelidade "1234-6666-005"
     Quando a requisição Post for feita no método create do ClienteController
@@ -59,15 +73,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Dado um ClienteDtoRequest, com nome "Helga Weiss" e email "hel@email.com" e login "helga" e senha "anne01234567890123456789012345678901234567890123456789" e numeroCartaoFidelidade "1234-6666-012"
     Quando a requisição Post for feita no método create do ClienteController
     Entao receber ResponseEntity com HTTP 400 do ClienteController
-
-  Cenario: Post para criar Cliente e Endereço, com sucesso, pelo ClienteController
-    Dado um ClienteDtoRequest e EnderecoDtoRequest, com nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013" e com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
-    Quando a requisição Post for feita no método create do ClienteController
-    Entao receber ResponseEntity com HTTP 201 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
-    E com EnderecoDtoResponse no body, com id e cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
-    E o Cliente cadastrado no banco de dados possui nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
-    E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
 
 
   Cenario: Get para consultar Cliente, com sucesso, pelo ClienteController
