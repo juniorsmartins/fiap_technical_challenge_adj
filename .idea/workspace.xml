@@ -4,7 +4,127 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="" />
+    <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fiap_technical_challenge_adj.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/challenge_user.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradle/config/config.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradle/config/source-sets.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradle/config/task.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/config/ConstantsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/config/CucumberRunnerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/config/DataSourceTestConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ClienteControllerStep.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/java/cucumber/steps/ProprietarioControllerStep.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/cliente.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/resources/features/proprietario.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/ChallengeUserApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/beans/InternationalMessageConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/beans/SpringDocOpenApiConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/GlobalHandlerException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/http404/ResourceNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/http404/UsuarioNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/exception/http500/InternalServerProblemException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Cliente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Endereco.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Proprietario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/model/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/DefaultEnderecoUpdateRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/DefaultUsuarioUpdateRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/EnderecoUpdateRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/domain/rule/UsuarioUpdateRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/ClienteMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/EnderecoMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/EntityMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/InputMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/OutputMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/mapper/ProprietarioMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/in/UsuarioCreateInputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/in/UsuarioDeleteByIdInputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/in/UsuarioUpdateInputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioCreateOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioDeleteOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioEventProducerOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioFindByIdOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/port/out/UsuarioSearchOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/AbstractUsuarioCreateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/AbstractUsuarioDeleteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/AbstractUsuarioUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ClienteCreateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ClienteDeleteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ClienteUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ProprietarioCreateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ProprietarioDeleteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/application/usecase/ProprietarioUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioCreateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioDeleteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioFindController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioSearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/AbstractUsuarioUpdateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteCreateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteDeleteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteFindController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteSearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ClienteUpdateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioCreateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioDeleteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioFindController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioSearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/in/ProprietarioUpdateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/ClienteSearchAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/ProprietarioSearchAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioCreateAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioDeleteAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioFindByIdAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/constant/ConstantsValidation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/constant/ControllerConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/filter/UsuarioFiltroDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/in/ClienteDtoRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/in/EnderecoDtoRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/in/ProprietarioDtoRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/out/ClienteDtoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/out/EnderecoDtoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/dto/out/ProprietarioDtoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/AbstractAuditingEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/ClienteEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/EnderecoEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/ProprietarioEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/entity/UsuarioEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ClienteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/EnderecoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ProprietarioRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/UsuarioRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/spec/ClienteSpecfication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/spec/ProprietarioSpecfication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/application-prod.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/db/import.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_en_US.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/messages_pt_BR.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/test/java/br/com/fiap/tech/challenge_user/ChallengeUserApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/test/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/postman/TechChallenge-ADJ.postman_collection.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +222,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/juniorsmartins/Workspace/agrotis-2025",
     "project.structure.last.edited": "Modules",
