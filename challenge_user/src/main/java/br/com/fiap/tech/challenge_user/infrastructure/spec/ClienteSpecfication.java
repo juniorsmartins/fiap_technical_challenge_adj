@@ -75,19 +75,6 @@ public final class ClienteSpecfication {
                 predicados.add(criteriaBuilder.or(predicates.toArray(new Predicate[0])));
             }
 
-            if (ObjectUtils.isNotEmpty(filtro.descricao())) {
-
-                var valores = Arrays.asList(filtro.descricao().split(","));
-
-                List<Predicate> predicates = valores.stream()
-                        .map(valor -> criteriaBuilder
-                                .like(criteriaBuilder.lower(root.get("descricao")),
-                                        "%" + valor.toLowerCase() + "%"))
-                        .toList();
-
-                predicados.add(criteriaBuilder.or(predicates.toArray(new Predicate[0])));
-            }
-
             return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
         });
     }
