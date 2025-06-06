@@ -2,6 +2,7 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
@@ -23,10 +24,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -295,5 +293,36 @@ public final class ProprietarioControllerStep {
         assertThat(proprietarioAtualizado.getUsuarioId()).isEqualTo(proprietarioEntity.getUsuarioId());
         assertThat(proprietarioAtualizado.getEndereco()).isNull();
     }
+
+    @Quando("uma requisição Get for feita, com nome {string} no filtro, no método search do ProprietarioController")
+    public void uma_requisicao_get_for_feita_com_nome_no_filtro_no_metodo_search_do_proprietario_controller(
+            String nomes) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("nome", nomes)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas proprietario, com nome {string}, no método search do ProprietarioController")
+    public void a_resposta_deve_conter_apenas_proprietario_com_nome_no_metodo_search_do_proprietario_controller(
+            String nomes) {
+
+        var nomesEsperados = Arrays.asList(nomes.trim().split(","));
+
+        List<ProprietarioDtoResponse> content = response.jsonPath()
+                .getList("content", ProprietarioDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto -> nomesEsperados.contains(dto.nome()))
+                .extracting(ProprietarioDtoResponse::nome)
+                .containsOnlyOnceElementsOf(nomesEsperados);
+    }
+
 }
 

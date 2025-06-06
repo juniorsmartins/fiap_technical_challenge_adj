@@ -82,6 +82,27 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do ClienteController
 
 
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por um nome, pelo ClienteController
+    Quando uma requisição Get for feita, com nome "Jeff Sutherland" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois nomes, pelo ClienteController
+    Quando uma requisição Get for feita, com nome "Jeff Sutherland,Kent Beck" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland,Kent Beck", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois emails, pelo ClienteController
+    Quando uma requisição Get for feita, com email "fowler@email.com,beck@proton.me" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com email "fowler@email.com,beck@proton.me", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois numeroCartaoFidelidade, pelo ClienteController
+    Quando uma requisição Get for feita, com numeroCartaoFidelidade "1234-5555-003,1234-5555-001" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com numeroCartaoFidelidade "1234-5555-003,1234-5555-001", no método search do ClienteController
+
+
   Cenario: Delete para apagar Cliente, com sucesso, pelo ClienteController
     Dado um identificador ID de um cliente existente, com email "beck@proton.me"
     Quando uma requisição Delete for feita no método deleteById do ClienteController
@@ -92,17 +113,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Dado um identificador ID de um cliente inexistente
     Quando uma requisição Delete for feita no método deleteById do ClienteController
     Entao receber ResponseEntity com HTTP 404 do ClienteController
-
-
-  Cenario: Get para pesquisa paginada de Cliente, com sucesso por um nome, pelo ClienteController
-    Quando uma requisição Get for feita, com nome "Jeff Sutherland" no filtro, no método search do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland", no método search do ClienteController
-
-  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois nomes, pelo ClienteController
-    Quando uma requisição Get for feita, com nome "Jeff Sutherland,Kent Beck" no filtro, no método search do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland,Kent Beck", no método search do ClienteController
 
 
   Cenario: Put para atualizar Cliente, com sucesso, pelo ClienteController
