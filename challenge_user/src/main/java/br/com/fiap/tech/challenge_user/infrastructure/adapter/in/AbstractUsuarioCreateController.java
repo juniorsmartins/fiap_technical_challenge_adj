@@ -1,10 +1,9 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioCreateInputPort;
-import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
-@Tag(name = "Usuários", description = "Contém recursos de cadastrar.")
+@Tag(name = "Usuários", description = "Contém recurso de cadastrar.")
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioCreateController<I, O, T, E> {

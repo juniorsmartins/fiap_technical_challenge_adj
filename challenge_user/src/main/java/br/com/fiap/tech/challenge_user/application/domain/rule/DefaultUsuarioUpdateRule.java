@@ -1,7 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.domain.rule;
 
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

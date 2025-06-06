@@ -5,7 +5,11 @@ import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.application.domain.model.Cliente;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -83,6 +87,17 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
                 entity.getDataHoraCriacao(), entity.getDataHoraEdicao(), endereco,
                 entity.getNumeroCartaoFidelidade()
         );
+    }
+
+    @Override
+    public Page<ClienteDtoResponse> toPageResponse(Page<ClienteEntity> entityPage)  {
+
+        List<ClienteDtoResponse> dtos = entityPage.getContent()
+                .stream()
+                .map(this::toResponse)
+                .toList();
+
+        return new PageImpl<>(dtos, entityPage.getPageable(), entityPage.getTotalElements());
     }
 }
 

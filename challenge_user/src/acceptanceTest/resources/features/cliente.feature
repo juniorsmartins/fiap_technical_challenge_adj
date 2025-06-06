@@ -94,6 +94,17 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do ClienteController
 
 
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por um nome, pelo ClienteController
+    Quando uma requisição Get for feita, com nome "Jeff Sutherland" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois nomes, pelo ClienteController
+    Quando uma requisição Get for feita, com nome "Jeff Sutherland,Kent Beck" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland,Kent Beck", no método search do ClienteController
+
+
   Cenario: Put para atualizar Cliente, com sucesso, pelo ClienteController
     Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
     E um ClienteDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
@@ -193,4 +204,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
     E o Cliente no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012"
     E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+
+
 
