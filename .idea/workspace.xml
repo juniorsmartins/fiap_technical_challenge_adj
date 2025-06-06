@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioSearchAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/ClienteSearchAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ClienteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ProprietarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ProprietarioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/spec/UsuarioSpecfication.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/spec/ProprietarioSpecfication.java" afterDir="false" />
-    </list>
+    <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,38 +79,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Cucumber Java.Feature: cliente.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: create_user.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: proprietario.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: user_create.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: user_post.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: usuario.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: usuario_get.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: usuario_post.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker.challenge_data_user: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build challenge_user.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [acceptanceTest].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.challenge_user [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/search-cliente&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/juniorsmartins/Workspace/agrotis-2025&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cucumber Java.Feature: cliente.executor": "Run",
+    "Cucumber Java.Feature: create_user.executor": "Run",
+    "Cucumber Java.Feature: proprietario.executor": "Run",
+    "Cucumber Java.Feature: user_create.executor": "Run",
+    "Cucumber Java.Feature: user_post.executor": "Run",
+    "Cucumber Java.Feature: usuario.executor": "Run",
+    "Cucumber Java.Feature: usuario_get.executor": "Run",
+    "Cucumber Java.Feature: usuario_post.executor": "Run",
+    "Cucumber Java.Scenario: Post para criar Usuário Cliente, com sucesso, pelo ClienteController.executor": "Run",
+    "Cucumber Java.Scenario: Post para criar Usuário e Endereço, com sucesso, pelo UsuarioController.executor": "Run",
+    "Cucumber Java.Scenario: Put para atualizar Usuário e Endereço, com sucesso, pelo UsuarioController.executor": "Run",
+    "Docker.docker.challenge_data_user: Compose Deployment.executor": "Run",
+    "Gradle.Build challenge_user.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.challenge_user [:br.com.fiap.tech.challenge_user.ChallengeUserApplication.main()].executor": "Run",
+    "Gradle.challenge_user [acceptanceTest].executor": "Run",
+    "Gradle.challenge_user [build].executor": "Run",
+    "Gradle.challenge_user [clean].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/juniorsmartins/Workspace/agrotis-2025",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "File.Encoding"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/challenge_user/postman" />
