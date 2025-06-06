@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e467526b-6c9c-4e4a-b813-dcc90077edfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/application-test.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/acceptanceTest/cucumber-reports/cucumber.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/UsuarioSearchAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/adapter/out/ClienteSearchAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ClienteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ProprietarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/repository/ProprietarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/spec/UsuarioSpecfication.java" beforeDir="false" afterPath="$PROJECT_DIR$/challenge_user/src/main/java/br/com/fiap/tech/challenge_user/infrastructure/spec/ProprietarioSpecfication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,11 +136,11 @@
       <recent name="br.com.fiap.tech.challenge_user.adapter.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.com.fiap.tech.challenge_user.infrastructure.spec" />
+      <recent name="br.com.fiap.tech.challenge_user.infrastructure.adapter.out" />
       <recent name="br.com.fiap.tech.challenge_user.adapter.controller" />
       <recent name="br.com.fiap.tech.challenge_user.application.core.usecase" />
       <recent name="br.com.fiap.tech.challenge_user.application.core.utils" />
-      <recent name="br.com.fiap.tech.challenge_user.application.port.output" />
-      <recent name="br.com.fiap.tech.challenge_user.application.port.input" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.challenge_user [acceptanceTest]">

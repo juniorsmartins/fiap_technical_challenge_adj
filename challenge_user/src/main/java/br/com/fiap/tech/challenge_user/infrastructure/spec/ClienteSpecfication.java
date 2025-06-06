@@ -1,16 +1,16 @@
 package br.com.fiap.tech.challenge_user.infrastructure.spec;
 
 import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.*;
 
-public final class UsuarioSpecfication {
+public final class ClienteSpecfication {
 
-    public static Specification<UsuarioEntity> consultaDinamica(UsuarioFiltroDto filtro) {
+    public static Specification<ClienteEntity> consultaDinamica(UsuarioFiltroDto filtro) {
 
         return ((root, query, criteriaBuilder) -> {
 
