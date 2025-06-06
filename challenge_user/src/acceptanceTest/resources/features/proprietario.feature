@@ -82,6 +82,17 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 
 
+  Cenario: Get para pesquisa paginada de Proprietario, com sucesso por um nome, pelo ProprietarioController
+    Quando uma requisição Get for feita, com nome "James Clear" no filtro, no método search do ProprietarioController
+    Entao receber ResponseEntity com HTTP 200 do ProprietarioController
+    E a resposta deve conter apenas proprietario, com nome "James Clear", no método search do ProprietarioController
+
+  Cenario: Get para pesquisa paginada de Proprietario, com sucesso por dois nomes, pelo ProprietarioController
+    Quando uma requisição Get for feita, com nome "James Clear,Kent Beck" no filtro, no método search do ProprietarioController
+    Entao receber ResponseEntity com HTTP 200 do ProprietarioController
+    E a resposta deve conter apenas proprietario, com nome "James Clear,Kent Beck", no método search do ProprietarioController
+
+
   Cenario: Delete para apagar Proprietario, com sucesso, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "beck@proton.me"
     Quando uma requisição Delete for feita no método deleteById do ProprietarioController

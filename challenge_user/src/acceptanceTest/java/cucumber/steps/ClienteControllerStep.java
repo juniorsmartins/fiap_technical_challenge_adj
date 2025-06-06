@@ -289,12 +289,12 @@ public final class ClienteControllerStep {
     }
 
     @Quando("uma requisição Get for feita, com nome {string} no filtro, no método search do ClienteController")
-    public void uma_requisicao_get_for_feita_com_nome_no_filtro_no_metodo_search_do_cliente_controller(String nome) {
+    public void uma_requisicao_get_for_feita_com_nome_no_filtro_no_metodo_search_do_cliente_controller(String nomes) {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                .queryParam("nome", nome)
+                .queryParam("nome", nomes)
                 .when()
                 .get();
 
@@ -302,9 +302,9 @@ public final class ClienteControllerStep {
     }
 
     @Entao("a resposta deve conter apenas clientes, com nome {string}, no método search do ClienteController")
-    public void a_resposta_deve_conter_apenas_clientes_com_nome_no_metodo_search_do_cliente_controller(String nome) {
+    public void a_resposta_deve_conter_apenas_clientes_com_nome_no_metodo_search_do_cliente_controller(String nomes) {
 
-        var nomesEsperados = Arrays.asList(nome.trim().split(","));
+        var nomesEsperados = Arrays.asList(nomes.trim().split(","));
 
         List<ClienteDtoResponse> content = response.jsonPath()
                 .getList("content", ClienteDtoResponse.class);
