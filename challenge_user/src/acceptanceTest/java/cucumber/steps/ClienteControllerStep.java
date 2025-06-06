@@ -315,5 +315,61 @@ public final class ClienteControllerStep {
                 .extracting(ClienteDtoResponse::nome)
                 .containsOnlyOnceElementsOf(nomesEsperados);
     }
+
+    @Quando("uma requisição Get for feita, com email {string} no filtro, no método search do ClienteController")
+    public void uma_requisicao_get_for_feita_com_email_no_filtro_no_metodo_search_do_cliente_controller(String emails) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("email", emails)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas clientes, com email {string}, no método search do ClienteController")
+    public void a_resposta_deve_conter_apenas_clientes_com_email_no_metodo_search_do_cliente_controller(String emails) {
+
+        var valores = Arrays.asList(emails.trim().split(","));
+
+        List<ClienteDtoResponse> content = response.jsonPath()
+                .getList("content", ClienteDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto -> valores.contains(dto.email()))
+                .extracting(ClienteDtoResponse::email)
+                .containsOnlyOnceElementsOf(valores);
+    }
+
+    @Quando("uma requisição Get for feita, com numeroCartaoFidelidade {string} no filtro, no método search do ClienteController")
+    public void uma_requisicao_get_for_feita_com_numero_cartao_fidelidade_no_filtro_no_metodo_search_do_cliente_controller(String numeros) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("numeroCartaoFidelidade", numeros)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas clientes, com numeroCartaoFidelidade {string}, no método search do ClienteController")
+    public void a_resposta_deve_conter_apenas_clientes_com_numero_cartao_fidelidade_no_metodo_search_do_cliente_controller(String numeros) {
+
+        var valores = Arrays.asList(numeros.trim().split(","));
+
+        List<ClienteDtoResponse> content = response.jsonPath()
+                .getList("content", ClienteDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto -> valores.contains(dto.numeroCartaoFidelidade()))
+                .extracting(ClienteDtoResponse::numeroCartaoFidelidade)
+                .containsOnlyOnceElementsOf(valores);
+    }
 }
 

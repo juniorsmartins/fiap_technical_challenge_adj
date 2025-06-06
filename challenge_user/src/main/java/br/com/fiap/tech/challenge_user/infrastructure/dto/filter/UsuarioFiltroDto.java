@@ -12,7 +12,18 @@ public record UsuarioFiltroDto(
         String usuarioId,
 
         @Schema(name = "Nome", description = "Nome do cliente.", example = "Alistair Cockburn")
-        String nome
+        String nome,
+
+        @Schema(name = "email", description = "Endereço de Correio Eletrônico.", example = "martin@email.com")
+        String email,
+
+        @Schema(name = "numeroCartaoFidelidade", description = "Registro em programa de fidelidade para benefícios.",
+                example = "12345-6789-3245")
+        String numeroCartaoFidelidade,
+
+        @Schema(name = "descricao", description = "Espaço livre para anotações.",
+                example = "Atua como contador da empresa.")
+        String descricao
 ) {
 }
 
