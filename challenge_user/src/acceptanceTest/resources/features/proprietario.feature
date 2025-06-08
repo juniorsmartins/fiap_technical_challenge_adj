@@ -34,6 +34,16 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando a requisição Post for feita no método create do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
 
+  Cenario: Post para criar Cliente, com erro por login não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Andrew Hunt" e email "hunt@email.com" e login "mfowler" e senha "12345" e numeroCartaoFidelidade "1234-6666-950"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+
+  Cenario: Post para criar Cliente, com erro por nome não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Martin Fowler" e email "hunt@email.com" e login "ahunt" e senha "12345" e numeroCartaoFidelidade "1234-6666-960"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+
   Cenario: Post para criar Proprietário, com erro por nome vazio, pelo ProprietarioController
     Dado um ProprietarioDtoRequest, com nome "   " e email "hel@email.com" e login "helga" e senha "12345" e descricao "Visita a empresa quinzenalmente"
     Quando a requisição Post for feita no método create do ProprietarioController
@@ -106,18 +116,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Get for feita, com descricao "atendente,contador" no filtro, no método search do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
     E a resposta deve conter apenas proprietarios, com descricao "atendente,contador", no método search do ProprietarioController
-
-
-  Cenario: Delete para apagar Proprietario, com sucesso, pelo ProprietarioController
-    Dado um identificador ID de um proprietario existente, com email "beck2@proton.me"
-    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
-    Entao receber ResponseEntity com HTTP 204 do ProprietarioController
-    E o Proprietario foi apagado do banco de dados pelo ProprietarioController
-
-  Cenario: Delete para apagar Proprietario não encontrado pelo ProprietarioController
-    Dado um identificador ID de um proprietario inexistente
-    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
-    Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 
 
   Cenario: Put para atualizar Proprietario, com sucesso, pelo ProprietarioController
@@ -219,4 +217,16 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25", pelo ProprietarioController
     E o Proprietario no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
     E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25", pelo ProprietarioController
+
+
+  Cenario: Delete para apagar Proprietario, com sucesso, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "beck2@proton.me"
+    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 204 do ProprietarioController
+    E o Proprietario foi apagado do banco de dados pelo ProprietarioController
+
+  Cenario: Delete para apagar Proprietario não encontrado pelo ProprietarioController
+    Dado um identificador ID de um proprietario inexistente
+    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 

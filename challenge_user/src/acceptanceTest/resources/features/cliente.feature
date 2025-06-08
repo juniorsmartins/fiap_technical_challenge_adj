@@ -30,12 +30,17 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
 
   Cenario: Post para criar Cliente, com erro por email não único, pelo ClienteController
-    Dado um ClienteDtoRequest, com nome "Alistair Cockburn" e email "mike@email.com" e login "alistair" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Dado um ClienteDtoRequest, com nome "Alistair Cockburnn" e email "mike@email.com" e login "alistair" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
     Quando a requisição Post for feita no método create do ClienteController
     Entao receber ResponseEntity com HTTP 409 do ClienteController
 
   Cenario: Post para criar Cliente, com erro por login não único, pelo ClienteController
-    Dado um ClienteDtoRequest, com nome "Alistair Cockburn" e email "cock@email.com" e login "mikeb" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Dado um ClienteDtoRequest, com nome "Alistair Cockburnnn" e email "cock@email.com" e login "mikeb" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+
+  Cenario: Post para criar Cliente, com erro por nome não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Mike Beedle" e email "cock@email.com" e login "alistair" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
     Quando a requisição Post for feita no método create do ClienteController
     Entao receber ResponseEntity com HTTP 409 do ClienteController
 
