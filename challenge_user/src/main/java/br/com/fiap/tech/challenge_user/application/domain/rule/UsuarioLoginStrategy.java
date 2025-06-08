@@ -1,26 +1,25 @@
 package br.com.fiap.tech.challenge_user.application.domain.rule;
 
 import br.com.fiap.tech.challenge_user.application.domain.exception.http409.UsuarioNonUniqueEmailException;
-import br.com.fiap.tech.challenge_user.application.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByEmailOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByLoginOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public final class UsuarioEmailStrategy<T extends Usuario> implements UsuarioRulesStrategy<T> {
+public final class UsuarioLoginStrategy<T extends Usuario> implements UsuarioRulesStrategy<T> {
 
-    private final UsuarioFindByEmailOutputPort findByEmailOutputPort;
+    private final UsuarioFindByLoginOutputPort findByLoginOutputPort;
 
     @Override
     public T executar(T usuario) {
 
-        var email = usuario.getEmail();
+        var login = usuario.getLogin();
 
-        findByEmailOutputPort.findByEmail(email)
+        findByLoginOutputPort.findByLogin(login)
                 .ifPresent(existe -> {
-                    throw new UsuarioNonUniqueEmailException(email);
+                    throw new UsuarioNonUniqueEmailException(login);
                 });
 
         return usuario;

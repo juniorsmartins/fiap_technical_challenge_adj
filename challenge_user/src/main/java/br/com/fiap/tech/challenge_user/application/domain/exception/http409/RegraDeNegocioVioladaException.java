@@ -5,18 +5,19 @@ import lombok.Getter;
 import java.io.Serial;
 
 @Getter
-public abstract sealed class RegraDeNegocioVioladaException extends RuntimeException permits UsuarioNonUniqueEmailException {
+public abstract sealed class RegraDeNegocioVioladaException extends RuntimeException
+        permits UsuarioNonUniqueEmailException, UsuarioNonUniqueLoginException {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     private final String messageKey;
 
-    private final String email;
+    private final String valor;
 
-    public RegraDeNegocioVioladaException(final String messageKey, final String email) {
+    public RegraDeNegocioVioladaException(final String messageKey, final String valor) {
         super(messageKey);
         this.messageKey = messageKey;
-        this.email = email;
+        this.valor = valor;
     }
 }

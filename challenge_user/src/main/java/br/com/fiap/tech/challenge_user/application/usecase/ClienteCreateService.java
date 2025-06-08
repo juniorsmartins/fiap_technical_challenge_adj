@@ -9,6 +9,8 @@ import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputP
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClienteCreateService extends AbstractUsuarioCreateService<Cliente, ClienteEntity>
         implements UsuarioCreateInputPort<Cliente> {
@@ -16,7 +18,7 @@ public class ClienteCreateService extends AbstractUsuarioCreateService<Cliente, 
     public ClienteCreateService(
             EntityMapper<Cliente, ClienteEntity> entityMapper,
             UsuarioCreateOutputPort<ClienteEntity> createOutputPort,
-            UsuarioRulesStrategy rulesStrategy) {
+            List<UsuarioRulesStrategy<Cliente>> rulesStrategy) {
         super(entityMapper, createOutputPort, rulesStrategy);
     }
 

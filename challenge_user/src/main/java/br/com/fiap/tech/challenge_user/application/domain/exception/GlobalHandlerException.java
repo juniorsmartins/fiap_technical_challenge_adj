@@ -60,11 +60,11 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
 
         log.info("class = GlobalHandlerException e método = handleRegraViolada", ex);
 
-        var email = ex.getEmail();
+        var valor = ex.getValor();
 
         var httpStatus = HttpStatus.CONFLICT;
         var mensagem = this.messageSource
-                .getMessage(ex.getMessageKey(), new Object[]{email}, LocaleContextHolder.getLocale());
+                .getMessage(ex.getMessageKey(), new Object[]{valor}, LocaleContextHolder.getLocale());
 
         var problemDetail = createProblemDetail(
                 httpStatus,

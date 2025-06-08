@@ -30,7 +30,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700", pelo ProprietarioController
 
   Cenario: Post para criar Proprietário, com erro por email não único, pelo ProprietarioController
-    Dado um ProprietarioDtoRequest, com nome "James Grenning" e email "jeff@gmail.com" e login "grenning" e senha "12345" e descricao "Presente toda quinta-feira"
+    Dado um ProprietarioDtoRequest, com nome "James Grenning" e email "jeff2@gmail.com" e login "grenning" e senha "12345" e descricao "Presente toda quinta-feira"
     Quando a requisição Post for feita no método create do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
 
