@@ -11,7 +11,8 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
       |  Martin Fowler    |   fowler2@email.com    |   mfowler   |   fowler123   |      null    |      null    |    null    |      gerente geral      |
       |     Kent Beck     |     beck2@proton.me    |     kbeck   |     beck123   |      null    |      null    |    null    |       atendente         |
       |  Jeff Sutherland  |     jeff2@gmail.com    |   jsuther   |   suther234   |      null    |      null    |    null    |       investidor        |
-      |    James Clear    |     clear@gmail.com    |    james    |    james12    |   78098-179  |     Rua L    |     300    |        contador         |
+      |    James Clear    |  jamesclear@gmail.com  |    jamesc   |    james12    |   78098-179  |     Rua L    |     300    |        contador         |
+      |    Ron Jeffries   |     ronj@gmail.com     |   jeffries  |   jeffries12  |   78098-800  |     Rua H    |     709    |          teste2         |
 
   Cenario: Post para criar Proprietário, com sucesso, pelo ProprietarioController
     Dado um ProprietarioDtoRequest, com nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e descricao "advogado"
@@ -136,25 +137,27 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
 
   Cenario: Put para atualizar Proprietario, com erro por nome não único, pelo ProprietarioController
-    Dado um identificador ID de um proprietario existente, com email "clear@gmail.com"
-    E um ProprietarioDtoRequest, com nome "Martin Fowler" e email "clear@gmail.com" e login "james" e senha "james12" e descricao "contador"
+    Dado um identificador ID de um proprietario existente, com email "jamesclear@gmail.com"
+    E um ProprietarioDtoRequest, com nome "Martin Fowler" e email "jamesclear@gmail.com" e login "jamesc" e senha "james12" e descricao "contador"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
-    E o Proprietario no database possui nome "James Clear" e email "clear@gmail.com" e login "james" e senha "james12" e descricao "contador"
+    E o Proprietario no database possui nome "James Clear" e email "jamesclear@gmail.com" e login "jamesc" e senha "james12" e descricao "contador"
 
   Cenario: Put para atualizar Proprietario, com erro por email não único, pelo ProprietarioController
-    Dado um identificador ID de um proprietario existente, com email "clear@gmail.com"
-    E um ProprietarioDtoRequest, com nome "James Clear" e email "beck2@proton.me" e login "james" e senha "james12" e descricao "contador"
+    Dado um identificador ID de um proprietario existente, com email "jamesclear@gmail.com"
+    E um ProprietarioDtoRequest, com nome "James Clear" e email "beck2@proton.me" e login "jamesc" e senha "james12" e descricao "contador"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
-    E o Proprietario no database possui nome "James Clear" e email "clear@gmail.com" e login "james" e senha "james12" e descricao "contador"
+    E o Proprietario no database possui nome "James Clear" e email "jamesclear@gmail.com" e login "jamesc" e senha "james12" e descricao "contador"
 
   Cenario: Put para atualizar Proprietario, com erro por login não único, pelo ProprietarioController
-    Dado um identificador ID de um proprietario existente, com email "clear@gmail.com"
-    E um ProprietarioDtoRequest, com nome "James Clear" e email "clear@gmail.com" e login "jsuther" e senha "james12" e descricao "contador"
+    Dado um identificador ID de um proprietario existente, com email "jamesclear@gmail.com"
+    E um ProprietarioDtoRequest, com nome "James Clear" e email "jamesclear@gmail.com" e login "jsuther" e senha "james12" e descricao "contador"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
-    E o Proprietario no database possui nome "James Clear" e email "clear@gmail.com" e login "james" e senha "james12" e descricao "contador"
+    E o Proprietario no database possui nome "James Clear" e email "jamesclear@gmail.com" e login "jamesc" e senha "james12" e descricao "contador"
+
+
 
   Cenario: Put para atualizar Proprietario, com erro por nome vazio, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff2@gmail.com"
@@ -213,13 +216,13 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E o Proprietario no database possui nome "Jeff Sutherland" e email "jeff2@gmail.com" e login "jsuther" e senha "suther234" e descricao "investidor"
 
   Cenario: Put para atualizar Proprietario e remover Endereço (cenário 2), com sucesso, pelo ProprietarioController
-    Dado um identificador ID de um proprietario existente, com email "clear@gmail.com"
-    E um ProprietarioDtoRequest, com nome "James Clear Jr" e email "jclear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
+    Dado um identificador ID de um proprietario existente, com email "ronj@gmail.com"
+    E um ProprietarioDtoRequest, com nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
-    E com ProprietarioDtoResponse no body, com id e nome "James Clear Jr" e email "jclear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
+    E com ProprietarioDtoResponse no body, com id e nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa"
     E sem EnderecoDtoResponse no body pelo ProprietarioController
-    E o Proprietario no database possui nome "James Clear Jr" e email "jclear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
+    E o Proprietario no database possui nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa"
     E sem Endereço salvo no database pelo ProprietarioController
 
   Cenario: Put para atualizar Proprietario e criar Endereço (cenário 3), com sucesso, pelo ProprietarioController
@@ -233,13 +236,13 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E um Endereço salvo no database, com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200", pelo ProprietarioController
 
   Cenario: Put para atualizar Proprietario e atualizar Endereço (cenário 4), com sucesso, pelo ProprietarioController
-    Dado um identificador ID de um proprietario existente, com email "clear@gmail.com"
-    E um ProprietarioDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "jclear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    Dado um identificador ID de um proprietario existente, com email "ronj@gmail.com"
+    E um ProprietarioDtoRequest e EnderecoDtoRequest, com nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 200 do ProprietarioController
-    E com ProprietarioDtoResponse no body, com id e nome "James Clear Jr" e email "jclear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
+    E com ProprietarioDtoResponse no body, com id e nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa"
     E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25", pelo ProprietarioController
-    E o Proprietario no database possui nome "James Clear Jr" e email "jclear@email.com" e login "clear" e senha "clear12" e descricao "TI da empresa"
+    E o Proprietario no database possui nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa"
     E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25", pelo ProprietarioController
 
 
