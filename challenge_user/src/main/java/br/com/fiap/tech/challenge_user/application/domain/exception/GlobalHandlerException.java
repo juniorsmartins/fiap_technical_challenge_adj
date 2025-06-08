@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.domain.exception;
 
 import br.com.fiap.tech.challenge_user.application.domain.exception.http404.ResourceNotFoundException;
+import br.com.fiap.tech.challenge_user.application.domain.exception.http409.RegraDeNegocioVioladaException;
 import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,29 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
         var problemDetail = createProblemDetail(
                 httpStatus,
                 "https://paginax.com/erros/recurso-nao-encontrado",
+                mensagem,
+                null);
+
+        return ResponseEntity
+                .status(httpStatus)
+                .body(problemDetail);
+    }
+
+    // ---------- 409 Conflict ---------- //
+    @ExceptionHandler(RegraDeNegocioVioladaException.class)
+    public ResponseEntity<ProblemDetail> handleRegraViolada(RegraDeNegocioVioladaException ex) {
+
+        log.info("class = GlobalHandlerException e método = handleRegraViolada", ex);
+
+        var valor = ex.getValor();
+
+        var httpStatus = HttpStatus.CONFLICT;
+        var mensagem = this.messageSource
+                .getMessage(ex.getMessageKey(), new Object[]{valor}, LocaleContextHolder.getLocale());
+
+        var problemDetail = createProblemDetail(
+                httpStatus,
+                "https://paginax.com/erros/regra-em-conflito",
                 mensagem,
                 null);
 

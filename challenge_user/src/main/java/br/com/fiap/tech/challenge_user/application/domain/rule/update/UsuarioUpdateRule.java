@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.domain.rule;
+package br.com.fiap.tech.challenge_user.application.domain.rule.update;
 
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;

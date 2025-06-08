@@ -324,5 +324,60 @@ public final class ProprietarioControllerStep {
                 .containsOnlyOnceElementsOf(nomesEsperados);
     }
 
+    @Quando("uma requisição Get for feita, com email {string} no filtro, no método search do ProprietarioController")
+    public void uma_requisicao_get_for_feita_com_email_no_filtro_no_metodo_search_do_proprietario_controller(String emails) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("email", emails)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas proprietarios, com email {string}, no método search do ProprietarioController")
+    public void a_resposta_deve_conter_apenas_proprietarios_com_email_no_metodo_search_do_proprietario_controller(String emails) {
+
+        var valores = Arrays.asList(emails.trim().split(","));
+
+        List<ProprietarioDtoResponse> content = response.jsonPath()
+                .getList("content", ProprietarioDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto ->valores.contains(dto.email()))
+                .extracting(ProprietarioDtoResponse::email)
+                .containsOnlyOnceElementsOf(valores);
+    }
+
+    @Quando("uma requisição Get for feita, com descricao {string} no filtro, no método search do ProprietarioController")
+    public void uma_requisicao_get_for_feita_com_descricao_no_filtro_no_metodo_search_do_proprietario_controller(String descricoes) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("descricao", descricoes)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas proprietarios, com descricao {string}, no método search do ProprietarioController")
+    public void a_resposta_deve_conter_apenas_proprietarios_com_descricao_no_metodo_search_do_proprietario_controller(String descricoes) {
+
+        var valores = Arrays.asList(descricoes.trim().split(","));
+
+        List<ProprietarioDtoResponse> content = response.jsonPath()
+                .getList("content", ProprietarioDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto ->valores.contains(dto.descricao()))
+                .extracting(ProprietarioDtoResponse::descricao)
+                .containsOnlyOnceElementsOf(valores);
+    }
 }
 

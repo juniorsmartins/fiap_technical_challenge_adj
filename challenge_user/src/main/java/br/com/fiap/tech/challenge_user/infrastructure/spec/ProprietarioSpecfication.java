@@ -50,6 +50,31 @@ public final class ProprietarioSpecfication {
                 predicados.add(criteriaBuilder.or(nomePredicates.toArray(new Predicate[0])));
             }
 
+            if (ObjectUtils.isNotEmpty(filtro.email())) {
+
+                var valores = Arrays.asList(filtro.email().split(","));
+
+                List<Predicate> predicates = valores.stream()
+                        .map(valor -> criteriaBuilder.like(criteriaBuilder
+                                .lower(root.get("email")), "%" + valor.toLowerCase() + "%"))
+                        .toList();
+
+                predicados.add(criteriaBuilder.or(predicates.toArray(new Predicate[0])));
+            }
+
+            if (ObjectUtils.isNotEmpty(filtro.descricao())) {
+
+                var valores = Arrays.asList(filtro.descricao().split(","));
+
+                List<Predicate> predicates = valores.stream()
+                        .map(valor -> criteriaBuilder
+                                .like(criteriaBuilder.lower(root.get("descricao")),
+                                        "%" + valor.toLowerCase() + "%"))
+                        .toList();
+
+                predicados.add(criteriaBuilder.or(predicates.toArray(new Predicate[0])));
+            }
+
             return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
         });
     }

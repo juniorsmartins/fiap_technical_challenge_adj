@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Kent Beck\",\n    \"email\": \"beck@email.com\",\n    \"login\": \"beck123\",\n    \"senha\": \"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5501\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Dennis Ritchie\",\n    \"email\": \"ritchie@email.com\",\n    \"login\": \"ritchie123\",\n    \"senha\": \"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5501\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -50,7 +50,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Rozenn Morgat\",\n    \"email\":\"morgat@email.com\",\n    \"login\":\"morgat\",\n    \"senha\":\"morgat123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5514\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    }\n}\n\n",
+									"raw": "{\n    \"nome\":\"Ken Thompson\",\n    \"email\":\"thompson@email.com\",\n    \"login\":\"thompson\",\n    \"senha\":\"12345\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5514\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    }\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -81,7 +81,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"beck@email.com\",\n    \"login\": \"beck123\",\n    \"senha\": \"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5502\"\n}\n\n",
+									"raw": "{\n    \"email\": \"torvalds@email.com\",\n    \"login\": \"torvalds123\",\n    \"senha\": \"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5502\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -112,7 +112,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"  \",\n    \"email\":\"beck@email.com\",\n    \"login\":\"beck123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5503\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"  \",\n    \"email\": \"torvalds@email.com\",\n    \"login\": \"torvalds123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5503\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -143,7 +143,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl\",\n    \"email\":\"beck@email.com\",\n    \"login\":\"beck123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5504\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Linus Torvalds abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl\",\n    \"email\": \"torvalds@email.com\",\n    \"login\": \"torvalds123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5504\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -174,7 +174,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"login\":\"beck123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5505\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Bjarne Stroustrup\",\n    \"login\":\"bjarne123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5505\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -205,7 +205,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"   \",\n    \"login\":\"beck123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5506\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Bjarne Stroustrup\",\n    \"email\":\"   \",\n    \"login\":\"bjarne123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5506\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -236,7 +236,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck.com\",\n    \"login\":\"beck123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5507\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Bjarne Stroustrup\",\n    \"email\":\"bjarne.com\",\n    \"login\":\"bjarne123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5507\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -267,7 +267,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck@email.com\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5508\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Tim Berners-Lee\",\n    \"email\":\"tim@email.com\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5508\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -298,7 +298,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck@email.com\",\n    \"login\":\"    \",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5509\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Tim Berners-Lee\",\n    \"email\":\"tim@email.com\",\n    \"login\":\"    \",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5509\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -329,7 +329,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck@email.com\",\n    \"login\":\"beck01234567890123456789012345678901234567890123456789\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5510\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Tim Berners-Lee\",\n    \"email\":\"tim@email.com\",\n    \"login\":\"tim01234567890123456789012345678901234567890123456789\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5510\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -360,7 +360,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck@email.com\",\n    \"login\":\"beck123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5511\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"James Gosling\",\n    \"email\":\"gosling@email.com\",\n    \"login\":\"gosling123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5511\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -391,7 +391,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck@email.com\",\n    \"login\":\"beck123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5512\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"James Gosling\",\n    \"email\":\"gosling@email.com\",\n    \"login\":\"gosling123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5512\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -422,7 +422,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck@email.com\",\n    \"login\":\"beck123\",\n    \"senha\":\"012345678901234567890123456789012345678901234567890\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5513\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"James Gosling\",\n    \"email\":\"gosling@email.com\",\n    \"login\":\"gosling123\",\n    \"senha\":\"012345678901234567890123456789012345678901234567890\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5513\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -453,7 +453,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"beck.com\",\n    \"login\":\"beck123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5515\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Guido van Rossum\",\n    \"email\":\"rossum.com\",\n    \"login\":\"rossum123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5515\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -585,7 +585,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5604\"\n}\n\n",
+									"raw": "{\n    \"email\":\"hejlsberg@email.com\",\n    \"login\":\"hejlsberg123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5604\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -617,7 +617,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5605\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"hejlsberg@email.com\",\n    \"login\":\"hejlsberg123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5605\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -649,7 +649,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5606\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Anders Hejlsberg MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande\",\n    \"email\":\"hejlsberg@email.com\",\n    \"login\":\"hejlsberg123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5606\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -681,7 +681,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5607\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Brian Kernighan\",\n    \"login\":\"kernighan123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5607\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -713,7 +713,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"   \",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5608\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Brian Kernighan\",\n    \"email\":\"   \",\n    \"login\":\"kernighan123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5608\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -745,7 +745,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5609\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Brian Kernighan\",\n    \"email\":\"kbeck.com\",\n    \"login\":\"kernighan123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5609\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -777,7 +777,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5610\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Donald Knuth\",\n    \"email\":\"knuth@email.com\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5610\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -809,7 +809,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"  \",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5611\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Donald Knuth\",\n    \"email\":\"knuth@email.com\",\n    \"login\":\"  \",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5611\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -841,7 +841,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"beck01234567890123456789012345678901234567890123456789\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5612\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Donald Knuth\",\n    \"email\":\"knuth@email.com\",\n    \"login\":\"knuth01234567890123456789012345678901234567890123456789\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5612\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -873,7 +873,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5613\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Alan Turing\",\n    \"email\":\"turing@email.com\",\n    \"login\":\"turing123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5613\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -905,7 +905,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5614\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Alan Turing\",\n    \"email\":\"turing@email.com\",\n    \"login\":\"turing123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5614\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -937,7 +937,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"012345678901234567890123456789012345678901234567890\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5615\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Alan Turing\",\n    \"email\":\"turing@email.com\",\n    \"login\":\"turing123\",\n    \"senha\":\"012345678901234567890123456789012345678901234567890\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5615\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -969,7 +969,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"  \",\n    \"email\":\"kbeck.com\",\n    \"login\":\"kbeck123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5616\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"  \",\n    \"email\":\"turingemail.com\",\n    \"login\":\"turing123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5616\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1040,6 +1040,62 @@
 										"challenge-user",
 										"clientes",
 										"ae315d6a-89f1-4ef8-82d0-06da701aea69"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes?numeroCartaoFidelidade=4321-1234-003,4321-1234-001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									],
+									"query": [
+										{
+											"key": "usuarioId",
+											"value": "6d648275-37d9-4fd3-800f-025a2262ef4d",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Carl Friedrich Gauss",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "gauss@email.com,euler@email.com",
+											"disabled": true
+										},
+										{
+											"key": "numeroCartaoFidelidade",
+											"value": "4321-1234-003,4321-1234-001"
+										}
 									]
 								}
 							},
@@ -1144,7 +1200,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\",\n    \"endereco\": {\n        \"cep\": \"78050-120\",\n        \"logradouro\": \"Rua Centro 2\",\n        \"numero\": \"130\"\n    }\n}\n\n",
+									"raw": "{\n    \"nome\": \"Steve Wozniak\",\n    \"email\": \"wozniak@email.com\",\n    \"login\": \"wozniak12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\",\n    \"endereco\": {\n        \"cep\": \"78050-120\",\n        \"logradouro\": \"Rua Centro 2\",\n        \"numero\": \"130\"\n    }\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1175,7 +1231,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"email\": \"eich@email.com\",\n    \"login\": \"eich12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1206,7 +1262,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"  \",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"  \",\n    \"email\": \"eich@email.com\",\n    \"login\": \"eich12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1237,7 +1293,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Brendan Eich 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789\",\n    \"email\": \"eich@email.com\",\n    \"login\": \"eich12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1268,7 +1324,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Jon Skeet\",\n    \"login\": \"skeet12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1299,7 +1355,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"   \",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Jon Skeet\",\n    \"email\": \"   \",\n    \"login\": \"skeet12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1330,7 +1386,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mikeemail.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Jon Skeet\",\n    \"email\": \"skeetemail.com\",\n    \"login\": \"skeet12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1361,7 +1417,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Gennady Korotkevich\",\n    \"email\": \"korotkevich@email.com\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1392,7 +1448,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"   \",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Gennady Korotkevich\",\n    \"email\": \"korotkevich@email.com\",\n    \"login\": \"   \",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1423,7 +1479,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike1201234567890123456789012345678901234567890123456789\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Gennady Korotkevich\",\n    \"email\": \"korotkevich@email.com\",\n    \"login\": \"korotkevich1201234567890123456789012345678901234567890123456789\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1454,7 +1510,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Grace Hopper\",\n    \"email\": \"hopper@email.com\",\n    \"login\": \"hopper12\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1485,7 +1541,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"  \",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Grace Hopper\",\n    \"email\": \"hopper@email.com\",\n    \"login\": \"hopper12\",\n    \"senha\": \"  \",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1516,7 +1572,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"012345678901234567890123456789012345678901234567890\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Grace Hopper\",\n    \"email\": \"hopper@email.com\",\n    \"login\": \"hopper12\",\n    \"senha\": \"012345678901234567890123456789012345678901234567890\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1547,7 +1603,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mikeemail.com\",\n    \"login\": \"  \",\n    \"senha\": \"012345678901234567890123456789012345678901234567890\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Niklaus Wirth\",\n    \"email\": \"Wirthemail.com\",\n    \"login\": \"  \",\n    \"senha\": \"012345678901234567890123456789012345678901234567890\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1583,7 +1639,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz B. Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Fritz B. Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1647,7 +1703,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz B. Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"John Backus\",\n    \"email\":\"backus@email.com\",\n    \"login\":\"backus123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1655,7 +1711,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/5d40ce35-fc5f-42bf-b4ec-acb507e4fdb8",
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/df795738-fc6f-433e-aebe-310e896a9f11",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1666,7 +1722,7 @@
 										"v1",
 										"challenge-user",
 										"proprietarios",
-										"5d40ce35-fc5f-42bf-b4ec-acb507e4fdb8"
+										"df795738-fc6f-433e-aebe-310e896a9f11"
 									]
 								}
 							},
@@ -1679,7 +1735,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"email\":\"stallman@email.com\",\n    \"login\":\"stallman123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1711,7 +1767,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"stallman@email.com\",\n    \"login\":\"stallman123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1743,7 +1799,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Richard Stallman abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij\",\n    \"email\":\"stallman@email.com\",\n    \"login\":\"stallman123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1775,7 +1831,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Larry Page\",\n    \"login\":\"page123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1807,7 +1863,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"   \",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Larry Page\",\n    \"email\":\"   \",\n    \"login\":\"page123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1839,7 +1895,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Larry Page\",\n    \"email\":\"page.com\",\n    \"login\":\"page123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1871,7 +1927,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber@email.com\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Sergey Brin\",\n    \"email\":\"brin@email.com\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1903,7 +1959,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"  \",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Sergey Brin\",\n    \"email\":\"brin@email.com\",\n    \"login\":\"  \",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1935,7 +1991,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123haber123haber123haber123haber123haber123haber123haber123haber123\",\n    \"senha\":\"h123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Sergey Brin\",\n    \"email\":\"brin@email.com\",\n    \"login\":\"brin123haber123haber123haber123haber123haber123haber123haber123haber123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1967,7 +2023,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Margaret Hamilton\",\n    \"email\":\"hamilton@email.com\",\n    \"login\":\"hamilton123\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1999,7 +2055,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"  \",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Margaret Hamilton\",\n    \"email\":\"hamilton@email.com\",\n    \"login\":\"hamilton123\",\n    \"senha\":\"  \",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2031,7 +2087,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"h123456789h123456789h123456789h123456789h123456789h123456789\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"Margaret Hamilton\",\n    \"email\":\"hamilton@email.com\",\n    \"login\":\"hamilton123\",\n    \"senha\":\"h123456789h123456789h123456789h123456789h123456789h123456789\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2063,7 +2119,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"haberemail.com\",\n    \"login\":\"haber123\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"lattneremail.com\",\n    \"login\":\"lattner123\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2134,6 +2190,62 @@
 										"challenge-user",
 										"proprietarios",
 										"e42bc7de-2790-4b1e-a58c-30349cec6505"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios?descricao=Advogado,Químico",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									],
+									"query": [
+										{
+											"key": "usuarioId",
+											"value": "051f5dc8-74fe-4d2c-81e2-ddea7c515532",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Linus,Marie",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "curie@email.com,linus@email.com",
+											"disabled": true
+										},
+										{
+											"key": "descricao",
+											"value": "Advogado,Químico"
+										}
 									]
 								}
 							},

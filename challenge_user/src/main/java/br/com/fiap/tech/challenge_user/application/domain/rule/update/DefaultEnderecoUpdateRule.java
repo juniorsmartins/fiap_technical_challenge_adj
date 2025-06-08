@@ -1,6 +1,5 @@
-package br.com.fiap.tech.challenge_user.application.domain.rule;
+package br.com.fiap.tech.challenge_user.application.domain.rule.update;
 
-import br.com.fiap.tech.challenge_user.application.domain.rule.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;

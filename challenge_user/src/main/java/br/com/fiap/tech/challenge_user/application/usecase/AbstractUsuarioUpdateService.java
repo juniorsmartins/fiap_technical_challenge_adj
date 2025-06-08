@@ -1,9 +1,10 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
+import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.application.domain.rule.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.application.domain.rule.update.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.application.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -30,7 +32,12 @@ public abstract class AbstractUsuarioUpdateService<T extends Usuario, E extends 
 
     private final EnderecoUpdateRule<T, E> enderecoUpdateRule;
 
+    private final List<UsuarioRulesStrategy<T>> rulesStrategy;
+
     public T update(@NonNull UUID id, @NonNull T usuario) {
+
+        usuario.setUsuarioId(id);
+        this.rules(usuario);
 
         return findByIdOutputPort.findById(id)
                 .map(entity -> usuarioUpdateRule.updateUser(usuario, entity))
@@ -41,6 +48,11 @@ public abstract class AbstractUsuarioUpdateService<T extends Usuario, E extends 
                     log.error("AbstractUsuarioUpdateService - Usuário não encontrado por id: {}.", id);
                     return new UsuarioNotFoundException(id);
                 });
+    }
+
+    private T rules(T usuario) {
+        rulesStrategy.forEach(rule -> rule.executar(usuario));
+        return usuario;
     }
 }
 
