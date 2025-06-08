@@ -579,9 +579,9 @@ Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arqui
 
 #### Link para a Collection do Postman
 
-[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge--ADJ.postman_collection.json)  
 
-https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge--ADJ.postman_collection.json
 
 #### Descrição dos Testes Manuais
 
