@@ -36,6 +36,7 @@ public abstract class AbstractUsuarioUpdateService<T extends Usuario, E extends 
 
     public T update(@NonNull UUID id, @NonNull T usuario) {
 
+        usuario.setUsuarioId(id);
         this.rules(usuario);
 
         return findByIdOutputPort.findById(id)
