@@ -16,10 +16,13 @@ public final class UsuarioNomeStrategy<T extends Usuario> implements UsuarioRule
     public T executar(T usuario) {
 
         var nome = usuario.getNome();
+        var id = usuario.getUsuarioId();
 
         findByNomeOutputPort.findByNome(nome)
                 .ifPresent(existe -> {
-                    throw new UsuarioNonUniqueNomeException(nome);
+                    if (!existe.getUsuarioId().equals(id)) {
+                        throw new UsuarioNonUniqueNomeException(nome);
+                    }
                 });
 
         return usuario;

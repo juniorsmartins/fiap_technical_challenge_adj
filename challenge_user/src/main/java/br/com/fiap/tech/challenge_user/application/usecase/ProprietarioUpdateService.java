@@ -1,16 +1,18 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.application.domain.model.Proprietario;
+import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.application.domain.rule.update.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.application.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,8 +24,9 @@ public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Prop
             UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioUpdateRule<Proprietario, ProprietarioEntity> usuarioUpdateRule,
-            EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule) {
-        super(entityMapper, createOutputPort, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule);
+            EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule,
+            List<UsuarioRulesStrategy<Proprietario>> rulesStrategies) {
+        super(entityMapper, createOutputPort, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, rulesStrategies);
     }
 
     @Override

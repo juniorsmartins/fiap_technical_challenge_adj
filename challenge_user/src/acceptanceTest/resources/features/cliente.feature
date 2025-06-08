@@ -132,6 +132,27 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Put for feita no método update do ClienteController
     Entao receber ResponseEntity com HTTP 404 do ClienteController
 
+  Cenario: Put para atualizar Cliente, com erro por nome não único, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Mike Beedle" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por email não único, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunningham" e email "mike@email.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por login não único, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunningham" e email "ward@gmail.com" e login "mikeb" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
   Cenario: Put para atualizar Cliente, com erro por nome vazio, pelo ClienteController
     Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
     E um ClienteDtoRequest, com nome "  " e email "wardcunn@gmail.com" e login "wardcunn" e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"

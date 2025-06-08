@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.domain.rule;
 
-import br.com.fiap.tech.challenge_user.application.domain.exception.http409.UsuarioNonUniqueEmailException;
+import br.com.fiap.tech.challenge_user.application.domain.exception.http409.UsuarioNonUniqueLoginException;
 import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByLoginOutputPort;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +16,13 @@ public final class UsuarioLoginStrategy<T extends Usuario> implements UsuarioRul
     public T executar(T usuario) {
 
         var login = usuario.getLogin();
+        var id = usuario.getUsuarioId();
 
         findByLoginOutputPort.findByLogin(login)
                 .ifPresent(existe -> {
-                    throw new UsuarioNonUniqueEmailException(login);
+                    if (!existe.getUsuarioId().equals(id)) {
+                        throw new UsuarioNonUniqueLoginException(login);
+                    }
                 });
 
         return usuario;
