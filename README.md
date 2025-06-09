@@ -300,6 +300,55 @@ services:
 
 #### Boas Práticas Utilizadas
 
+##### Clean Code
+
+- Nomes Significativos:
+Prática: Use nomes de variáveis, métodos e classes que revelem claramente sua intenção e propósito. Evite abreviações ambíguas
+ou nomes genéricos como data ou temp.
+
+- Funções Pequenas e Focadas:
+Prática: Escreva métodos curtos que façam apenas uma coisa e a façam bem. Evite métodos longos com múltiplas responsabilidades.
+
+- Formatação Consistente:
+Prática: Siga um padrão de formatação consistente, como indentação de 2 ou 4 espaços e organização lógica de classes (atributos,
+construtores, métodos).
+
+- Tratamento de Erros:
+Prática: Use exceções em vez de códigos de erro e forneça mensagens claras. Estruture o tratamento de erros de forma centralizada.
+
+- Evite Duplicação de Código:
+Prática: Refatore trechos duplicados em métodos ou classes reutilizáveis. Use padrões como Template Method ou Strategy
+quando apropriado.
+
+- Testes Unitários:
+Prática: Escreva testes unitários claros e independentes para cada funcionalidade. Use nomes de teste que descrevam o
+comportamento esperado.
+
+- Uso de Objetos e Estruturas de Dados:
+Prática: Escolha entre objetos (que encapsulam comportamento) e estruturas de dados (que expõem dados) com base na
+necessidade. Evite híbridos confusos.
+
+- Simplicidade:
+Prática: Priorize soluções simples e evite complexidade desnecessária. Refatore continuamente para remover código obsoleto
+ou redundante.
+
+- Limite o Escopo de Variáveis:
+Prática: Declare variáveis o mais próximo possível de onde são usadas e minimize seu escopo. Evite variáveis globais ou
+com vida longa desnecessária.
+
+- Prefira Imutabilidade:
+Prática: Sempre que possível, use objetos imutáveis e evite alterações de estado após a criação. No Java, utilize final
+e coleções imutáveis.
+
+- Siga Convenções de Nomenclatura:
+Prática: Adote convenções de nomenclatura consistentes com a linguagem e o framework, como camelCase para métodos Java
+e nomes descritivos para endpoints REST.
+
+- Refatore Incrementalmente:
+Prática: Aplique melhorias contínuas ao código, refatorando pequenos trechos sempre que identificar oportunidades,
+sem esperar por grandes revisões.
+
+
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
 
@@ -573,6 +622,26 @@ Documentação Viva: Cenários .feature documentam o comportamento da API, útei
 Foco no Comportamento: Testes validam resultados visíveis (ex.: status 201), não detalhes internos.
 Integração com TDD: Testes de aceitação guiam o desenvolvimento iterativo.
 Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arquitetura Hexagonal.
+
+
+##### Design Patterns
+
+- Strategy
+O Strategy é um padrão de projeto comportamental que permite que você defina uma família de algoritmos, coloque-os em classes separadas,
+e faça os objetos deles intercambiáveis.
+
+O padrão Strategy sugere que você pegue uma classe que faz algo específico em diversas maneiras diferentes e extraia todos esses algoritmos 
+para classes separadas chamadas estratégias.
+
+A classe original, chamada contexto, deve ter um campo para armazenar uma referência para um dessas estratégias. O contexto delega o 
+trabalho para um objeto estratégia ao invés de executá-lo por conta própria.
+
+O contexto não é responsável por selecionar um algoritmo apropriado para o trabalho. Ao invés disso, o cliente passa a estratégia desejada 
+para o contexto. Na verdade, o contexto não sabe muito sobre as estratégias. Ele trabalha com todas elas através de uma interface genérica, 
+que somente expõe um único método para acionar o algoritmo encapsulado dentro da estratégia selecionada.
+
+Desta forma o contexto se torna independente das estratégias concretas, então você pode adicionar novos algoritmos ou modificar os existentes 
+sem modificar o código do contexto ou outras estratégias.
 
 
 ## Collections para Teste
