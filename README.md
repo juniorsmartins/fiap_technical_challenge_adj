@@ -626,7 +626,8 @@ Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arqui
 
 ##### Design Patterns
 
-- Strategy
+Strategy
+
 O Strategy é um padrão de projeto comportamental que permite que você defina uma família de algoritmos, coloque-os em classes separadas,
 e faça os objetos deles intercambiáveis.
 
@@ -642,6 +643,11 @@ que somente expõe um único método para acionar o algoritmo encapsulado dentro
 
 Desta forma o contexto se torna independente das estratégias concretas, então você pode adicionar novos algoritmos ou modificar os existentes 
 sem modificar o código do contexto ou outras estratégias.
+
+O projeto possui duas classes, chamadas AbstractUsuarioCreateService e AbstractUsuarioUpdateService, que implementam o Design Pattern 
+Strategy. Essas duas classes são o contexto, cadastrar e atualizar, e ambos usam a interface UsuarioRulesStrategy, que é composta por
+várias classes com estratégias de regras específicas, como, por exemplo: não permitir cadastros e atualizações com nomes repetidos, 
+emails repetidos e logins repetidos. São regras que garantes que tais propriedades sejam únicas. 
 
 
 ## Collections para Teste
