@@ -2,6 +2,7 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.SenhaDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
@@ -53,6 +54,8 @@ public final class ClienteControllerStep {
     private ClienteEntity clienteEntity;
 
     private EnderecoDtoResponse enderecoDtoResponse;
+
+    private SenhaDtoRequest senhaDtoRequest;
 
     @Before
     public void setUp() {
@@ -276,6 +279,7 @@ public final class ClienteControllerStep {
     public void sem_endereco_dto_response_no_body() {
 
         clienteDtoResponse = response.as(ClienteDtoResponse.class);
+
         assertThat(clienteDtoResponse.usuarioId()).isNotNull();
         assertThat(clienteDtoResponse.endereco()).isNull();
     }
@@ -284,6 +288,7 @@ public final class ClienteControllerStep {
     public void sem_endereco_salvo_no_database() {
 
         var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
+
         assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
@@ -370,6 +375,29 @@ public final class ClienteControllerStep {
                 .allMatch(dto -> valores.contains(dto.numeroCartaoFidelidade()))
                 .extracting(ClienteDtoResponse::numeroCartaoFidelidade)
                 .containsOnlyOnceElementsOf(valores);
+    }
+
+    @Dado("um SenhaDtoRequest, com senhaAntiga {string} e senhaNova {string}, para o ClienteController")
+    public void um_senha_dto_request_com_senha_antiga_e_senha_nova_para_o_cliente_controller(
+            String senhaAntiga, String senhaNova) {
+
+        senhaDtoRequest = new SenhaDtoRequest(
+                clienteEntity.getUsuarioId(), senhaAntiga, senhaNova);
+
+        assertThat(senhaDtoRequest).isNotNull();
+    }
+
+    @Quando("uma requisição Patch for feita no método updatePassword do ClienteController")
+    public void uma_requisicao_patch_for_feita_no_metodo_update_password_do_cliente_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(senhaDtoRequest)
+                .when()
+                .patch();
+
+        assertThat(response).isNotNull();
     }
 }
 
