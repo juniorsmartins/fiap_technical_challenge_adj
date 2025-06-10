@@ -7,12 +7,13 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
   Contexto:
     Dado ambiente de teste ativado para Proprietário de Challenge_User
     Dado cadastros de Proprietários disponíveis no banco de dados
-      |       nome        |          email         |     login   |     senha     |      cep     |  logradouro  |   numero   |        descricao        |
+      |       nome        |          email         |    login    |     senha     |      cep     |  logradouro  |   numero   |        descricao        |
       |  Martin Fowler    |   fowler2@email.com    |   mfowler   |   fowler123   |      null    |      null    |    null    |      gerente geral      |
       |     Kent Beck     |     beck2@proton.me    |     kbeck   |     beck123   |      null    |      null    |    null    |       atendente         |
       |  Jeff Sutherland  |     jeff2@gmail.com    |   jsuther   |   suther234   |      null    |      null    |    null    |       investidor        |
       |    James Clear    |  jamesclear@gmail.com  |    jamesc   |    james12    |   78098-179  |     Rua L    |     300    |        contador         |
       |    Ron Jeffries   |     ronj@gmail.com     |   jeffries  |   jeffries12  |   78098-800  |     Rua H    |     709    |          teste2         |
+      |     Eric Evans    |     eric@yahoo.com     |     evans   |    evans123   |   75666-908  |     Rua O    |     110    |          teste3         |
 
   Cenario: Post para criar Proprietário, com sucesso, pelo ProprietarioController
     Dado um ProprietarioDtoRequest, com nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e descricao "advogado"
@@ -133,9 +134,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 404 do ProprietarioController
 
-
-
-
   Cenario: Put para atualizar Proprietario, com erro por nome não único, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jamesclear@gmail.com"
     E um ProprietarioDtoRequest, com nome "Martin Fowler" e email "jamesclear@gmail.com" e login "jamesc" e senha "james12" e descricao "contador"
@@ -156,8 +154,6 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Put for feita no método update do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
     E o Proprietario no database possui nome "James Clear" e email "jamesclear@gmail.com" e login "jamesc" e senha "james12" e descricao "contador"
-
-
 
   Cenario: Put para atualizar Proprietario, com erro por nome vazio, pelo ProprietarioController
     Dado um identificador ID de um proprietario existente, com email "jeff2@gmail.com"
@@ -244,6 +240,55 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25", pelo ProprietarioController
     E o Proprietario no database possui nome "Ron Jeffries Jr" e email "ronjeff@gmail.com" e login "rjeffries" e senha "rjeffries12" e descricao "TI da empresa"
     E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25", pelo ProprietarioController
+
+
+  Cenario: Patch para trocar a senha do Proprietario, com sucesso, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "eric@yahoo.com"
+    E um SenhaDtoRequest, com senhaAntiga "evans123" e senhaNova "ericevans1", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 204 do ProprietarioController
+    E o Proprietario no database possui nome "Eric Evans" e email "eric@yahoo.com" e login "evans" e senha "ericevans1" e descricao "teste3"
+
+  Cenario: Patch para trocar a senha do Proprietario, com erro de não encontrado, pelo ProprietarioController
+    Dado um identificador ID de um proprietario inexistente
+    E um SenhaDtoRequest, com senhaAntiga "evans123" e senhaNova "ericevans1", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 404 do ProprietarioController
+
+  Cenario: Patch para trocar a senha do Proprietario, com erro por senha antiga incompatível, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "eric@yahoo.com"
+    E um SenhaDtoRequest, com senhaAntiga "senhaincompativel" e senhaNova "ericevans1", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 409 do ProprietarioController
+    E o Proprietario no database possui nome "Eric Evans" e email "eric@yahoo.com" e login "evans" e senha "evans123" e descricao "teste3"
+
+  Cenario: Patch para trocar a senha do Proprietario, com erro por senha antiga vazia, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "eric@yahoo.com"
+    E um SenhaDtoRequest, com senhaAntiga "  " e senhaNova "ericevans1", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 400 do ProprietarioController
+    E o Proprietario no database possui nome "Eric Evans" e email "eric@yahoo.com" e login "evans" e senha "evans123" e descricao "teste3"
+
+  Cenario: Patch para trocar a senha do Proprietario, com erro por senha nova vazia, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "eric@yahoo.com"
+    E um SenhaDtoRequest, com senhaAntiga "evans123" e senhaNova "   ", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 400 do ProprietarioController
+    E o Proprietario no database possui nome "Eric Evans" e email "eric@yahoo.com" e login "evans" e senha "evans123" e descricao "teste3"
+
+  Cenario: Patch para trocar a senha do Proprietario, com erro por senha antiga maior, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "eric@yahoo.com"
+    E um SenhaDtoRequest, com senhaAntiga "00001234567890123456789012345678901234567890123456789" e senhaNova "ericevans1", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 400 do ProprietarioController
+    E o Proprietario no database possui nome "Eric Evans" e email "eric@yahoo.com" e login "evans" e senha "evans123" e descricao "teste3"
+
+  Cenario: Patch para trocar a senha do Proprietario, com erro por senha nova maior, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "eric@yahoo.com"
+    E um SenhaDtoRequest, com senhaAntiga "evans123" e senhaNova "00001234567890123456789012345678901234567890123456789", para o ProprietarioController
+    Quando uma requisição Patch for feita no método updatePassword do ProprietarioController
+    Entao receber ResponseEntity com HTTP 400 do ProprietarioController
+    E o Proprietario no database possui nome "Eric Evans" e email "eric@yahoo.com" e login "evans" e senha "evans123" e descricao "teste3"
 
 
   Cenario: Delete para apagar Proprietario, com sucesso, pelo ProprietarioController
