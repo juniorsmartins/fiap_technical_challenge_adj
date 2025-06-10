@@ -2,7 +2,7 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.SenhaDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
@@ -54,6 +54,8 @@ public final class ProprietarioControllerStep {
     private EnderecoDtoResponse enderecoDtoResponse;
 
     private ProprietarioEntity proprietarioEntity;
+
+    private SenhaDtoRequest senhaDtoRequest;
 
     @Before
     public void setUp() {
@@ -378,6 +380,29 @@ public final class ProprietarioControllerStep {
                 .allMatch(dto ->valores.contains(dto.descricao()))
                 .extracting(ProprietarioDtoResponse::descricao)
                 .containsOnlyOnceElementsOf(valores);
+    }
+
+    @Dado("um SenhaDtoRequest, com senhaAntiga {string} e senhaNova {string}, para o ProprietarioController")
+    public void um_senha_dto_request_com_senha_antiga_e_senha_nova_para_o_proprietario_controller(
+            String senhaAntiga, String senhaNova) {
+
+        senhaDtoRequest = new SenhaDtoRequest(
+                proprietarioEntity.getUsuarioId(), senhaAntiga, senhaNova);
+
+        assertThat(senhaDtoRequest).isNotNull();
+    }
+
+    @Quando("uma requisição Patch for feita no método updatePassword do ProprietarioController")
+    public void uma_requisicao_patch_for_feita_no_metodo_update_password_do_proprietario_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(senhaDtoRequest)
+                .when()
+                .patch();
+
+        assertThat(response).isNotNull();
     }
 }
 
