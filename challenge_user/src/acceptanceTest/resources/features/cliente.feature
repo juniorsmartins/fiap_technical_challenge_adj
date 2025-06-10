@@ -12,6 +12,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     | Arie van Bennekum |     arie@proton.me    |    ariev   |    arie123    |      null    |      null    |    null    |     1234-5555-001        |
     |  Ward Cunningham  |     ward@gmail.com    |    wardc   |    ward234    |      null    |      null    |    null    |     1234-5555-002        |
     |  James Grenning   |    james@gmail.com    |    james   |    james12    |   78098-179  |     Rua L    |     300    |     1234-5555-003        |
+    |     Josh Long     |     long@gmail.com    |    jlong   |    jlong12    |   79666-800  |     Rua Z    |     800    |     1234-5545-004        |
 
   Cenario: Post para criar Cliente, com sucesso, pelo ClienteController
     Dado um ClienteDtoRequest, com nome "Jim Highsmith" e email "jim@email.com" e login "highsmith" e senha "high123" e numeroCartaoFidelidade "1234-6666-004"
@@ -238,6 +239,55 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
     E o Cliente no database possui nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
     E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+
+
+  Cenario: Patch para trocar a senha do Cliente, com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 204 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "j!long45" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro de não encontrado, pelo ClienteController
+    Dado um identificador ID de um cliente inexistente
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 404 do ClienteController
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha antiga incompatível, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "senhaincompativel" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha antiga vazia, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "  " e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha nova vazia, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "   ", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha antiga maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "00001234567890123456789012345678901234567890123456789" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha nova maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "00001234567890123456789012345678901234567890123456789", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
 
 
   Cenario: Delete para apagar Cliente, com sucesso, pelo ClienteController
