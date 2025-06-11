@@ -665,9 +665,11 @@ emails repetidos e logins repetidos. São regras que garantes que tais proprieda
 
 #### Link para a Collection do Postman
 
-[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge--ADJ.postman_collection.json)  
+O arquvo de coleções de teste do Postman está neste diretório: https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
 
-https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge--ADJ.postman_collection.json
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v3.postman_collection.json)  
+
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v3.postman_collection.json
 
 #### Descrição dos Testes Manuais
 
