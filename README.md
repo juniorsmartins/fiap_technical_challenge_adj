@@ -103,10 +103,12 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 | Get       | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
 | Post      | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
+| Patch     | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 3) |           204 No Content                  |
 | Delete    | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
 | Get       | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
 | Post      | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
+| Patch     | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 3) |           204 No Content                  |
 
 ##### Resposta 1 #####
 ```
@@ -213,6 +215,15 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
         "numero": "130"
     },
     "descricao": "Presente pela tarde"
+}
+```
+
+##### Requisição 3 #####
+```
+{
+    "usuarioId":"86522917-f507-459a-8ef9-93015089a5b2",
+    "senhaAntiga":"brian123",
+    "senhaNova":"brian123"
 }
 ```
 
