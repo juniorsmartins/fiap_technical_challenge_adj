@@ -103,10 +103,12 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 | Get       | http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b                                      |    200 OK + Json no body (resposta 1)     |
 | Post      | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 1) |  201 Created + Json no body (resposta 2)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a      (+ Json no body - requisição 1) |    200 OK + Json no body (resposta 2)     |
+| Patch     | http://localhost:9050/api/v1/challenge-user/clientes                                           (+ Json no body - requisição 3) |           204 No Content                  |
 | Delete    | http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532                                 |           204 No Content                  |
 | Get       | http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd                                 |    200 OK + Json no body (resposta 3)     |
 | Post      | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
+| Patch     | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 3) |           204 No Content                  |
 
 ##### Resposta 1 #####
 ```
@@ -216,6 +218,15 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 }
 ```
 
+##### Requisição 3 #####
+```
+{
+    "usuarioId":"86522917-f507-459a-8ef9-93015089a5b2",
+    "senhaAntiga":"brian123",
+    "senhaNova":"brian123"
+}
+```
+
 
 Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
@@ -299,6 +310,55 @@ services:
 ## Qualidade do Código
 
 #### Boas Práticas Utilizadas
+
+##### Clean Code
+
+- Nomes Significativos:
+Prática: Use nomes de variáveis, métodos e classes que revelem claramente sua intenção e propósito. Evite abreviações ambíguas
+ou nomes genéricos como data ou temp.
+
+- Funções Pequenas e Focadas:
+Prática: Escreva métodos curtos que façam apenas uma coisa e a façam bem. Evite métodos longos com múltiplas responsabilidades.
+
+- Formatação Consistente:
+Prática: Siga um padrão de formatação consistente, como indentação de 2 ou 4 espaços e organização lógica de classes (atributos,
+construtores, métodos).
+
+- Tratamento de Erros:
+Prática: Use exceções em vez de códigos de erro e forneça mensagens claras. Estruture o tratamento de erros de forma centralizada.
+
+- Evite Duplicação de Código:
+Prática: Refatore trechos duplicados em métodos ou classes reutilizáveis. Use padrões como Template Method ou Strategy
+quando apropriado.
+
+- Testes Unitários:
+Prática: Escreva testes unitários claros e independentes para cada funcionalidade. Use nomes de teste que descrevam o
+comportamento esperado.
+
+- Uso de Objetos e Estruturas de Dados:
+Prática: Escolha entre objetos (que encapsulam comportamento) e estruturas de dados (que expõem dados) com base na
+necessidade. Evite híbridos confusos.
+
+- Simplicidade:
+Prática: Priorize soluções simples e evite complexidade desnecessária. Refatore continuamente para remover código obsoleto
+ou redundante.
+
+- Limite o Escopo de Variáveis:
+Prática: Declare variáveis o mais próximo possível de onde são usadas e minimize seu escopo. Evite variáveis globais ou
+com vida longa desnecessária.
+
+- Prefira Imutabilidade:
+Prática: Sempre que possível, use objetos imutáveis e evite alterações de estado após a criação. No Java, utilize final
+e coleções imutáveis.
+
+- Siga Convenções de Nomenclatura:
+Prática: Adote convenções de nomenclatura consistentes com a linguagem e o framework, como camelCase para métodos Java
+e nomes descritivos para endpoints REST.
+
+- Refatore Incrementalmente:
+Prática: Aplique melhorias contínuas ao código, refatorando pequenos trechos sempre que identificar oportunidades,
+sem esperar por grandes revisões.
+
 
 ##### SOLID
 - Princípio da Responsabilidade Única (SRP):
@@ -575,13 +635,41 @@ Integração com TDD: Testes de aceitação guiam o desenvolvimento iterativo.
 Manutenibilidade: Step definitions reutilizáveis e testes alinhados com a Arquitetura Hexagonal.
 
 
+##### Design Patterns
+
+Strategy
+
+O Strategy é um padrão de projeto comportamental que permite que você defina uma família de algoritmos, coloque-os em classes separadas,
+e faça os objetos deles intercambiáveis.
+
+O padrão Strategy sugere que você pegue uma classe que faz algo específico em diversas maneiras diferentes e extraia todos esses algoritmos 
+para classes separadas chamadas estratégias.
+
+A classe original, chamada contexto, deve ter um campo para armazenar uma referência para um dessas estratégias. O contexto delega o 
+trabalho para um objeto estratégia ao invés de executá-lo por conta própria.
+
+O contexto não é responsável por selecionar um algoritmo apropriado para o trabalho. Ao invés disso, o cliente passa a estratégia desejada 
+para o contexto. Na verdade, o contexto não sabe muito sobre as estratégias. Ele trabalha com todas elas através de uma interface genérica, 
+que somente expõe um único método para acionar o algoritmo encapsulado dentro da estratégia selecionada.
+
+Desta forma o contexto se torna independente das estratégias concretas, então você pode adicionar novos algoritmos ou modificar os existentes 
+sem modificar o código do contexto ou outras estratégias.
+
+O projeto possui duas classes, chamadas AbstractUsuarioCreateService e AbstractUsuarioUpdateService, que implementam o Design Pattern 
+Strategy. Essas duas classes são o contexto, cadastrar e atualizar, e ambos usam a interface UsuarioRulesStrategy, que é composta por
+várias classes com estratégias de regras específicas, como, por exemplo: não permitir cadastros e atualizações com nomes repetidos, 
+emails repetidos e logins repetidos. São regras que garantes que tais propriedades sejam únicas. 
+
+
 ## Collections para Teste
 
 #### Link para a Collection do Postman
 
-[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ.postman_collection.json)  
+O arquvo de coleções de teste do Postman está neste diretório: https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
 
-https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v3.postman_collection.json)  
+
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v3.postman_collection.json
 
 #### Descrição dos Testes Manuais
 

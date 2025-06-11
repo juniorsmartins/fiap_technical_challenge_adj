@@ -7,18 +7,43 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
   Contexto:
     Dado ambiente de teste ativado para Challenge_User
     Dado cadastros de Clientes disponíveis no banco de dados
-    |       nome        |         email         |     login   |     senha     |      cep     |  logradouro  |   numero   |  numeroCartaoFidelidade  |
-    |  Martin Fowler    |   fowler@email.com    |   mfowler   |   fowler123   |      null    |      null    |    null    |     1234-5555-000        |
-    |     Kent Beck     |     beck@proton.me    |     kbeck   |     beck123   |      null    |      null    |    null    |     1234-5555-001        |
-    |  Jeff Sutherland  |     jeff@gmail.com    |   jsuther   |   suther234   |      null    |      null    |    null    |     1234-5555-002        |
-    |    James Clear    |    james@gmail.com    |    james    |    james12    |   78098-179  |     Rua L    |     300    |     1234-5555-003        |
+    |       nome        |         email         |    login   |     senha     |      cep     |  logradouro  |   numero   |  numeroCartaoFidelidade  |
+    |    Mike Beedle    |     mike@email.com    |    mikeb   |    mike123    |      null    |      null    |    null    |     1234-5555-000        |
+    | Arie van Bennekum |     arie@proton.me    |    ariev   |    arie123    |      null    |      null    |    null    |     1234-5555-001        |
+    |  Ward Cunningham  |     ward@gmail.com    |    wardc   |    ward234    |      null    |      null    |    null    |     1234-5555-002        |
+    |  James Grenning   |    james@gmail.com    |    james   |    james12    |   78098-179  |     Rua L    |     300    |     1234-5555-003        |
+    |     Josh Long     |     long@gmail.com    |    jlong   |    jlong12    |   79666-800  |     Rua Z    |     800    |     1234-5545-004        |
 
   Cenario: Post para criar Cliente, com sucesso, pelo ClienteController
-    Dado um ClienteDtoRequest, com nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e numeroCartaoFidelidade "1234-6666-004"
+    Dado um ClienteDtoRequest, com nome "Jim Highsmith" e email "jim@email.com" e login "highsmith" e senha "high123" e numeroCartaoFidelidade "1234-6666-004"
     Quando a requisição Post for feita no método create do ClienteController
     Entao receber ResponseEntity com HTTP 201 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e numeroCartaoFidelidade "1234-6666-004"
-    E o Cliente cadastrado no banco de dados possui nome "Robert Martin" e email "rm@email.com" e login "rmartin" e senha "rm123" e numeroCartaoFidelidade "1234-6666-004"
+    E com ClienteDtoResponse no body, com id e nome "Jim Highsmith" e email "jim@email.com" e login "highsmith" e senha "high123" e numeroCartaoFidelidade "1234-6666-004"
+    E o Cliente cadastrado no banco de dados possui nome "Jim Highsmith" e email "jim@email.com" e login "highsmith" e senha "high123" e numeroCartaoFidelidade "1234-6666-004"
+
+  Cenario: Post para criar Cliente e Endereço, com sucesso, pelo ClienteController
+    Dado um ClienteDtoRequest e EnderecoDtoRequest, com nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013" e com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 201 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
+    E com EnderecoDtoResponse no body, com id e cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+    E o Cliente cadastrado no banco de dados possui nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
+    E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
+
+  Cenario: Post para criar Cliente, com erro por email não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Alistair Cockburnn" e email "mike@email.com" e login "alistair" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+
+  Cenario: Post para criar Cliente, com erro por login não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Alistair Cockburnnn" e email "cock@email.com" e login "mikeb" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+
+  Cenario: Post para criar Cliente, com erro por nome não único, pelo ClienteController
+    Dado um ClienteDtoRequest, com nome "Mike Beedle" e email "cock@email.com" e login "alistair" e senha "12345" e numeroCartaoFidelidade "1234-6666-987"
+    Quando a requisição Post for feita no método create do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
 
   Cenario: Post para criar Cliente, com erro por nome vazio, pelo ClienteController
     Dado um ClienteDtoRequest, com nome "   " e email "hel@email.com" e login "helga" e senha "12345" e numeroCartaoFidelidade "1234-6666-005"
@@ -60,21 +85,12 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando a requisição Post for feita no método create do ClienteController
     Entao receber ResponseEntity com HTTP 400 do ClienteController
 
-  Cenario: Post para criar Cliente e Endereço, com sucesso, pelo ClienteController
-    Dado um ClienteDtoRequest e EnderecoDtoRequest, com nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013" e com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
-    Quando a requisição Post for feita no método create do ClienteController
-    Entao receber ResponseEntity com HTTP 201 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
-    E com EnderecoDtoResponse no body, com id e cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
-    E o Cliente cadastrado no banco de dados possui nome "Geoffrey Blaney" e email "blaney@email.com" e login "blaney" e senha "blaney12" e numeroCartaoFidelidade "1234-6666-013"
-    E um Endereço salvo no database, com cep "23520-123" e logradouro "Rua Hermes Lima" e número "700"
-
 
   Cenario: Get para consultar Cliente, com sucesso, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "fowler@email.com"
+    Dado um identificador ID de um cliente existente, com email "mike@email.com"
     Quando uma requisição Get for feita no método findById do ClienteController
     Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "Martin Fowler" e email "fowler@email.com" e login "mfowler" e senha "fowler123" e numeroCartaoFidelidade "1234-5555-000"
+    E com ClienteDtoResponse no body, com id e nome "Mike Beedle" e email "mike@email.com" e login "mikeb" e senha "mike123" e numeroCartaoFidelidade "1234-5555-000"
 
   Cenario: Get para consultar Cliente não encontrado pelo ClienteController
     Dado um identificador ID de um cliente inexistente
@@ -82,8 +98,200 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 404 do ClienteController
 
 
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por um nome, pelo ClienteController
+    Quando uma requisição Get for feita, com nome "Mike Beedle" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com nome "Mike Beedle", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois nomes, pelo ClienteController
+    Quando uma requisição Get for feita, com nome "James Grenning,Mike Beedle" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com nome "James Grenning,Mike Beedle", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois emails, pelo ClienteController
+    Quando uma requisição Get for feita, com email "ward@gmail.com,arie@proton.me" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com email "ward@gmail.com,arie@proton.me", no método search do ClienteController
+
+  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois numeroCartaoFidelidade, pelo ClienteController
+    Quando uma requisição Get for feita, com numeroCartaoFidelidade "1234-5555-003,1234-5555-001" no filtro, no método search do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E a resposta deve conter apenas clientes, com numeroCartaoFidelidade "1234-5555-003,1234-5555-001", no método search do ClienteController
+
+
+  Cenario: Put para atualizar Cliente, com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "arie@proton.me"
+    E um ClienteDtoRequest, com nome "Arie v. Bennekum" e email "arievb@proton.me" e login "arievb" e senha "arievb123" e numeroCartaoFidelidade "1234-8888-001"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "Arie v. Bennekum" e email "arievb@proton.me" e login "arievb" e senha "arievb123" e numeroCartaoFidelidade "1234-8888-001"
+    E o Cliente cadastrado no banco de dados possui nome "Arie v. Bennekum" e email "arievb@proton.me" e login "arievb" e senha "arievb123" e numeroCartaoFidelidade "1234-8888-001"
+
+  Cenario: Put para atualizar Cliente não encontrado pelo ClienteController
+    Dado um identificador ID de um cliente inexistente
+    E um ClienteDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e numeroCartaoFidelidade "1234-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 404 do ClienteController
+
+  Cenario: Put para atualizar Cliente, com erro por nome não único, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Mike Beedle" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por email não único, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunningham" e email "mike@email.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por login não único, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunningham" e email "ward@gmail.com" e login "mikeb" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por nome vazio, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "  " e email "wardcunn@gmail.com" e login "wardcunn" e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por nome maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunningham abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "wardcunn@gmail.com" e login "wardcunn" e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por email vazio, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunninghammm" e email "   " e login "wardcunn" e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por email incorreto, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunninghammm" e email "ward.com" e login "wardcunn" e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por login vazio, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunninghammm" e email "wardc@gmail.com" e login "   " e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por login maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunninghammm" e email "wardc@gmail.com" e login "wardctestetestetestetestetestetestetestetestetestetestetesteteste" e senha "wardcunn234" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por senha vazia, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunninghammm" e email "wardc@gmail.com" e login "wardcunn" e senha "   " e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente, com erro por senha maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "ward@gmail.com"
+    E um ClienteDtoRequest, com nome "Ward Cunninghammm" e email "wardc@gmail.com" e login "wardcunn" e senha "anne1234567890123456789012345678901234567890123456789" e numeroCartaoFidelidade "5555-8888-002"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Ward Cunningham" e email "ward@gmail.com" e login "wardc" e senha "ward234" e numeroCartaoFidelidade "1234-5555-002"
+
+  Cenario: Put para atualizar Cliente e remover Endereço (cenário 2), com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
+    E um ClienteDtoRequest, com nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    E sem EnderecoDtoResponse no body
+    E o Cliente no database possui nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    E sem Endereço salvo no database
+
+  Cenario: Put para atualizar Cliente e criar Endereço (cenário 3), com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
+    E um ClienteDtoRequest e EnderecoDtoRequest, com nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    E com EnderecoDtoResponse no body, com id e cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+    E o Cliente no database possui nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    E um Endereço salvo no database, com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
+
+  Cenario: Put para atualizar Cliente e atualizar Endereço (cenário 4), com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
+    E um ClienteDtoRequest e EnderecoDtoRequest, com nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    Quando uma requisição Put for feita no método update do ClienteController
+    Entao receber ResponseEntity com HTTP 200 do ClienteController
+    E com ClienteDtoResponse no body, com id e nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+    E o Cliente no database possui nome "James Grenning Jr" e email "jamesg@gmail.com" e login "jamesg" e senha "james12" e numeroCartaoFidelidade "1234-8888-1010"
+    E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
+
+
+  Cenario: Patch para trocar a senha do Cliente, com sucesso, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 204 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "j!long45" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro de não encontrado, pelo ClienteController
+    Dado um identificador ID de um cliente inexistente
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 404 do ClienteController
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha antiga incompatível, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "senhaincompativel" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 409 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha antiga vazia, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "  " e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha nova vazia, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "   ", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha antiga maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "00001234567890123456789012345678901234567890123456789" e senhaNova "j!long45", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+  Cenario: Patch para trocar a senha do Cliente, com erro por senha nova maior, pelo ClienteController
+    Dado um identificador ID de um cliente existente, com email "long@gmail.com"
+    E um SenhaDtoRequest, com senhaAntiga "jlong12" e senhaNova "00001234567890123456789012345678901234567890123456789", para o ClienteController
+    Quando uma requisição Patch for feita no método updatePassword do ClienteController
+    Entao receber ResponseEntity com HTTP 400 do ClienteController
+    E o Cliente no database possui nome "Josh Long" e email "long@gmail.com" e login "jlong" e senha "jlong12" e numeroCartaoFidelidade "1234-5545-004"
+
+
   Cenario: Delete para apagar Cliente, com sucesso, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "beck@proton.me"
+    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
     Quando uma requisição Delete for feita no método deleteById do ClienteController
     Entao receber ResponseEntity com HTTP 204 do ClienteController
     E o Cliente foi apagado do banco de dados pelo ClienteController
@@ -92,118 +300,4 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Dado um identificador ID de um cliente inexistente
     Quando uma requisição Delete for feita no método deleteById do ClienteController
     Entao receber ResponseEntity com HTTP 404 do ClienteController
-
-
-  Cenario: Get para pesquisa paginada de Cliente, com sucesso por um nome, pelo ClienteController
-    Quando uma requisição Get for feita, com nome "Jeff Sutherland" no filtro, no método search do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland", no método search do ClienteController
-
-  Cenario: Get para pesquisa paginada de Cliente, com sucesso por dois nomes, pelo ClienteController
-    Quando uma requisição Get for feita, com nome "Jeff Sutherland,Kent Beck" no filtro, no método search do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E a resposta deve conter apenas clientes, com nome "Jeff Sutherland,Kent Beck", no método search do ClienteController
-
-
-  Cenario: Put para atualizar Cliente, com sucesso, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
-    E o Cliente cadastrado no banco de dados possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-001"
-
-  Cenario: Put para atualizar Cliente não encontrado pelo ClienteController
-    Dado um identificador ID de um cliente inexistente
-    E um ClienteDtoRequest, com nome "Viktor Frankl" e email "vik@email.com" e login "viktor" e senha "vikt1" e numeroCartaoFidelidade "1234-8888-002"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 404 do ClienteController
-
-  Cenario: Put para atualizar Cliente, com erro por nome vazio, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "  " e email "anne@email.com" e login "annee" e senha "anne1" e numeroCartaoFidelidade "1234-8888-002"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por nome maior, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl" e email "anne@email.com" e login "annee" e senha "anne1" e numeroCartaoFidelidade "1234-8888-003"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por email vazio, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank" e email "   " e login "anne" e senha "anne1" e numeroCartaoFidelidade "1234-8888-004"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por email incorreto, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank" e email "anne.com" e login "anne" e senha "anne1" e numeroCartaoFidelidade "1234-8888-005"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por login vazio, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "   " e senha "anne1" e numeroCartaoFidelidade "1234-8888-006"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por login maior, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annefrank1annefrank1annefrank1annefrank1annefrank12" e senha "anne1" e numeroCartaoFidelidade "1234-8888-007"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por senha vazia, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "   " e numeroCartaoFidelidade "1234-8888-008"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente, com erro por senha maior, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest, com nome "Anne Frank" e email "anne@email.com" e login "annef" e senha "anne1234567890123456789012345678901234567890123456789" e numeroCartaoFidelidade "1234-8888-009"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 400 do ClienteController
-    E o Cliente no database possui nome "Jeff Sutherland" e email "jeff@gmail.com" e login "jsuther" e senha "suther234" e numeroCartaoFidelidade "1234-5555-002"
-
-  Cenario: Put para atualizar Cliente e remover Endereço (cenário 2), com sucesso, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
-    E um ClienteDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0010"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0010"
-    E sem EnderecoDtoResponse no body
-    E o Cliente no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0010"
-    E sem Endereço salvo no database
-
-  Cenario: Put para atualizar Cliente e criar Endereço (cenário 3), com sucesso, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "jeff@gmail.com"
-    E um ClienteDtoRequest e EnderecoDtoRequest, com nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-0011" e com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-0011"
-    E com EnderecoDtoResponse no body, com id e cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
-    E o Cliente no database possui nome "J. Sutherland" e email "js@email.com" e login "jeffs" e senha "js123" e numeroCartaoFidelidade "1234-8888-0011"
-    E um Endereço salvo no database, com cep "96065-815" e logradouro "Rua Otto Fassbender Filho" e número "200"
-
-  Cenario: Put para atualizar Cliente e atualizar Endereço (cenário 4), com sucesso, pelo ClienteController
-    Dado um identificador ID de um cliente existente, com email "james@gmail.com"
-    E um ClienteDtoRequest e EnderecoDtoRequest, com nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012" e com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
-    Quando uma requisição Put for feita no método update do ClienteController
-    Entao receber ResponseEntity com HTTP 200 do ClienteController
-    E com ClienteDtoResponse no body, com id e nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012"
-    E com EnderecoDtoResponse no body, com id e cep "68513-224" e logradouro "Quadra Vinte" e número "25"
-    E o Cliente no database possui nome "James Clear Jr" e email "clear@email.com" e login "clear" e senha "clear12" e numeroCartaoFidelidade "1234-8888-0012"
-    E um Endereço salvo no database, com cep "68513-224" e logradouro "Quadra Vinte" e número "25"
-
-
 

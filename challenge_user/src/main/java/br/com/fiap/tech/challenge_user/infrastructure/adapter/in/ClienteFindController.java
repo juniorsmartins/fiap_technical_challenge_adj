@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 import br.com.fiap.tech.challenge_user.infrastructure.constant.ControllerConstants;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Cliente;
+import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
 import org.springframework.web.bind.annotation.RequestMapping;

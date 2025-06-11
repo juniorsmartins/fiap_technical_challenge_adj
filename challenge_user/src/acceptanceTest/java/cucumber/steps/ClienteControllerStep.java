@@ -2,6 +2,7 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.SenhaDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
@@ -53,6 +54,8 @@ public final class ClienteControllerStep {
     private ClienteEntity clienteEntity;
 
     private EnderecoDtoResponse enderecoDtoResponse;
+
+    private SenhaDtoRequest senhaDtoRequest;
 
     @Before
     public void setUp() {
@@ -276,6 +279,7 @@ public final class ClienteControllerStep {
     public void sem_endereco_dto_response_no_body() {
 
         clienteDtoResponse = response.as(ClienteDtoResponse.class);
+
         assertThat(clienteDtoResponse.usuarioId()).isNotNull();
         assertThat(clienteDtoResponse.endereco()).isNull();
     }
@@ -284,17 +288,18 @@ public final class ClienteControllerStep {
     public void sem_endereco_salvo_no_database() {
 
         var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
+
         assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
 
     @Quando("uma requisição Get for feita, com nome {string} no filtro, no método search do ClienteController")
-    public void uma_requisicao_get_for_feita_com_nome_no_filtro_no_metodo_search_do_cliente_controller(String nome) {
+    public void uma_requisicao_get_for_feita_com_nome_no_filtro_no_metodo_search_do_cliente_controller(String nomes) {
 
         response = RestAssured
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
-                .queryParam("nome", nome)
+                .queryParam("nome", nomes)
                 .when()
                 .get();
 
@@ -302,9 +307,9 @@ public final class ClienteControllerStep {
     }
 
     @Entao("a resposta deve conter apenas clientes, com nome {string}, no método search do ClienteController")
-    public void a_resposta_deve_conter_apenas_clientes_com_nome_no_metodo_search_do_cliente_controller(String nome) {
+    public void a_resposta_deve_conter_apenas_clientes_com_nome_no_metodo_search_do_cliente_controller(String nomes) {
 
-        var nomesEsperados = Arrays.asList(nome.trim().split(","));
+        var nomesEsperados = Arrays.asList(nomes.trim().split(","));
 
         List<ClienteDtoResponse> content = response.jsonPath()
                 .getList("content", ClienteDtoResponse.class);
@@ -314,6 +319,85 @@ public final class ClienteControllerStep {
                 .allMatch(dto -> nomesEsperados.contains(dto.nome()))
                 .extracting(ClienteDtoResponse::nome)
                 .containsOnlyOnceElementsOf(nomesEsperados);
+    }
+
+    @Quando("uma requisição Get for feita, com email {string} no filtro, no método search do ClienteController")
+    public void uma_requisicao_get_for_feita_com_email_no_filtro_no_metodo_search_do_cliente_controller(String emails) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("email", emails)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas clientes, com email {string}, no método search do ClienteController")
+    public void a_resposta_deve_conter_apenas_clientes_com_email_no_metodo_search_do_cliente_controller(String emails) {
+
+        var valores = Arrays.asList(emails.trim().split(","));
+
+        List<ClienteDtoResponse> content = response.jsonPath()
+                .getList("content", ClienteDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto -> valores.contains(dto.email()))
+                .extracting(ClienteDtoResponse::email)
+                .containsOnlyOnceElementsOf(valores);
+    }
+
+    @Quando("uma requisição Get for feita, com numeroCartaoFidelidade {string} no filtro, no método search do ClienteController")
+    public void uma_requisicao_get_for_feita_com_numero_cartao_fidelidade_no_filtro_no_metodo_search_do_cliente_controller(String numeros) {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .queryParam("numeroCartaoFidelidade", numeros)
+                .when()
+                .get();
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("a resposta deve conter apenas clientes, com numeroCartaoFidelidade {string}, no método search do ClienteController")
+    public void a_resposta_deve_conter_apenas_clientes_com_numero_cartao_fidelidade_no_metodo_search_do_cliente_controller(String numeros) {
+
+        var valores = Arrays.asList(numeros.trim().split(","));
+
+        List<ClienteDtoResponse> content = response.jsonPath()
+                .getList("content", ClienteDtoResponse.class);
+
+        assertThat(content).isNotEmpty();
+        assertThat(content)
+                .allMatch(dto -> valores.contains(dto.numeroCartaoFidelidade()))
+                .extracting(ClienteDtoResponse::numeroCartaoFidelidade)
+                .containsOnlyOnceElementsOf(valores);
+    }
+
+    @Dado("um SenhaDtoRequest, com senhaAntiga {string} e senhaNova {string}, para o ClienteController")
+    public void um_senha_dto_request_com_senha_antiga_e_senha_nova_para_o_cliente_controller(
+            String senhaAntiga, String senhaNova) {
+
+        senhaDtoRequest = new SenhaDtoRequest(
+                clienteEntity.getUsuarioId(), senhaAntiga, senhaNova);
+
+        assertThat(senhaDtoRequest).isNotNull();
+    }
+
+    @Quando("uma requisição Patch for feita no método updatePassword do ClienteController")
+    public void uma_requisicao_patch_for_feita_no_metodo_update_password_do_cliente_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(senhaDtoRequest)
+                .when()
+                .patch();
+
+        assertThat(response).isNotNull();
     }
 }
 

@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.mapper;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Cliente;
+import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

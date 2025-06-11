@@ -20,6 +20,7 @@ public class UsuarioFindByIdAdapter<E extends UsuarioEntity> implements UsuarioF
     @Transactional(readOnly = true)
     @Override
     public Optional<E> findById(@NonNull final UUID id) {
+
         return repository.findById(id)
                 .map(entity -> (E) entity);
     }

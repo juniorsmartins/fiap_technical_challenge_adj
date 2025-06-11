@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioDeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
