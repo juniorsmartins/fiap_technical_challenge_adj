@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.application.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.application.domain.rule.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
+import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;

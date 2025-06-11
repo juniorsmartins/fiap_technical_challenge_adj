@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.domain.exception.http409;
+package br.com.fiap.tech.challenge_user.domain.exception.http409;
 
 import java.io.Serial;
 

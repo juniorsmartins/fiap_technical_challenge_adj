@@ -1,10 +1,9 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

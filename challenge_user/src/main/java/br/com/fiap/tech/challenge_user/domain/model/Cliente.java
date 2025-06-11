@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.domain.model;
+package br.com.fiap.tech.challenge_user.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public final class Cliente extends Usuario {
 
     public Cliente(
             String nome, String email, String login, String senha,
-            br.com.fiap.tech.challenge_user.application.domain.model.Endereco endereco,
+            Endereco endereco,
             String numeroCartaoFidelidade) {
         super(nome, email, login, senha, endereco);
         this.numeroCartaoFidelidade = numeroCartaoFidelidade;

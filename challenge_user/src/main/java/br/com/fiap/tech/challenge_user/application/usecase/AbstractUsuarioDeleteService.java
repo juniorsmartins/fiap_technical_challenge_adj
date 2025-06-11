@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioDeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.application.domain.exception.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

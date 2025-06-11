@@ -1,14 +1,14 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.domain.rule.UsuarioRulesStrategy;
+import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.application.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.application.domain.rule.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.model.Usuario;
+import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.application.domain.exception.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

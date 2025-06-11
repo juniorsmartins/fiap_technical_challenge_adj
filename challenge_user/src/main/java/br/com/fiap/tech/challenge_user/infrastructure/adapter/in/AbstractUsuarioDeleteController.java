@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioDeleteByIdInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
