@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class ProprietarioSenhaService extends AbstractClienteSenhaService<ProprietarioEntity>
+public class ProprietarioSenhaService extends AbstractUsuarioSenhaService<ProprietarioEntity>
         implements UsuarioSenhaInputPort<ProprietarioEntity> {
 
     public ProprietarioSenhaService(
