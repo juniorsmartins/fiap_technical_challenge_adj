@@ -1,8 +1,8 @@
-package br.com.fiap.tech.challenge_user.application.domain.exception;
+package br.com.fiap.tech.challenge_user.domain.exception;
 
-import br.com.fiap.tech.challenge_user.application.domain.exception.http404.ResourceNotFoundException;
-import br.com.fiap.tech.challenge_user.application.domain.exception.http409.RegraDeNegocioVioladaException;
-import br.com.fiap.tech.challenge_user.application.domain.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.ResourceNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.exception.http409.RegraDeNegocioVioladaException;
+import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;

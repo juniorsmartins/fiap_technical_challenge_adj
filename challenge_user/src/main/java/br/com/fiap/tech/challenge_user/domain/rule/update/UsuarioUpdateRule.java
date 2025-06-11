@@ -1,7 +1,7 @@
-package br.com.fiap.tech.challenge_user.application.domain.rule.update;
+package br.com.fiap.tech.challenge_user.domain.rule.update;
 
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
+import br.com.fiap.tech.challenge_user.domain.model.Usuario;
 
 public interface UsuarioUpdateRule<T extends Usuario, E extends UsuarioEntity> {
 

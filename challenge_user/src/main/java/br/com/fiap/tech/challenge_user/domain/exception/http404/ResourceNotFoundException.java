@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.domain.exception.http404;
+package br.com.fiap.tech.challenge_user.domain.exception.http404;
 
 import lombok.Getter;
 

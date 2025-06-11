@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.domain.exception.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
 import io.swagger.v3.oas.annotations.Operation;

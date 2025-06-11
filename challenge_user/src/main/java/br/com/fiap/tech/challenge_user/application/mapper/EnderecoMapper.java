@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.mapper;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.application.domain.model.Endereco;
+import br.com.fiap.tech.challenge_user.domain.model.Endereco;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

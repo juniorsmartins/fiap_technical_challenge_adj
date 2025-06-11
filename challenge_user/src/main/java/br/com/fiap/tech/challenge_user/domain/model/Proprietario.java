@@ -1,6 +1,5 @@
-package br.com.fiap.tech.challenge_user.application.domain.model;
+package br.com.fiap.tech.challenge_user.domain.model;
 
-import br.com.fiap.tech.challenge_user.application.domain.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ public final class Proprietario extends Usuario {
 
     public Proprietario(
             UUID usuarioId, String nome, String email, String login, String senha,
-            br.com.fiap.tech.challenge_user.application.domain.model.Endereco endereco,
+            Endereco endereco,
             String descricao) {
         super(usuarioId, nome, email, login, senha, endereco);
         this.descricao = descricao;
@@ -24,7 +23,7 @@ public final class Proprietario extends Usuario {
 
     public Proprietario(
             String nome, String email, String login, String senha,
-            br.com.fiap.tech.challenge_user.application.domain.model.Endereco endereco,
+            Endereco endereco,
             String descricao) {
         super(nome, email, login, senha, endereco);
         this.descricao = descricao;

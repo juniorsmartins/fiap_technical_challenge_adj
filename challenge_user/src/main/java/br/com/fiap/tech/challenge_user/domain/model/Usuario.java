@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.domain.model;
+package br.com.fiap.tech.challenge_user.domain.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,7 +30,7 @@ public abstract class Usuario {
                    String email,
                    String login,
                    String senha,
-                   br.com.fiap.tech.challenge_user.application.domain.model.Endereco endereco) {
+                   Endereco endereco) {
         this.nome = nome;
         this.email = email;
         this.login = login;
@@ -43,7 +43,7 @@ public abstract class Usuario {
                    String email,
                    String login,
                    String senha,
-                   br.com.fiap.tech.challenge_user.application.domain.model.Endereco endereco) {
+                   Endereco endereco) {
         this(nome, email, login, senha, endereco);
         this.usuarioId = usuarioId;
     }

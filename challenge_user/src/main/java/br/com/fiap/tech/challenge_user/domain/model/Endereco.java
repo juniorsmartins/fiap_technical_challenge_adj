@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.domain.model;
+package br.com.fiap.tech.challenge_user.domain.model;
 
 import lombok.*;
 
