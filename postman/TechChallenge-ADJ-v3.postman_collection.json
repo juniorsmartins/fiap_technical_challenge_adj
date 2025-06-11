@@ -1153,6 +1153,228 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Patch",
+					"item": [
+						{
+							"name": "Trocar Senha - 200",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"86522917-f507-459a-8ef9-93015089a5b2\",\n    \"senhaAntiga\":\"brian123\",\n    \"senhaNova\":\"brian123\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 404",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"267f9e02-414e-4aa3-8cee-f14b20c57223\",\n    \"senhaAntiga\":\"newton123\",\n    \"senhaNova\":\"newton456\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 409",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"newton\",\n    \"senhaNova\":\"newton123\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"   \",\n    \"senhaNova\":\"k123456\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha nova vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"k123456\",\n    \"senhaNova\":\"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"k123456456456456456456456456456456456456345345345345345345345345345\",\n    \"senhaNova\":\"k123456\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 200 (senha nova maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"k123456\",\n    \"senhaNova\":\"k123456234234234534656756786867897f789789767867u678\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -2297,6 +2519,228 @@
 										"challenge-user",
 										"proprietarios",
 										"b46bff53-5b8b-464f-b264-eba485e9eaf2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patch",
+					"item": [
+						{
+							"name": "Trocar Senha - 200",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 404",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"267f9e02-414e-4aa3-8cee-f14b20c57223\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"tanenbaum1234\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 409",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum\",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"   \",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha nova vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum1234534654565756867879789706785645634523423412342343245\",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 200 (senha nova maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"tanenbaum124434545636574857968705476352rtrth7648745673546\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
 									]
 								}
 							},
