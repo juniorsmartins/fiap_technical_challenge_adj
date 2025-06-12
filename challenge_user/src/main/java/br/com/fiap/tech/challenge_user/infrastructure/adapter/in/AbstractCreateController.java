@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,16 +22,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
-@Tag(name = "Usuários", description = "Contém recurso de cadastrar.")
+@Tag(name = "Create/Post", description = "Contém recurso de cadastrar.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioCreateController<I, O, T, E> {
+public abstract class AbstractCreateController<I, O, T, E> {
 
     private final InputMapper<I, T> inputMapper;
 
     private final OutputMapper<T, O, E> outputMapper;
 
-    private final UsuarioCreateInputPort<T> createInputPort;
+    private final CreateInputPort<T> createInputPort;
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -69,7 +69,7 @@ public abstract class AbstractUsuarioCreateController<I, O, T, E> {
                 .map(createInputPort::create)
                 .map(outputMapper::toDtoResponse)
                 .orElseThrow(() -> {
-                    log.error("AbstractUsuarioCreateController - Erro interno do servidor no método create.");
+                    log.error("AbstractCreateController - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
                 });
 

@@ -17,6 +17,8 @@ public class ConstantsTest {
 
     public static final String PATH_CHALLENGE_PROPRIETARIO = "/api/v1/challenge-user/proprietarios";
 
+    public static final String PATH_CHALLENGE_RESTAURANTE = "/api/v1/challenge-user/restaurantes";
+
     public static final String CONTENT_TYPE_JSON = "application/json";
 
     public static final String CONTENT_TYPE_XML = "application/xml";

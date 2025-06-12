@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.UsuarioRepository;
+import br.com.fiap.tech.challenge_user.application.port.out.RestauranteCreateOutputPort;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.repository.RestauranteRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioCreateAdapter<E extends UsuarioEntity> implements UsuarioCreateOutputPort<E> {
+public class RestauranteCreateAdapter implements RestauranteCreateOutputPort {
 
-    private final UsuarioRepository repository;
+    private final RestauranteRepository repository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     @Modifying
     @Override
-    public E save(@NonNull final E entity) {
+    public RestauranteEntity save(@NonNull final RestauranteEntity restauranteEntity) {
 
-        return repository.saveAndFlush(entity);
+        return repository.saveAndFlush(restauranteEntity);
     }
 }
 
