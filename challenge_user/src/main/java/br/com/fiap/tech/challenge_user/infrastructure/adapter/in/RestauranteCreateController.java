@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constant.ControllerConstants;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = {ControllerConstants.URI_RESTAURANTE})
 public class RestauranteCreateController
-        extends AbstractUsuarioCreateController<RestauranteDtoRequest, RestauranteDtoResponse, Restaurante, RestauranteEntity> {
+        extends AbstractCreateController<RestauranteDtoRequest, RestauranteDtoResponse, Restaurante, RestauranteEntity> {
 
     public RestauranteCreateController(
             InputMapper<RestauranteDtoRequest, Restaurante> inputMapper,
             OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper,
-            UsuarioCreateInputPort<Restaurante> createInputPort) {
+            CreateInputPort<Restaurante> createInputPort) {
         super(inputMapper, outputMapper, createInputPort);
     }
 }

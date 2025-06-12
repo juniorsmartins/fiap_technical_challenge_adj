@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioCreateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class ClienteCreateService extends AbstractUsuarioCreateService<Cliente, ClienteEntity>
-        implements UsuarioCreateInputPort<Cliente> {
+        implements CreateInputPort<Cliente> {
 
     public ClienteCreateService(
             EntityMapper<Cliente, ClienteEntity> entityMapper,
