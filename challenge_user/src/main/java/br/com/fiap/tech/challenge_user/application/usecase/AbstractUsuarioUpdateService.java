@@ -6,7 +6,7 @@ import br.com.fiap.tech.challenge_user.domain.model.Usuario;
 import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import lombok.NonNull;
@@ -24,7 +24,7 @@ public abstract class AbstractUsuarioUpdateService<T extends Usuario, E extends 
 
     private final EntityMapper<T, E> entityMapper;
 
-    private final UsuarioCreateOutputPort<E> createOutputPort;
+    private final CreateOutputPort<E> createOutputPort;
 
     private final UsuarioFindByIdOutputPort<E> findByIdOutputPort;
 

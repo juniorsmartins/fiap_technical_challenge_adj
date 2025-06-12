@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioSenhaInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import lombok.NonNull;
@@ -15,7 +15,7 @@ public class ClienteSenhaService extends AbstractUsuarioSenhaService<ClienteEnti
 
     public ClienteSenhaService(
             UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
-            UsuarioCreateOutputPort<ClienteEntity> createOutputPort) {
+            CreateOutputPort<ClienteEntity> createOutputPort) {
         super(findByIdOutputPort, createOutputPort);
     }
 

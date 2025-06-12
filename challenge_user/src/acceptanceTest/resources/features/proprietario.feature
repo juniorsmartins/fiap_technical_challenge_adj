@@ -36,15 +36,15 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando a requisição Post for feita no método create do ProprietarioController
     Entao receber ResponseEntity com HTTP 409 do ProprietarioController
 
-  Cenario: Post para criar Cliente, com erro por login não único, pelo ClienteController
-    Dado um ClienteDtoRequest, com nome "Andrew Hunt" e email "hunt@email.com" e login "mfowler" e senha "12345" e numeroCartaoFidelidade "1234-6666-950"
-    Quando a requisição Post for feita no método create do ClienteController
-    Entao receber ResponseEntity com HTTP 409 do ClienteController
+  Cenario: Post para criar Proprietário, com erro por login não único, pelo ProprietárioController
+    Dado um ProprietarioDtoRequest, com nome "Andrew Hunt" e email "hunt@email.com" e login "mfowler" e senha "12345" e descricao "Presente pela tarde"
+    Quando a requisição Post for feita no método create do ProprietarioController
+    Entao receber ResponseEntity com HTTP 409 do ProprietarioController
 
-  Cenario: Post para criar Cliente, com erro por nome não único, pelo ClienteController
-    Dado um ClienteDtoRequest, com nome "Martin Fowler" e email "hunt@email.com" e login "ahunt" e senha "12345" e numeroCartaoFidelidade "1234-6666-960"
-    Quando a requisição Post for feita no método create do ClienteController
-    Entao receber ResponseEntity com HTTP 409 do ClienteController
+  Cenario: Post para criar Proprietário, com erro por nome não único, pelo ProprietárioController
+    Dado um ProprietarioDtoRequest, com nome "Martin Fowler" e email "hunt@email.com" e login "ahunt" e senha "12345" e descricao "Trabalha pela manhã"
+    Quando a requisição Post for feita no método create do ProprietarioController
+    Entao receber ResponseEntity com HTTP 409 do ProprietarioController
 
   Cenario: Post para criar Proprietário, com erro por nome vazio, pelo ProprietarioController
     Dado um ProprietarioDtoRequest, com nome "   " e email "hel@email.com" e login "helga" e senha "12345" e descricao "Visita a empresa quinzenalmente"

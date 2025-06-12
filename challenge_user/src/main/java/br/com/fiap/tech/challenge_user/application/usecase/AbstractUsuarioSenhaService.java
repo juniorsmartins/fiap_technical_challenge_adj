@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import lombok.NonNull;
@@ -19,7 +19,7 @@ public abstract class AbstractUsuarioSenhaService<E extends UsuarioEntity> {
 
     private final UsuarioFindByIdOutputPort<E> findByIdOutputPort;
 
-    private final UsuarioCreateOutputPort<E> createOutputPort;
+    private final CreateOutputPort<E> createOutputPort;
 
     public void updatePassword(
             @NonNull final UUID usuarioId, @NonNull final String senhaAntiga, @NonNull final String senhaNova) {
