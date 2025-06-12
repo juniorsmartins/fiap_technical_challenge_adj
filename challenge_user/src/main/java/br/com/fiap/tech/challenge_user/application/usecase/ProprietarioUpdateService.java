@@ -6,7 +6,7 @@ import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioCreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import lombok.NonNull;
@@ -21,7 +21,7 @@ public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Prop
 
     public ProprietarioUpdateService(
             EntityMapper<Proprietario, ProprietarioEntity> entityMapper,
-            UsuarioCreateOutputPort<ProprietarioEntity> createOutputPort,
+            CreateOutputPort<ProprietarioEntity> createOutputPort,
             UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioUpdateRule<Proprietario, ProprietarioEntity> usuarioUpdateRule,
             EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule,

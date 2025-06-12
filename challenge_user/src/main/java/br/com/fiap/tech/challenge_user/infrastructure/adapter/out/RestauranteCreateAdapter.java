@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.port.out.RestauranteCreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.RestauranteRepository;
 import lombok.NonNull;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class RestauranteCreateAdapter implements RestauranteCreateOutputPort {
+public class RestauranteCreateAdapter implements CreateOutputPort<RestauranteEntity> {
 
     private final RestauranteRepository repository;
 
