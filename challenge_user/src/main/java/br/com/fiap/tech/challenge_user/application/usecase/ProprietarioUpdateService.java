@@ -7,7 +7,7 @@ import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Prop
     public ProprietarioUpdateService(
             EntityMapper<Proprietario, ProprietarioEntity> entityMapper,
             CreateOutputPort<ProprietarioEntity> createOutputPort,
-            UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
+            FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioUpdateRule<Proprietario, ProprietarioEntity> usuarioUpdateRule,
             EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule,
             List<UsuarioRulesStrategy<Proprietario>> rulesStrategies) {

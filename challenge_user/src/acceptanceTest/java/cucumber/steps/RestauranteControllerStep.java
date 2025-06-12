@@ -55,6 +55,8 @@ public final class RestauranteControllerStep {
 
     private RestauranteDtoResponse restauranteDtoResponse;
 
+    private RestauranteEntity restauranteEntity;
+
     @Before
     public void setUp() {
         requestSpecification = new RequestSpecBuilder()
@@ -173,6 +175,26 @@ public final class RestauranteControllerStep {
         var entidade = restauranteRepository.findById(restauranteDtoResponse.restauranteId()).get();
 
         assertThat(entidade.getNome()).isEqualTo(nome);
+    }
+
+    @Dado("um identificador ID de um Restaurante existente, com nome {string}")
+    public void um_identificador_id_de_um_restaurante_existente_com_nome(String nome) {
+
+        restauranteEntity = restauranteRepository.findByNome(nome).get();
+
+        assertThat(restauranteEntity).isNotNull();
+    }
+
+    @Quando("uma requisição Get for feita no método findById do RestauranteController")
+    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_restaurante_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .get("/" + restauranteEntity.getRestauranteId());
+
+        assertThat(response).isNotNull();
     }
 }
 

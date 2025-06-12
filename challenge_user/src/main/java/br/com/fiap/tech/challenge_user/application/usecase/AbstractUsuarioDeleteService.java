@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioDeleteOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioDeleteService<E extends UsuarioEntity> {
 
-    private final UsuarioFindByIdOutputPort<E> findByIdOutputPort;
+    private final FindByIdOutputPort<E> findByIdOutputPort;
 
     private final UsuarioDeleteOutputPort<E> deleteOutputPort;
 

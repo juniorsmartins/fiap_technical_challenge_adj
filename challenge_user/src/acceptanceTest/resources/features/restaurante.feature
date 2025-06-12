@@ -28,3 +28,10 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E o Restaurante cadastrado no banco de dados possui nome "Arturito"
 
 
+  Cenario: Get para consultar Restaurante, com sucesso, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "Casa do Porco"
+    Quando uma requisição Get for feita no método findById do RestauranteController
+    Entao receber ResponseEntity com HTTP 200 do RestauranteController
+    E com RestauranteDtoResponse no body, com id e nome "Casa do Porco"
+
+

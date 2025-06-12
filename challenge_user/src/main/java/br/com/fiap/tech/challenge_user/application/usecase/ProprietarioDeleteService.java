@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioDeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioDeleteOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class ProprietarioDeleteService extends AbstractUsuarioDeleteService<Prop
         implements UsuarioDeleteByIdInputPort<Proprietario> {
 
     public ProprietarioDeleteService(
-            UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
+            FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             UsuarioDeleteOutputPort<ProprietarioEntity> deleteOutputPort) {
         super(findByIdOutputPort, deleteOutputPort);
     }
