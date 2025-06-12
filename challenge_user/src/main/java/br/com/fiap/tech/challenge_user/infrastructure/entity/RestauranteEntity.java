@@ -1,10 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "restaurantes")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"restauranteId"})
