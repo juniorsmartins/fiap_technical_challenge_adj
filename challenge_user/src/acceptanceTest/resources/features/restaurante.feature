@@ -27,6 +27,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com RestauranteDtoResponse no body, com id e nome "Arturito"
     E o Restaurante cadastrado no banco de dados possui nome "Arturito"
 
+  Cenario: Post para criar Restaurante, com erro por nome vazio, pelo RestauranteController
+    Dado um RestauranteDtoRequest, com nome "   "
+    Quando a requisição Post for feita no método create do RestauranteController
+    Entao receber ResponseEntity com HTTP 400 do RestauranteController
+
 
   Cenario: Get para consultar Restaurante, com sucesso, pelo RestauranteController
     Dado um identificador ID de um Restaurante existente, com nome "Casa do Porco"
@@ -34,4 +39,20 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 200 do RestauranteController
     E com RestauranteDtoResponse no body, com id e nome "Casa do Porco"
 
+  Cenario: Get para consultar Restaurante, com erro not found, pelo RestauranteController
+    Dado um identificador ID de um Restaurante inexistente
+    Quando uma requisição Get for feita no método findById do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
+
+
+  Cenario: Delete para apagar Restaurante, com sucesso, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "Coco Bambu"
+    Quando uma requisição Delete for feita no método deleteById do RestauranteController
+    Entao receber ResponseEntity com HTTP 204 do RestauranteController
+    E o Restaurante foi apagado do banco de dados pelo RestauranteController
+
+  Cenario: Delete para apagar Restaurante, com erro not found, pelo RestauranteController
+    Dado um identificador ID de um Restaurante inexistente
+    Quando uma requisição Delete for feita no método deleteById do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
 

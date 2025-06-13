@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioDeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.DeleteByIdInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,15 +19,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Optional;
 import java.util.UUID;
 
-@Tag(name = "Usuários", description = "Contém recurso de deletar.")
+@Tag(name = "DeleteById/Delete", description = "Contém recurso de deletar.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioDeleteController<T> {
+public abstract class AbstractDeleteController<T> {
 
-    private final UsuarioDeleteByIdInputPort<T> deleteByIdInputPort;
+    private final DeleteByIdInputPort<T> deleteByIdInputPort;
 
     @DeleteMapping(path = {"/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    @Operation(summary = "Delete", description = "Apagar recurso do banco de dados.",
+    @Operation(summary = "DeleteById", description = "Apagar recurso do banco de dados.",
             responses = {
                     @ApiResponse(responseCode = "204", description = "No Content - requisição bem sucedida e sem retorno.",
                             content = {@Content(mediaType = "application/json")}
@@ -58,7 +58,7 @@ public abstract class AbstractUsuarioDeleteController<T> {
 
         Optional.ofNullable(id)
                 .ifPresentOrElse(deleteByIdInputPort::deleteById, () -> {
-                    log.error("AbstractUsuarioDeleteController - Erro interno do servidor no método deleteById.");
+                    log.error("AbstractDeleteController - Erro interno do servidor no método deleteById.");
                     throw new InternalServerProblemException();
                 });
 
