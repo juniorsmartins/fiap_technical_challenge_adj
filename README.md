@@ -94,7 +94,8 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 |       Recurso       |               Endpoint                |                     Descrição                     |
 |---------------------|---------------------------------------|---------------------------------------------------|
 | Cliente             | /api/v1/challenge-user/clientes       | Endpoint para operações de CRUD de Clientes       |
-| Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para oeprações de CRUD de Proprietários  |
+| Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para operações de CRUD de Proprietários  |
+| Restaurante         | /api/v1/challenge-user/restaurantes   | Endpoint para operações de CRUD de Restaurantes   |
 
 
 | Método    | Endpoint e Requisição                                                                                                          |              Resposta                     |
@@ -109,6 +110,10 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 | Post      | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 2) |  201 Created + Json no body (resposta 4)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7 (+ Json no body - requisição 2) |    200 OK + Json no body (resposta 4)     |
 | Patch     | http://localhost:9050/api/v1/challenge-user/proprietarios                                      (+ Json no body - requisição 3) |           204 No Content                  |
+| Delete    | http://localhost:9050/api/v1/challenge-user/restaurantes/6bfe2290-0720-4c58-89d7-902698778e59                                  |           204 No Content                  |
+| Get       | http://localhost:9050/api/v1/challenge-user/restaurantes/b173aa00-d852-4ff2-86aa-ce657136a44a                                  |    200 OK + Json no body (resposta 5)     |
+| Post      | http://localhost:9050/api/v1/challenge-user/restaurantes                                       (+ Json no body - requisição 4) |  201 Created + Json no body (resposta 5)  |
+| Put       | http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79  (+ Json no body - requisição 4) |    200 OK + Json no body (resposta 5)     |
 
 ##### Resposta 1 #####
 ```
@@ -227,6 +232,20 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 }
 ```
 
+##### Requisição 4 #####
+```
+{
+    "nome": "Panela Velha"
+}
+```
+
+##### Resposta 5 #####
+```
+{
+    "restauranteId": "3091ef7a-c2d2-4510-9bd3-0467fc5744ad",
+    "nome": "Panela Velha"
+}
+```
 
 Mais informações podem ser adquiridas via Swagger (rode o docker compose): http://localhost:9050/swagger-ui/index.html
 
