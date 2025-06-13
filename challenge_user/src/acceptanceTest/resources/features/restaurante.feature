@@ -33,6 +33,21 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 400 do RestauranteController
 
 
+  Cenario: Put para atualizar Restaurante, com sucesso, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "Fasano"
+    E um RestauranteDtoRequest, com nome "Fasano"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 200 do RestauranteController
+    E com RestauranteDtoResponse no body, com id e nome "Fasano"
+    E o Restaurante cadastrado no banco de dados possui nome "Fasano"
+
+  Cenario: Put para atualizar Restaurante, com erro not found, pelo RestauranteController
+    Dado um identificador ID de um Restaurante inexistente
+    E um RestauranteDtoRequest, com nome "Arturito"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
+
+
   Cenario: Get para consultar Restaurante, com sucesso, pelo RestauranteController
     Dado um identificador ID de um Restaurante existente, com nome "Casa do Porco"
     Quando uma requisição Get for feita no método findById do RestauranteController

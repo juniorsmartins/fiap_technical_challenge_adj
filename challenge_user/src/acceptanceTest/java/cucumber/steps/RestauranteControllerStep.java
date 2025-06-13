@@ -225,5 +225,18 @@ public final class RestauranteControllerStep {
 
         assertThat(response).isEmpty();
     }
+
+    @Quando("uma requisição Put for feita no método update do RestauranteController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_restaurante_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(restauranteDtoRequest)
+                .when()
+                .put("/" + restauranteEntity.getRestauranteId());
+
+        assertThat(response).isNotNull();
+    }
 }
 

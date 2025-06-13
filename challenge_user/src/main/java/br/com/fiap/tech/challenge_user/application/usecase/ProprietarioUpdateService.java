@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Service
 public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Proprietario, ProprietarioEntity>
-        implements UsuarioUpdateInputPort<Proprietario> {
+        implements UpdateInputPort<Proprietario> {
 
     public ProprietarioUpdateService(
             EntityMapper<Proprietario, ProprietarioEntity> entityMapper,
@@ -30,7 +30,7 @@ public class ProprietarioUpdateService extends AbstractUsuarioUpdateService<Prop
     }
 
     @Override
-    public Proprietario update(@NonNull UUID id, @NonNull Proprietario usuario) {
+    public Proprietario update(@NonNull final UUID id, @NonNull Proprietario usuario) {
         return super.update(id, usuario);
     }
 }

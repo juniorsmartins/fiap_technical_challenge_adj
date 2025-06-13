@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 public abstract sealed class ResourceNotFoundException extends RuntimeException
-        permits UsuarioNotFoundException, RecursoNotFoundException {
+        permits UsuarioNotFoundException, RecursoNotFoundException, RestauranteNotFoundException {
 
     @Serial
     private static final long serialVersionUID = 1L;
