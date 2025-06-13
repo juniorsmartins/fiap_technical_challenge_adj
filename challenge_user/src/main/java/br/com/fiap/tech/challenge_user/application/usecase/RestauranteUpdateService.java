@@ -10,6 +10,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,15 +27,21 @@ public class RestauranteUpdateService implements UpdateInputPort<Restaurante> {
     private final FindByIdOutputPort<RestauranteEntity> findByIdOutputPort;
 
     @Override
-    public Restaurante update(@NonNull final UUID id, @NonNull Restaurante usuario) {
+    public Restaurante update(@NonNull final UUID id, @NonNull Restaurante domain) {
 
         return findByIdOutputPort.findById(id)
+                .map(entity -> this.updateRestaurant(domain, entity))
                 .map(createOutputPort::save)
                 .map(entityMapper::toDomain)
                 .orElseThrow(() -> {
                     log.error("RestauranteUpdateService - Restaurante não encontrado por id: {}.", id);
                     return new RestauranteNotFoundException(id);
                 });
+    }
+
+    private RestauranteEntity updateRestaurant(Restaurante domain, RestauranteEntity entity) {
+        BeanUtils.copyProperties(domain, entity, "restauranteId");
+        return entity;
     }
 }
 

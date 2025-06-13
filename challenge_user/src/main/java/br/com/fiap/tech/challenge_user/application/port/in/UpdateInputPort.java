@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public interface UpdateInputPort<T> {
 
-    T update(UUID id, T usuario);
+    T update(UUID id, T domain);
 }
 

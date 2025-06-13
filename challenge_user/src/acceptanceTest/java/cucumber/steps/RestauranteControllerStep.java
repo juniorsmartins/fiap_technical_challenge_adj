@@ -178,6 +178,14 @@ public final class RestauranteControllerStep {
         assertThat(entidade.getNome()).isEqualTo(nome);
     }
 
+    @Entao("o Restaurante cadastrado no database possui nome {string}")
+    public void o_restaurante_cadastrado_no_database_possui_nome(String nome) {
+
+        var entidade = restauranteRepository.findById(restauranteEntity.getRestauranteId()).get();
+
+        assertThat(entidade.getNome()).isEqualTo(nome);
+    }
+
     @Dado("um identificador ID de um Restaurante existente, com nome {string}")
     public void um_identificador_id_de_um_restaurante_existente_com_nome(String nome) {
 
