@@ -5,18 +5,18 @@ import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoRes
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = {ControllerConstants.URI_PROPRIETARIO})
 public class ProprietarioFindController
-        extends AbstractUsuarioFindController<ProprietarioDtoResponse, Proprietario, ProprietarioEntity> {
+        extends AbstractFindController<ProprietarioDtoResponse, Proprietario, ProprietarioEntity> {
 
     public ProprietarioFindController(
             OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper,
-            UsuarioFindByIdOutputPort<ProprietarioEntity> findByIdOutputPort) {
+            FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort) {
         super(outputMapper, findByIdOutputPort);
     }
 }

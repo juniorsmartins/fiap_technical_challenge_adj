@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,41 +13,40 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
-import java.util.UUID;
 
-@Tag(name = "Usuários", description = "Contém recurso de atualizar.")
+@Tag(name = "Create/Post", description = "Contém recurso de cadastrar.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioUpdateController<I, O, T, E> {
+public abstract class AbstractCreateController<I, O, T, E> {
 
     private final InputMapper<I, T> inputMapper;
 
     private final OutputMapper<T, O, E> outputMapper;
 
-    private final UsuarioUpdateInputPort<T> updateInputPort;
+    private final CreateInputPort<T> createInputPort;
 
-    @PutMapping(path = {"/{id}"},
+    @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    @Operation(summary = "Atualizar", description = "Modificar dados de um recurso.",
+    @Operation(summary = "Cadastrar", description = "Criar um novo recurso.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.",
+                    @ApiResponse(responseCode = "201", description = "Created - recurso cadastrado com sucesso.",
                             content = {@Content(mediaType = "application/json")}
                     ),
                     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal formulada.",
                             content = {@Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProblemDetail.class))}
                     ),
-                    @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado no banco de dados.",
+                    @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado.",
                             content = {@Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProblemDetail.class))}
                     ),
@@ -58,27 +57,24 @@ public abstract class AbstractUsuarioUpdateController<I, O, T, E> {
                     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.",
                             content = {@Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProblemDetail.class))}
-                    ),
+                    )
             }
     )
-    public ResponseEntity<O> update(
-            @Parameter(name = "id", description = "Identificador único do recurso.",
-                    example = "034eb74c-69ee-4bd4-a064-5c4cc5e9e748", required = true)
-            @PathVariable(name = "id") final UUID id,
+    public ResponseEntity<O> create(
             @Parameter(name = "DtoRequest", description = "Para transporte de dados de entrada.", required = true)
             @RequestBody @Valid I dtoRequest) {
 
         var response = Optional.ofNullable(dtoRequest)
                 .map(inputMapper::toDomainIn)
-                .map(domain -> updateInputPort.update(id, domain))
+                .map(createInputPort::create)
                 .map(outputMapper::toDtoResponse)
                 .orElseThrow(() -> {
-                    log.error("AbstractUsuarioUpdateController - Erro interno do servidor no método update.");
+                    log.error("AbstractCreateController - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();
                 });
 
         return ResponseEntity
-                .ok()
+                .status(HttpStatus.CREATED)
                 .body(response);
     }
 }

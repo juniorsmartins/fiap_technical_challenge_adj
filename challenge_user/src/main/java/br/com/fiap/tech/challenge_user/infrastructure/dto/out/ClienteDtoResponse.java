@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import java.util.UUID;
 
-@Schema(name = "ClienteDtoResponse", description = "Transportador de dados de saída.")
+@Schema(name = "ClienteDtoResponse", description = "Transportador de dados de saída em requisições.")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ClienteDtoResponse(
 

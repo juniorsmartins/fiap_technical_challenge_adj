@@ -1,0 +1,31 @@
+package br.com.fiap.tech.challenge_user.application.usecase;
+
+import br.com.fiap.tech.challenge_user.application.port.out.DeleteOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public abstract class AbstractDeleteService<E> {
+
+    private final FindByIdOutputPort<E> findByIdOutputPort;
+
+    private final DeleteOutputPort<E> deleteOutputPort;
+
+    public void deleteById(@NonNull final UUID id) {
+
+        findByIdOutputPort.findById(id)
+                .ifPresentOrElse(deleteOutputPort::delete, () -> {
+                    log.error("AbstractDeleteService - Recurso não encontrado por id: {}.", id);
+                    throw new RecursoNotFoundException(id);
+                });
+    }
+}
+

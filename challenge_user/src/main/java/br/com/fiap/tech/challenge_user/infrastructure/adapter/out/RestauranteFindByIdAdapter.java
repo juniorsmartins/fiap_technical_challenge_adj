@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.UsuarioRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.repository.RestauranteRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,16 +13,15 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioFindByIdAdapter<E extends UsuarioEntity> implements FindByIdOutputPort<E> {
+public class RestauranteFindByIdAdapter implements FindByIdOutputPort<RestauranteEntity> {
 
-    private final UsuarioRepository repository;
+    private final RestauranteRepository repository;
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<E> findById(@NonNull final UUID id) {
+    public Optional<RestauranteEntity> findById(@NonNull final UUID id) {
 
-        return repository.findById(id)
-                .map(entity -> (E) entity);
+        return repository.findById(id);
     }
 }
 
