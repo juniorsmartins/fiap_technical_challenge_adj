@@ -2749,6 +2749,281 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Restaurante",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Cadastrar - 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Put",
+					"item": [
+						{
+							"name": "Atualizar - 200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 404",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ba0d272e-11de-4509-b48a-8389d2f8a66a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ba0d272e-11de-4509-b48a-8389d2f8a66a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Consultar - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/b173aa00-d852-4ff2-86aa-ce657136a44a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"b173aa00-d852-4ff2-86aa-ce657136a44a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar - 404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ba0d272e-11de-4509-b48a-8389d2f8a66a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ba0d272e-11de-4509-b48a-8389d2f8a66a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Deletar - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/6bfe2290-0720-4c58-89d7-902698778e59",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"6bfe2290-0720-4c58-89d7-902698778e59"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar - 404",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ba0d272e-11de-4509-b48a-8389d2f8a66a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ba0d272e-11de-4509-b48a-8389d2f8a66a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	]
 }
