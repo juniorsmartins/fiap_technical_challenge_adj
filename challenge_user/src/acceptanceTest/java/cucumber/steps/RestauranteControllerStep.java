@@ -26,6 +26,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,6 +55,8 @@ public final class RestauranteControllerStep {
     private Response response;
 
     private RestauranteDtoResponse restauranteDtoResponse;
+
+    private RestauranteEntity restauranteEntity;
 
     @Before
     public void setUp() {
@@ -173,6 +176,75 @@ public final class RestauranteControllerStep {
         var entidade = restauranteRepository.findById(restauranteDtoResponse.restauranteId()).get();
 
         assertThat(entidade.getNome()).isEqualTo(nome);
+    }
+
+    @Entao("o Restaurante cadastrado no database possui nome {string}")
+    public void o_restaurante_cadastrado_no_database_possui_nome(String nome) {
+
+        var entidade = restauranteRepository.findById(restauranteEntity.getRestauranteId()).get();
+
+        assertThat(entidade.getNome()).isEqualTo(nome);
+    }
+
+    @Dado("um identificador ID de um Restaurante existente, com nome {string}")
+    public void um_identificador_id_de_um_restaurante_existente_com_nome(String nome) {
+
+        restauranteEntity = restauranteRepository.findByNome(nome).get();
+
+        assertThat(restauranteEntity).isNotNull();
+    }
+
+    @Quando("uma requisição Get for feita no método findById do RestauranteController")
+    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_restaurante_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .get("/" + restauranteEntity.getRestauranteId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Dado("um identificador ID de um Restaurante inexistente")
+    public void um_identificador_id_de_um_restaurante_inexistente() {
+
+        restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste");
+
+        assertThat(restauranteEntity.getRestauranteId()).isNotNull();
+    }
+
+    @Quando("uma requisição Delete for feita no método deleteById do RestauranteController")
+    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_restaurante_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .delete("/" + restauranteEntity.getRestauranteId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Restaurante foi apagado do banco de dados pelo RestauranteController")
+    public void o_restaurante_foi_apagado_do_banco_de_dados_pelo_restaurante_controller() {
+
+        var response = restauranteRepository.findById(restauranteEntity.getRestauranteId());
+
+        assertThat(response).isEmpty();
+    }
+
+    @Quando("uma requisição Put for feita no método update do RestauranteController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_restaurante_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(restauranteDtoRequest)
+                .when()
+                .put("/" + restauranteEntity.getRestauranteId());
+
+        assertThat(response).isNotNull();
     }
 }
 

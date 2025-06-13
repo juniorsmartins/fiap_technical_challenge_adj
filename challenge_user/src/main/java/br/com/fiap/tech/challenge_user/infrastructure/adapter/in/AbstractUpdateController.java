@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,16 +23,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Optional;
 import java.util.UUID;
 
-@Tag(name = "Usuários", description = "Contém recurso de atualizar.")
+@Tag(name = "Update/Put", description = "Contém recurso de atualizar.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioUpdateController<I, O, T, E> {
+public abstract class AbstractUpdateController<I, O, T, E> {
 
     private final InputMapper<I, T> inputMapper;
 
     private final OutputMapper<T, O, E> outputMapper;
 
-    private final UsuarioUpdateInputPort<T> updateInputPort;
+    private final UpdateInputPort<T> updateInputPort;
 
     @PutMapping(path = {"/{id}"},
             consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -73,7 +73,7 @@ public abstract class AbstractUsuarioUpdateController<I, O, T, E> {
                 .map(domain -> updateInputPort.update(id, domain))
                 .map(outputMapper::toDtoResponse)
                 .orElseThrow(() -> {
-                    log.error("AbstractUsuarioUpdateController - Erro interno do servidor no método update.");
+                    log.error("AbstractUpdateController - Erro interno do servidor no método update.");
                     return new InternalServerProblemException();
                 });
 

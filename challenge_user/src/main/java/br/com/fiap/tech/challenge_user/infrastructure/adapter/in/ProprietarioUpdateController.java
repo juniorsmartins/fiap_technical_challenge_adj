@@ -7,19 +7,19 @@ import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioUpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = {ControllerConstants.URI_PROPRIETARIO})
 public class ProprietarioUpdateController
-        extends AbstractUsuarioUpdateController<ProprietarioDtoRequest, ProprietarioDtoResponse, Proprietario, ProprietarioEntity> {
+        extends AbstractUpdateController<ProprietarioDtoRequest, ProprietarioDtoResponse, Proprietario, ProprietarioEntity> {
 
     public ProprietarioUpdateController(
             InputMapper<ProprietarioDtoRequest, Proprietario> inputMapper,
             OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper,
-            UsuarioUpdateInputPort<Proprietario> updateInputPort) {
+            UpdateInputPort<Proprietario> updateInputPort) {
         super(inputMapper, outputMapper, updateInputPort);
     }
 }

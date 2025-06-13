@@ -250,6 +250,7 @@ public final class ProprietarioControllerStep {
     public void o_proprietario_foi_apagado_do_banco_de_dados_pelo_proprietario_controller() {
 
         var response = proprietarioRepository.findById(proprietarioEntity.getUsuarioId());
+
         assertThat(response).isEmpty();
     }
 

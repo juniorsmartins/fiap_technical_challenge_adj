@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.application.port.in.UsuarioSenhaInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ClienteSenhaService extends AbstractUsuarioSenhaService<ClienteEnti
         implements UsuarioSenhaInputPort<ClienteEntity> {
 
     public ClienteSenhaService(
-            UsuarioFindByIdOutputPort<ClienteEntity> findByIdOutputPort,
+            FindByIdOutputPort<ClienteEntity> findByIdOutputPort,
             CreateOutputPort<ClienteEntity> createOutputPort) {
         super(findByIdOutputPort, createOutputPort);
     }

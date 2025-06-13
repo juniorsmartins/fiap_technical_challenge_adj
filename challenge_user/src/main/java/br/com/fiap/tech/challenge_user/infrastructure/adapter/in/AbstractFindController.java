@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
-@Tag(name = "Usuários", description = "Contém recurso de consultar.")
+@Tag(name = "FindById/Get", description = "Contém recurso de consultar por Id.")
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioFindController<O, T, E> {
+public abstract class AbstractFindController<O, T, E> {
 
     private final OutputMapper<T, O, E> outputMapper;
 
-    private final UsuarioFindByIdOutputPort<E> findByIdOutputPort;
+    private final FindByIdOutputPort<E> findByIdOutputPort;
 
     @GetMapping(path = {"/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "Consultar", description = "Buscar um recurso por id.",
@@ -52,8 +52,8 @@ public abstract class AbstractUsuarioFindController<O, T, E> {
         var response = findByIdOutputPort.findById(id)
                 .map(outputMapper::toResponse)
                 .orElseThrow(() -> {
-                    log.error("AbstractUsuarioFindController - Usuário não encontrado por id: {}.", id);
-                    return new UsuarioNotFoundException(id);
+                    log.error("AbstractFindController - Recurso não encontrado por id: {}.", id);
+                    return new RecursoNotFoundException(id);
                 });
 
         return ResponseEntity
