@@ -36,14 +36,16 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 400 do RestauranteController
 
 
-#  Cenario: Put para atualizar Restaurante, com sucesso, pelo RestauranteController
-#    Dado um identificador ID de um Restaurante existente, com nome "Fasano"
-#    E um RestauranteDtoRequest, com nome "Fasano Atualizado"
-#    Quando uma requisição Put for feita no método update do RestauranteController
-#    Entao receber ResponseEntity com HTTP 200 do RestauranteController
-#    E com RestauranteDtoResponse no body, com id e nome "Fasano Atualizado"
-#    E o Restaurante cadastrado no banco de dados possui nome "Fasano Atualizado"
-#
+  Cenario: Put para atualizar Restaurante e Endereço, com sucesso, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "Fasano"
+    E um RestauranteDtoRequest e EnderecoDtoRequest, com nome "Fasano Atualizado" e com cep "11333-444" e logradouro "Rua Fasano Central" e número "56"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 200 do RestauranteController
+    E com RestauranteDtoResponse no body, com id e nome "Fasano Atualizado"
+    E com EnderecoDtoResponse no body, com id e cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
+    E o Restaurante cadastrado no banco de dados possui nome "Fasano Atualizado"
+    E um Endereço salvo no database, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
+
 #  Cenario: Put para atualizar Restaurante, com erro not found, pelo RestauranteController
 #    Dado um identificador ID de um Restaurante inexistente
 #    E um RestauranteDtoRequest, com nome "Arturito"
