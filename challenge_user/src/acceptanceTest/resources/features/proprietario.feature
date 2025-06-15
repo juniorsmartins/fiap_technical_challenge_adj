@@ -296,6 +296,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Delete for feita no método deleteById do ProprietarioController
     Entao receber ResponseEntity com HTTP 204 do ProprietarioController
     E o Proprietario foi apagado do banco de dados pelo ProprietarioController
+    E o Endereço foi apagado do banco de dados pelo ProprietarioController
 
   Cenario: Delete para apagar Proprietario não encontrado pelo ProprietarioController
     Dado um identificador ID de um proprietario inexistente

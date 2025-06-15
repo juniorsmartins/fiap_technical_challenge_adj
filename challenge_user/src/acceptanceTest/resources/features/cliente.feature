@@ -295,6 +295,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando uma requisição Delete for feita no método deleteById do ClienteController
     Entao receber ResponseEntity com HTTP 204 do ClienteController
     E o Cliente foi apagado do banco de dados pelo ClienteController
+    E o Endereço foi apagado do banco de dados pelo ClienteController
 
   Cenario: Delete para apagar Cliente não encontrado pelo ClienteController
     Dado um identificador ID de um cliente inexistente

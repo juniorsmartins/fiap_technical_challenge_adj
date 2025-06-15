@@ -210,6 +210,14 @@ public final class ClienteControllerStep {
         assertThat(response).isEmpty();
     }
 
+    @Entao("o Endereço foi apagado do banco de dados pelo ClienteController")
+    public void o_endereco_foi_apagado_do_banco_de_dados_pelo_cliente_controller() {
+
+        var response = clienteRepository.findById(clienteEntity.getEndereco().getEnderecoId());
+
+        assertThat(response).isEmpty();
+    }
+
     @Quando("uma requisição Put for feita no método update do ClienteController")
     public void uma_requisicao_put_for_feita_no_metodo_update_do_cliente_controller() {
 

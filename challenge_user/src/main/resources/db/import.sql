@@ -14,7 +14,11 @@ INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data
 INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao, endereco_id) VALUES('051f5dc8-74fe-4d2c-81e2-ddea7c515532', 'Marie Curie', 'curie@email.com', 'curie', 'curie123', 'Advogado', TO_TIMESTAMP('2023-10-01 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-12-09 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), null);
 INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao, endereco_id) VALUES('b69e9f12-e489-4751-9b24-a936c4f3c4d2', 'Andrew S. Tanenbaum', 'tanenbaum@email.com', 'tanenbaum', 'tanenbaum12', 'Porteiro', TO_TIMESTAMP('2019-01-21 12:02:20', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-05-05 12:50:50', 'YYYY-MM-DD HH24:MI:SS'), null);
 
-INSERT INTO restaurantes(restaurante_id, nome) VALUES('63fd1b44-4fd9-4d67-95d9-9a4607409c79', 'Lasai');
-INSERT INTO restaurantes(restaurante_id, nome) VALUES('b173aa00-d852-4ff2-86aa-ce657136a44a', 'Oteque');
-INSERT INTO restaurantes(restaurante_id, nome) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa');
+INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('ee4d3283-028e-4883-9d43-169240b56758', '70680-777', 'Rua Manoel das Pitangas', '666');
+INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('5dc8d58a-7cf9-422b-8167-985da17fd563', '80999-555', 'Avenida do Porto', '555');
+INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('5f887464-fb36-4556-a78e-b567a85e62be', '20987-222', 'Avenida do Porto', '555');
+
+INSERT INTO restaurantes(restaurante_id, nome, endereco_id) VALUES('63fd1b44-4fd9-4d67-95d9-9a4607409c79', 'Lasai', 'ee4d3283-028e-4883-9d43-169240b56758');
+INSERT INTO restaurantes(restaurante_id, nome, endereco_id) VALUES('b173aa00-d852-4ff2-86aa-ce657136a44a', 'Oteque', '5dc8d58a-7cf9-422b-8167-985da17fd563');
+INSERT INTO restaurantes(restaurante_id, nome, endereco_id) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa', '5f887464-fb36-4556-a78e-b567a85e62be');
 
