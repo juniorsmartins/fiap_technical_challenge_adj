@@ -235,15 +235,26 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 ##### Requisição 4 #####
 ```
 {
-    "nome": "Panela Velha"
+    "nome": "Panela Velha",
+    "endereco": {
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    }
 }
 ```
 
 ##### Resposta 5 #####
 ```
 {
-    "restauranteId": "3091ef7a-c2d2-4510-9bd3-0467fc5744ad",
-    "nome": "Panela Velha"
+    "restauranteId": "056a441c-2cc0-401c-a1ee-4e3c1ab3c581",
+    "nome": "Panela Velha",
+    "endereco": {
+        "enderecoId": "6add2d40-c81d-4516-b11c-02667b8b9db3",
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    }
 }
 ```
 
