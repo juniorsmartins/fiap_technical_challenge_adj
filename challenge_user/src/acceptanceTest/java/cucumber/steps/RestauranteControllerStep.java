@@ -1,11 +1,15 @@
 package cucumber.steps;
 
+import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.ClienteRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.repository.EnderecoRepository;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.ProprietarioRepository;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.RestauranteRepository;
 import cucumber.config.ConstantsTest;
@@ -50,6 +54,9 @@ public final class RestauranteControllerStep {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     private RestauranteDtoRequest restauranteDtoRequest;
 
     private Response response;
@@ -57,6 +64,10 @@ public final class RestauranteControllerStep {
     private RestauranteDtoResponse restauranteDtoResponse;
 
     private RestauranteEntity restauranteEntity;
+
+    private EnderecoEntity enderecoEntity;
+
+    private EnderecoDtoResponse enderecoDtoResponse;
 
     @Before
     public void setUp() {
@@ -129,18 +140,31 @@ public final class RestauranteControllerStep {
         List<Map<String, String>> massaDados = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> row : massaDados) {
+
+            enderecoEntity = EnderecoEntity.builder()
+                    .cep(row.get("cep"))
+                    .logradouro(row.get("logradouro"))
+                    .numero(row.get("numero"))
+                    .build();
+
             var entidade = new RestauranteEntity();
             entidade.setNome(row.get("nome"));
+            entidade.setEndereco(enderecoEntity);
 
             restauranteRepository.save(entidade);
         }
     }
 
-    @Dado("um RestauranteDtoRequest, com nome {string}")
-    public void um_restaurante_dto_request_com_nome(String nome) {
+    @Dado("um RestauranteDtoRequest e EnderecoDtoRequest, com nome {string} e com cep {string} e logradouro {string} e número {string}")
+    public void um_restaurante_dto_request_e_endereco_dto_request_com_nome_e_com_cep_e_logradouro_e_numero(
+            String nome, String cep, String logradouro, String numero) {
 
-        restauranteDtoRequest = new RestauranteDtoRequest(nome);
+        restauranteDtoRequest = new RestauranteDtoRequest(
+                nome, new EnderecoDtoRequest(cep, logradouro, numero)
+        );
+
         assertThat(restauranteDtoRequest).isNotNull();
+        assertThat(restauranteDtoRequest.endereco()).isNotNull();
     }
 
     @Quando("a requisição Post for feita no método create do RestauranteController")
@@ -158,6 +182,7 @@ public final class RestauranteControllerStep {
 
     @Entao("receber ResponseEntity com HTTP {int} do RestauranteController")
     public void receber_response_entity_com_http_do_restaurante_controller(Integer status) {
+
         assertEquals(status, response.getStatusCode());
     }
 
@@ -170,6 +195,18 @@ public final class RestauranteControllerStep {
         assertThat(restauranteDtoResponse.nome()).isEqualTo(nome);
     }
 
+    @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}, pelo RestauranteController")
+    public void com_endereco_dto_response_no_body_com_id_e_cep_e_logradouro_e_numero_pelo_restaurante_controller(
+            String cep, String logradouro, String numero) {
+
+        enderecoDtoResponse = restauranteDtoResponse.endereco();
+
+        assertThat(enderecoDtoResponse.enderecoId()).isNotNull();
+        assertThat(enderecoDtoResponse.cep()).isEqualTo(cep);
+        assertThat(enderecoDtoResponse.logradouro()).isEqualTo(logradouro);
+        assertThat(enderecoDtoResponse.numero()).isEqualTo(numero);
+    }
+
     @Entao("o Restaurante cadastrado no banco de dados possui nome {string}")
     public void o_restaurante_cadastrado_no_banco_de_dados_possui_nome(String nome) {
 
@@ -177,13 +214,16 @@ public final class RestauranteControllerStep {
 
         assertThat(entidade.getNome()).isEqualTo(nome);
     }
+    
+    @Entao("um Endereço salvo no database, com cep {string} e logradouro {string} e número {string}, pelo RestauranteController")
+    public void um_endereco_salvo_no_database_com_cep_e_logradouro_e_numero_pelo_restaurante_controller(
+            String cep, String logradouro, String numero) {
 
-    @Entao("o Restaurante cadastrado no database possui nome {string}")
-    public void o_restaurante_cadastrado_no_database_possui_nome(String nome) {
+        var enderecoSalvo = enderecoRepository.findById(enderecoDtoResponse.enderecoId()).get();
 
-        var entidade = restauranteRepository.findById(restauranteEntity.getRestauranteId()).get();
-
-        assertThat(entidade.getNome()).isEqualTo(nome);
+        assertThat(enderecoSalvo.getCep()).isEqualTo(cep);
+        assertThat(enderecoSalvo.getLogradouro()).isEqualTo(logradouro);
+        assertThat(enderecoSalvo.getNumero()).isEqualTo(numero);
     }
 
     @Dado("um identificador ID de um Restaurante existente, com nome {string}")
@@ -209,7 +249,8 @@ public final class RestauranteControllerStep {
     @Dado("um identificador ID de um Restaurante inexistente")
     public void um_identificador_id_de_um_restaurante_inexistente() {
 
-        restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste");
+        restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste",
+                new EnderecoEntity(UUID.randomUUID(), "78000-000", "Rua Teste", "300"));
 
         assertThat(restauranteEntity.getRestauranteId()).isNotNull();
     }
@@ -230,6 +271,14 @@ public final class RestauranteControllerStep {
     public void o_restaurante_foi_apagado_do_banco_de_dados_pelo_restaurante_controller() {
 
         var response = restauranteRepository.findById(restauranteEntity.getRestauranteId());
+
+        assertThat(response).isEmpty();
+    }
+
+    @Entao("o Endereço foi apagado do banco de dados pelo RestauranteController")
+    public void o_endereco_foi_apagado_do_banco_de_dados_pelo_restaurante_controller() {
+
+        var response = enderecoRepository.findById(restauranteEntity.getEndereco().getEnderecoId());
 
         assertThat(response).isEmpty();
     }

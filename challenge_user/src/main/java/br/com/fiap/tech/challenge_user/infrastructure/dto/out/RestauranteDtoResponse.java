@@ -14,7 +14,10 @@ public record RestauranteDtoResponse(
         UUID restauranteId,
 
         @Schema(name = "nome", description = "Nome do restaurante.", example = "Casa das Aves")
-        String nome
+        String nome,
+
+        @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
+        EnderecoDtoResponse endereco
 ) {
 }
 

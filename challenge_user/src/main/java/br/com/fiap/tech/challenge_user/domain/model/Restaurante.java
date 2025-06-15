@@ -14,5 +14,7 @@ public final class Restaurante {
     private UUID restauranteId;
 
     private String nome;
+
+    private Endereco endereco;
 }
 

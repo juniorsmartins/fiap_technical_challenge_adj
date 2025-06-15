@@ -41,6 +41,7 @@ public class RestauranteUpdateService implements UpdateInputPort<Restaurante> {
 
     private RestauranteEntity updateRestaurant(Restaurante domain, RestauranteEntity entity) {
         BeanUtils.copyProperties(domain, entity, "restauranteId");
+        BeanUtils.copyProperties(domain.getEndereco(), entity.getEndereco(), "enderecoId");
         return entity;
     }
 }

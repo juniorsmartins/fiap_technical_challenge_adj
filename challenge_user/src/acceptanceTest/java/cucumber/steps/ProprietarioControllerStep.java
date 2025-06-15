@@ -254,6 +254,14 @@ public final class ProprietarioControllerStep {
         assertThat(response).isEmpty();
     }
 
+    @Entao("o Endereço foi apagado do banco de dados pelo ProprietarioController")
+    public void o_endereco_foi_apagado_do_banco_de_dados_pelo_proprietario_controller() {
+
+        var response = enderecoRepository.findById(proprietarioEntity.getEndereco().getEnderecoId());
+
+        assertThat(response).isEmpty();
+    }
+
     @Quando("uma requisição Put for feita no método update do ProprietarioController")
     public void uma_requisicao_put_for_feita_no_metodo_update_do_proprietario_controller() {
 
