@@ -295,40 +295,5 @@ public final class RestauranteControllerStep {
 
         assertThat(response).isNotNull();
     }
-
-
-
-
-
-//    @Dado("um RestauranteDtoRequest, com nome {string}")
-//    public void um_restaurante_dto_request_com_nome(String nome) {
-//
-////        restauranteDtoRequest = new RestauranteDtoRequest(nome);
-//        assertThat(restauranteDtoRequest).isNotNull();
-//    }
-//
-
-//
-
-//
-//    @Entao("o Restaurante cadastrado no database possui nome {string}")
-//    public void o_restaurante_cadastrado_no_database_possui_nome(String nome) {
-//
-//        var entidade = restauranteRepository.findById(restauranteEntity.getRestauranteId()).get();
-//
-//        assertThat(entidade.getNome()).isEqualTo(nome);
-//    }
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
 }
 

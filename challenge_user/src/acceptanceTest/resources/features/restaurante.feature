@@ -46,18 +46,17 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E o Restaurante cadastrado no banco de dados possui nome "Fasano Atualizado"
     E um Endereço salvo no database, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
 
-#  Cenario: Put para atualizar Restaurante, com erro not found, pelo RestauranteController
-#    Dado um identificador ID de um Restaurante inexistente
-#    E um RestauranteDtoRequest, com nome "Arturito"
-#    Quando uma requisição Put for feita no método update do RestauranteController
-#    Entao receber ResponseEntity com HTTP 404 do RestauranteController
-#
-#  Cenario: Put para atualizar Restaurante, com erro por nome vazio, pelo RestauranteController
-#    Dado um identificador ID de um Restaurante existente, com nome "D.O.M"
-#    E um RestauranteDtoRequest, com nome "   "
-#    Quando uma requisição Put for feita no método update do RestauranteController
-#    Entao receber ResponseEntity com HTTP 400 do RestauranteController
-#    E o Restaurante cadastrado no database possui nome "D.O.M"
+  Cenario: Put para atualizar Restaurante, com erro not found, pelo RestauranteController
+    Dado um identificador ID de um Restaurante inexistente
+    E um RestauranteDtoRequest e EnderecoDtoRequest, com nome "Fasano Atualizado" e com cep "11333-444" e logradouro "Rua Fasano Central" e número "56"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
+
+  Cenario: Put para atualizar Restaurante, com erro por nome vazio, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "D.O.M"
+    E um RestauranteDtoRequest e EnderecoDtoRequest, com nome "   " e com cep "11333-444" e logradouro "Rua Dom" e número "56"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 400 do RestauranteController
 
 
   Cenario: Get para consultar Restaurante, com sucesso, pelo RestauranteController
