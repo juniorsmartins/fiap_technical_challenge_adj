@@ -84,11 +84,10 @@ public final class ClienteControllerStep {
             EnderecoEntity enderecoEntity = null;
 
             if (!row.get("cep").isEmpty()) {
-                enderecoEntity = EnderecoEntity.builder()
-                        .cep(row.get("cep"))
-                        .logradouro(row.get("logradouro"))
-                        .numero(row.get("numero"))
-                        .build();
+                enderecoEntity = new EnderecoEntity();
+                enderecoEntity.setCep(row.get("cep"));
+                enderecoEntity.setLogradouro(row.get("logradouro"));
+                enderecoEntity.setNumero(row.get("numero"));
             }
 
             var clienteEntidade = new ClienteEntity(

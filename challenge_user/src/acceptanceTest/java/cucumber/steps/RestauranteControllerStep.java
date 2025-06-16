@@ -141,11 +141,10 @@ public final class RestauranteControllerStep {
 
         for (Map<String, String> row : massaDados) {
 
-            enderecoEntity = EnderecoEntity.builder()
-                    .cep(row.get("cep"))
-                    .logradouro(row.get("logradouro"))
-                    .numero(row.get("numero"))
-                    .build();
+            enderecoEntity = new EnderecoEntity();
+            enderecoEntity.setCep(row.get("cep"));
+            enderecoEntity.setLogradouro(row.get("logradouro"));
+            enderecoEntity.setNumero(row.get("numero"));
 
             var entidade = new RestauranteEntity();
             entidade.setNome(row.get("nome"));
