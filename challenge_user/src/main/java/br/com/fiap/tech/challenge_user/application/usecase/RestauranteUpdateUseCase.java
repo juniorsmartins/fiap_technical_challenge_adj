@@ -18,7 +18,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RestauranteUpdateService implements UpdateInputPort<Restaurante> {
+public class RestauranteUpdateUseCase implements UpdateInputPort<Restaurante> {
 
     private final EntityMapper<Restaurante, RestauranteEntity> entityMapper;
 

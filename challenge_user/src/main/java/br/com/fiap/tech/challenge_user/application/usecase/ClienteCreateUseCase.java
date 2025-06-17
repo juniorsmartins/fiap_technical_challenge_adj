@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClienteCreateService extends AbstractCreateService<Cliente, ClienteEntity>
+public class ClienteCreateUseCase extends AbstractCreateUseCase<Cliente, ClienteEntity>
         implements CreateInputPort<Cliente> {
 
     private final List<UsuarioRulesStrategy<Cliente>> rulesStrategy;
 
-    public ClienteCreateService(
+    public ClienteCreateUseCase(
             EntityMapper<Cliente, ClienteEntity> entityMapper,
             CreateOutputPort<ClienteEntity> createOutputPort,
             List<UsuarioRulesStrategy<Cliente>> rulesStrategy) {

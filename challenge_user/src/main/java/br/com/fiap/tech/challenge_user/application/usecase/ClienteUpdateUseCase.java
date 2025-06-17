@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ClienteUpdateService extends AbstractUsuarioUpdateService<Cliente, ClienteEntity>
+public class ClienteUpdateUseCase extends AbstractUsuarioUpdateUseCase<Cliente, ClienteEntity>
         implements UpdateInputPort<Cliente> {
 
-    public ClienteUpdateService(
+    public ClienteUpdateUseCase(
             EntityMapper<Cliente, ClienteEntity> entityMapper,
             CreateOutputPort<ClienteEntity> createOutputPort,
             FindByIdOutputPort<ClienteEntity> findByIdOutputPort,

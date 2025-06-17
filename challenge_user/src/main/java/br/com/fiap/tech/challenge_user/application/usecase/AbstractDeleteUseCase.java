@@ -13,7 +13,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractDeleteService<E> {
+public abstract class AbstractDeleteUseCase<E> {
 
     private final FindByIdOutputPort<E> findByIdOutputPort;
 

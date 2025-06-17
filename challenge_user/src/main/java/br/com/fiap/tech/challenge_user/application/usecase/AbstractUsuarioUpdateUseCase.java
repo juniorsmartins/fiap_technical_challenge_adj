@@ -20,7 +20,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioUpdateService<T extends Usuario, E extends UsuarioEntity> {
+public abstract class AbstractUsuarioUpdateUseCase<T extends Usuario, E extends UsuarioEntity> {
 
     private final EntityMapper<T, E> entityMapper;
 

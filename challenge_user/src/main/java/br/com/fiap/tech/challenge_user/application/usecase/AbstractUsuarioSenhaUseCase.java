@@ -15,7 +15,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioSenhaService<E extends UsuarioEntity> {
+public abstract class AbstractUsuarioSenhaUseCase<E extends UsuarioEntity> {
 
     private final FindByIdOutputPort<E> findByIdOutputPort;
 
