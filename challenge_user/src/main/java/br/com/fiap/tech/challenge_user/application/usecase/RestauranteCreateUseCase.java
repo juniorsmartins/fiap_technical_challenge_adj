@@ -12,12 +12,12 @@ import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RestauranteCreateService extends AbstractCreateService<Restaurante, RestauranteEntity>
+public class RestauranteCreateUseCase extends AbstractCreateUseCase<Restaurante, RestauranteEntity>
         implements CreateInputPort<Restaurante> {
 
     private final FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
 
-    public RestauranteCreateService(
+    public RestauranteCreateUseCase(
             EntityMapper<Restaurante, RestauranteEntity> entityMapper,
             CreateOutputPort<RestauranteEntity> createOutputPort,
             FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort) {

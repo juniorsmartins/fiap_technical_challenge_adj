@@ -13,7 +13,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractCreateService<T, E> {
+public abstract class AbstractCreateUseCase<T, E> {
 
     private final EntityMapper<T, E> entityMapper;
 

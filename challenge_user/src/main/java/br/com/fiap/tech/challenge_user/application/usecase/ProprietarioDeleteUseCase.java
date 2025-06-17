@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class ProprietarioDeleteService extends AbstractDeleteService<ProprietarioEntity>
+public class ProprietarioDeleteUseCase extends AbstractDeleteUseCase<ProprietarioEntity>
         implements DeleteByIdInputPort<Proprietario> {
 
-    public ProprietarioDeleteService(
+    public ProprietarioDeleteUseCase(
             FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
             DeleteOutputPort<ProprietarioEntity> deleteOutputPort) {
         super(findByIdOutputPort, deleteOutputPort);
