@@ -1,5 +1,6 @@
 package cucumber.steps;
 
+import br.com.fiap.tech.challenge_user.application.mapper.ProprietarioMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
@@ -69,6 +70,8 @@ public final class RestauranteControllerStep {
 
     private EnderecoDtoResponse enderecoDtoResponse;
 
+    private ProprietarioMapper proprietarioMapper;
+
     @Before
     public void setUp() {
         requestSpecification = new RequestSpecBuilder()
@@ -112,6 +115,7 @@ public final class RestauranteControllerStep {
 
     @Dado("cadastros de Proprietários disponíveis no banco de dados para RestauranteController")
     public void cadastros_de_proprietarios_disponiveis_no_banco_de_dados_para_restaurante_controller(io.cucumber.datatable.DataTable dataTable) {
+        restauranteRepository.deleteAll();
         proprietarioRepository.deleteAll();
 
         List<Map<String, String>> usuariosData = dataTable.asMaps(String.class, String.class);
@@ -146,20 +150,25 @@ public final class RestauranteControllerStep {
             enderecoEntity.setLogradouro(row.get("logradouro"));
             enderecoEntity.setNumero(row.get("numero"));
 
+            var proprietarioEntity = proprietarioRepository.findByEmail(row.get("proprietario")).get();
+
             var entidade = new RestauranteEntity();
             entidade.setNome(row.get("nome"));
             entidade.setEndereco(enderecoEntity);
+            entidade.setProprietario(proprietarioEntity);
 
             restauranteRepository.save(entidade);
         }
     }
 
-    @Dado("um RestauranteDtoRequest e EnderecoDtoRequest, com nome {string} e com cep {string} e logradouro {string} e número {string}")
-    public void um_restaurante_dto_request_e_endereco_dto_request_com_nome_e_com_cep_e_logradouro_e_numero(
-            String nome, String cep, String logradouro, String numero) {
+    @Dado("um RestauranteDtoRequest, com nome {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com email {string}")
+    public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_número_e_proprietario_com_email(
+            String nome, String cep, String logradouro, String numero, String email) {
+
+        var proprietario = proprietarioRepository.findByEmail(email).get();
 
         restauranteDtoRequest = new RestauranteDtoRequest(
-                nome, new EnderecoDtoRequest(cep, logradouro, numero)
+                nome, new EnderecoDtoRequest(cep, logradouro, numero), proprietario.getUsuarioId()
         );
 
         assertThat(restauranteDtoRequest).isNotNull();
@@ -248,8 +257,11 @@ public final class RestauranteControllerStep {
     @Dado("um identificador ID de um Restaurante inexistente")
     public void um_identificador_id_de_um_restaurante_inexistente() {
 
+        var proprietario = proprietarioRepository.findByEmail("galilei@yahoo.com").get();
+
         restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste",
-                new EnderecoEntity(UUID.randomUUID(), "78000-000", "Rua Teste", "300"));
+                new EnderecoEntity(UUID.randomUUID(), "78000-000", "Rua Teste", "300"),
+                proprietario);
 
         assertThat(restauranteEntity.getRestauranteId()).isNotNull();
     }

@@ -12,17 +12,21 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
       |  Albert Einstein  |   einstein@proton.me  |   einstein   |  einstein123  |     8001-5555-011        |
     Dado cadastros de Proprietários disponíveis no banco de dados para RestauranteController
       |       nome        |         email         |    login     |    senha      |  descricao  |
-      |  Galileu Galilei  |    galilei@yahoo.com  |    galilei   |   galilei123  |   Teste1    |
-      |     Niels Bohr    |      bohr@yahoo.com   |     bohr     |    bohr123    |   Teste2    |
+      |  Stephen Hawking  |    hawking@yahoo.com  |    hawking   |   hawking123  |   Teste0    |
+      |     Sócrates      |   socrates@yahoo.com  |   socrates   |  socrates123  |   Teste1    |
+      |      Platão       |    platao@yahoo.com   |    platao    |   platao123   |   Teste2    |
+      |    Aristóteles    | aristoteles@yahoo.com |  aristoteles | aristoteles12 |   Teste3    |
+      |  Galileu Galilei  |    galilei@yahoo.com  |    galilei   |   galilei123  |   Teste4    |
+      |     Niels Bohr    |      bohr@yahoo.com   |     bohr     |    bohr123    |   Teste5    |
     Dado cadastros de Restaurantes disponíveis no banco de dados
-      |         nome        |      cep     |  logradouro  |   numero   |
-      |    Casa do Porco    |   78008-009  |    Rua GH    |    1506    |
-      |      Coco Bambu     |   78511-876  |    Rua BN    |    2234    |
-      |        Fasano       |   78689-123  |    Rua MS    |    3349    |
-      |        D.O.M        |   78543-400  |    Rua DG    |    1201    |
+      |         nome        |      cep     |  logradouro  |   numero   |     proprietario      |
+      |    Casa do Porco    |   78008-009  |    Rua GH    |    1506    |   hawking@yahoo.com   |
+      |      Coco Bambu     |   78511-876  |    Rua BN    |    2234    |  socrates@yahoo.com   |
+      |        Fasano       |   78689-123  |    Rua MS    |    3349    |   platao@yahoo.com    |
+      |        D.O.M        |   78543-400  |    Rua DG    |    1201    | aristoteles@yahoo.com |
 
   Cenario: Post para criar Restaurante e Endereço, com sucesso, pelo RestauranteController
-    Dado um RestauranteDtoRequest e EnderecoDtoRequest, com nome "Arturito" e com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550"
+    Dado um RestauranteDtoRequest, com nome "Arturito", e EnderecoDtoRequest, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550",e Proprietario, com email "galilei@yahoo.com"
     Quando a requisição Post for feita no método create do RestauranteController
     Entao receber ResponseEntity com HTTP 201 do RestauranteController
     E com RestauranteDtoResponse no body, com id e nome "Arturito"
@@ -31,14 +35,14 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E um Endereço salvo no database, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550", pelo RestauranteController
 
   Cenario: Post para criar Restaurante e Endereço, com erro por nome vazio, pelo RestauranteController
-    Dado um RestauranteDtoRequest e EnderecoDtoRequest, com nome "   " e com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550"
+    Dado um RestauranteDtoRequest, com nome "   ", e EnderecoDtoRequest, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550",e Proprietario, com email "galilei@yahoo.com"
     Quando a requisição Post for feita no método create do RestauranteController
     Entao receber ResponseEntity com HTTP 400 do RestauranteController
 
 
   Cenario: Put para atualizar Restaurante e Endereço, com sucesso, pelo RestauranteController
     Dado um identificador ID de um Restaurante existente, com nome "Fasano"
-    E um RestauranteDtoRequest e EnderecoDtoRequest, com nome "Fasano Atualizado" e com cep "11333-444" e logradouro "Rua Fasano Central" e número "56"
+    E um RestauranteDtoRequest, com nome "Fasano Atualizado", e EnderecoDtoRequest, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56",e Proprietario, com email "bohr@yahoo.com"
     Quando uma requisição Put for feita no método update do RestauranteController
     Entao receber ResponseEntity com HTTP 200 do RestauranteController
     E com RestauranteDtoResponse no body, com id e nome "Fasano Atualizado"
@@ -48,13 +52,13 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Cenario: Put para atualizar Restaurante, com erro not found, pelo RestauranteController
     Dado um identificador ID de um Restaurante inexistente
-    E um RestauranteDtoRequest e EnderecoDtoRequest, com nome "Fasano Atualizado" e com cep "11333-444" e logradouro "Rua Fasano Central" e número "56"
+    E um RestauranteDtoRequest, com nome "Fasano Atualizado", e EnderecoDtoRequest, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56",e Proprietario, com email "bohr@yahoo.com"
     Quando uma requisição Put for feita no método update do RestauranteController
     Entao receber ResponseEntity com HTTP 404 do RestauranteController
 
   Cenario: Put para atualizar Restaurante, com erro por nome vazio, pelo RestauranteController
     Dado um identificador ID de um Restaurante existente, com nome "D.O.M"
-    E um RestauranteDtoRequest e EnderecoDtoRequest, com nome "   " e com cep "11333-444" e logradouro "Rua Dom" e número "56"
+    E um RestauranteDtoRequest, com nome "   ", e EnderecoDtoRequest, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56",e Proprietario, com email "bohr@yahoo.com"
     Quando uma requisição Put for feita no método update do RestauranteController
     Entao receber ResponseEntity com HTTP 400 do RestauranteController
 

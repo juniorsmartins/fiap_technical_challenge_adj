@@ -17,7 +17,10 @@ public record RestauranteDtoResponse(
         String nome,
 
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
-        EnderecoDtoResponse endereco
+        EnderecoDtoResponse endereco,
+
+        @Schema(name = "proprietario", description = "Dono do restaurante.")
+        ProprietarioDtoResponse proprietario
 ) {
 }
 
