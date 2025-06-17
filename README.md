@@ -235,15 +235,26 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 ##### Requisição 4 #####
 ```
 {
-    "nome": "Panela Velha"
+    "nome": "Panela Velha",
+    "endereco": {
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    }
 }
 ```
 
 ##### Resposta 5 #####
 ```
 {
-    "restauranteId": "3091ef7a-c2d2-4510-9bd3-0467fc5744ad",
-    "nome": "Panela Velha"
+    "restauranteId": "056a441c-2cc0-401c-a1ee-4e3c1ab3c581",
+    "nome": "Panela Velha",
+    "endereco": {
+        "enderecoId": "6add2d40-c81d-4516-b11c-02667b8b9db3",
+        "cep": "78000-100",
+        "logradouro": "Rua Centro",
+        "numero": "100"
+    }
 }
 ```
 
@@ -686,9 +697,9 @@ emails repetidos e logins repetidos. São regras que garantes que tais proprieda
 
 O arquivo de coleções de teste do Postman está neste diretório: https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
 
-[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v3.postman_collection.json)  
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v4.postman_collection.json)  
 
-https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v3.postman_collection.json
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v4.postman_collection.json
 
 #### Descrição dos Testes Manuais
 

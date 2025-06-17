@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.domain.rule;
 
+import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByLoginOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http409.UsuarioNonUniqueLoginException;
 import br.com.fiap.tech.challenge_user.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByLoginOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public final class UsuarioLoginStrategy<T extends Usuario> implements UsuarioRul
     private final UsuarioFindByLoginOutputPort findByLoginOutputPort;
 
     @Override
-    public T executar(T usuario) {
+    public void executar(T usuario) {
 
         var login = usuario.getLogin();
         var id = usuario.getUsuarioId();
@@ -24,8 +24,6 @@ public final class UsuarioLoginStrategy<T extends Usuario> implements UsuarioRul
                         throw new UsuarioNonUniqueLoginException(login);
                     }
                 });
-
-        return usuario;
     }
 }
 

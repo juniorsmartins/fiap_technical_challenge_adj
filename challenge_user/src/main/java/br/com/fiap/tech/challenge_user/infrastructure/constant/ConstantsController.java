@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.constant;
 
-public final class ControllerConstants {
+public final class ConstantsController {
 
     public static final String URI_CLIENTE = "/api/v1/challenge-user/clientes";
 

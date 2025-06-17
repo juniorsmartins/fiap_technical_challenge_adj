@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
+import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 public final class RestauranteMapper implements InputMapper<RestauranteDtoRequest, Restaurante>,
         EntityMapper<Restaurante, RestauranteEntity>, OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> {
 
-    private final EnderecoMapper mapper;
+    private final EnderecoMapper enderecoMapper;
+
+    private final ProprietarioMapper proprietarioMapper;
 
     @Override
     public Restaurante toDomainIn(RestauranteDtoRequest dto) {
@@ -21,9 +24,11 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
             return null;
         }
 
-        var endereco = mapper.toEndereco(dto.endereco());
+        var endereco = enderecoMapper.toEndereco(dto.endereco());
+        var proprietario = new Proprietario();
+        proprietario.setUsuarioId(dto.proprietario());
 
-        return new Restaurante(null, dto.nome(), endereco);
+        return new Restaurante(null, dto.nome(), endereco, proprietario);
     }
 
     @Override
@@ -32,9 +37,10 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
             return null;
         }
 
-        var endereco = mapper.toEnderecoDtoResponse(domain.getEndereco());
+        var endereco = enderecoMapper.toEnderecoDtoResponse(domain.getEndereco());
+        var proprietario = proprietarioMapper.toDtoResponse(domain.getProprietario());
 
-        return new RestauranteDtoResponse(domain.getRestauranteId(), domain.getNome(), endereco);
+        return new RestauranteDtoResponse(domain.getRestauranteId(), domain.getNome(), endereco, proprietario);
     }
 
     @Override
@@ -43,9 +49,10 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
             return null;
         }
 
-        var endereco = mapper.toEnderecoDtoResponse(entity.getEndereco());
+        var endereco = enderecoMapper.toEnderecoDtoResponse(entity.getEndereco());
+        var proprietario = proprietarioMapper.toResponse(entity.getProprietario());
 
-        return new RestauranteDtoResponse(entity.getRestauranteId(), entity.getNome(), endereco);
+        return new RestauranteDtoResponse(entity.getRestauranteId(), entity.getNome(), endereco, proprietario);
     }
 
     @Override
@@ -59,9 +66,10 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
             return null;
         }
 
-        var endereco = mapper.toEnderecoEntity(domain.getEndereco());
+        var endereco = enderecoMapper.toEnderecoEntity(domain.getEndereco());
+        var proprietario = proprietarioMapper.toEntity(domain.getProprietario());
 
-        return new RestauranteEntity(domain.getRestauranteId(), domain.getNome(), endereco);
+        return new RestauranteEntity(domain.getRestauranteId(), domain.getNome(), endereco, proprietario);
     }
 
     @Override
@@ -70,9 +78,10 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
             return null;
         }
 
-        var endereco = mapper.toEndereco(entity.getEndereco());
+        var endereco = enderecoMapper.toEndereco(entity.getEndereco());
+        var proprietario = proprietarioMapper.toDomain(entity.getProprietario());
 
-        return new Restaurante(entity.getRestauranteId(), entity.getNome(), endereco);
+        return new Restaurante(entity.getRestauranteId(), entity.getNome(), endereco, proprietario);
     }
 }
 

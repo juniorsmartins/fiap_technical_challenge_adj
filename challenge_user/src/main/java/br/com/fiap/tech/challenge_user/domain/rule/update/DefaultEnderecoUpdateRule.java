@@ -18,12 +18,10 @@ public final class DefaultEnderecoUpdateRule<T extends Usuario, E extends Usuari
 
         } else if (domain.getEndereco() != null && entity.getEndereco() == null) {
             // Cenário: Requisição com endereço e usuário sem endereço → Criar novo endereço
-            entity.setEndereco(EnderecoEntity.builder()
-                    .cep(domain.getEndereco().getCep())
-                    .logradouro(domain.getEndereco().getLogradouro())
-                    .numero(domain.getEndereco().getNumero())
-                    .build()
-            );
+            var enderecoEntity = new EnderecoEntity();
+            enderecoEntity.setCep(domain.getEndereco().getCep());
+            enderecoEntity.setLogradouro(domain.getEndereco().getLogradouro());
+            enderecoEntity.setNumero(domain.getEndereco().getNumero());
 
         } else if (domain.getEndereco() != null && entity.getEndereco() != null) {
             // Cenário: Requisição com endereço e usuário com endereço → substituir endereço

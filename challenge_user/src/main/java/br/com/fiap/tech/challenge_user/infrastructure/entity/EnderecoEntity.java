@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "enderecos")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

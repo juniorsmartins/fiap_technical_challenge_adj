@@ -40,7 +40,7 @@ public abstract class UsuarioEntity extends AbstractAuditingEntity implements Se
     private String senha;
 
     @OneToOne(targetEntity = EnderecoEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true, orphanRemoval = true)
-    @JoinColumn(name = "endereco_id", unique = true)
+    @JoinColumn(name = "endereco_id", unique = true, nullable = true)
     private EnderecoEntity endereco;
 
     protected UsuarioEntity() {
