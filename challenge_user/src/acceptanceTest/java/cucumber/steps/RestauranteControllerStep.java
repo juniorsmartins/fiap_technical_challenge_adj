@@ -28,10 +28,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -173,6 +170,7 @@ public final class RestauranteControllerStep {
 
         assertThat(restauranteDtoRequest).isNotNull();
         assertThat(restauranteDtoRequest.endereco()).isNotNull();
+        assertThat(restauranteDtoRequest.proprietario()).isNotNull();
     }
 
     @Quando("a requisição Post for feita no método create do RestauranteController")
@@ -306,5 +304,19 @@ public final class RestauranteControllerStep {
 
         assertThat(response).isNotNull();
     }
+
+    @Dado("um RestauranteDtoRequest, com nome {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com Id inexistente")
+    public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_id_inexistente(
+            String nome, String cep, String logradouro, String numero) {
+
+        restauranteDtoRequest = new RestauranteDtoRequest(
+                nome, new EnderecoDtoRequest(cep, logradouro, numero), UUID.randomUUID()
+        );
+
+        assertThat(restauranteDtoRequest).isNotNull();
+        assertThat(restauranteDtoRequest.endereco()).isNotNull();
+        assertThat(restauranteDtoRequest.proprietario()).isNotNull();
+    }
+
 }
 

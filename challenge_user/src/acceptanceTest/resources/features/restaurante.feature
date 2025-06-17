@@ -34,6 +34,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E o Restaurante cadastrado no banco de dados possui nome "Arturito"
     E um Endereço salvo no database, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550", pelo RestauranteController
 
+  Cenario: Post para criar Restaurante e Endereço, com erro por Proprietario not found, pelo RestauranteController
+    Dado um RestauranteDtoRequest, com nome "Casa das Aves", e EnderecoDtoRequest, com cep "90788-500" e logradouro "Rua Aves" e número "400",e Proprietario, com Id inexistente
+    Quando a requisição Post for feita no método create do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
+
   Cenario: Post para criar Restaurante e Endereço, com erro por nome vazio, pelo RestauranteController
     Dado um RestauranteDtoRequest, com nome "   ", e EnderecoDtoRequest, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550",e Proprietario, com email "galilei@yahoo.com"
     Quando a requisição Post for feita no método create do RestauranteController
