@@ -22,6 +22,7 @@ public final class EnderecoCheckRuleImpl<T extends Usuario, E extends UsuarioEnt
             enderecoEntity.setCep(domain.getEndereco().getCep());
             enderecoEntity.setLogradouro(domain.getEndereco().getLogradouro());
             enderecoEntity.setNumero(domain.getEndereco().getNumero());
+            entity.setEndereco(enderecoEntity);
 
         } else if (domain.getEndereco() != null && entity.getEndereco() != null) {
             // Cenário: Requisição com endereço e usuário com endereço → substituir endereço
