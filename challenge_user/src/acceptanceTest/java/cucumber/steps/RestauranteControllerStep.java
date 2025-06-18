@@ -214,6 +214,16 @@ public final class RestauranteControllerStep {
         assertThat(enderecoDtoResponse.numero()).isEqualTo(numero);
     }
 
+    @Entao("com Proprietario no body, com email {string}")
+    public void com_proprietario_no_body_com_email(String email) {
+
+        var proprietario = restauranteDtoResponse.proprietario();
+
+        assertThat(proprietario).isNotNull();
+        assertThat(proprietario.usuarioId()).isNotNull();
+        assertThat(proprietario.email()).isEqualTo(email);
+    }
+
     @Entao("o Restaurante cadastrado no banco de dados possui nome {string}")
     public void o_restaurante_cadastrado_no_banco_de_dados_possui_nome(String nome) {
 

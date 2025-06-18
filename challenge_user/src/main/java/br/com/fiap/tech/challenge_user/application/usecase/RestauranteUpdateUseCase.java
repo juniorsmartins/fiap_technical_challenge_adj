@@ -32,8 +32,6 @@ public class RestauranteUpdateUseCase implements UpdateInputPort<Restaurante> {
     @Override
     public Restaurante update(@NonNull final UUID id, @NonNull Restaurante domain) {
 
-        restauranteCheckRule.checkProprietario(domain);
-
         return findByIdOutputPort.findById(id)
                 .map(entity -> this.updateRestaurant(domain, entity))
                 .map(createOutputPort::save)
@@ -45,8 +43,13 @@ public class RestauranteUpdateUseCase implements UpdateInputPort<Restaurante> {
     }
 
     private RestauranteEntity updateRestaurant(Restaurante domain, RestauranteEntity entity) {
-        BeanUtils.copyProperties(domain, entity, "restauranteId");
+
+        var proprietarioEntity = restauranteCheckRule.checkProprietario(domain);
+
+        BeanUtils.copyProperties(domain, entity, "restauranteId", "proprietario");
         BeanUtils.copyProperties(domain.getEndereco(), entity.getEndereco(), "enderecoId");
+
+        entity.setProprietario(proprietarioEntity);
         return entity;
     }
 }

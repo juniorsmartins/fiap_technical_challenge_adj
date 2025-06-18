@@ -31,6 +31,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 201 do RestauranteController
     E com RestauranteDtoResponse no body, com id e nome "Arturito"
     E com EnderecoDtoResponse no body, com id e cep "25444-222" e logradouro "Rua Avelino Popo" e número "550", pelo RestauranteController
+    E com Proprietario no body, com email "galilei@yahoo.com"
     E o Restaurante cadastrado no banco de dados possui nome "Arturito"
     E um Endereço salvo no database, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550", pelo RestauranteController
 
@@ -57,6 +58,17 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 200 do RestauranteController
     E com RestauranteDtoResponse no body, com id e nome "Fasano Atualizado"
     E com EnderecoDtoResponse no body, com id e cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
+    E o Restaurante cadastrado no banco de dados possui nome "Fasano Atualizado"
+    E um Endereço salvo no database, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
+
+  Cenario: Put para atualizar Proprietario do Restaurante e Endereço, com sucesso, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "Fasano"
+    E um RestauranteDtoRequest, com nome "Fasano Atualizado", e EnderecoDtoRequest, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56",e Proprietario, com email "bohr@yahoo.com"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 200 do RestauranteController
+    E com RestauranteDtoResponse no body, com id e nome "Fasano Atualizado"
+    E com EnderecoDtoResponse no body, com id e cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
+    E com Proprietario no body, com email "bohr@yahoo.com"
     E o Restaurante cadastrado no banco de dados possui nome "Fasano Atualizado"
     E um Endereço salvo no database, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
 

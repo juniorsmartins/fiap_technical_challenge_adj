@@ -1,7 +1,9 @@
 package br.com.fiap.tech.challenge_user.domain.rule.update;
 
+import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import lombok.NonNull;
@@ -14,8 +16,10 @@ public final class RestauranteCheckRuleImpl implements RestauranteCheckRule {
 
     private final FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
 
+    private final EntityMapper<Proprietario, ProprietarioEntity> mapper;
+
     @Override
-    public void checkProprietario(@NonNull final Restaurante restaurante) {
+    public ProprietarioEntity checkProprietario(@NonNull final Restaurante restaurante) {
 
         var proprietarioId = restaurante.getProprietario().getUsuarioId();
 
@@ -25,6 +29,11 @@ public final class RestauranteCheckRuleImpl implements RestauranteCheckRule {
         if (!(obj instanceof ProprietarioEntity)) {
             throw new ProprietarioNotFoundException(proprietarioId);
         }
+
+        var proprietarioEntity = (ProprietarioEntity) obj;
+        restaurante.setProprietario(mapper.toDomain(proprietarioEntity));
+
+        return proprietarioEntity;
     }
 }
 
