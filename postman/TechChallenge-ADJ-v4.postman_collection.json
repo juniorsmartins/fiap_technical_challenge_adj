@@ -521,7 +521,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Rozenn Morgat\",\n    \"email\":\"rmorgat@email.com\",\n    \"login\":\"rmorgat\",\n    \"senha\":\"rmorgat123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5602\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Central\",\n        \"numero\": \"1001\"\n    }\n}\n\n",
+									"raw": "{\n    \"nome\":\"Sam Atual Newman\",\n    \"email\":\"snewman@email.com\",\n    \"login\":\"snewman\",\n    \"senha\":\"snewman123\",\n    \"numeroCartaoFidelidade\": \"7611-0111-000\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Central\",\n        \"numero\": \"1001\"\n    }\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -529,7 +529,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/2f677af6-6f43-47b3-8461-1180effb4401",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -540,7 +540,7 @@
 										"v1",
 										"challenge-user",
 										"clientes",
-										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+										"2f677af6-6f43-47b3-8461-1180effb4401"
 									]
 								}
 							},
@@ -1220,7 +1220,7 @@
 							"response": []
 						},
 						{
-							"name": "Trocar Senha - 409",
+							"name": "Trocar Senha - 409 (senha antiga incompatível)",
 							"request": {
 								"method": "PATCH",
 								"header": [],
@@ -1893,7 +1893,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\":\"Fritz B. Haber\",\n    \"email\":\"fhaber@email.com\",\n    \"login\":\"fhaber123\",\n    \"senha\":\"fh123456\",\n    \"descricao\": \"Presente pela manhã\",\n    \"endereco\": {\n        \"cep\": \"78020-101\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"101\"\n    }\n}\n\n",
+									"raw": "{\n    \"nome\":\"John Atual Lakos\",\n    \"email\":\"jlakos@email.com\",\n    \"login\":\"jlakos\",\n    \"senha\":\"jlakos12\",\n    \"descricao\": \"Presente pela manhã\",\n    \"endereco\": {\n        \"cep\": \"78333-999\",\n        \"logradouro\": \"Rua Central Two\",\n        \"numero\": \"1010\"\n    }\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1901,7 +1901,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/01ca9f69-b74b-4bd9-8e9f-d0cfea6045ef",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1912,7 +1912,7 @@
 										"v1",
 										"challenge-user",
 										"proprietarios",
-										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+										"01ca9f69-b74b-4bd9-8e9f-d0cfea6045ef"
 									]
 								}
 							},
@@ -2592,7 +2592,7 @@
 							"response": []
 						},
 						{
-							"name": "Trocar Senha - 409",
+							"name": "Trocar Senha - 409 (senha antiga incompatível)",
 							"request": {
 								"method": "PATCH",
 								"header": [],
@@ -2763,7 +2763,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    }\n}\n\n",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
