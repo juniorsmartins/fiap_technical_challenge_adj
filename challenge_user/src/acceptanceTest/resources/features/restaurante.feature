@@ -60,6 +60,12 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E o Restaurante cadastrado no banco de dados possui nome "Fasano Atualizado"
     E um Endereço salvo no database, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56", pelo RestauranteController
 
+  Cenario: Put para atualizar Restaurante e Endereço, com erro por Id de Cliente como Proprietario, pelo RestauranteController
+    Dado um identificador ID de um Restaurante existente, com nome "Fasano"
+    E um RestauranteDtoRequest, com nome "Fasano Bovino", e EnderecoDtoRequest, com cep "78000-550" e logradouro "Rua do Boi" e número "400",e Proprietario, com email "newton@email.com"
+    Quando uma requisição Put for feita no método update do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
+
   Cenario: Put para atualizar Restaurante, com erro not found, pelo RestauranteController
     Dado um identificador ID de um Restaurante inexistente
     E um RestauranteDtoRequest, com nome "Fasano Atualizado", e EnderecoDtoRequest, com cep "11333-444" e logradouro "Rua Fasano Central" e número "56",e Proprietario, com email "bohr@yahoo.com"
