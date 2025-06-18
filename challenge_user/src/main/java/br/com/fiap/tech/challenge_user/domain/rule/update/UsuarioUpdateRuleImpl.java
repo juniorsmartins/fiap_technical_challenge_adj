@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class UsuarioCheckRuleImpl<T extends Usuario, E extends UsuarioEntity> implements UsuarioCheckRule<T, E> {
+public final class UsuarioUpdateRuleImpl<T extends Usuario, E extends UsuarioEntity> implements UsuarioUpdateRule<T, E> {
 
     @Override
     public E updateUser(T domain, E entity) {
