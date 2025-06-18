@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class DefaultEnderecoUpdateRule<T extends Usuario, E extends UsuarioEntity> implements EnderecoUpdateRule<T, E> {
+public final class EnderecoCheckRuleImpl<T extends Usuario, E extends UsuarioEntity> implements EnderecoCheckRule<T, E> {
 
     @Override
     public E updateAddress(T domain, E entity) {
@@ -22,6 +22,7 @@ public final class DefaultEnderecoUpdateRule<T extends Usuario, E extends Usuari
             enderecoEntity.setCep(domain.getEndereco().getCep());
             enderecoEntity.setLogradouro(domain.getEndereco().getLogradouro());
             enderecoEntity.setNumero(domain.getEndereco().getNumero());
+            entity.setEndereco(enderecoEntity);
 
         } else if (domain.getEndereco() != null && entity.getEndereco() != null) {
             // Cenário: Requisição com endereço e usuário com endereço → substituir endereço

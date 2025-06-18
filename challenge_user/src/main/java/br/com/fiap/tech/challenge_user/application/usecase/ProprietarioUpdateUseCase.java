@@ -2,8 +2,8 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoCheckRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioCheckRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
@@ -23,10 +23,10 @@ public class ProprietarioUpdateUseCase extends AbstractUsuarioUpdateUseCase<Prop
             EntityMapper<Proprietario, ProprietarioEntity> entityMapper,
             CreateOutputPort<ProprietarioEntity> createOutputPort,
             FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort,
-            UsuarioUpdateRule<Proprietario, ProprietarioEntity> usuarioUpdateRule,
-            EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule,
+            UsuarioCheckRule<Proprietario, ProprietarioEntity> usuarioCheckRule,
+            EnderecoCheckRule<Proprietario, ProprietarioEntity> enderecoCheckRule,
             List<UsuarioRulesStrategy<Proprietario>> rulesStrategies) {
-        super(entityMapper, createOutputPort, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, rulesStrategies);
+        super(entityMapper, createOutputPort, findByIdOutputPort, usuarioCheckRule, enderecoCheckRule, rulesStrategies);
     }
 
     @Override
