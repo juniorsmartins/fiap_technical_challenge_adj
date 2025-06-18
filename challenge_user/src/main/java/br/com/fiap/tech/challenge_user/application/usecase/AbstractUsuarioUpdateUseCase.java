@@ -3,8 +3,8 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoCheckRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioCheckRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
@@ -28,9 +28,9 @@ public abstract class AbstractUsuarioUpdateUseCase<T extends Usuario, E extends 
 
     private final FindByIdOutputPort<E> findByIdOutputPort;
 
-    private final UsuarioUpdateRule<T, E> usuarioUpdateRule;
+    private final UsuarioCheckRule<T, E> usuarioCheckRule;
 
-    private final EnderecoUpdateRule<T, E> enderecoUpdateRule;
+    private final EnderecoCheckRule<T, E> enderecoCheckRule;
 
     private final List<UsuarioRulesStrategy<T>> rulesStrategy;
 
@@ -40,8 +40,8 @@ public abstract class AbstractUsuarioUpdateUseCase<T extends Usuario, E extends 
         this.rules(usuario);
 
         return findByIdOutputPort.findById(id)
-                .map(entity -> usuarioUpdateRule.updateUser(usuario, entity))
-                .map(entity -> enderecoUpdateRule.updateAddress(usuario, entity))
+                .map(entity -> usuarioCheckRule.updateUser(usuario, entity))
+                .map(entity -> enderecoCheckRule.updateAddress(usuario, entity))
                 .map(createOutputPort::save)
                 .map(entityMapper::toDomain)
                 .orElseThrow(() -> {

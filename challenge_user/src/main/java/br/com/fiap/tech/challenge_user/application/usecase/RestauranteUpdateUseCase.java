@@ -6,7 +6,7 @@ import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http404.RestauranteNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteCheckRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteUpdateRule;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class RestauranteUpdateUseCase implements UpdateInputPort<Restaurante> {
 
     private final FindByIdOutputPort<RestauranteEntity> findByIdOutputPort;
 
-    private final RestauranteCheckRule restauranteCheckRule;
+    private final RestauranteUpdateRule restauranteUpdateRule;
 
     @Override
     public Restaurante update(@NonNull final UUID id, @NonNull Restaurante domain) {
@@ -44,7 +44,7 @@ public class RestauranteUpdateUseCase implements UpdateInputPort<Restaurante> {
 
     private RestauranteEntity updateRestaurant(Restaurante domain, RestauranteEntity entity) {
 
-        var proprietarioEntity = restauranteCheckRule.checkProprietario(domain);
+        var proprietarioEntity = restauranteUpdateRule.checkProprietario(domain);
 
         BeanUtils.copyProperties(domain, entity, "restauranteId", "proprietario");
         BeanUtils.copyProperties(domain.getEndereco(), entity.getEndereco(), "enderecoId");
