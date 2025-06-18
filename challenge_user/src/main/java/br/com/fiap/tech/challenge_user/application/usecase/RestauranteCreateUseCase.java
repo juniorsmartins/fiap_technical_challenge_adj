@@ -36,8 +36,12 @@ public class RestauranteCreateUseCase extends AbstractCreateUseCase<Restaurante,
 
         var proprietarioId = restaurante.getProprietario().getUsuarioId();
 
-        findByIdOutputPort.findById(proprietarioId)
-                .orElseThrow(() -> new ProprietarioNotFoundException(proprietarioId));
+        Object obj = findByIdOutputPort.findById(proprietarioId)
+                .orElse(null);
+
+        if (!(obj instanceof ProprietarioEntity)) {
+            throw new ProprietarioNotFoundException(proprietarioId);
+        }
     }
 }
 

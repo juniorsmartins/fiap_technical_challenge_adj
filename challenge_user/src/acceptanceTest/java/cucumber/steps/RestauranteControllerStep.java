@@ -9,10 +9,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ClienteRepository;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.EnderecoRepository;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ProprietarioRepository;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.RestauranteRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.repository.*;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -54,6 +51,9 @@ public final class RestauranteControllerStep {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     private RestauranteDtoRequest restauranteDtoRequest;
 
@@ -159,10 +159,11 @@ public final class RestauranteControllerStep {
     }
 
     @Dado("um RestauranteDtoRequest, com nome {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com email {string}")
-    public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_número_e_proprietario_com_email(
+    public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_email(
             String nome, String cep, String logradouro, String numero, String email) {
 
-        var proprietario = proprietarioRepository.findByEmail(email).get();
+//        var proprietario = proprietarioRepository.findByEmail(email).get();
+        var proprietario = usuarioRepository.findByEmail(email).get();
 
         restauranteDtoRequest = new RestauranteDtoRequest(
                 nome, new EnderecoDtoRequest(cep, logradouro, numero), proprietario.getUsuarioId()

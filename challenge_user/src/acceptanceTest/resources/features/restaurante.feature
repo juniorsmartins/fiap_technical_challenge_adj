@@ -39,6 +39,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Quando a requisição Post for feita no método create do RestauranteController
     Entao receber ResponseEntity com HTTP 404 do RestauranteController
 
+  Cenario: Post para criar Restaurante e Endereço, com erro por Id de Cliente como Proprietario, pelo RestauranteController
+    Dado um RestauranteDtoRequest, com nome "Churrascaria do Boi", e EnderecoDtoRequest, com cep "78000-550" e logradouro "Rua do Boi" e número "400",e Proprietario, com email "newton@email.com"
+    Quando a requisição Post for feita no método create do RestauranteController
+    Entao receber ResponseEntity com HTTP 404 do RestauranteController
+
   Cenario: Post para criar Restaurante e Endereço, com erro por nome vazio, pelo RestauranteController
     Dado um RestauranteDtoRequest, com nome "   ", e EnderecoDtoRequest, com cep "25444-222" e logradouro "Rua Avelino Popo" e número "550",e Proprietario, com email "galilei@yahoo.com"
     Quando a requisição Post for feita no método create do RestauranteController
