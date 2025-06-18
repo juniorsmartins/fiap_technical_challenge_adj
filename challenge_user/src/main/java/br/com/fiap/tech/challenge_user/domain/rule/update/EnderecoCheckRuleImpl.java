@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class DefaultEnderecoUpdateRule<T extends Usuario, E extends UsuarioEntity> implements EnderecoUpdateRule<T, E> {
+public final class EnderecoCheckRuleImpl<T extends Usuario, E extends UsuarioEntity> implements EnderecoCheckRule<T, E> {
 
     @Override
     public E updateAddress(T domain, E entity) {
