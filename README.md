@@ -83,7 +83,7 @@ mas sim de interfaces abstratas (EntityMapper, UsuarioCreateOutputPort).
 
 #### Diagrama da Arquitetura
 
-![TechChallenge3](docs/DiagramaTechChallenge-v3.png)
+![TechChallenge3](docs/DiagramaTechChallenge-v4.png)
 
 Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. Ela reflete a arquitetura da
 aplicação de forma simplificada. Mostra a parte das regras de negócio separada das partes de infraestrutura de entrada e

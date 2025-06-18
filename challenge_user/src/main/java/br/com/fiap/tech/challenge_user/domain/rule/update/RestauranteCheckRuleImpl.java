@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public final class RestauranteUpdateRuleImpl implements RestauranteUpdateRule {
+public final class RestauranteCheckRuleImpl implements RestauranteCheckRule {
 
     private final FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
 
