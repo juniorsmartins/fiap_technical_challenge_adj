@@ -130,7 +130,7 @@ public final class RestauranteControllerStep {
                     null
             );
 
-            proprietarioRepository.save(entidade);
+            proprietarioRepository.saveAndFlush(entidade);
         }
     }
 

@@ -1,8 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +19,9 @@ public final class ProprietarioEntity extends UsuarioEntity {
 
     @Column(name = "descricao", nullable = true)
     private String descricao;
+
+    @OneToOne(mappedBy = "proprietario", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, optional = true, orphanRemoval = false)
+    private RestauranteEntity restaurante;
 
     public ProprietarioEntity(
             String nome, String email, String login, String senha,
