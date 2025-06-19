@@ -13,6 +13,7 @@ public enum TipoCozinhaEnum {
     CHINESA("CHINESA"),
     TURCA("TURCA"),
     CHILENA("CHILENA"),
+    FAST_FOOD("FAST_FOOD"),
     CARNIVORA("CARNIVORA"),
     VEGANA("VEGANA"),
     VEGETARIANA("VEGETARIANA");
