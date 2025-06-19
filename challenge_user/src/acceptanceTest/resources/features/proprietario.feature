@@ -7,13 +7,17 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
   Contexto:
     Dado ambiente de teste ativado para Proprietário de Challenge_User
     Dado cadastros de Proprietários disponíveis no banco de dados
-      |       nome        |          email         |    login    |     senha     |      cep     |  logradouro  |   numero   |        descricao        |
-      |  Martin Fowler    |   fowler2@email.com    |   mfowler   |   fowler123   |      null    |      null    |    null    |      gerente geral      |
-      |     Kent Beck     |     beck2@proton.me    |     kbeck   |     beck123   |      null    |      null    |    null    |       atendente         |
-      |  Jeff Sutherland  |     jeff2@gmail.com    |   jsuther   |   suther234   |      null    |      null    |    null    |       investidor        |
-      |    James Clear    |  jamesclear@gmail.com  |    jamesc   |    james12    |   78098-179  |     Rua L    |     300    |        contador         |
-      |    Ron Jeffries   |     ronj@gmail.com     |   jeffries  |   jeffries12  |   78098-800  |     Rua H    |     709    |          teste2         |
-      |     Eric Evans    |     eric@yahoo.com     |     evans   |    evans123   |   75666-908  |     Rua O    |     110    |          teste3         |
+      |       nome        |          email         |    login    |     senha     |      cep     |  logradouro  |   numero   |     descricao    |
+      |  Martin Fowler    |   fowler2@email.com    |   mfowler   |   fowler123   |      null    |      null    |    null    |   gerente geral  |
+      |     Kent Beck     |     beck2@proton.me    |     kbeck   |     beck123   |      null    |      null    |    null    |     atendente    |
+      |  Jeff Sutherland  |     jeff2@gmail.com    |   jsuther   |   suther234   |      null    |      null    |    null    |     investidor   |
+      |    James Clear    |  jamesclear@gmail.com  |    jamesc   |    james12    |   78098-179  |     Rua L    |     300    |      contador    |
+      |    Ron Jeffries   |     ronj@gmail.com     |   jeffries  |   jeffries12  |   78098-800  |     Rua H    |     709    |       teste2     |
+      |     Eric Evans    |     eric@yahoo.com     |     evans   |    evans123   |   75666-908  |     Rua O    |     110    |       teste3     |
+      |  Scott Hanselman  |   hanselman@yahoo.com  |   hanselman |  hanselman123 |   66000-777  |    Rua HJ    |    2119    |        chef      |
+    Dado cadastros de Restaurantes disponíveis no banco de dados
+      |         nome        |      cep     |  logradouro  |   numero   |     proprietario      |
+      | Churrasco da Ovelha |   78324-125  |    Rua RF    |    1236    |  hanselman@yahoo.com  |
 
   Cenario: Post para criar Proprietário, com sucesso, pelo ProprietarioController
     Dado um ProprietarioDtoRequest, com nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e descricao "advogado"
@@ -297,6 +301,12 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 204 do ProprietarioController
     E o Proprietario foi apagado do banco de dados pelo ProprietarioController
     E o Endereço foi apagado do banco de dados pelo ProprietarioController
+
+  Cenario: Delete para apagar Proprietario, com erro por regra de bloqueio por ser dono ativo, pelo ProprietarioController
+    Dado um identificador ID de um proprietario existente, com email "hanselman@yahoo.com"
+    Quando uma requisição Delete for feita no método deleteById do ProprietarioController
+    Entao receber ResponseEntity com HTTP 409 do ProprietarioController
+    E o Proprietario no database possui nome "Scott Hanselman" e email "hanselman@yahoo.com" e login "hanselman" e senha "hanselman123" e descricao "chef"
 
   Cenario: Delete para apagar Proprietario não encontrado pelo ProprietarioController
     Dado um identificador ID de um proprietario inexistente
