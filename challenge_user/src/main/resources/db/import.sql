@@ -7,6 +7,7 @@ INSERT INTO clientes(usuario_id, nome, email, login, senha, numero_cartao_fideli
 INSERT INTO clientes(usuario_id, nome, email, login, senha, numero_cartao_fidelidade, data_hora_criacao, data_hora_edicao) VALUES('86522917-f507-459a-8ef9-93015089a5b2', 'Brian W. Kernighan', 'kernighan@email.com', 'brian', 'brian123', '7678-1111-123', TO_TIMESTAMP('2020-11-01 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2022-12-08 12:05:00', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO clientes(usuario_id, nome, email, login, senha, numero_cartao_fidelidade, data_hora_criacao, data_hora_edicao) VALUES('2f677af6-6f43-47b3-8461-1180effb4401', 'Sam Newman', 'newman@email.com', 'newman', 'newman123', '7611-0985-223', TO_TIMESTAMP('2020-11-01 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2023-11-01 11:07:00', 'YYYY-MM-DD HH24:MI:SS'));
 
+
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('eac614d5-c70b-4b36-b4c8-7560f6f0eef9', '69905-169', 'Rua Antônio Francisco das Chagas', '100');
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('e2619c26-ae4e-4a2b-bd20-ae0ed7c4c62d', '69800-610', 'Avenida Central', '870');
 
@@ -15,12 +16,15 @@ INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data
 INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao) VALUES('051f5dc8-74fe-4d2c-81e2-ddea7c515532', 'Marie Curie', 'curie@email.com', 'curie', 'curie123', 'Advogado', TO_TIMESTAMP('2023-10-01 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-12-09 12:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao) VALUES('b69e9f12-e489-4751-9b24-a936c4f3c4d2', 'Andrew S. Tanenbaum', 'tanenbaum@email.com', 'tanenbaum', 'tanenbaum12', 'Porteiro', TO_TIMESTAMP('2019-01-21 12:02:20', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-05-05 12:50:50', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao) VALUES('01ca9f69-b74b-4bd9-8e9f-d0cfea6045ef', 'John Lakos', 'lakos@email.com', 'lakos', 'lakos12', 'Professor', TO_TIMESTAMP('2019-02-20 10:01:10', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-05-06 11:56:52', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao) VALUES('d2c8e228-b0d4-46a7-90da-ab7afe0fc063', 'Jon Skeet', 'skeet@yahoo.com', 'skeet', 'skeet12', 'Estudante', TO_TIMESTAMP('2019-02-20 10:01:10', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-05-06 11:56:52', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO proprietarios(usuario_id, nome, email, login, senha, descricao, data_hora_criacao, data_hora_edicao) VALUES('0a1e22f4-9c16-4f42-ab52-94ee029dba1f', 'Jeffrey Richter', 'richter@yahoo.com', 'richter', 'richter12', 'Mecânico', TO_TIMESTAMP('2019-02-20 10:01:10', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2024-05-06 11:56:52', 'YYYY-MM-DD HH24:MI:SS'));
+
 
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('ee4d3283-028e-4883-9d43-169240b56758', '70680-777', 'Rua Manoel das Pitangas', '666');
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('5dc8d58a-7cf9-422b-8167-985da17fd563', '80999-555', 'Avenida do Porto', '555');
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('5f887464-fb36-4556-a78e-b567a85e62be', '20987-222', 'Avenida do Porto', '555');
 
-INSERT INTO restaurantes(restaurante_id, nome, endereco_id, proprietario_id) VALUES('63fd1b44-4fd9-4d67-95d9-9a4607409c79', 'Lasai', 'ee4d3283-028e-4883-9d43-169240b56758', 'eb957f38-90c4-4ef2-850c-229fb1658fcd');
-INSERT INTO restaurantes(restaurante_id, nome, endereco_id, proprietario_id) VALUES('b173aa00-d852-4ff2-86aa-ce657136a44a', 'Oteque', '5dc8d58a-7cf9-422b-8167-985da17fd563', 'bc11e003-219d-4884-88e9-e2a0b43d42c7');
-INSERT INTO restaurantes(restaurante_id, nome, endereco_id, proprietario_id) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa', '5f887464-fb36-4556-a78e-b567a85e62be', '051f5dc8-74fe-4d2c-81e2-ddea7c515532');
+INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, endereco_id, proprietario_id) VALUES('63fd1b44-4fd9-4d67-95d9-9a4607409c79', 'Lasai', 'BRASILEIRA', 'ee4d3283-028e-4883-9d43-169240b56758', 'eb957f38-90c4-4ef2-850c-229fb1658fcd');
+INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, endereco_id, proprietario_id) VALUES('b173aa00-d852-4ff2-86aa-ce657136a44a', 'Oteque', 'ITALIANA', '5dc8d58a-7cf9-422b-8167-985da17fd563', 'bc11e003-219d-4884-88e9-e2a0b43d42c7');
+INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, endereco_id, proprietario_id) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa', 'JAPONESA', '5f887464-fb36-4556-a78e-b567a85e62be', '051f5dc8-74fe-4d2c-81e2-ddea7c515532');
 

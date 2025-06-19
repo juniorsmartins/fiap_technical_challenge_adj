@@ -22,6 +22,7 @@ public class ClienteDeleteUseCase extends AbstractDeleteUseCase<ClienteEntity>
 
     @Override
     public void deleteById(@NonNull final UUID id) {
+
         super.deleteById(id);
     }
 }

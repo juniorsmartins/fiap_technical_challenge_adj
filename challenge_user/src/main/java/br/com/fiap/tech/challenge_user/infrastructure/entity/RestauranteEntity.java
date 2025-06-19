@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.entity;
 
+import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,10 @@ public final class RestauranteEntity implements Serializable {
 
     @Column(name = "nome", nullable = false)
     private String nome;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_cozinha", nullable = false)
+    private TipoCozinhaEnum tipoCozinhaEnum;
 
     @OneToOne(targetEntity = EnderecoEntity.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", unique = true)
