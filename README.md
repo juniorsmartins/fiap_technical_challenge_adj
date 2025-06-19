@@ -236,24 +236,35 @@ de saída. Bem como mostra como foram organizados os princípios Solid.
 ```
 {
     "nome": "Panela Velha",
+    "tipoCozinhaEnum": "FAST_FOOD",
     "endereco": {
         "cep": "78000-100",
         "logradouro": "Rua Centro",
         "numero": "100"
-    }
+    },
+    "proprietario": "b69e9f12-e489-4751-9b24-a936c4f3c4d2"
 }
 ```
 
 ##### Resposta 5 #####
 ```
 {
-    "restauranteId": "056a441c-2cc0-401c-a1ee-4e3c1ab3c581",
+    "restauranteId": "4fc0503e-68f3-42be-be79-b2eed500bd94",
     "nome": "Panela Velha",
+    "tipoCozinhaEnum": "FAST_FOOD",
     "endereco": {
-        "enderecoId": "6add2d40-c81d-4516-b11c-02667b8b9db3",
+        "enderecoId": "2ca3a63e-1e5d-473f-8ed1-ba14c0f949cd",
         "cep": "78000-100",
         "logradouro": "Rua Centro",
         "numero": "100"
+    },
+    "proprietario": {
+        "usuarioId": "b69e9f12-e489-4751-9b24-a936c4f3c4d2",
+        "nome": "Andrew S. Tanenbaum",
+        "email": "tanenbaum@email.com",
+        "login": "tanenbaum",
+        "senha": "tanenbaum12",
+        "descricao": "Porteiro"
     }
 }
 ```
