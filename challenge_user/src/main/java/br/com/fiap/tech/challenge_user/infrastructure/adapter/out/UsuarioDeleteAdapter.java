@@ -21,6 +21,7 @@ public class UsuarioDeleteAdapter<E extends UsuarioEntity> implements DeleteOutp
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Override
     public void delete(@NonNull final E usuario) {
+
         repository.delete(usuario);
     }
 }
