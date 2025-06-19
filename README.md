@@ -399,63 +399,39 @@ sem esperar por grandes revisões.
 
 
 ##### SOLID
-- Princípio da Responsabilidade Única (SRP):
+
+1. Princípio da Responsabilidade Única (SRP):
 
 O Princípio da Responsabilidade Única (Single Responsibility Principle) estabelece que uma classe deve ter apenas
 um motivo para mudar, ou seja, deve ser responsável por uma única parte da funcionalidade do sistema, e essa
 responsabilidade deve ser totalmente encapsulada pela classe. Isso reduz o acoplamento, facilita a manutenção e
 melhora a legibilidade do código, já que mudanças em uma responsabilidade específica afetam apenas uma classe.
 
-1. Separação de Camadas
+A aplicação segue uma arquitetura com responsabilidades bem definidas:
 
-A aplicação segue uma arquitetura em camadas, com responsabilidades bem definidas:
+Controllers (AbstractCreateController, ClienteCreateController, ProprietarioCreateController): A classe abstrata
+AbstractCreateController lida com a operação Criar de forma genérica, enquanto as subclasses definem endpoints 
+específicos. Isso é uma boa separação, pois o controlador genérico centraliza a lógica comum, e as subclasses 
+configuram o contexto específico. Cada controlador tem a responsabilidade clara de gerenciar requisições HTTP.
 
-Controllers (AbstractUsuarioController, ClienteController, ProprietarioController): A classe abstrata
-AbstractUsuarioController lida com operações CRUD (criar, atualizar, buscar, deletar) de forma genérica, enquanto
-as subclasses (ClienteController, ProprietarioController) definem endpoints específicos. Isso é uma boa separação,
-pois o controlador genérico centraliza a lógica comum, e as subclasses configuram o contexto específico. Cada
-controlador tem a responsabilidade clara de gerenciar requisições HTTP.
-
-Serviços (AbstractUsuarioService, ClienteService, ProprietarioService): Contêm a lógica de negócio para operações
-como criação, atualização e exclusão de usuários. A classe abstrata AbstractUsuarioService lida com operações de forma
-genérica,enquanto as subclasses definem contextos específicos. Dessa forma, a subclasse ClienteService é responsável por
-operações de Cliente e a subclasse ProprietarioService é responsável por operações de Proprietario. Ou seja, cada
+UseCases (AbstractCreateUseCase, ClienteCreateUseCase, ProprietarioCreateUseCase): Contêm a lógica de negócio para 
+a operação de criação. A classe abstrata AbstractCreateUseCase lida com a operação de forma genérica,enquanto as 
+subclasses definem contextos específicos. Dessa forma, a subclasse ClienteCreateUseCase é responsável por criar 
+Cliente e a subclasse ProprietarioCreateUseCase é responsável por criar Proprietario. Ou seja, cada
 uma possui um único motivo para mudar. Elas mudarão apenas se mudarem as regras por seu tipo específico de usuário.
 
 Adaptadores (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter): Lidam com a persistência de dados,
 interagindo com o repositório JPA. Cada adaptador lida com uma única operação de acesso a dados (salvar, deletar, buscar),
 alinhando-se ao SRP.
 
-Regras de Atualização (DefaultUsuarioUpdateRule, DefaultEnderecoUpdateRule): A segregação das regras de atualização
-em UsuarioUpdateRule (para dados do usuário) e EnderecoUpdateRule (para endereços) demonstra uma clara separação de
-responsabilidades, com cada classe focada em uma tarefa específica.
-
-Essa separação garante que cada camada tenha uma única responsabilidade, facilitando a manutenção e a escalabilidade.
-
-2. Mapeadores Específicos
-
-Mapeadores (ClienteMapper, ProprietarioMapper, EnderecoMapper): Responsáveis por transformar dados entre DTOs, objetos de
-domínio e entidades de persistência. As classes ClienteMapper e ProprietarioMapper implementam métodos com
-responsabilidades únicas, por exemplo:
-
-toDomainIn: Converte DTOs de entrada em objetos de domínio.
-toEntity: Converte objetos de domínio em entidades de persistência.
-toDtoResponse: Converte objetos de domínio ou entidades em DTOs de saída.
-
-Cada método é focado em uma única tarefa, respeitando o SRP.
-
-3. Interfaces Específicas
-
-Interfaces como UsuarioCreateInputPort, UsuarioUpdateInputPort e UsuarioDeleteByIdInputPort definem contratos claros
-para operações específicas, garantindo que cada interface tenha uma única responsabilidade.
-
-4. Entidades
+Interfaces como CreateInputPort, UpdateInputPort e DeleteByIdInputPort definem contratos claros para operações 
+específicas, garantindo que cada interface tenha uma única responsabilidade.
 
 As classes ClienteEntity e ProprietarioEntity são responsáveis apenas por representar os dados persistidos, sem conter
 lógica de negócio, o que está alinhado com o SRP.
 
 
-- Princípio Aberto/Fechado (OCP):
+2. Princípio Aberto/Fechado (OCP):
 
 O Princípio Aberto/Fechado (Open/Closed Principle) estabelece que as entidades de software (classes, módulos, funções e
 etc.) devem estar abertas para extensão, mas fechadas para modificação. Novas funcionalidades são adicionadas por meio
@@ -463,40 +439,23 @@ de extensões (como subclasses ou implementações), sem alterar o código exist
 uma classe pode ser estendido para atender a novos requisitos sem alterar seu código-fonte existente. O OCP promove a
 flexibilidade e a reutilização do código, reduzindo o risco de introduzir erros ao modificar classes já testadas.
 
-1. Uso de Classes Abstratas:
+Classes Abstratas (AbstractCreateController, AbstractCreateUseCase): O uso de generics (T, E) permite
+adicionar novos tipos de usuários (como Admin ou Funcionario) criando subclasses (AdminCreateController e
+AdminCreateUseCase ou FuncionarioCreateController e FuncionarioCreateUseCase) sem modificar as classes base.
 
-Classes Abstratas (AbstractUsuarioController, AbstractUsuarioService): O uso de generics (T, E) permite
-adicionar novos tipos de usuários (como Admin ou Funcionario) criando subclasses (AdminController e
-AdminService ou FuncionarioController e FuncionarioService) sem modificar as classes base.
+Exemplo: O método create em AbstractCreateController é reutilizado por ClienteCreateController e ProprietarioCreateController 
+sem alterações, permitindo que novos tipos de usuários sejam adicionados por meio de novas subclasses.
 
-Exemplo: O método create em AbstractUsuarioController é reutilizado por ClienteController e ProprietarioController sem
-alterações, permitindo que novos tipos de usuários sejam adicionados por meio de novas subclasses.
+Interfaces Genéricas (CreateInputPort, UpdateInputPort e etc.): Interfaces como CreateInputPort<T>, UpdateInputPort<T>, 
+DeleteByIdInputPort<T>, InputMapper<I, U, T>, e OutputMapper<T, O, E> são genéricas, permitindo que diferentes tipos de 
+usuários sejam manipulados sem alterar o contrato definido pelas interfaces. Novos tipos de usuários podem implementar essas 
+interfaces sem alterar o código existente.
 
-2. Uso de Interfaces Genéricas:
-
-Interfaces Genéricas (UsuarioCreateInputPort, UsuarioUpdateInputPort e etc.): Interfaces como UsuarioCreateInputPort<T>,
-UsuarioUpdateInputPort<T>, UsuarioDeleteByIdInputPort<T>, InputMapper<I, U, T>, e OutputMapper<T, O, E> são genéricas,
-permitindo que diferentes tipos de usuários (Cliente, Proprietario) sejam manipulados sem alterar o contrato definido
-pelas interfaces. Novos tipos de usuários podem implementar essas interfaces sem alterar o código existente.
-
-Exemplo: A interface UsuarioCreateInputPort<T> define o método create(T usuario), que é implementado por ClienteService e
-ProprietarioService. Isso permite adicionar suporte a novos tipos de usuários (por exemplo, Administrador) criando novas
+Exemplo: A interface CreateInputPort<T> define o método create(T domain), que é implementado por ClienteCreateUseCase e
+ProprietarioCreateUseCase. Isso permite adicionar suporte a novos tipos de usuários (por exemplo, Administrador) criando novas
 implementações da interface, sem modificar o código existente.
 
-Regras de Atualização (UsuarioUpdateRule, EnderecoUpdateRule): As interfaces permitem novas implementações para
-diferentes tipos de usuários ou regras específicas, sem modificar as classes base como DefaultUsuarioUpdateRule e
-DefaultEnderecoUpdateRule.
-
-3. Mapeadores Genéricos:
-
-As interfaces InputMapper, OutputMapper e EntityMapper são projetadas para suportar diferentes tipos de entrada (I, U),
-saída (O) e entidades (T, E). Isso torna os mapeadores extensíveis para novos tipos de DTOs ou entidades sem alterar suas
-implementações existentes.
-
-Exemplo: ClienteMapper e ProprietarioMapper implementam essas interfaces, permitindo que novos mapeadores sejam criados para
-outras entidades (como Fornecedor) sem modificar as interfaces.
-
-4. Uso de Herança na Camada de Persistência:
+Uso de Herança na Camada de Persistência:
 
 A classe abstrata UsuarioEntity define atributos e comportamentos comuns (como nome, email, login, senha, e endereco),
 enquanto ClienteEntity e ProprietarioEntity estendem essa classe para adicionar campos específicos (numeroCartaoFidelidade
@@ -507,37 +466,26 @@ Exemplo: A adição de uma nova entidade, como AdministradorEntity, pode ser fei
 UsuarioEntity, sem modificar o código existente.
 
 
-- Princípio da Substituição de Liskov (LSP):
+3. Princípio da Substituição de Liskov (LSP):
 
 O Princípio de Substituição de Liskov (Liskov Substitution Principle) estabelece que objetos de uma classe derivada devem poder
 substituir objetos da classe base sem alterar o comportamento correto do programa. Em outras palavras, uma subclasse deve ser
 substituível por sua superclasse sem quebrar as expectativas do código que utiliza a superclasse. Isso implica que as subclasses
 devem respeitar os contratos definidos pela superclasse, incluindo pré-condições, pós-condições e invariantes.
 
-1. Herança de AbstractUsuarioController:
-
-As classes ClienteController e ProprietarioController estendem AbstractUsuarioController, que define métodos genéricos para
-operações CRUD (create, update, findById, deleteById). Essas subclasses utilizam a implementação genérica da superclasse, passando
-tipos específicos (ClienteDtoRequest, ClienteDtoResponse, etc.) via parâmetros genéricos.
+As classes ClienteCreateController e ProprietarioCreateController estendem AbstractCreateController, que define métodos genéricos para
+create. Essas subclasses utilizam a implementação genérica da superclasse, passando tipos específicos via parâmetros genéricos.
 
 Conformidade: As subclasses respeitam o contrato da superclasse, pois utilizam os métodos herdados sem alterar seu comportamento.
-Por exemplo, o método create em ClienteController funciona da mesma forma que em AbstractUsuarioController, apenas com tipos
-específicos (ClienteDtoRequest, Cliente, etc.), mantendo as pré-condições (entrada válida) e pós-condições (retorno de um
-ResponseEntity com status 201).
+Por exemplo, o método create em ClienteCreateController funciona da mesma forma que em AbstractCreateController, apenas com tipos
+específicos mantendo as pré-condições (entrada válida) e pós-condições (retorno de um ResponseEntity com status 201).
 
-2. Herança de AbstractUsuarioService:
+As classes ClienteCreateUseCase e ProprietarioCreateUseCase estendem AbstractCreateService e implementam interfaces específicas
+(CreateInputPort, UpdateInputPort, DeleteByIdInputPort). A superclasse define a lógica genérica para operações de negócio, enquanto 
+as subclasses apenas delegam para os métodos herdados.
 
-As classes ClienteService e ProprietarioService estendem AbstractUsuarioService e implementam interfaces específicas
-(UsuarioCreateInputPort, UsuarioUpdateInputPort, UsuarioDeleteByIdInputPort). A superclasse define a lógica genérica para operações
-de negócio, enquanto as subclasses apenas delegam para os métodos herdados.
-
-Conformidade: As subclasses não alteram o comportamento dos métodos herdados (create, update, deleteById), garantindo que qualquer
-código que utilize AbstractUsuarioService possa substituir por ClienteService ou ProprietarioService sem quebrar o sistema.
-
-Exemplo: O método create em ClienteService chama super.create, preservando as pré-condições (entrada não nula) e pós-condições
-(retorno de um objeto do tipo Cliente).
-
-3. Herança de UsuarioEntity:
+Conformidade: As subclasses não alteram o comportamento dos métodos herdados, garantindo que qualquer código que utilize AbstractCreateUseCase 
+possa substituir por ClienteCreateUseCase ou ProprietarioCreateUseCase sem quebrar o sistema.
 
 As classes ClienteEntity e ProprietarioEntity estendem UsuarioEntity, que define atributos comuns (usuarioId, nome, email, login,
 senha, endereco). Cada subclasse adiciona atributos específicos (numeroCartaoFidelidade para ClienteEntity e descricao para
@@ -547,58 +495,47 @@ Conformidade: Como UsuarioEntity é uma classe de modelo de dados sem métodos c
 superclasse. Por exemplo, o repositório UsuarioRepository pode manipular instâncias de ClienteEntity ou ProprietarioEntity sem problemas,
 já que ambas respeitam a estrutura definida por UsuarioEntity.
 
-Benefício: Qualquer operação que utilize UsuarioEntity (como buscas no repositório) funciona corretamente com ClienteEntity ou
-ProprietarioEntity.
+Benefício: Qualquer operação de persistência que utilize o repositório de UsuarioEntity (como buscas) funciona corretamente com 
+ClienteEntity ou ProprietarioEntity.
 
-4. Interfaces Genéricas:
-
-Interfaces como UsuarioCreateInputPort<T>, UsuarioUpdateInputPort<T>, e UsuarioDeleteByIdInputPort<T> são implementadas por
-ClienteService e ProprietarioService com tipos específicos (Cliente e Proprietario). Essas implementações respeitam os contratos das
-interfaces, garantindo que métodos como create(T usuario) ou deleteById(UUID id) funcionem como esperado.
+Interfaces como CreateInputPort<T>, UpdateInputPort<T>, e DeleteByIdInputPort<T> são implementadas com tipos específicos. Essas implementações 
+respeitam os contratos das interfaces, garantindo que métodos como create(T domain) ou deleteById(UUID id) funcionem como esperado.
 
 Conformidade: As implementações específicas não introduzem comportamentos inesperados, permitindo que qualquer código que dependa dessas
-interfaces utilize ClienteService ou ProprietarioService de forma intercambiável.
+interfaces seja utilizada de forma intercambiável.
 
 
-- Princípio da Segregação de Interfaces (ISP):
+4. Princípio da Segregação de Interfaces (ISP):
 
 O Princípio de Segregação de Interfaces (Interface Segregation Principle) estabelece que os clientes não devem ser forçados a depender
 de interfaces que não utilizam. Em outras palavras, uma classe não deve ser obrigada a implementar métodos que não são relevantes para
 sua funcionalidade. Interfaces devem ser específicas e coesas, contendo apenas os métodos necessários para um contexto específico,
 reduzindo o acoplamento e facilitando a manutenção. Muitas interfaces específicas são melhores que uma interface geral.
 
-1. Interfaces Específicas para Portas:
+A aplicação define interfaces específicas para diferentes operações de negócio, como CreateInputPort<T>, UpdateInputPort<T>, DeleteByIdInputPort<T> 
+e FindByIdOutputPort<E>. Cada interface contém apenas um método relacionado à sua responsabilidade (por exemplo, create para criação, 
+update para atualização, deleteById para exclusão).
 
-A aplicação define interfaces específicas para diferentes operações de negócio, como UsuarioCreateInputPort<T>, UsuarioUpdateInputPort<T>,
-UsuarioDeleteByIdInputPort<T>, e UsuarioFindByIdOutputPort<E>. Cada interface contém apenas um método relacionado à sua
-responsabilidade (por exemplo, create para criação, update para atualização, deleteById para exclusão).
+Conformidade: Essas interfaces são coesas e focadas em uma única operação, garantindo que as classes que as implementam não sejam forçadas a 
+implementar métodos desnecessários.
 
-Conformidade: Essas interfaces são coesas e focadas em uma única operação, garantindo que as classes que as implementam (como
-ClienteService e ProprietarioService) não sejam forçadas a implementar métodos desnecessários.
+Exemplo: A interface CreateInputPort<T> define apenas o método T create(T domain), e ClienteCreateUseCase implementa apenas esse método para 
+criação, sem precisar de métodos irrelevantes como exclusão ou busca.
 
-Exemplo: A interface UsuarioCreateInputPort<T> define apenas o método T create(T usuario), e ClienteService implementa apenas esse
-método para criação de clientes, sem precisar de métodos irrelevantes como exclusão ou busca.
-
-2. Interfaces de Repositório:
-
-Os adaptadores de repositório (UsuarioCreateAdapter, UsuarioDeleteAdapter, UsuarioFindByIdAdapter) implementam interfaces específicas
-(UsuarioCreateOutputPort<E>, UsuarioDeleteOutputPort<E>, UsuarioFindByIdOutputPort<E>), cada uma com um único método correspondente à
-sua função (salvar, excluir, buscar por ID).
+Os adaptadores de repositório (classes com o sufixo Adapter) implementam interfaces específicas (CreateOutputPort<E>, DeleteOutputPort<E>, 
+FindByIdOutputPort<E>), cada uma com um único método correspondente à sua função (salvar, excluir, buscar por ID).
 
 Conformidade: Cada adaptador implementa apenas a interface necessária para sua operação, evitando a inclusão de métodos desnecessários.
 
 Benefício: Isso reduz o acoplamento e garante que os adaptadores sejam usados apenas para as operações que suportam.
 
-3. Uso de Generics:
-
-As interfaces genéricas (UsuarioCreateInputPort<T>, InputMapper<I, U, T>, etc.) permitem que diferentes tipos de entidades (Cliente e
-Proprietario) sejam manipulados sem forçar a implementação de métodos irrelevantes. Por exemplo, ClienteService implementa
-UsuarioCreateInputPort<Cliente>, que é específico para o tipo Cliente.
+As interfaces genéricas (CreateInputPort<T>, InputMapper<I, U, T>, etc.) permitem que diferentes tipos de entidades (Cliente e Proprietario) 
+sejam manipulados sem forçar a implementação de métodos irrelevantes. 
 
 Conformidade: A flexibilidade dos generics garante que as interfaces sejam aplicadas apenas aos tipos relevantes, mantendo a coesão.
 
 
-- Princípio da Inversão de Dependência (DIP):
+5. Princípio da Inversão de Dependência (DIP):
 
 O Princípio de Inversão de Dependência (Dependency Inversion Principle) estabelece que: Módulos de alto nível não devem depender de
 módulos de baixo nível; ambos devem depender de abstrações. Abstrações não devem depender de detalhes; detalhes devem depender de
