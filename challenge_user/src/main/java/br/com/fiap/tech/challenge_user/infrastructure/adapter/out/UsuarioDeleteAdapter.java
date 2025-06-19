@@ -18,7 +18,7 @@ public class UsuarioDeleteAdapter<E extends UsuarioEntity> implements DeleteOutp
     private final UsuarioRepository repository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Override
     public void delete(@NonNull final E usuario) {
         repository.delete(usuario);

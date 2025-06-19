@@ -27,12 +27,12 @@ public final class RestauranteEntity implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @OneToOne(targetEntity = EnderecoEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
+    @OneToOne(targetEntity = EnderecoEntity.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", unique = true)
     private EnderecoEntity endereco;
 
-    @OneToOne(targetEntity = ProprietarioEntity.class, cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false, orphanRemoval = false)
-    @JoinColumn(name = "proprietario_id", unique = true)
+    @OneToOne(targetEntity = ProprietarioEntity.class, cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "proprietario_id", nullable = false, unique = true)
     private ProprietarioEntity proprietario;
 }
 
