@@ -16,8 +16,8 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
       |     Eric Evans    |     eric@yahoo.com     |     evans   |    evans123   |   75666-908  |     Rua O    |     110    |       teste3     |
       |  Scott Hanselman  |   hanselman@yahoo.com  |   hanselman |  hanselman123 |   66000-777  |    Rua HJ    |    2119    |        chef      |
     Dado cadastros de Restaurantes disponíveis no banco de dados
-      |         nome        |      cep     |  logradouro  |   numero   |     proprietario      |
-      | Churrasco da Ovelha |   78324-125  |    Rua RF    |    1236    |  hanselman@yahoo.com  |
+      |         nome        | tipoCozinhaEnum |      cep     |  logradouro  |   numero   |     proprietario      |
+      | Churrasco da Ovelha |      ARABE      |   78324-125  |    Rua RF    |    1236    |  hanselman@yahoo.com  |
 
   Cenario: Post para criar Proprietário, com sucesso, pelo ProprietarioController
     Dado um ProprietarioDtoRequest, com nome "Alistair Cockburn" e email "cock@email.com" e login "cockburn" e senha "cock12" e descricao "advogado"

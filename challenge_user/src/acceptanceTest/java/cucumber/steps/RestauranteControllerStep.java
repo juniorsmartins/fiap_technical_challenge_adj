@@ -1,6 +1,7 @@
 package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.application.mapper.ProprietarioMapper;
+import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
@@ -151,6 +152,7 @@ public final class RestauranteControllerStep {
 
             var entidade = new RestauranteEntity();
             entidade.setNome(row.get("nome"));
+            entidade.setTipoCozinhaEnum(TipoCozinhaEnum.valueOf(row.get("tipoCozinhaEnum")));
             entidade.setEndereco(enderecoEntity);
             entidade.setProprietario(proprietarioEntity);
 
@@ -158,15 +160,16 @@ public final class RestauranteControllerStep {
         }
     }
 
-    @Dado("um RestauranteDtoRequest, com nome {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com email {string}")
+    @Dado("um RestauranteDtoRequest, com nome {string} e tipoCozinhaEnum {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com email {string}")
     public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_email(
-            String nome, String cep, String logradouro, String numero, String email) {
+            String nome, String tipoCozinhaEnum, String cep, String logradouro, String numero, String email) {
 
 //        var proprietario = proprietarioRepository.findByEmail(email).get();
         var proprietario = usuarioRepository.findByEmail(email).get();
 
         restauranteDtoRequest = new RestauranteDtoRequest(
-                nome, new EnderecoDtoRequest(cep, logradouro, numero), proprietario.getUsuarioId()
+                nome, TipoCozinhaEnum.valueOf(tipoCozinhaEnum),
+                new EnderecoDtoRequest(cep, logradouro, numero), proprietario.getUsuarioId()
         );
 
         assertThat(restauranteDtoRequest).isNotNull();
@@ -193,13 +196,14 @@ public final class RestauranteControllerStep {
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com RestauranteDtoResponse no body, com id e nome {string}")
-    public void com_restaurante_dto_response_no_body_com_id_e_nome(String nome) {
+    @Entao("com RestauranteDtoResponse no body, com id e nome {string} e tipoCozinhaEnum {string}")
+    public void com_restaurante_dto_response_no_body_com_id_e_nome(String nome, String tipoCozinhaEnum) {
 
         restauranteDtoResponse = response.as(RestauranteDtoResponse.class);
 
         assertThat(restauranteDtoResponse.restauranteId()).isNotNull();
         assertThat(restauranteDtoResponse.nome()).isEqualTo(nome);
+        assertThat(restauranteDtoResponse.tipoCozinhaEnum()).isEqualTo(TipoCozinhaEnum.valueOf(tipoCozinhaEnum));
     }
 
     @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}, pelo RestauranteController")
@@ -224,12 +228,13 @@ public final class RestauranteControllerStep {
         assertThat(proprietario.email()).isEqualTo(email);
     }
 
-    @Entao("o Restaurante cadastrado no banco de dados possui nome {string}")
-    public void o_restaurante_cadastrado_no_banco_de_dados_possui_nome(String nome) {
+    @Entao("o Restaurante cadastrado no banco de dados possui nome {string} e tipoCozinhaEnum {string}")
+    public void o_restaurante_cadastrado_no_banco_de_dados_possui_nome(String nome, String tipoCozinhaEnum) {
 
         var entidade = restauranteRepository.findById(restauranteDtoResponse.restauranteId()).get();
 
         assertThat(entidade.getNome()).isEqualTo(nome);
+        assertThat(entidade.getTipoCozinhaEnum()).isEqualTo(TipoCozinhaEnum.valueOf(tipoCozinhaEnum));
     }
     
     @Entao("um Endereço salvo no database, com cep {string} e logradouro {string} e número {string}, pelo RestauranteController")
@@ -268,7 +273,7 @@ public final class RestauranteControllerStep {
 
         var proprietario = proprietarioRepository.findByEmail("galilei@yahoo.com").get();
 
-        restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste",
+        restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste", TipoCozinhaEnum.ARABE,
                 new EnderecoEntity(UUID.randomUUID(), "78000-000", "Rua Teste", "300"),
                 proprietario);
 
@@ -316,12 +321,13 @@ public final class RestauranteControllerStep {
         assertThat(response).isNotNull();
     }
 
-    @Dado("um RestauranteDtoRequest, com nome {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com Id inexistente")
+    @Dado("um RestauranteDtoRequest, com nome {string} e tipoCozinhaEnum {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com Id inexistente")
     public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_id_inexistente(
-            String nome, String cep, String logradouro, String numero) {
+            String nome, String tipoCozinhaEnum, String cep, String logradouro, String numero) {
 
         restauranteDtoRequest = new RestauranteDtoRequest(
-                nome, new EnderecoDtoRequest(cep, logradouro, numero), UUID.randomUUID()
+                nome, TipoCozinhaEnum.valueOf(tipoCozinhaEnum),
+                new EnderecoDtoRequest(cep, logradouro, numero), UUID.randomUUID()
         );
 
         assertThat(restauranteDtoRequest).isNotNull();

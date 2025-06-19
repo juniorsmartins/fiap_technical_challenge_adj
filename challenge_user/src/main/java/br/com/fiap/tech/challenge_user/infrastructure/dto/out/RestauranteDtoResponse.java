@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.dto.out;
 
+import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -15,6 +16,9 @@ public record RestauranteDtoResponse(
 
         @Schema(name = "nome", description = "Nome do restaurante.", example = "Casa das Aves")
         String nome,
+
+        @Schema(name = "tipoCozinhaEnum", description = "Perfil culinário do restaurante.", example = "ITALIANA")
+        TipoCozinhaEnum tipoCozinhaEnum,
 
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
         EnderecoDtoResponse endereco,

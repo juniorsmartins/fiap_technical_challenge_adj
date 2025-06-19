@@ -22,6 +22,7 @@ public class RestauranteDeleteUseCase extends AbstractDeleteUseCase<RestauranteE
 
     @Override
     public void deleteById(@NonNull final UUID id) {
+
         super.deleteById(id);
     }
 }

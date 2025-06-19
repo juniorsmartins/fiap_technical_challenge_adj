@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
+import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ public final class Restaurante {
     private UUID restauranteId;
 
     private String nome;
+
+    private TipoCozinhaEnum tipoCozinhaEnum;
 
     private Endereco endereco;
 
