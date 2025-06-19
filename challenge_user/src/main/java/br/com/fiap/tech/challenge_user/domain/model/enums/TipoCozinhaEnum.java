@@ -12,6 +12,7 @@ public enum TipoCozinhaEnum {
     ARABE("ARABE"),
     CHINESA("CHINESA"),
     TURCA("TURCA"),
+    CHILENA("CHILENA"),
     CARNIVORA("CARNIVORA"),
     VEGANA("VEGANA"),
     VEGETARIANA("VEGETARIANA");

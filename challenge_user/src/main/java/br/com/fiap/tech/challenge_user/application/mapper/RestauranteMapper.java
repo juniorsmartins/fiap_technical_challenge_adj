@@ -28,7 +28,7 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
         var proprietario = new Proprietario();
         proprietario.setUsuarioId(dto.proprietario());
 
-        return new Restaurante(null, dto.nome(), endereco, proprietario);
+        return new Restaurante(null, dto.nome(), dto.tipoCozinhaEnum(), endereco, proprietario);
     }
 
     @Override
@@ -40,7 +40,8 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
         var endereco = enderecoMapper.toEnderecoDtoResponse(domain.getEndereco());
         var proprietario = proprietarioMapper.toDtoResponse(domain.getProprietario());
 
-        return new RestauranteDtoResponse(domain.getRestauranteId(), domain.getNome(), endereco, proprietario);
+        return new RestauranteDtoResponse(
+                domain.getRestauranteId(), domain.getNome(), domain.getTipoCozinhaEnum(), endereco, proprietario);
     }
 
     @Override
@@ -52,7 +53,8 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
         var endereco = enderecoMapper.toEnderecoDtoResponse(entity.getEndereco());
         var proprietario = proprietarioMapper.toResponse(entity.getProprietario());
 
-        return new RestauranteDtoResponse(entity.getRestauranteId(), entity.getNome(), endereco, proprietario);
+        return new RestauranteDtoResponse(
+                entity.getRestauranteId(), entity.getNome(), entity.getTipoCozinhaEnum(), endereco, proprietario);
     }
 
     @Override
@@ -69,7 +71,8 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
         var endereco = enderecoMapper.toEnderecoEntity(domain.getEndereco());
         var proprietario = proprietarioMapper.toEntity(domain.getProprietario());
 
-        return new RestauranteEntity(domain.getRestauranteId(), domain.getNome(), endereco, proprietario);
+        return new RestauranteEntity(
+                domain.getRestauranteId(), domain.getNome(), domain.getTipoCozinhaEnum(), endereco, proprietario);
     }
 
     @Override
@@ -81,7 +84,8 @@ public final class RestauranteMapper implements InputMapper<RestauranteDtoReques
         var endereco = enderecoMapper.toEndereco(entity.getEndereco());
         var proprietario = proprietarioMapper.toDomain(entity.getProprietario());
 
-        return new Restaurante(entity.getRestauranteId(), entity.getNome(), endereco, proprietario);
+        return new Restaurante(
+                entity.getRestauranteId(), entity.getNome(), entity.getTipoCozinhaEnum(), endereco, proprietario);
     }
 }
 

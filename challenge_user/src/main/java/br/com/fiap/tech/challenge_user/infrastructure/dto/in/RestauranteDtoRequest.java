@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.dto.in;
 
+import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,11 +14,16 @@ public record RestauranteDtoRequest(
         @NotBlank
         String nome,
 
+        @Schema(name = "tipoCozinhaEnum", description = "Perfil culinário do restaurante.", example = "ITALIANA")
+        @NotNull
+        TipoCozinhaEnum tipoCozinhaEnum,
+
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
         @NotNull
         EnderecoDtoRequest endereco,
 
         @Schema(name = "proprietario", description = "Chave de identificação do dono do restaurante.")
+        @NotNull
         UUID proprietario
 ) {
 }
