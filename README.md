@@ -10,7 +10,8 @@ Equipe: Junior Martins (rm364241)
 4. Configuração do Projeto;
 5. Qualidade do Código;
 6. Collections para Teste;
-7. Autoria.
+7. Notas;
+8. Autoria.
 
 
 ## Introdução
@@ -636,6 +637,26 @@ para execução. A aplicação possui um arquivo, chamado import.sql, responsáv
 [Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
 
 https://github.com/juniorsmartins/fiap_technical_challenge_adj
+
+
+## Notas
+
+1. Tipos de Usuários:
+
+O projeto utiliza a Herança como solução para os tipos de usuários. Há uma entidade pai, chamada UsuárioEntity, e suas filhas, ClienteEntity e 
+ProprietarioEntity. Há uso de polimorfismo para simplificar e não duplicar código. Bem como uso de generics para facilitar a implementação de 
+novos tipos de usuários.
+
+2. Esquema de Exceptions:
+
+O projeto usa Herança no esquema de exceções para simplificar o tratamento personalizado e global. Bem como usar internacionalização de mensagens 
+em dois idiomas, Português e Inglês. Podendo, se necessário, facilmente adicionar outros idiomas nas mensagens de retorno de exceções.
+
+3. Esquema de Testes:
+
+O projeto possui um submódulo, chamado acceptanceTest, para os testes de integração/aceitação. Esses testes foram construídos via BDD/TDD 
+com Cucumber. Bem como também há testes unitários construídos com JUnit e Mockito e H2. 
+
 
 ## Autoria
 
