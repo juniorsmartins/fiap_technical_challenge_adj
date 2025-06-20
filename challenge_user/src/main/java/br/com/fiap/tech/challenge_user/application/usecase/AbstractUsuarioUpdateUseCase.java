@@ -1,15 +1,14 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
-import br.com.fiap.tech.challenge_user.domain.model.Usuario;
-import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
-import lombok.NonNull;
+import br.com.fiap.tech.challenge_user.domain.model.Usuario;
+import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
+import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public abstract class AbstractUsuarioUpdateUseCase<T extends Usuario, E extends 
 
     private final List<UsuarioRulesStrategy<T>> rulesStrategy;
 
-    public T update(@NonNull UUID id, @NonNull T usuario) {
+    public T update(final UUID id, T usuario) {
 
         usuario.setUsuarioId(id);
         this.rules(usuario);

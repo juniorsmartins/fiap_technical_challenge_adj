@@ -31,6 +31,7 @@ public class ClienteUpdateUseCase extends AbstractUsuarioUpdateUseCase<Cliente, 
 
     @Override
     public Cliente update(@NonNull final UUID id, @NonNull Cliente usuario) {
+
         return super.update(id, usuario);
     }
 }
