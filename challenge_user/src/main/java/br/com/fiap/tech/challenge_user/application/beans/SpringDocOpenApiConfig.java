@@ -17,8 +17,8 @@ public class SpringDocOpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Challenge_user")
-                        .description("Microsserviços responsável pelo CRUD de Usuário.")
-                        .version("v0.0.3")
+                        .description("Microsserviços.")
+                        .version("v0.0.5")
                         .termsOfService("http://teste.com.br/terms-of-service") // URL fictícia
                         .license(new License()
                                 .name("Apache 2.0")

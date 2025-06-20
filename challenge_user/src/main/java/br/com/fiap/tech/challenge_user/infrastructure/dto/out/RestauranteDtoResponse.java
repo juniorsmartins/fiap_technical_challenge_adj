@@ -21,10 +21,12 @@ public record RestauranteDtoResponse(
         @Schema(name = "tipoCozinhaEnum", description = "Perfil culinário do restaurante.", example = "ITALIANA")
         TipoCozinhaEnum tipoCozinhaEnum,
 
-        @Schema(name = "horaAbertura", description = "Horário de abertura do restaurante.", example = "08:00:00")
+        @Schema(name = "horaAbertura", description = "Horário de abertura do restaurante (formato HH:mm:ss).",
+                example = "08:00:00", format = "time")
         LocalTime horaAbertura,
 
-        @Schema(name = "horaFechamento", description = "Horário de fechamento do restaurante.", example = "22:00:00")
+        @Schema(name = "horaFechamento", description = "Horário de fechamento do restaurante (formato HH:mm:ss).",
+                example = "22:00:00", format = "time")
         LocalTime horaFechamento,
 
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")

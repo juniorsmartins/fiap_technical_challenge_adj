@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
-@Tag(name = "Usuários", description = "Contém recurso para pesquisar.")
+@Tag(name = "Search/Get", description = "Contém recurso para pesquisar.")
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioSearchController<O, E> {
