@@ -43,8 +43,8 @@ public final class RestauranteEntity implements Serializable {
     @JoinColumn(name = "endereco_id", nullable = false, unique = true)
     private EnderecoEntity endereco;
 
-    @OneToOne(targetEntity = ProprietarioEntity.class, cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "proprietario_id", nullable = false, unique = true)
+    @ManyToOne(targetEntity = ProprietarioEntity.class, cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "proprietario_id", nullable = false)
     private ProprietarioEntity proprietario;
 }
 
