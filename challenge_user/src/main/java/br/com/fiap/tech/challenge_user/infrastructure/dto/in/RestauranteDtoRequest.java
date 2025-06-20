@@ -20,12 +20,12 @@ public record RestauranteDtoRequest(
         TipoCozinhaEnum tipoCozinhaEnum,
 
         @Schema(name = "horaAbertura", description = "Horário de abertura do restaurante (formato HH:mm:ss).",
-                example = "08:00:00")
+                example = "08:00:00", format = "time")
         @NotNull
         LocalTime horaAbertura,
 
         @Schema(name = "horaFechamento", description = "Horário de fechamento do restaurante (formato HH:mm:ss).",
-                example = "22:00:00")
+                example = "22:00:00", format = "time")
         @NotNull
         LocalTime horaFechamento,
 
