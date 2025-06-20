@@ -35,10 +35,9 @@ public class ProprietarioDeleteUseCase implements DeleteByIdInputPort<Proprietar
                 });
     }
 
-
     private void checkActiveOwner(ProprietarioEntity entity) {
 
-        if (entity.getRestaurante() != null) {
+        if (!entity.getRestaurantes().isEmpty()) {
             throw new ActiveOwnerBlocksDeletionException(entity.getUsuarioId().toString());
         }
     }
