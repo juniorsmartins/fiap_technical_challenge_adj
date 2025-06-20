@@ -2763,7 +2763,38 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"10:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 409 (hora abertura posterior fim)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"20:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2794,7 +2825,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"   \",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"   \",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"10:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2825,7 +2856,69 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Franz Kafka\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Franz Kafka\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"10:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (hora abertura nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (hora fechamento nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:10:10\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2861,7 +2954,39 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 409 (hora abertura posterior fim)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"21:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2893,7 +3018,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2925,7 +3050,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"   \",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"   \",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2957,7 +3082,71 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Francis Galton\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"raw": "{\n    \"nome\": \"Francis Galton\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (hora abertura nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (hora fechamento nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
