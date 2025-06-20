@@ -37,17 +37,19 @@ e avaliado tanto pelos restaurantes quanto pelos clientes.
 
 #### Objetivo do projeto:
 
-Desenvolver um backend completo e robusto utilizando o framework
-Spring Boot, com foco no gerenciamento de usuários, incluindo operações de
-criação, atualização, exclusão e validação de login. O projeto será configurado
-para rodar em um ambiente Docker, utilizando Docker Compose, o que permitirá
-a orquestração dos serviços e a integração com um banco de dados relacional,
-como PostgreSQL, MySQL ou H2. A configuração com Docker Compose
-garantirá que a aplicação seja facilmente replicável e escalável, permitindo a
-implantação em diversos ambientes de forma consistente e eficiente. Além disso,
-o projeto será desenvolvido seguindo as melhores práticas de arquitetura e
-segurança, de modo que o sistema seja não apenas funcional, mas também
-seguro, escalável e de fácil manutenção.
+Desenvolver um backend completo e robusto utilizando o framework Spring Boot, 
+com foco no gerenciamento de Usuários, Restaurantes e Cardápios, incluindo 
+operações de criação, atualização, exclusão e consulta. O projeto será 
+configurado para rodar em um ambiente Docker, utilizando Docker Compose, o 
+que permitirá a orquestração dos serviços e a integração com um banco de dados 
+relacional, como PostgreSQL, MySQL ou H2. A configuração com Docker Compose 
+garantirá que a aplicação seja facilmente replicável e escalável, permitindo a 
+implantação em diversos ambientes de forma consistente e eficiente. Além disso, 
+o projeto será desenvolvido seguindo as melhores práticas de arquitetura e 
+segurança, de modo que o sistema seja não apenas funcional, mas também seguro, 
+escalável e de fácil manutenção. Bem como, são incluídos requisitos técnicos 
+para garantir que o sistema mantenha alta qualidade e organização, com suporte 
+para documentação e testes automatizados
 
 
 ## Arquitetura do Sistema
@@ -56,35 +58,32 @@ seguro, escalável e de fácil manutenção.
 
 - Ports and Adapters (Arquitetura Hexagonal):
 
-A aplicação utiliza o padrão Ports and Adapters, onde as portas (CreateInputPort, CreateOutputPort e 
-etc.) definem contratos entre camadas, e os adaptadores (UsuarioCreateAdapter, ClienteController) implementam esses 
-contratos.
+A aplicação utiliza o padrão Ports and Adapters, onde as portas definem contratos entre camadas.
 
-Portas de Entrada: Interfaces como CreateInputPort permitem que a camada de apresentação acesse a lógica
-de negócio.
+Portas de Entrada: Interfaces como CreateInputPort permitem que a camada de Infraestrutura acesse 
+a lógica de negócio.
 
-Portas de Saída: Interfaces como CreateOutputPort permitem que a camada de negócio acesse a persistência sem
-depender de detalhes de implementação.
+Portas de Saída: Interfaces como CreateOutputPort permitem que a camada de negócio acesse a 
+persistência sem depender de detalhes de implementação.
 
-Adaptadores: ClienteController (adaptador de entrada) traduz requisições HTTP em chamadas às portas de entrada,
-enquanto UsuarioCreateAdapter (adaptador de saída) traduz chamadas das portas de saída em operações de banco de dados.
+Adaptadores: ClienteCreateController (adaptador de entrada) traduz requisições HTTP em chamadas às 
+portas de entrada, enquanto UsuarioCreateAdapter (adaptador de saída) traduz chamadas das portas de 
+saída em operações de banco de dados.
 
 - Clean Architecture:
 
-A aplicação segue princípios da Clean Architecture, com a camada de negócio (Application e Domain) no centro, independente de 
-detalhes de infraestrutura. A camada de persistência e a camada de apresentação são externas e dependem
-do núcleo por meio de interfaces.
+A aplicação segue princípios da Clean Architecture, com a camada de negócio (Application e Domain) 
+no centro, independente de detalhes de infraestrutura. A persistência e a apresentação são externas e 
+dependem do núcleo por meio de interfaces.
 
-Exemplo: A lógica de negócio em AbstractCreateUseCase não depende diretamente de Spring Data JPA ou do framework HTTP,
-mas sim de interfaces abstratas (EntityMapper, CreateOutputPort).
+Exemplo: A lógica de negócio em AbstractCreateUseCase não depende diretamente de Spring Data JPA ou do 
+framework HTTP, mas sim de interfaces abstratas (EntityMapper, CreateOutputPort).
 
 #### Diagrama da Arquitetura
 
 ![TechChallenge3](docs/DiagramaTechChallenge-v5.png)
 
-Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. Ela reflete a arquitetura da
-aplicação de forma simplificada. Mostra a parte das regras de negócio separada das partes de infraestrutura de entrada e
-de saída. Bem como mostra como foram organizados os princípios Solid.
+Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. 
 
 ## Descrição dos Endpoints da API e exemplos
 
