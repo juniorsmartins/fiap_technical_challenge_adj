@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
-@Tag(name = "Usuários", description = "Contém recurso de atualizar senha.")
+@Tag(name = "UpdatePassword/Patch", description = "Contém recurso de atualizar senha.")
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioSenhaController<E> {

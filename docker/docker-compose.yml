@@ -13,14 +13,14 @@ services:
 
   challenge_user:
     container_name: challenge_user
-    image: juniorsmartins/challenge_user:v0.0.4
+    image: juniorsmartins/challenge_user:v0.0.5
     build:
       context: ../challenge_user/
       dockerfile: Dockerfile
       args:
         APP_NAME: "challenge_user"
-        APP_VERSION: "v0.0.4"
-        APP_DESCRIPTION: "Serviço de Crud de usuários."
+        APP_VERSION: "v0.0.5"
+        APP_DESCRIPTION: "Serviço de Crud de usuários e restaurantes."
     ports:
       - "9050:9050"
     deploy:
