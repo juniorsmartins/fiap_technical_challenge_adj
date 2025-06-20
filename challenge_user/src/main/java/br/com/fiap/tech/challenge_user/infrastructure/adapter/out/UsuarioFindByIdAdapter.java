@@ -17,6 +17,7 @@ public class UsuarioFindByIdAdapter<E extends UsuarioEntity> implements FindById
 
     private final UsuarioRepository repository;
 
+    @SuppressWarnings({"unchecked"})
     @Transactional(readOnly = true)
     @Override
     public Optional<E> findById(@NonNull final UUID id) {
