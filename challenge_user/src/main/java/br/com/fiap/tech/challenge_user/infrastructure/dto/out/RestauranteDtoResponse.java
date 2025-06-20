@@ -4,6 +4,7 @@ import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Schema(name = "RestauranteDtoResponse", description = "Transportador de dados de saída em requisições.")
@@ -19,6 +20,12 @@ public record RestauranteDtoResponse(
 
         @Schema(name = "tipoCozinhaEnum", description = "Perfil culinário do restaurante.", example = "ITALIANA")
         TipoCozinhaEnum tipoCozinhaEnum,
+
+        @Schema(name = "horaAbertura", description = "Horário de abertura do restaurante.", example = "08:00:00")
+        LocalTime horaAbertura,
+
+        @Schema(name = "horaFechamento", description = "Horário de fechamento do restaurante.", example = "22:00:00")
+        LocalTime horaFechamento,
 
         @Schema(name = "endereco", description = "Descrição completa para identificar localização física de imóvel.")
         EnderecoDtoResponse endereco,

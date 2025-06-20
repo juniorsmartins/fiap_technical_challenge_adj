@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity
@@ -32,8 +33,14 @@ public final class RestauranteEntity implements Serializable {
     @Column(name = "tipo_cozinha", nullable = false)
     private TipoCozinhaEnum tipoCozinhaEnum;
 
+    @Column(name = "hora_abertura", nullable = false)
+    private LocalTime horaAbertura;
+
+    @Column(name = "hora_fechamento", nullable = false)
+    private LocalTime horaFechamento;
+
     @OneToOne(targetEntity = EnderecoEntity.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
-    @JoinColumn(name = "endereco_id", unique = true)
+    @JoinColumn(name = "endereco_id", nullable = false, unique = true)
     private EnderecoEntity endereco;
 
     @OneToOne(targetEntity = ProprietarioEntity.class, cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, optional = false)
