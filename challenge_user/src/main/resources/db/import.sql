@@ -24,7 +24,7 @@ INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('ee4d3283-028
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('5dc8d58a-7cf9-422b-8167-985da17fd563', '80999-555', 'Avenida do Porto', '555');
 INSERT INTO enderecos(endereco_id, cep, logradouro, numero) VALUES('5f887464-fb36-4556-a78e-b567a85e62be', '20987-222', 'Avenida do Porto', '555');
 
-INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, endereco_id, proprietario_id) VALUES('63fd1b44-4fd9-4d67-95d9-9a4607409c79', 'Lasai', 'BRASILEIRA', 'ee4d3283-028e-4883-9d43-169240b56758', 'eb957f38-90c4-4ef2-850c-229fb1658fcd');
-INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, endereco_id, proprietario_id) VALUES('b173aa00-d852-4ff2-86aa-ce657136a44a', 'Oteque', 'ITALIANA', '5dc8d58a-7cf9-422b-8167-985da17fd563', 'bc11e003-219d-4884-88e9-e2a0b43d42c7');
-INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, endereco_id, proprietario_id) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa', 'JAPONESA', '5f887464-fb36-4556-a78e-b567a85e62be', '051f5dc8-74fe-4d2c-81e2-ddea7c515532');
+INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, hora_abertura, hora_fechamento, endereco_id, proprietario_id) VALUES('63fd1b44-4fd9-4d67-95d9-9a4607409c79', 'Lasai', 'BRASILEIRA', '08:00:10', '20:00:40', 'ee4d3283-028e-4883-9d43-169240b56758', 'eb957f38-90c4-4ef2-850c-229fb1658fcd');
+INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, hora_abertura, hora_fechamento, endereco_id, proprietario_id) VALUES('b173aa00-d852-4ff2-86aa-ce657136a44a', 'Oteque', 'ITALIANA', '09:10:20', '18:30:30', '5dc8d58a-7cf9-422b-8167-985da17fd563', 'bc11e003-219d-4884-88e9-e2a0b43d42c7');
+INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, hora_abertura, hora_fechamento, endereco_id, proprietario_id) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa', 'JAPONESA', '10:20:30', '21:52:50', '5f887464-fb36-4556-a78e-b567a85e62be', '051f5dc8-74fe-4d2c-81e2-ddea7c515532');
 

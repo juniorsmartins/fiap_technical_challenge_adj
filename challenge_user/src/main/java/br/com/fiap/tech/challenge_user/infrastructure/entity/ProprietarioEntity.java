@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,8 +22,8 @@ public final class ProprietarioEntity extends UsuarioEntity {
     @Column(name = "descricao", nullable = true)
     private String descricao;
 
-    @OneToOne(mappedBy = "proprietario", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, optional = true, orphanRemoval = false)
-    private RestauranteEntity restaurante;
+    @OneToMany(mappedBy = "proprietario", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = false)
+    private List<RestauranteEntity> restaurantes = new ArrayList<>();
 
     public ProprietarioEntity(
             String nome, String email, String login, String senha,

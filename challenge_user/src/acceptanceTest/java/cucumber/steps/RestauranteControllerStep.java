@@ -26,6 +26,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.time.Instant;
+import java.time.LocalTime;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -153,6 +154,8 @@ public final class RestauranteControllerStep {
             var entidade = new RestauranteEntity();
             entidade.setNome(row.get("nome"));
             entidade.setTipoCozinhaEnum(TipoCozinhaEnum.valueOf(row.get("tipoCozinhaEnum")));
+            entidade.setHoraAbertura(LocalTime.parse(row.get("horaAbertura")));
+            entidade.setHoraFechamento(LocalTime.parse(row.get("horaFechamento")));
             entidade.setEndereco(enderecoEntity);
             entidade.setProprietario(proprietarioEntity);
 
@@ -160,15 +163,16 @@ public final class RestauranteControllerStep {
         }
     }
 
-    @Dado("um RestauranteDtoRequest, com nome {string} e tipoCozinhaEnum {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com email {string}")
+    @Dado("um RestauranteDtoRequest, com nome {string} e tipoCozinhaEnum {string} e horaAbertura {string} e horaFechamento {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com email {string}")
     public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_email(
-            String nome, String tipoCozinhaEnum, String cep, String logradouro, String numero, String email) {
+            String nome, String tipoCozinhaEnum, String horaAbertura, String horaFechamento, String cep, String logradouro, String numero, String email) {
 
-//        var proprietario = proprietarioRepository.findByEmail(email).get();
+//        var proprietario = proprietarioRepository.findByEmail(email).get(); ????????????????????????????????
         var proprietario = usuarioRepository.findByEmail(email).get();
 
         restauranteDtoRequest = new RestauranteDtoRequest(
                 nome, TipoCozinhaEnum.valueOf(tipoCozinhaEnum),
+                LocalTime.parse(horaAbertura), LocalTime.parse(horaFechamento),
                 new EnderecoDtoRequest(cep, logradouro, numero), proprietario.getUsuarioId()
         );
 
@@ -196,14 +200,17 @@ public final class RestauranteControllerStep {
         assertEquals(status, response.getStatusCode());
     }
 
-    @Entao("com RestauranteDtoResponse no body, com id e nome {string} e tipoCozinhaEnum {string}")
-    public void com_restaurante_dto_response_no_body_com_id_e_nome(String nome, String tipoCozinhaEnum) {
+    @Entao("com RestauranteDtoResponse no body, com id e nome {string} e tipoCozinhaEnum {string} e horaAbertura {string} e horaFechamento {string}")
+    public void com_restaurante_dto_response_no_body_com_id_e_nome(
+            String nome, String tipoCozinhaEnum, String horaAbertura, String horaFechamento) {
 
         restauranteDtoResponse = response.as(RestauranteDtoResponse.class);
 
         assertThat(restauranteDtoResponse.restauranteId()).isNotNull();
         assertThat(restauranteDtoResponse.nome()).isEqualTo(nome);
         assertThat(restauranteDtoResponse.tipoCozinhaEnum()).isEqualTo(TipoCozinhaEnum.valueOf(tipoCozinhaEnum));
+        assertThat(restauranteDtoResponse.horaAbertura()).isEqualTo(LocalTime.parse(horaAbertura));
+        assertThat(restauranteDtoResponse.horaFechamento()).isEqualTo(LocalTime.parse(horaFechamento));
     }
 
     @Entao("com EnderecoDtoResponse no body, com id e cep {string} e logradouro {string} e número {string}, pelo RestauranteController")
@@ -228,13 +235,16 @@ public final class RestauranteControllerStep {
         assertThat(proprietario.email()).isEqualTo(email);
     }
 
-    @Entao("o Restaurante cadastrado no banco de dados possui nome {string} e tipoCozinhaEnum {string}")
-    public void o_restaurante_cadastrado_no_banco_de_dados_possui_nome(String nome, String tipoCozinhaEnum) {
+    @Entao("o Restaurante cadastrado no banco de dados possui nome {string} e tipoCozinhaEnum {string} e horaAbertura {string} e horaFechamento {string}")
+    public void o_restaurante_cadastrado_no_banco_de_dados_possui_nome(
+            String nome, String tipoCozinhaEnum, String horaAbertura, String horaFechamento) {
 
         var entidade = restauranteRepository.findById(restauranteDtoResponse.restauranteId()).get();
 
         assertThat(entidade.getNome()).isEqualTo(nome);
         assertThat(entidade.getTipoCozinhaEnum()).isEqualTo(TipoCozinhaEnum.valueOf(tipoCozinhaEnum));
+        assertThat(entidade.getHoraAbertura()).isEqualTo(LocalTime.parse(horaAbertura));
+        assertThat(entidade.getHoraFechamento()).isEqualTo(LocalTime.parse(horaFechamento));
     }
     
     @Entao("um Endereço salvo no database, com cep {string} e logradouro {string} e número {string}, pelo RestauranteController")
@@ -274,6 +284,7 @@ public final class RestauranteControllerStep {
         var proprietario = proprietarioRepository.findByEmail("galilei@yahoo.com").get();
 
         restauranteEntity = new RestauranteEntity(UUID.randomUUID(), "nomeTeste", TipoCozinhaEnum.ARABE,
+                LocalTime.of(8, 10, 10), LocalTime.of(21, 00, 10),
                 new EnderecoEntity(UUID.randomUUID(), "78000-000", "Rua Teste", "300"),
                 proprietario);
 
@@ -321,12 +332,13 @@ public final class RestauranteControllerStep {
         assertThat(response).isNotNull();
     }
 
-    @Dado("um RestauranteDtoRequest, com nome {string} e tipoCozinhaEnum {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com Id inexistente")
+    @Dado("um RestauranteDtoRequest, com nome {string} e tipoCozinhaEnum {string} e horaAbertura {string} e horaFechamento {string}, e EnderecoDtoRequest, com cep {string} e logradouro {string} e número {string},e Proprietario, com Id inexistente")
     public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_id_inexistente(
-            String nome, String tipoCozinhaEnum, String cep, String logradouro, String numero) {
+            String nome, String tipoCozinhaEnum, String horaAbertura, String horaFechamento, String cep, String logradouro, String numero) {
 
         restauranteDtoRequest = new RestauranteDtoRequest(
                 nome, TipoCozinhaEnum.valueOf(tipoCozinhaEnum),
+                LocalTime.parse(horaAbertura), LocalTime.parse(horaFechamento),
                 new EnderecoDtoRequest(cep, logradouro, numero), UUID.randomUUID()
         );
 
