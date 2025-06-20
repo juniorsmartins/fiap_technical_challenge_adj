@@ -31,6 +31,7 @@ public class ProprietarioUpdateUseCase extends AbstractUsuarioUpdateUseCase<Prop
 
     @Override
     public Proprietario update(@NonNull final UUID id, @NonNull Proprietario usuario) {
+
         return super.update(id, usuario);
     }
 }
