@@ -3,7 +3,6 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.port.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public abstract class AbstractDeleteUseCase<E> {
 
     private final DeleteOutputPort<E> deleteOutputPort;
 
-    public void deleteById(@NonNull final UUID id) {
+    public void deleteById(final UUID id) {
 
         findByIdOutputPort.findById(id)
                 .ifPresentOrElse(deleteOutputPort::delete, () -> {

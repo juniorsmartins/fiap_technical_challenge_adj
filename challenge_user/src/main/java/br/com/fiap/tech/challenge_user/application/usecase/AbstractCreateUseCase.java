@@ -3,7 +3,6 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public abstract class AbstractCreateUseCase<T, E> {
 
     private final CreateOutputPort<E> createOutputPort;
 
-    public T create(@NotNull final T usuario) {
+    public T create(final T usuario) {
 
         return Optional.of(usuario)
                 .map(entityMapper::toEntity)
