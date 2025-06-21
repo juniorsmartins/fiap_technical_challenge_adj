@@ -9,7 +9,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @EqualsAndHashCode(of = {"enderecoId"})
-public class Endereco {
+public final class Endereco {
 
     private UUID enderecoId;
 
