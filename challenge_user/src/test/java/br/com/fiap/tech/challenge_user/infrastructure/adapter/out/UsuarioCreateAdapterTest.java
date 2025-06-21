@@ -1,13 +1,13 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.domain.exception.http500.UsuarioNonPersistenceException;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,7 +67,7 @@ class UsuarioCreateAdapterTest {
         clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(UsuarioNonPersistenceException.class, () -> {
             usuarioCreateAdapter.save(clienteEntity);
         });
     }
@@ -82,7 +82,7 @@ class UsuarioCreateAdapterTest {
         clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(UsuarioNonPersistenceException.class, () -> {
             usuarioCreateAdapter.save(clienteEntity);
         });
     }
@@ -97,7 +97,7 @@ class UsuarioCreateAdapterTest {
         clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(UsuarioNonPersistenceException.class, () -> {
             usuarioCreateAdapter.save(clienteEntity);
         });
     }
@@ -112,7 +112,7 @@ class UsuarioCreateAdapterTest {
         clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(UsuarioNonPersistenceException.class, () -> {
             usuarioCreateAdapter.save(clienteEntity);
         });
     }

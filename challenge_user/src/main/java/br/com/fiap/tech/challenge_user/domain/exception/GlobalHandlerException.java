@@ -2,6 +2,7 @@ package br.com.fiap.tech.challenge_user.domain.exception;
 
 import br.com.fiap.tech.challenge_user.domain.exception.http404.ResourceNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.exception.http409.RegraDeNegocioVioladaException;
+import br.com.fiap.tech.challenge_user.domain.exception.http500.ErroInternoPersistenciaException;
 import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +78,30 @@ public final class GlobalHandlerException extends ResponseEntityExceptionHandler
                 .body(problemDetail);
     }
 
-    // ---------- 500 Internal Server Error ---------- //
+    // ---------- 500 Internal Server Error - Persistência ---------- //
+    @ExceptionHandler(ErroInternoPersistenciaException.class)
+    public ResponseEntity<ProblemDetail> handleErroInternoPersistencia(ErroInternoPersistenciaException ex) {
+
+        log.info("class = GlobalHandlerException e método = handleErroInternoPersistencia", ex);
+
+        var valor = ex.getValor();
+
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        var mensagem = this.messageSource
+                .getMessage(ex.getMessageKey(), new Object[]{valor}, LocaleContextHolder.getLocale());
+
+        var problemDetail = createProblemDetail(
+                httpStatus,
+                "https://paginax.com/erros/erro-interno-servidor-persistencia",
+                mensagem,
+                null);
+
+        return ResponseEntity
+                .status(httpStatus)
+                .body(problemDetail);
+    }
+
+    // ---------- 500 Internal Server Error - Geral---------- //
     @ExceptionHandler(InternalServerProblemException.class)
     public ResponseEntity<ProblemDetail> handleInternalServerProblem(InternalServerProblemException ex, WebRequest webRequest) {
 

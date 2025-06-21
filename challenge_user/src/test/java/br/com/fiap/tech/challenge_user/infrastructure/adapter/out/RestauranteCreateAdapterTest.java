@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.domain.exception.http500.RestauranteNonPersistenceException;
 import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalTime;
 
@@ -106,7 +106,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(RestauranteNonPersistenceException.class, () -> {
             restauranteCreateAdapter.save(restauranteEntity);
         });
     }
@@ -122,7 +122,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(RestauranteNonPersistenceException.class, () -> {
             restauranteCreateAdapter.save(restauranteEntity);
         });
     }
@@ -138,7 +138,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(RestauranteNonPersistenceException.class, () -> {
             restauranteCreateAdapter.save(restauranteEntity);
         });
     }
@@ -154,7 +154,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(RestauranteNonPersistenceException.class, () -> {
             restauranteCreateAdapter.save(restauranteEntity);
         });
     }
@@ -170,7 +170,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(RestauranteNonPersistenceException.class, () -> {
             restauranteCreateAdapter.save(restauranteEntity);
         });
     }
@@ -186,7 +186,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setEndereco(enderecoEntity);
 
         // Act & Assert
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(RestauranteNonPersistenceException.class, () -> {
             restauranteCreateAdapter.save(restauranteEntity);
         });
     }
