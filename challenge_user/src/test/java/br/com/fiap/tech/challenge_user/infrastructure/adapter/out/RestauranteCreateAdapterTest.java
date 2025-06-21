@@ -53,7 +53,7 @@ class RestauranteCreateAdapterTest {
         enderecoEntity.setNumero("1500");
 
         horaAbertura = LocalTime.of(8, 10, 10);
-        horaFechamento = LocalTime.of(22, 00, 00);
+        horaFechamento = LocalTime.of(22, 0, 0);
 
         proprietarioEntity = new ProprietarioEntity();
         proprietarioEntity.setNome("João Silva");
@@ -106,9 +106,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(RestauranteNonPersistenceException.class, () -> {
-            restauranteCreateAdapter.save(restauranteEntity);
-        });
+        assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
     }
 
     @Test
@@ -122,9 +120,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(RestauranteNonPersistenceException.class, () -> {
-            restauranteCreateAdapter.save(restauranteEntity);
-        });
+        assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
     }
 
     @Test
@@ -138,9 +134,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(RestauranteNonPersistenceException.class, () -> {
-            restauranteCreateAdapter.save(restauranteEntity);
-        });
+        assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
     }
 
     @Test
@@ -154,9 +148,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(RestauranteNonPersistenceException.class, () -> {
-            restauranteCreateAdapter.save(restauranteEntity);
-        });
+        assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
     }
 
     @Test
@@ -170,9 +162,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
-        assertThrows(RestauranteNonPersistenceException.class, () -> {
-            restauranteCreateAdapter.save(restauranteEntity);
-        });
+        assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
     }
 
     @Test
@@ -186,9 +176,7 @@ class RestauranteCreateAdapterTest {
         restauranteEntity.setEndereco(enderecoEntity);
 
         // Act & Assert
-        assertThrows(RestauranteNonPersistenceException.class, () -> {
-            restauranteCreateAdapter.save(restauranteEntity);
-        });
+        assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
     }
 
     @Test
