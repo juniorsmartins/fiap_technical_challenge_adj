@@ -17,7 +17,7 @@ public class RestauranteDeleteAdapter implements DeleteOutputPort<RestauranteEnt
 
     private final RestauranteRepository repository;
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Override
     public void delete(@NonNull final RestauranteEntity entity) {
