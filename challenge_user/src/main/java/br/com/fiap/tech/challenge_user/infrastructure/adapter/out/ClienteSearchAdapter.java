@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class ClienteSearchAdapter implements UsuarioSearchOutputPort<ClienteEnti
 
     private final ClienteRepository repository;
 
+    @Transactional(readOnly = true)
     @Override
     public Page<ClienteEntity> search(final UsuarioFiltroDto filtroDto, final Pageable paginacao) {
 

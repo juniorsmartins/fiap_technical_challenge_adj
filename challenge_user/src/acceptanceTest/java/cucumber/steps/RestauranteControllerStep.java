@@ -167,7 +167,6 @@ public final class RestauranteControllerStep {
     public void um_restaurante_dto_request_com_nome_e_endereco_dto_request_com_cep_e_logradouro_e_numero_e_proprietario_com_email(
             String nome, String tipoCozinhaEnum, String horaAbertura, String horaFechamento, String cep, String logradouro, String numero, String email) {
 
-//        var proprietario = proprietarioRepository.findByEmail(email).get(); ????????????????????????????????
         var proprietario = usuarioRepository.findByEmail(email).get();
 
         restauranteDtoRequest = new RestauranteDtoRequest(
