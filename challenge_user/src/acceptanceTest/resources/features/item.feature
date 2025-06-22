@@ -6,6 +6,10 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
 
   Contexto:
     Dado ambiente de teste ativado para Item de Challenge_User
+    Dado cadastros de Itens disponíveis no banco de dados para ItemController
+    |     nome     |        descricao        |   preco   |   entrega   |            foto            |
+    |    Sprite    |      Refrigerante       |   14.50   |    false    |  http://link-foto.com.br   |
+    |   Coca-Cola  |      Refrigerante       |   22.00   |    true     |  http://link-foto.com.br   |
 
   Cenario: Post para criar Item, com sucesso, pelo ItemController
     Dado um ItemDtoRequest, como nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
@@ -19,8 +23,14 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Dado um identificador ID de um Item existente, com nome "Coca-Cola"
     Quando uma requisição Get for feita no método findById do ItemController
     Entao receber ResponseEntity com HTTP 200 do ItemController
-    E com ItemDtoResponse no body, com id e nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
+    E com ItemDtoResponse no body, com id e nome "Coca-Cola" e descricao "Refrigerante" e preco "22.00" e entrega "true" e foto "http://link-foto.com.br"
 
+
+  Cenario: Delete para apagar Item, com sucesso, pelo ItemController
+    Dado um identificador ID de um Item existente, com nome "Sprite"
+    Quando uma requisição Delete for feita no método deleteById do ItemController
+    Entao receber ResponseEntity com HTTP 204 do ItemController
+    E o Item foi apagado do banco de dados pelo ItemController
 
 
 

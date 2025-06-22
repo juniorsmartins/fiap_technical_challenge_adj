@@ -19,6 +19,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -60,6 +62,27 @@ public final class ItemControllerStep {
         var count = jdbcTemplate
                 .queryForObject("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES", Integer.class);
         assertThat(count).isNotNull();
+    }
+
+    @Dado("cadastros de Itens disponíveis no banco de dados para ItemController")
+    public void cadastros_de_itens_disponiveis_no_banco_de_dados_para_item_controller(io.cucumber.datatable.DataTable dataTable) {
+        itemRepository.deleteAll();
+
+        List<Map<String, String>> itensData = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> row : itensData) {
+
+            var entidade = new ItemEntity(
+                    null,
+                    row.get("nome"),
+                    row.get("descricao"),
+                    new BigDecimal(row.get("preco")),
+                    Boolean.parseBoolean(row.get("entrega")),
+                    row.get("foto")
+            );
+
+            itemRepository.saveAndFlush(entidade);
+        }
     }
 
     @Dado("um ItemDtoRequest, como nome {string} e descricao {string} e preco {string} e entrega {string} e foto {string}")
@@ -135,6 +158,26 @@ public final class ItemControllerStep {
                 .get("/" + itemEntity.getItemId());
 
         assertThat(response).isNotNull();
+    }
+
+    @Quando("uma requisição Delete for feita no método deleteById do ItemController")
+    public void uma_requisicao_delete_for_feita_no_metodo_delete_by_id_do_item_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .delete("/" + itemEntity.getItemId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Entao("o Item foi apagado do banco de dados pelo ItemController")
+    public void o_item_foi_apagado_do_banco_de_dados_pelo_item_controller() {
+
+        var response = itemRepository.findById(itemEntity.getItemId());
+
+        assertThat(response).isEmpty();
     }
 }
 
