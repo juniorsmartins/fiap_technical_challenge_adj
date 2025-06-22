@@ -15,3 +15,12 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com Item salvo no database, com nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
 
 
+  Cenario: Get para consultar Item, com sucesso, pelo ItemController
+    Dado um identificador ID de um Item existente, com nome "Coca-Cola"
+    Quando uma requisição Get for feita no método findById do ItemController
+    Entao receber ResponseEntity com HTTP 200 do ItemController
+    E com ItemDtoResponse no body, com id e nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
+
+
+
+

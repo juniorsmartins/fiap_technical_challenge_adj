@@ -2,6 +2,7 @@ package cucumber.steps;
 
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ItemDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.ItemRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
@@ -40,6 +41,8 @@ public final class ItemControllerStep {
     private Response response;
 
     private ItemDtoResponse itemDtoResponse;
+
+    private ItemEntity itemEntity;
 
     @Before
     public void setUp() {
@@ -112,6 +115,26 @@ public final class ItemControllerStep {
         assertEquals(0, new BigDecimal(preco).compareTo(entidade.getPreco()));
         assertThat(entidade.isEntrega()).isEqualTo(Boolean.parseBoolean(entrega));
         assertThat(entidade.getFoto()).isEqualTo(foto);
+    }
+
+    @Dado("um identificador ID de um Item existente, com nome {string}")
+    public void um_identificador_id_de_um_item_existente_com_nome(String nome) {
+
+        itemEntity = itemRepository.findByNome(nome).get();
+
+        assertThat(itemEntity).isNotNull();
+    }
+
+    @Quando("uma requisição Get for feita no método findById do ItemController")
+    public void uma_requisicao_get_for_feita_no_metodo_find_by_id_do_item_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .when()
+                .get("/" + itemEntity.getItemId());
+
+        assertThat(response).isNotNull();
     }
 }
 
