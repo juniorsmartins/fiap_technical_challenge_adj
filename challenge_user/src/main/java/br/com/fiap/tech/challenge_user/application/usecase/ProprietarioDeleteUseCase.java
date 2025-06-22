@@ -11,6 +11,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public class ProprietarioDeleteUseCase implements DeleteByIdInputPort<Proprietar
 
     private final DeleteOutputPort<ProprietarioEntity> deleteOutputPort;
 
+    @Transactional
     public void deleteById(@NonNull final UUID id) {
 
         findByIdOutputPort.findById(id)
