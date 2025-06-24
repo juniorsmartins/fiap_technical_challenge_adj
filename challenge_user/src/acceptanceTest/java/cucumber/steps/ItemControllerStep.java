@@ -85,7 +85,7 @@ public final class ItemControllerStep {
         }
     }
 
-    @Dado("um ItemDtoRequest, como nome {string} e descricao {string} e preco {string} e entrega {string} e foto {string}")
+    @Dado("um ItemDtoRequest, com nome {string} e descricao {string} e preco {string} e entrega {string} e foto {string}")
     public void um_item_dto_request_como_nome_e_descricao_e_preco_e_entrega_e_foto(
             String nome, String descricao, String preco, String entrega, String foto) {
 
@@ -178,6 +178,19 @@ public final class ItemControllerStep {
         var response = itemRepository.findById(itemEntity.getItemId());
 
         assertThat(response).isEmpty();
+    }
+
+    @Quando("uma requisição Put for feita no método update do ItemController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_item_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(itemDtoRequest)
+                .when()
+                .put("/" + itemEntity.getItemId());
+
+        assertThat(response).isNotNull();
     }
 }
 

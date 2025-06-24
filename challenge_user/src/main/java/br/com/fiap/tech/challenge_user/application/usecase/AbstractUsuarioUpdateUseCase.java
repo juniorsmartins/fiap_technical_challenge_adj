@@ -49,9 +49,8 @@ public abstract class AbstractUsuarioUpdateUseCase<T extends Usuario, E extends 
                 });
     }
 
-    private T rules(T usuario) {
+    private void rules(T usuario) {
         rulesStrategy.forEach(rule -> rule.executar(usuario));
-        return usuario;
     }
 }
 

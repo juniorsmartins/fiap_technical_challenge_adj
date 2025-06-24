@@ -12,7 +12,7 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     |   Coca-Cola  |      Refrigerante       |   22.00   |    true     |  http://link-foto.com.br   |
 
   Cenario: Post para criar Item, com sucesso, pelo ItemController
-    Dado um ItemDtoRequest, como nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
+    Dado um ItemDtoRequest, com nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
     Quando a requisição Post for feita no método create de ItemController
     Entao receber ResponseEntity com HTTP 201 do ItemController
     E com ItemDtoResponse no body, com id e nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
@@ -33,4 +33,11 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E o Item foi apagado do banco de dados pelo ItemController
 
 
+  Cenario: Put para atualizar Item, com sucesso, pelo ItemController
+    Dado um identificador ID de um Item existente, com nome "Coca-Cola"
+    E um ItemDtoRequest, com nome "Coca-Cola Light" e descricao "Refrigerante Diet" e preco "16.00" e entrega "false" e foto "http://link-fotos.com.br"
+    Quando uma requisição Put for feita no método update do ItemController
+    Entao receber ResponseEntity com HTTP 200 do ItemController
+    E com ItemDtoResponse no body, com id e nome "Coca-Cola Light" e descricao "Refrigerante Diet" e preco "16.00" e entrega "false" e foto "http://link-fotos.com.br"
+    E com Item salvo no database, com nome "Coca-Cola Light" e descricao "Refrigerante Diet" e preco "16.00" e entrega "false" e foto "http://link-fotos.com.br"
 
