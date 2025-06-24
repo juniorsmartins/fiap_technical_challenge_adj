@@ -25,12 +25,22 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     Entao receber ResponseEntity com HTTP 200 do ItemController
     E com ItemDtoResponse no body, com id e nome "Coca-Cola" e descricao "Refrigerante" e preco "22.00" e entrega "true" e foto "http://link-foto.com.br"
 
+  Cenario: Get para consultar Item, com erro not found, pelo ItemController
+    Dado um identificador ID de um Item inexistente
+    Quando uma requisição Get for feita no método findById do ItemController
+    Entao receber ResponseEntity com HTTP 404 do ItemController
+
 
   Cenario: Delete para apagar Item, com sucesso, pelo ItemController
     Dado um identificador ID de um Item existente, com nome "Sprite"
     Quando uma requisição Delete for feita no método deleteById do ItemController
     Entao receber ResponseEntity com HTTP 204 do ItemController
     E o Item foi apagado do banco de dados pelo ItemController
+    
+  Cenario: Delete para apagar Item, com erro not found, pelo ItemController
+    Dado um identificador ID de um Item inexistente
+    Quando uma requisição Delete for feita no método deleteById do ItemController
+    Entao receber ResponseEntity com HTTP 404 do ItemController
 
 
   Cenario: Put para atualizar Item, com sucesso, pelo ItemController

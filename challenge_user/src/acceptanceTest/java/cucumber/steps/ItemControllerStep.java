@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -191,6 +192,17 @@ public final class ItemControllerStep {
                 .put("/" + itemEntity.getItemId());
 
         assertThat(response).isNotNull();
+    }
+
+    @Dado("um identificador ID de um Item inexistente")
+    public void um_identificador_id_de_um_item_inexistente() {
+
+        itemEntity = new ItemEntity(
+                UUID.randomUUID(), "Cerveja", "Bebida alcoólica",
+                new BigDecimal("15.00"), true, "link-foto"
+        );
+
+        assertThat(itemEntity.getItemId()).isNotNull();
     }
 }
 
