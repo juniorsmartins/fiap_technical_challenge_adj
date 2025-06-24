@@ -93,6 +93,8 @@ public final class ItemControllerStep {
         itemDtoRequest = new ItemDtoRequest(
                 nome, descricao, new BigDecimal(preco), Boolean.parseBoolean(entrega), foto
         );
+
+        assertThat(itemDtoRequest).isNotNull();
     }
 
     @Quando("a requisição Post for feita no método create de ItemController")
