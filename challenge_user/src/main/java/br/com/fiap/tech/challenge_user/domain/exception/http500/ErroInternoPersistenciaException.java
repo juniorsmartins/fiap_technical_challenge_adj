@@ -6,7 +6,7 @@ import java.io.Serial;
 
 @Getter
 public abstract sealed class ErroInternoPersistenciaException extends RuntimeException
-        permits RestauranteNonPersistenceException, UsuarioNonPersistenceException {
+        permits RestauranteNonPersistenceException, UsuarioNonPersistenceException, ItemNonPersistenceException {
 
     @Serial
     private static final long serialVersionUID = 1L;
