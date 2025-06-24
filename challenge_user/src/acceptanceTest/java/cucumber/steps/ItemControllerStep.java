@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -85,13 +86,15 @@ public final class ItemControllerStep {
         }
     }
 
-    @Dado("um ItemDtoRequest, como nome {string} e descricao {string} e preco {string} e entrega {string} e foto {string}")
+    @Dado("um ItemDtoRequest, com nome {string} e descricao {string} e preco {string} e entrega {string} e foto {string}")
     public void um_item_dto_request_como_nome_e_descricao_e_preco_e_entrega_e_foto(
             String nome, String descricao, String preco, String entrega, String foto) {
 
         itemDtoRequest = new ItemDtoRequest(
                 nome, descricao, new BigDecimal(preco), Boolean.parseBoolean(entrega), foto
         );
+
+        assertThat(itemDtoRequest).isNotNull();
     }
 
     @Quando("a requisição Post for feita no método create de ItemController")
@@ -178,6 +181,30 @@ public final class ItemControllerStep {
         var response = itemRepository.findById(itemEntity.getItemId());
 
         assertThat(response).isEmpty();
+    }
+
+    @Quando("uma requisição Put for feita no método update do ItemController")
+    public void uma_requisicao_put_for_feita_no_metodo_update_do_item_controller() {
+
+        response = RestAssured
+                .given().spec(requestSpecification)
+                .contentType(ConstantsTest.CONTENT_TYPE_JSON)
+                .body(itemDtoRequest)
+                .when()
+                .put("/" + itemEntity.getItemId());
+
+        assertThat(response).isNotNull();
+    }
+
+    @Dado("um identificador ID de um Item inexistente")
+    public void um_identificador_id_de_um_item_inexistente() {
+
+        itemEntity = new ItemEntity(
+                UUID.randomUUID(), "Cerveja", "Bebida alcoólica",
+                new BigDecimal("15.00"), true, "link-foto"
+        );
+
+        assertThat(itemEntity.getItemId()).isNotNull();
     }
 }
 
