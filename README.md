@@ -82,7 +82,7 @@ framework HTTP, mas sim de interfaces abstratas (EntityMapper, CreateOutputPort)
 
 #### Diagrama da Arquitetura
 
-![TechChallenge3](docs/DiagramaTechChallenge-v5.png)
+![TechChallenge3](docs/DiagramaTechChallenge-v6.png)
 
 Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. 
 
