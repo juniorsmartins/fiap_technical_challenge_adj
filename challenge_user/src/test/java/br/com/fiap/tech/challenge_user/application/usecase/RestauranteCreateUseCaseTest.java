@@ -111,7 +111,8 @@ class RestauranteCreateUseCaseTest {
     @Test
     void deveLancarExcecaoQuandoValidacaoFalha() {
         // Arrange
-        doThrow(new IllegalArgumentException("Proprietário inválido")).when(restauranteCheckRule).checkProprietario(restaurante);
+        doThrow(new IllegalArgumentException("Proprietário inválido"))
+                .when(restauranteCheckRule).checkProprietario(restaurante);
 
         // Act & Assert
         IllegalArgumentException exception = assertThrows(
