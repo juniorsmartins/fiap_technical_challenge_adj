@@ -31,3 +31,7 @@ INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, hora_abertura, hora
 INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, hora_abertura, hora_fechamento, endereco_id, proprietario_id) VALUES('6bfe2290-0720-4c58-89d7-902698778e59', 'Casa de Taipa', 'JAPONESA', '10:20:30', '21:52:50', '5f887464-fb36-4556-a78e-b567a85e62be', '051f5dc8-74fe-4d2c-81e2-ddea7c515532');
 INSERT INTO restaurantes(restaurante_id, nome, tipo_cozinha, hora_abertura, hora_fechamento, endereco_id, proprietario_id) VALUES('ccca983c-d09d-4137-a934-2b29eac991bc', 'Churros do Sam', 'FAST_FOOD', '11:20:30', '22:00:50', '93c1b36d-254d-4dc4-b666-97a0200ee9de', '051f5dc8-74fe-4d2c-81e2-ddea7c515532');
 
+INSERT INTO itens(item_id, nome, descricao, preco, entrega, foto) VALUES('2fe3e028-7983-437a-9f9a-a1240314167d', 'Batata frita', 'Batata feita sem óleo', '22.10', true, 'http://link-foto-exemplo.com');
+INSERT INTO itens(item_id, nome, descricao, preco, entrega, foto) VALUES('51bd3c74-593a-4fae-9ea3-ba29e6b086c8', 'Pão de Queijo', 'Farinha de mandioca', '31.26', true, 'http://link-foto-exemplo2.com');
+INSERT INTO itens(item_id, nome, descricao, preco, entrega, foto) VALUES('350d7035-e940-4394-a0db-72fec01c60b9', 'Salada de Alface', 'Legume fresco', '17.46', true, 'http://link-foto-exemplo3.com');
+

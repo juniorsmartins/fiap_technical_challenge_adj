@@ -19,10 +19,10 @@ Funcionalidade: testar operações Create/POST, Read/GET, Update/PUT e Delete/DE
     E com ItemDtoResponse no body, com id e nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
     E com Item salvo no database, com nome "Coca-Cola" e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
 
-    Cenario: Post para criar Item, com erro por nome vazio, pelo ItemController
-      Dado um ItemDtoRequest, com nome "   " e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
-      Quando a requisição Post for feita no método create de ItemController
-      Entao receber ResponseEntity com HTTP 400 do ItemController
+  Cenario: Post para criar Item, com erro por nome vazio, pelo ItemController
+    Dado um ItemDtoRequest, com nome "   " e descricao "Refrigerante" e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
+    Quando a requisição Post for feita no método create de ItemController
+    Entao receber ResponseEntity com HTTP 400 do ItemController
 
   Cenario: Post para criar Item, com erro por descrição vazia, pelo ItemController
     Dado um ItemDtoRequest, com nome "Coca-Cola" e descricao "   " e preco "20.00" e entrega "true" e foto "http://link-foto.com.br"
