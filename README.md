@@ -113,8 +113,9 @@ Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do softwar
 | Post      | http://localhost:9050/api/v1/challenge-user/restaurantes                                       (+ Json no body - requisição 4) |  201 Created + Json no body (resposta 5)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79  (+ Json no body - requisição 4) |    200 OK + Json no body (resposta 5)     |
 | Delete    | http://localhost:9050/api/v1/challenge-user/itens                                                                              |           204 No Content                  |
-| Get       | http://localhost:9050/api/v1/challenge-user/itens/2fe3e028-7983-437a-9f9a-a1240314167d                                         |    200 OK + Json no body (resposta 1)     |
+| Get       | http://localhost:9050/api/v1/challenge-user/itens/2fe3e028-7983-437a-9f9a-a1240314167d                                         |    200 OK + Json no body (resposta 6)     |
 | Post      | http://localhost:9050/api/v1/challenge-user/itens                                              (+ Json no body - requisição 5) |  201 Created + Json no body (resposta 6)  |
+| Put       | http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9         (+ Json no body - requisição 5) |    200 OK + Json no body (resposta 6)     |
 
 ##### Resposta 1 #####
 ```
@@ -267,6 +268,29 @@ Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do softwar
         "senha": "tanenbaum12",
         "descricao": "Porteiro"
     }
+}
+```
+
+##### Requisição 5 #####
+```
+{
+    "nome": "Bife à Milanesa",
+    "descricao": "Carne bovina com ovo",
+    "preco": "232.05",
+    "entrega": true,
+    "foto": "http://link-foto-teste.com"
+}
+```
+
+##### Resposta 5 #####
+```
+{
+    "itemId": "64eb1ea5-f17b-4ddf-8bc0-e58e4ea1fc33",
+    "nome": "Bife à Milanesa",
+    "descricao": "Carne bovina com ovo",
+    "preco": 232.05,
+    "entrega": true,
+    "foto": "http://link-foto-teste.com"
 }
 ```
 
