@@ -61,24 +61,24 @@ para documentação e testes automatizados
 
 A aplicação utiliza o padrão Ports and Adapters, onde as portas definem contratos entre camadas.
 
-Portas de Entrada: Interfaces como CreateInputPort permitem que a camada de Infraestrutura acesse 
-a lógica de negócio.
+Portas de Entrada: Interfaces com sufixo InputPort permitem que a camada de Infraestrutura acesse a lógica 
+de negócio.
 
-Portas de Saída: Interfaces como CreateOutputPort permitem que a camada de negócio acesse a 
-persistência sem depender de detalhes de implementação.
+Portas de Saída: Interfaces com o sufixo OutputPort permitem que a camada de negócio acesse a persistência 
+sem depender de detalhes de implementação.
 
-Adaptadores: ClienteCreateController (adaptador de entrada) traduz requisições HTTP em chamadas às 
-portas de entrada, enquanto UsuarioCreateAdapter (adaptador de saída) traduz chamadas das portas de 
-saída em operações de banco de dados.
+Adaptadores: classes com o sufixo Controller (adaptadores de entrada) traduzem requisições HTTP em chamadas 
+às portas de entrada, enquanto classes com sufixo Adapter (adaptadores de saída) traduzem chamadas das 
+portas de saída em operações de banco de dados.
 
 - Clean Architecture:
 
-A aplicação segue princípios da Clean Architecture, com a camada de negócio (Application e Domain) 
-no centro, independente de detalhes de infraestrutura. A persistência e a apresentação são externas e 
-dependem do núcleo por meio de interfaces.
+A aplicação segue princípios da Clean Architecture, com as regras de negócio (Application e Domain) no 
+centro, independente de detalhes de infraestrutura. A persistência e a apresentação são externas e dependem 
+do núcleo por meio de interfaces.
 
-Exemplo: A lógica de negócio em AbstractCreateUseCase não depende diretamente de Spring Data JPA ou do 
-framework HTTP, mas sim de interfaces abstratas (EntityMapper, CreateOutputPort).
+Exemplo: A lógica de negócio não depende diretamente de Spring Data JPA ou do framework HTTP, mas de 
+interfaces abstratas (OutputPort).
 
 #### Diagrama da Arquitetura
 
