@@ -1,0 +1,3957 @@
+{
+	"info": {
+		"_postman_id": "c3c8e5ed-d581-4b86-b641-411644bb4992",
+		"name": "Tech Challenge - ADJ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18044131"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Cadastrar - 201 (s/ endereço)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Dennis Ritchie\",\n    \"email\": \"ritchie@email.com\",\n    \"login\": \"ritchie123\",\n    \"senha\": \"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5501\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 201 (c/ endereço)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Ken Thompson\",\n    \"email\":\"thompson@email.com\",\n    \"login\":\"thompson\",\n    \"senha\":\"12345\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5514\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    }\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"torvalds@email.com\",\n    \"login\": \"torvalds123\",\n    \"senha\": \"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5502\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"  \",\n    \"email\": \"torvalds@email.com\",\n    \"login\": \"torvalds123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5503\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome maior)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Linus Torvalds abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl abcdefghijl\",\n    \"email\": \"torvalds@email.com\",\n    \"login\": \"torvalds123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5504\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (email nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Bjarne Stroustrup\",\n    \"login\":\"bjarne123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5505\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (email vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Bjarne Stroustrup\",\n    \"email\":\"   \",\n    \"login\":\"bjarne123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5506\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (email incorreto)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Bjarne Stroustrup\",\n    \"email\":\"bjarne.com\",\n    \"login\":\"bjarne123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5507\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (login nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Tim Berners-Lee\",\n    \"email\":\"tim@email.com\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5508\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (login vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Tim Berners-Lee\",\n    \"email\":\"tim@email.com\",\n    \"login\":\"    \",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5509\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (login maior)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Tim Berners-Lee\",\n    \"email\":\"tim@email.com\",\n    \"login\":\"tim01234567890123456789012345678901234567890123456789\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5510\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (senha nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"James Gosling\",\n    \"email\":\"gosling@email.com\",\n    \"login\":\"gosling123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5511\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (senha vazia)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"James Gosling\",\n    \"email\":\"gosling@email.com\",\n    \"login\":\"gosling123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5512\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (senha maior)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"James Gosling\",\n    \"email\":\"gosling@email.com\",\n    \"login\":\"gosling123\",\n    \"senha\":\"012345678901234567890123456789012345678901234567890\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5513\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (erro duplo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Guido van Rossum\",\n    \"email\":\"rossum.com\",\n    \"login\":\"rossum123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5515\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Put",
+					"item": [
+						{
+							"name": "Atualizar - 200 (s/ endereço)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Kent Beck\",\n    \"email\":\"kbeck@email.com\",\n    \"login\":\"kbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5601\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 200 (c/ endereço)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Sam Atual Newman\",\n    \"email\":\"snewman@email.com\",\n    \"login\":\"snewman\",\n    \"senha\":\"snewman123\",\n    \"numeroCartaoFidelidade\": \"7611-0111-000\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Central\",\n        \"numero\": \"1001\"\n    }\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/2f677af6-6f43-47b3-8461-1180effb4401",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"2f677af6-6f43-47b3-8461-1180effb4401"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 404 (not found)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Kent Beck Jr.\",\n    \"email\":\"kbbeck@email.com\",\n    \"login\":\"kbbeck123\",\n    \"senha\":\"k123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5603\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/237dc66c-3598-457c-aded-1fc2c855a503",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"237dc66c-3598-457c-aded-1fc2c855a503"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"hejlsberg@email.com\",\n    \"login\":\"hejlsberg123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5604\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"hejlsberg@email.com\",\n    \"login\":\"hejlsberg123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5605\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome maior)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Anders Hejlsberg MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande MuitoGrande\",\n    \"email\":\"hejlsberg@email.com\",\n    \"login\":\"hejlsberg123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5606\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (email nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Brian Kernighan\",\n    \"login\":\"kernighan123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5607\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (email vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Brian Kernighan\",\n    \"email\":\"   \",\n    \"login\":\"kernighan123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5608\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (email incorreto)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Brian Kernighan\",\n    \"email\":\"kbeck.com\",\n    \"login\":\"kernighan123\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5609\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (login nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Donald Knuth\",\n    \"email\":\"knuth@email.com\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5610\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (login vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Donald Knuth\",\n    \"email\":\"knuth@email.com\",\n    \"login\":\"  \",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5611\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (login maior)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Donald Knuth\",\n    \"email\":\"knuth@email.com\",\n    \"login\":\"knuth01234567890123456789012345678901234567890123456789\",\n    \"senha\":\"123456\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5612\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (senha nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Alan Turing\",\n    \"email\":\"turing@email.com\",\n    \"login\":\"turing123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5613\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (senha vazia)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Alan Turing\",\n    \"email\":\"turing@email.com\",\n    \"login\":\"turing123\",\n    \"senha\":\"   \",\n    \"numeroCartaoFidelidade\": \"1234-0000-5614\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (senha maior)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Alan Turing\",\n    \"email\":\"turing@email.com\",\n    \"login\":\"turing123\",\n    \"senha\":\"012345678901234567890123456789012345678901234567890\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5615\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (erro triplo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"  \",\n    \"email\":\"turingemail.com\",\n    \"login\":\"turing123\",\n    \"numeroCartaoFidelidade\": \"1234-0000-5616\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a90902fa-7cce-4c17-87fd-5cd9c70c9d5a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Consultar - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/a546ef31-d9f4-4ff7-9665-4baed324920b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"a546ef31-d9f4-4ff7-9665-4baed324920b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar - 404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/ae315d6a-89f1-4ef8-82d0-06da701aea69",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"ae315d6a-89f1-4ef8-82d0-06da701aea69"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes?numeroCartaoFidelidade=4321-1234-003,4321-1234-001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									],
+									"query": [
+										{
+											"key": "usuarioId",
+											"value": "6d648275-37d9-4fd3-800f-025a2262ef4d",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Carl Friedrich Gauss",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "gauss@email.com,euler@email.com",
+											"disabled": true
+										},
+										{
+											"key": "numeroCartaoFidelidade",
+											"value": "4321-1234-003,4321-1234-001"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Deletar - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/6d648275-37d9-4fd3-800f-025a2262ef4d",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"6d648275-37d9-4fd3-800f-025a2262ef4d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar - 404",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes/ae315d6a-89f1-4ef8-82d0-06da701aea69",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes",
+										"ae315d6a-89f1-4ef8-82d0-06da701aea69"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patch",
+					"item": [
+						{
+							"name": "Trocar Senha - 200",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"86522917-f507-459a-8ef9-93015089a5b2\",\n    \"senhaAntiga\":\"brian123\",\n    \"senhaNova\":\"brian123\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 404 (not found)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"267f9e02-414e-4aa3-8cee-f14b20c57223\",\n    \"senhaAntiga\":\"newton123\",\n    \"senhaNova\":\"newton456\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 409 (senha antiga incompatível)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"newton\",\n    \"senhaNova\":\"newton123\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"   \",\n    \"senhaNova\":\"k123456\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha nova vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"k123456\",\n    \"senhaNova\":\"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"k123456456456456456456456456456456456456345345345345345345345345345\",\n    \"senhaNova\":\"k123456\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 200 (senha nova maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"a90902fa-7cce-4c17-87fd-5cd9c70c9d5a\",\n    \"senhaAntiga\":\"k123456\",\n    \"senhaNova\":\"k123456234234234534656756786867897f789789767867u678\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Proprietário",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Cadastrar - 201 (s/ endereço)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Mike Beedle\",\n    \"email\": \"mike@email.com\",\n    \"login\": \"mike12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 201 (c/ endereço)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Steve Wozniak\",\n    \"email\": \"wozniak@email.com\",\n    \"login\": \"wozniak12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\",\n    \"endereco\": {\n        \"cep\": \"78050-120\",\n        \"logradouro\": \"Rua Centro 2\",\n        \"numero\": \"130\"\n    }\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"eich@email.com\",\n    \"login\": \"eich12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"  \",\n    \"email\": \"eich@email.com\",\n    \"login\": \"eich12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome maior)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Brendan Eich 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789\",\n    \"email\": \"eich@email.com\",\n    \"login\": \"eich12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (email nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Jon Skeet\",\n    \"login\": \"skeet12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (email vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Jon Skeet\",\n    \"email\": \"   \",\n    \"login\": \"skeet12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (email incorreto)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Jon Skeet\",\n    \"email\": \"skeetemail.com\",\n    \"login\": \"skeet12\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (login nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Gennady Korotkevich\",\n    \"email\": \"korotkevich@email.com\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (login vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Gennady Korotkevich\",\n    \"email\": \"korotkevich@email.com\",\n    \"login\": \"   \",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (login maior)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Gennady Korotkevich\",\n    \"email\": \"korotkevich@email.com\",\n    \"login\": \"korotkevich1201234567890123456789012345678901234567890123456789\",\n    \"senha\": \"123456\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (senha nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Grace Hopper\",\n    \"email\": \"hopper@email.com\",\n    \"login\": \"hopper12\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (senha vazia)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Grace Hopper\",\n    \"email\": \"hopper@email.com\",\n    \"login\": \"hopper12\",\n    \"senha\": \"  \",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (senha maior)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Grace Hopper\",\n    \"email\": \"hopper@email.com\",\n    \"login\": \"hopper12\",\n    \"senha\": \"012345678901234567890123456789012345678901234567890\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (erro triplo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Niklaus Wirth\",\n    \"email\": \"Wirthemail.com\",\n    \"login\": \"  \",\n    \"senha\": \"012345678901234567890123456789012345678901234567890\",\n    \"descricao\": \"Presente pela tarde\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Put",
+					"item": [
+						{
+							"name": "Atualizar - 200 (s/ endereço)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Fritz B. Haber\",\n    \"email\":\"haber@email.com\",\n    \"login\":\"haber123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 200 (c/ endereço)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"John Atual Lakos\",\n    \"email\":\"jlakos@email.com\",\n    \"login\":\"jlakos\",\n    \"senha\":\"jlakos12\",\n    \"descricao\": \"Presente pela manhã\",\n    \"endereco\": {\n        \"cep\": \"78333-999\",\n        \"logradouro\": \"Rua Central Two\",\n        \"numero\": \"1010\"\n    }\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/01ca9f69-b74b-4bd9-8e9f-d0cfea6045ef",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"01ca9f69-b74b-4bd9-8e9f-d0cfea6045ef"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 404 (not found)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"John Backus\",\n    \"email\":\"backus@email.com\",\n    \"login\":\"backus123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/df795738-fc6f-433e-aebe-310e896a9f11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"df795738-fc6f-433e-aebe-310e896a9f11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"stallman@email.com\",\n    \"login\":\"stallman123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"stallman@email.com\",\n    \"login\":\"stallman123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome maior)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Richard Stallman abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij\",\n    \"email\":\"stallman@email.com\",\n    \"login\":\"stallman123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (email nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Larry Page\",\n    \"login\":\"page123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (email vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Larry Page\",\n    \"email\":\"   \",\n    \"login\":\"page123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (email incorreto)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Larry Page\",\n    \"email\":\"page.com\",\n    \"login\":\"page123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (login nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Sergey Brin\",\n    \"email\":\"brin@email.com\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (login vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Sergey Brin\",\n    \"email\":\"brin@email.com\",\n    \"login\":\"  \",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (login maior)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Sergey Brin\",\n    \"email\":\"brin@email.com\",\n    \"login\":\"brin123haber123haber123haber123haber123haber123haber123haber123haber123\",\n    \"senha\":\"123456\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (senha nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Margaret Hamilton\",\n    \"email\":\"hamilton@email.com\",\n    \"login\":\"hamilton123\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (senha vazia)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Margaret Hamilton\",\n    \"email\":\"hamilton@email.com\",\n    \"login\":\"hamilton123\",\n    \"senha\":\"  \",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (senha maior)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"Margaret Hamilton\",\n    \"email\":\"hamilton@email.com\",\n    \"login\":\"hamilton123\",\n    \"senha\":\"h123456789h123456789h123456789h123456789h123456789h123456789\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (erro triplo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\":\"   \",\n    \"email\":\"lattneremail.com\",\n    \"login\":\"lattner123\",\n    \"descricao\": \"Visita a empresa quinzenalmente\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/bc11e003-219d-4884-88e9-e2a0b43d42c7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"bc11e003-219d-4884-88e9-e2a0b43d42c7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Consultar - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/eb957f38-90c4-4ef2-850c-229fb1658fcd",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"eb957f38-90c4-4ef2-850c-229fb1658fcd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar - 404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/e42bc7de-2790-4b1e-a58c-30349cec6505",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"e42bc7de-2790-4b1e-a58c-30349cec6505"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios?descricao=Advogado,Químico",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									],
+									"query": [
+										{
+											"key": "usuarioId",
+											"value": "051f5dc8-74fe-4d2c-81e2-ddea7c515532",
+											"disabled": true
+										},
+										{
+											"key": "nome",
+											"value": "Linus,Marie",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "curie@email.com,linus@email.com",
+											"disabled": true
+										},
+										{
+											"key": "descricao",
+											"value": "Advogado,Químico"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Deletar - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/ef2655be-9415-4e54-8db6-53725485de77",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"ef2655be-9415-4e54-8db6-53725485de77"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar - 409 (dono de restaurante)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/051f5dc8-74fe-4d2c-81e2-ddea7c515532",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"051f5dc8-74fe-4d2c-81e2-ddea7c515532"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar - 404 (not found)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios/b46bff53-5b8b-464f-b264-eba485e9eaf2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios",
+										"b46bff53-5b8b-464f-b264-eba485e9eaf2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patch",
+					"item": [
+						{
+							"name": "Trocar Senha - 200",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 404",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usuarioId\":\"267f9e02-414e-4aa3-8cee-f14b20c57223\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"tanenbaum1234\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 409 (senha antiga incompatível)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum\",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"   \",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha nova vazia)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 400 (senha antiga maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum1234534654565756867879789706785645634523423412342343245\",\n    \"senhaNova\":\"tanenbaum1244\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trocar Senha - 200 (senha nova maior)",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"usuarioId\":\"b69e9f12-e489-4751-9b24-a936c4f3c4d2\",\n    \"senhaAntiga\":\"tanenbaum12\",\n    \"senhaNova\":\"tanenbaum124434545636574857968705476352rtrth7648745673546\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/proprietarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"proprietarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Restaurante",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Cadastrar - 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"10:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 409 (hora abertura posterior fim)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"20:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"   \",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"10:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (endereço nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Franz Kafka\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"10:10:10\",\n    \"horaFechamento\": \"12:20:20\",\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (hora abertura nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaFechamento\": \"12:20:20\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (hora fechamento nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Panela Velha\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:10:10\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"b69e9f12-e489-4751-9b24-a936c4f3c4d2\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Put",
+					"item": [
+						{
+							"name": "Atualizar - 200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 409 (hora abertura posterior fim)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"21:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 404 (not found)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ba0d272e-11de-4509-b48a-8389d2f8a66a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ba0d272e-11de-4509-b48a-8389d2f8a66a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (nome vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"   \",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (endereço nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francis Galton\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"horaFechamento\": \"19:00:01\",\n    \"proprietario\": \"d2c8e228-b0d4-46a7-90da-ab7afe0fc063\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (hora abertura nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaFechamento\": \"19:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar - 400 (hora fechamento nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Lasai Atualizado\",\n    \"tipoCozinhaEnum\": \"FAST_FOOD\",\n    \"horaAbertura\": \"08:00:01\",\n    \"endereco\": {\n        \"cep\": \"78000-100\",\n        \"logradouro\": \"Rua Centro\",\n        \"numero\": \"100\"\n    },\n    \"proprietario\": \"0a1e22f4-9c16-4f42-ab52-94ee029dba1f\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"63fd1b44-4fd9-4d67-95d9-9a4607409c79"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Consultar - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/b173aa00-d852-4ff2-86aa-ce657136a44a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"b173aa00-d852-4ff2-86aa-ce657136a44a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar - 404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ba0d272e-11de-4509-b48a-8389d2f8a66a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ba0d272e-11de-4509-b48a-8389d2f8a66a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Deletar - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ccca983c-d09d-4137-a934-2b29eac991bc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ccca983c-d09d-4137-a934-2b29eac991bc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar - 404",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/restaurantes/ba0d272e-11de-4509-b48a-8389d2f8a66a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"restaurantes",
+										"ba0d272e-11de-4509-b48a-8389d2f8a66a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Cadastrar - 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Bife à Milanesa\",\n    \"descricao\": \"Carne bovina com ovo\",\n    \"preco\": \"232.05\",\n    \"entrega\": true,\n    \"foto\": \"http://link-foto-teste.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome vazio)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"   \",\n    \"descricao\": \"Carne bovina com ovo\",\n    \"preco\": \"232.05\",\n    \"entrega\": true,\n    \"foto\": \"http://link-foto-teste.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Carne bovina com ovo\",\n    \"preco\": \"232.05\",\n    \"entrega\": true,\n    \"foto\": \"http://link-foto-teste.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (descrição vazia)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Bife à Milanesa\",\n    \"descricao\": \"   \",\n    \"preco\": \"232.05\",\n    \"entrega\": true,\n    \"foto\": \"http://link-foto-teste.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (descrição nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Bife à Milanesa\",\n    \"preco\": \"232.05\",\n    \"entrega\": true,\n    \"foto\": \"http://link-foto-teste.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (preço nulo)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Bife à Milanesa\",\n    \"descricao\": \"Carne bovina com ovo\",\n    \"entrega\": true,\n    \"foto\": \"http://link-foto-teste.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (foto vazia)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Bife à Milanesa\",\n    \"descricao\": \"Carne bovina com ovo\",\n    \"preco\": \"232.05\",\n    \"entrega\": true,\n    \"foto\": \"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (foto nula)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Bife à Milanesa\",\n    \"descricao\": \"Carne bovina com ovo\",\n    \"preco\": \"232.05\",\n    \"entrega\": true\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Put",
+					"item": [
+						{
+							"name": "Cadastrar - 200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"descricao\": \"Legumes frescos do dia\",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 404 (not found)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"descricao\": \"Legumes frescos do dia\",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/02d6513e-c6ac-43fc-b32d-f1dea7cbf9dc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"02d6513e-c6ac-43fc-b32d-f1dea7cbf9dc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome vazio)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"   \",\n    \"descricao\": \"Legumes frescos do dia\",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (nome nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Legumes frescos do dia\",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (descrição vazia)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"descricao\": \"   \",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (descrição nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (preço nulo)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"descricao\": \"Legumes frescos do dia\",\n    \"entrega\": false,\n    \"foto\": \"http://link-foto-exemplo-teste3.com\"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (foto vazia)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"descricao\": \"Legumes frescos do dia\",\n    \"preco\": \"19.68\",\n    \"entrega\": false,\n    \"foto\": \"   \"\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 400 (foto nula)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Salada de Alface com Rúcula\",\n    \"descricao\": \"Legumes frescos do dia\",\n    \"preco\": \"19.68\",\n    \"entrega\": false\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/350d7035-e940-4394-a0db-72fec01c60b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"350d7035-e940-4394-a0db-72fec01c60b9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Cadastrar - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/2fe3e028-7983-437a-9f9a-a1240314167d",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"2fe3e028-7983-437a-9f9a-a1240314167d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 404 (not found)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/03e893c2-8045-4dfe-9568-4580ed687859",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"03e893c2-8045-4dfe-9568-4580ed687859"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Cadastrar - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/51bd3c74-593a-4fae-9ea3-ba29e6b086c8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"51bd3c74-593a-4fae-9ea3-ba29e6b086c8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar - 404 (not found)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9050/api/v1/challenge-user/itens/c199ae1c-eb72-400b-9df7-26729a6076e5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9050",
+									"path": [
+										"api",
+										"v1",
+										"challenge-user",
+										"itens",
+										"c199ae1c-eb72-400b-9df7-26729a6076e5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
