@@ -93,6 +93,7 @@ Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do softwar
 | Cliente             | /api/v1/challenge-user/clientes       | Endpoint para operações de CRUD de Clientes       |
 | Proprietario        | /api/v1/challenge-user/proprietarios  | Endpoint para operações de CRUD de Proprietários  |
 | Restaurante         | /api/v1/challenge-user/restaurantes   | Endpoint para operações de CRUD de Restaurantes   |
+| Item                | /api/v1/challenge-user/itens          | Endpoint para operações de CRUD de Itens          |
 
 
 | Método    | Endpoint e Requisição                                                                                                          |              Resposta                     |
@@ -111,6 +112,9 @@ Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do softwar
 | Get       | http://localhost:9050/api/v1/challenge-user/restaurantes/b173aa00-d852-4ff2-86aa-ce657136a44a                                  |    200 OK + Json no body (resposta 5)     |
 | Post      | http://localhost:9050/api/v1/challenge-user/restaurantes                                       (+ Json no body - requisição 4) |  201 Created + Json no body (resposta 5)  |
 | Put       | http://localhost:9050/api/v1/challenge-user/restaurantes/63fd1b44-4fd9-4d67-95d9-9a4607409c79  (+ Json no body - requisição 4) |    200 OK + Json no body (resposta 5)     |
+| Delete    | http://localhost:9050/api/v1/challenge-user/itens                                                                              |           204 No Content                  |
+| Get       | http://localhost:9050/api/v1/challenge-user/itens/2fe3e028-7983-437a-9f9a-a1240314167d                                         |    200 OK + Json no body (resposta 1)     |
+| Post      | http://localhost:9050/api/v1/challenge-user/itens                                              (+ Json no body - requisição 5) |  201 Created + Json no body (resposta 6)  |
 
 ##### Resposta 1 #####
 ```
