@@ -282,7 +282,7 @@ Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do softwar
 }
 ```
 
-##### Resposta 5 #####
+##### Resposta 6 #####
 ```
 {
     "itemId": "64eb1ea5-f17b-4ddf-8bc0-e58e4ea1fc33",
