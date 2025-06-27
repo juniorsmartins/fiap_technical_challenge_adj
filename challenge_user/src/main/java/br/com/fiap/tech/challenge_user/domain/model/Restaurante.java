@@ -36,21 +36,28 @@ public final class Restaurante {
         this.nome = nome;
         this.tipoCozinhaEnum = tipoCozinhaEnum;
         this.horaAbertura = horaAbertura;
-        this.checkHoraFechamento(horaFechamento);
         this.horaFechamento = horaFechamento;
         this.endereco = endereco;
         this.proprietario = proprietario;
+
+        this.checkHoraFuncionamento();
+    }
+
+    public void setHoraAbertura(LocalTime horaAbertura) {
+        this.horaAbertura = horaAbertura;
+        this.checkHoraFuncionamento();
     }
 
     public void setHoraFechamento(LocalTime horarioFim) {
 
-        this.checkHoraFechamento(horarioFim);
         this.horaFechamento = horarioFim;
+        this.checkHoraFuncionamento();
     }
 
-    private void checkHoraFechamento(LocalTime horarioFim) {
-        if (horarioFim != null && this.horaAbertura != null && horarioFim.isBefore(this.horaAbertura)) {
-            throw new OpeningTimeLaterClosingTimeException(horarioFim.toString());
+    private void checkHoraFuncionamento() {
+
+        if (this.horaFechamento != null && this.horaAbertura != null && this.horaFechamento.isBefore(this.horaAbertura)) {
+            throw new OpeningTimeLaterClosingTimeException(this.horaFechamento.toString());
         }
     }
 }

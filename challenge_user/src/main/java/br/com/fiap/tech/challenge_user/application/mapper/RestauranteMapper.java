@@ -5,98 +5,53 @@ import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
-import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.PageImpl;
 
-@Service
-@RequiredArgsConstructor
-public final class RestauranteMapper implements InputMapper<RestauranteDtoRequest, Restaurante>,
-        EntityMapper<Restaurante, RestauranteEntity>, OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> {
+import java.util.UUID;
 
-    private final EnderecoMapper enderecoMapper;
+@Mapper(componentModel = "spring", uses = {EnderecoMapper.class, ProprietarioMapper.class})
+public abstract class RestauranteMapper implements InputMapper<RestauranteDtoRequest, Restaurante>,
+        OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity>,
+        EntityMapper<Restaurante, RestauranteEntity> {
 
-    private final ProprietarioMapper proprietarioMapper;
+    @Autowired
+    private ProprietarioMapper proprietarioMapper;
 
-    @Override
-    public Restaurante toDomainIn(RestauranteDtoRequest dto) {
-        if (dto == null) {
-            return null;
-        }
+    @Mapping(target = "restauranteId", ignore = true)
+    @Mapping(target = "proprietario", source = "proprietario", qualifiedByName = "mapUuidToProprietario")
+    public abstract Restaurante toDomainIn(RestauranteDtoRequest dto);
 
-        var endereco = enderecoMapper.toEndereco(dto.endereco());
-        var proprietario = new Proprietario();
-        proprietario.setUsuarioId(dto.proprietario());
+    public abstract RestauranteDtoResponse toDtoResponse(Restaurante domain);
 
-        return new Restaurante(
-                null, dto.nome(), dto.tipoCozinhaEnum(),
-                dto.horaAbertura(), dto.horaFechamento(),
-                endereco, proprietario);
-    }
+    public abstract RestauranteDtoResponse toResponse(RestauranteEntity entity);
 
-    @Override
-    public RestauranteDtoResponse toDtoResponse(Restaurante domain) {
-        if (domain == null) {
-            return null;
-        }
-
-        var endereco = enderecoMapper.toEnderecoDtoResponse(domain.getEndereco());
-        var proprietario = proprietarioMapper.toDtoResponse(domain.getProprietario());
-
-        return new RestauranteDtoResponse(
-                domain.getRestauranteId(), domain.getNome(), domain.getTipoCozinhaEnum(),
-                domain.getHoraAbertura(), domain.getHoraFechamento(),
-                endereco, proprietario);
-    }
-
-    @Override
-    public RestauranteDtoResponse toResponse(RestauranteEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
-        var endereco = enderecoMapper.toEnderecoDtoResponse(entity.getEndereco());
-        var proprietario = proprietarioMapper.toResponse(entity.getProprietario());
-
-        return new RestauranteDtoResponse(
-                entity.getRestauranteId(), entity.getNome(), entity.getTipoCozinhaEnum(),
-                entity.getHoraAbertura(), entity.getHoraFechamento(),
-                endereco, proprietario);
-    }
-
-    @Override
     public Page<RestauranteDtoResponse> toPageResponse(Page<RestauranteEntity> entityPage) {
-        return null;
+        return entityPage == null ? null : new PageImpl<>(
+                entityPage.getContent().stream().map(this::toResponse).toList(),
+                entityPage.getPageable(),
+                entityPage.getTotalElements()
+        );
     }
 
-    @Override
-    public RestauranteEntity toEntity(Restaurante domain) {
-        if (domain == null) {
+    public abstract RestauranteEntity toEntity(Restaurante domain);
+
+    public abstract Restaurante toDomain(RestauranteEntity entity);
+
+    @Named("mapUuidToProprietario")
+    public Proprietario map(UUID proprietarioId) {
+        if (proprietarioId == null) {
             return null;
         }
 
-        var endereco = enderecoMapper.toEnderecoEntity(domain.getEndereco());
-        var proprietario = proprietarioMapper.toEntity(domain.getProprietario());
+        Proprietario proprietario = new Proprietario();
+        proprietario.setUsuarioId(proprietarioId);
 
-        return new RestauranteEntity(
-                domain.getRestauranteId(), domain.getNome(), domain.getTipoCozinhaEnum(),
-                domain.getHoraAbertura(), domain.getHoraFechamento(),
-                endereco, proprietario);
-    }
-
-    @Override
-    public Restaurante toDomain(RestauranteEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
-        var endereco = enderecoMapper.toEndereco(entity.getEndereco());
-        var proprietario = proprietarioMapper.toDomain(entity.getProprietario());
-
-        return new Restaurante(
-                entity.getRestauranteId(), entity.getNome(), entity.getTipoCozinhaEnum(),
-                entity.getHoraAbertura(), entity.getHoraFechamento(),
-                endereco, proprietario);
+        return proprietario;
     }
 }
 
