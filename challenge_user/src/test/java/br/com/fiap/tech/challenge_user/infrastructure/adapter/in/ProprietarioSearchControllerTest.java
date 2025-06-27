@@ -1,8 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
+import br.com.fiap.tech.challenge_user.application.mapper.PageMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
@@ -29,7 +28,7 @@ import static org.mockito.Mockito.*;
 class ProprietarioSearchControllerTest {
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> mapper;
+    private PageMapper<ProprietarioDtoResponse, ProprietarioEntity> mapper;
 
     @Mock
     private UsuarioSearchOutputPort<ProprietarioEntity> finder;

@@ -14,7 +14,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequest, Proprietario>,
-        EntityMapper<Proprietario, ProprietarioEntity>, OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> {
+        OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity>,
+        EntityMapper<Proprietario, ProprietarioEntity>,
+        PageMapper<ProprietarioDtoResponse, ProprietarioEntity> {
 
     private final EnderecoMapper mapper;
 

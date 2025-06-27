@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
+import br.com.fiap.tech.challenge_user.application.mapper.PageMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClienteSearchController extends AbstractUsuarioSearchController<ClienteDtoResponse, ClienteEntity> {
 
     public ClienteSearchController(
-            OutputMapper<?, ClienteDtoResponse, ClienteEntity> mapper,
+            PageMapper<ClienteDtoResponse, ClienteEntity> mapper,
             UsuarioSearchOutputPort<ClienteEntity> outputPort) {
         super(mapper, outputPort);
     }
