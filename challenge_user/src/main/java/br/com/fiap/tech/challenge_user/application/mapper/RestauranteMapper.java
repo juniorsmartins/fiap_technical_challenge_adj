@@ -9,8 +9,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 
 import java.util.UUID;
 
@@ -29,14 +27,6 @@ public abstract class RestauranteMapper implements InputMapper<RestauranteDtoReq
     public abstract RestauranteDtoResponse toDtoResponse(Restaurante domain);
 
     public abstract RestauranteDtoResponse toResponse(RestauranteEntity entity);
-
-    public Page<RestauranteDtoResponse> toPageResponse(Page<RestauranteEntity> entityPage) {
-        return entityPage == null ? null : new PageImpl<>(
-                entityPage.getContent().stream().map(this::toResponse).toList(),
-                entityPage.getPageable(),
-                entityPage.getTotalElements()
-        );
-    }
 
     public abstract RestauranteEntity toEntity(Restaurante domain);
 

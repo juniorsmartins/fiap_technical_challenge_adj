@@ -17,13 +17,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 
 import java.time.Instant;
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -238,37 +235,6 @@ class RestauranteMapperTest {
         assertThat(result.proprietario()).isEqualTo(proprietarioDtoResponse);
         assertThat(result.horaAbertura()).isEqualTo(restauranteEntity.getHoraAbertura());
         assertThat(result.horaFechamento()).isEqualTo(restauranteEntity.getHoraFechamento());
-        verify(enderecoMapper).toEnderecoDtoResponse(restauranteEntity.getEndereco());
-        verify(proprietarioMapper).toResponse(restauranteEntity.getProprietario());
-        verifyNoMoreInteractions(enderecoMapper, proprietarioMapper);
-    }
-
-    @Test
-    void deveMapearPageRestauranteEntityParaPageRestauranteDtoResponse() {
-        // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(restauranteEntity.getEndereco())).thenReturn(enderecoDtoResponse);
-        when(proprietarioMapper.toResponse(restauranteEntity.getProprietario())).thenReturn(proprietarioDtoResponse);
-        var page = new PageImpl<>(List.of(restauranteEntity), PageRequest.of(0, 10), 1);
-
-        // Act
-        var result = restauranteMapper.toPageResponse(page);
-
-        // Assert
-        assertThat(result).isNotNull();
-        assertThat(result.getContent()).hasSize(1);
-        assertThat(result.getTotalElements()).isEqualTo(1);
-        assertThat(result.getPageable().getPageNumber()).isEqualTo(0);
-        assertThat(result.getPageable().getPageSize()).isEqualTo(10);
-        var resultDto = result.getContent().getFirst();
-        assertThat(resultDto.restauranteId()).isEqualTo(restauranteEntity.getRestauranteId());
-        assertThat(resultDto.nome()).isEqualTo(restauranteEntity.getNome());
-        assertThat(resultDto.tipoCozinhaEnum()).isEqualTo(restauranteEntity.getTipoCozinhaEnum());
-        assertThat(resultDto.horaAbertura()).isEqualTo(restauranteEntity.getHoraAbertura());
-        assertThat(resultDto.horaFechamento()).isEqualTo(restauranteEntity.getHoraFechamento());
-        assertThat(resultDto.endereco()).isEqualTo(enderecoDtoResponse);
-        assertThat(resultDto.proprietario()).isEqualTo(proprietarioDtoResponse);
-        assertThat(resultDto.horaAbertura()).isEqualTo(restauranteEntity.getHoraAbertura());
-        assertThat(resultDto.horaFechamento()).isEqualTo(restauranteEntity.getHoraFechamento());
         verify(enderecoMapper).toEnderecoDtoResponse(restauranteEntity.getEndereco());
         verify(proprietarioMapper).toResponse(restauranteEntity.getProprietario());
         verifyNoMoreInteractions(enderecoMapper, proprietarioMapper);
