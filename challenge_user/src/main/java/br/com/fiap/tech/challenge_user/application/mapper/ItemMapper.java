@@ -6,10 +6,10 @@ import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
-public interface ItemMapper extends InputMapper<ItemDtoRequest, Item>, OutputMapper<Item, ItemDtoResponse,
+public interface ItemMapper extends InputMapper<ItemDtoRequest, Item>,
+        OutputMapper<Item, ItemDtoResponse,
         ItemEntity>, EntityMapper<Item, ItemEntity> {
 
     @Mapping(target = "itemId", ignore = true)
@@ -18,10 +18,6 @@ public interface ItemMapper extends InputMapper<ItemDtoRequest, Item>, OutputMap
     ItemDtoResponse toDtoResponse(Item domain);
 
     ItemDtoResponse toResponse(ItemEntity entity);
-
-    default Page<ItemDtoResponse> toPageResponse(Page<ItemEntity> entityPage) {
-        return null;
-    };
 
     ItemEntity toEntity(Item domain);
 

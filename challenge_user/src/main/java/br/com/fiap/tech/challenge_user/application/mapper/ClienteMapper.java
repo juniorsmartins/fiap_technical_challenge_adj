@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
+import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,7 +14,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Cliente>,
-        EntityMapper<Cliente, ClienteEntity>, OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> {
+        OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity>,
+        EntityMapper<Cliente, ClienteEntity>,
+        PageMapper<ClienteDtoResponse, ClienteEntity> {
 
     private final EnderecoMapper mapper;
 
