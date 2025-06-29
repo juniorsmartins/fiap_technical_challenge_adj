@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RestauranteNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.model.Endereco;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
@@ -48,13 +48,7 @@ class RestauranteUpdateUseCaseTest {
 
     private RestauranteEntity restauranteEntity;
 
-    private Proprietario proprietario;
-
     private ProprietarioEntity proprietarioEntity;
-
-    private Endereco endereco;
-
-    private EnderecoEntity enderecoEntity;
 
     private UUID restauranteId;
 
@@ -63,7 +57,7 @@ class RestauranteUpdateUseCaseTest {
         restauranteId = UUID.randomUUID();
         UUID proprietarioId = UUID.randomUUID();
 
-        proprietario = new Proprietario();
+        Proprietario proprietario = new Proprietario();
         proprietario.setUsuarioId(proprietarioId);
         proprietario.setNome("João");
         proprietario.setEmail("joao@email.com");
@@ -75,12 +69,12 @@ class RestauranteUpdateUseCaseTest {
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("joao");
 
-        endereco = new Endereco();
+        Endereco endereco = new Endereco();
         endereco.setCep("12345-678");
         endereco.setLogradouro("Rua Exemplo");
         endereco.setNumero("123");
 
-        enderecoEntity = new EnderecoEntity();
+        EnderecoEntity enderecoEntity = new EnderecoEntity();
         enderecoEntity.setCep("12345-678");
         enderecoEntity.setLogradouro("Rua Exemplo");
         enderecoEntity.setNumero("123");
@@ -131,10 +125,11 @@ class RestauranteUpdateUseCaseTest {
         doReturn(Optional.empty()).when(findByIdOutputPort).findById(restauranteId);
 
         // Act & Assert
-        RestauranteNotFoundException exception = assertThrows(
-                RestauranteNotFoundException.class,
+        RecursoNotFoundException exception = assertThrows(
+                RecursoNotFoundException.class,
                 () -> restauranteUpdateUseCase.update(restauranteId, restaurante)
         );
+
         assertEquals(restauranteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
         verifyNoInteractions(restauranteCheckRule, createOutputPort, entityMapper);
