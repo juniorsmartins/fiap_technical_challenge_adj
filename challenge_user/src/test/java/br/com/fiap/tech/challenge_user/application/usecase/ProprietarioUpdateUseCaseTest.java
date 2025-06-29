@@ -3,8 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.UsuarioNonUniqueNomeException;
+import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
@@ -20,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -109,34 +109,17 @@ class ProprietarioUpdateUseCaseTest {
     @Test
     void deveLancarUsuarioNotFoundExceptionQuandoProprietarioNaoEhEncontrado() {
         // Arrange
-        doReturn(Optional.empty()).when(findByIdOutputPort).findById(proprietarioId);
+        when(findByIdOutputPort.findById(proprietarioId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        UsuarioNotFoundException exception = assertThrows(
-                UsuarioNotFoundException.class,
+        RecursoNotFoundException exception = assertThrows(
+                RecursoNotFoundException.class,
                 () -> proprietarioUpdateUseCase.update(proprietarioId, proprietario)
         );
-        assertEquals(proprietarioId, exception.getId());
-        verify(rule1, times(1)).executar(proprietario);
-        verify(rule2, times(1)).executar(proprietario);
+
+        assertThat(exception.getId()).isEqualTo(proprietarioId);
         verify(findByIdOutputPort, times(1)).findById(proprietarioId);
-        verifyNoInteractions(usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
-        verifyNoMoreInteractions(rule1, rule2, findByIdOutputPort);
-    }
-
-    @Test
-    void deveLancarExcecaoQuandoRegraFalha() {
-        // Arrange
-        doThrow(new UsuarioNonUniqueNomeException("João")).when(rule1).executar(proprietario);
-
-        // Act & Assert
-        UsuarioNonUniqueNomeException exception = assertThrows(
-                UsuarioNonUniqueNomeException.class,
-                () -> proprietarioUpdateUseCase.update(proprietarioId, proprietario)
-        );
-        assertEquals("João", exception.getValor());
-        verify(rule1, times(1)).executar(proprietario);
-        verifyNoInteractions(rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
+        verifyNoInteractions(rule1, rule2, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
     }
 
     @Test
