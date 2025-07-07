@@ -678,13 +678,14 @@ usuários sem precisar modificar nada.
 
 2. Esquema de Exceptions:
 
-O projeto usa Herança no esquema de exceções para simplificar o tratamento personalizado e global. Bem como usar internacionalização de mensagens 
-em dois idiomas, Português e Inglês. Podendo, se necessário, facilmente adicionar outros idiomas nas mensagens de retorno de exceções.
+O projeto usa Herança no esquema de exceções para simplificar o tratamento personalizado e global. Bem como usa internacionalização de 
+mensagens em dois idiomas, Português e Inglês. Podendo, se necessário, facilmente adicionar outros idiomas nas mensagens de retorno de 
+exceções.
 
 3. Esquema de Testes:
 
 O projeto possui um submódulo, chamado acceptanceTest, para os testes de integração/aceitação. Esses testes foram construídos via BDD/TDD 
-com Cucumber. Bem como também há testes unitários construídos com JUnit e Mockito e H2. 
+com Cucumber. Bem como também há testes unitários construídos com JUnit e Mockito e H2, com cobertura acima de 80%. 
 
 
 ## Autoria
