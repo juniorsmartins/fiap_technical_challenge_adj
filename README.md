@@ -671,9 +671,10 @@ https://github.com/juniorsmartins/fiap_technical_challenge_adj
 
 1. Tipos de Usuários:
 
-O projeto utiliza a Herança como solução para os tipos de usuários. Há uma entidade pai, chamada UsuárioEntity, e suas filhas, ClienteEntity e 
-ProprietarioEntity. Há uso de polimorfismo para simplificar e não duplicar código. Bem como uso de generics para facilitar a implementação de 
-novos tipos de usuários.
+O projeto utiliza a Herança como solução para os tipos de usuários. Há uma entidade pai, chamada Usuário, e suas filhas, Cliente e 
+Proprietario. Há estrutura de CRUD para Cliente e há outra para Proprietario. Há uso de polimorfismo para simplificar e não duplicar 
+código. Bem como o uso de generics, conforme o SOLID (Princípio do Aberto-fechado), para facilitar a implementação de novos tipos de 
+usuários sem precisar modificar nada.
 
 2. Esquema de Exceptions:
 
