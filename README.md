@@ -685,7 +685,9 @@ exceções.
 3. Esquema de Testes:
 
 O projeto possui um submódulo, chamado acceptanceTest, para os testes de integração/aceitação. Esses testes foram construídos via BDD/TDD 
-com Cucumber. Bem como também há testes unitários construídos com JUnit e Mockito e H2, com cobertura acima de 80%. 
+com Cucumber. Bem como também há testes unitários construídos com JUnit e Mockito e H2, com cobertura de testes acima de 80%. 
+
+![TechChallenge3](docs/CoberturaTestes.png)
 
 
 ## Autoria
