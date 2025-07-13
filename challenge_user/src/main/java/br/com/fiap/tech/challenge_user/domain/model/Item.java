@@ -1,17 +1,10 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
-@NoArgsConstructor
-@Getter
-@Setter
-public final class Item implements Serializable {
+public final class Item {
 
     private UUID itemId;
 
@@ -25,6 +18,9 @@ public final class Item implements Serializable {
 
     private String foto;
 
+    public Item() {
+    }
+
     public Item(String nome, String descricao, BigDecimal preco, boolean entrega, String foto) {
         this.nome = nome;
         this.descricao = descricao;
@@ -36,6 +32,66 @@ public final class Item implements Serializable {
     public Item(UUID itemId, String nome, String descricao, BigDecimal preco, boolean entrega, String foto) {
         this(nome, descricao, preco, entrega, foto);
         this.itemId = itemId;
+    }
+
+    public UUID getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(UUID itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public boolean isEntrega() {
+        return entrega;
+    }
+
+    public void setEntrega(boolean entrega) {
+        this.entrega = entrega;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(itemId, item.itemId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(itemId);
     }
 }
 

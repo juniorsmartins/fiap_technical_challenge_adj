@@ -1,17 +1,16 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
 public final class Cliente extends Usuario {
 
     private String numeroCartaoFidelidade;
+
+    public Cliente() {
+    }
 
     public Cliente(
             UUID usuarioId, String nome, String email, String login, String senha,
@@ -27,6 +26,10 @@ public final class Cliente extends Usuario {
             String numeroCartaoFidelidade) {
         super(nome, email, login, senha, endereco);
         this.numeroCartaoFidelidade = numeroCartaoFidelidade;
+    }
+
+    public String getNumeroCartaoFidelidade() {
+        return numeroCartaoFidelidade;
     }
 }
 

@@ -1,14 +1,8 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
+import java.util.Objects;
 import java.util.UUID;
 
-@Getter
-@Setter
-@EqualsAndHashCode(of = {"usuarioId"})
 public abstract class Usuario {
 
     private UUID usuarioId;
@@ -46,6 +40,66 @@ public abstract class Usuario {
                    Endereco endereco) {
         this(nome, email, login, senha, endereco);
         this.usuarioId = usuarioId;
+    }
+
+    public UUID getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(UUID usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(usuarioId, usuario.usuarioId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(usuarioId);
     }
 }
 

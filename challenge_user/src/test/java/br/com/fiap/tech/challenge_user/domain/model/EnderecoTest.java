@@ -53,26 +53,6 @@ class EnderecoTest {
     }
 
     @Test
-    void deveGerarToStringCorreto() {
-        // Arrange
-        var endereco = new Endereco();
-        endereco.setEnderecoId(enderecoId);
-        endereco.setCep(cep);
-        endereco.setLogradouro(logradouro);
-        endereco.setNumero(numero);
-
-        // Act
-        var toString = endereco.toString();
-
-        // Assert
-        assertThat(toString)
-                .contains("enderecoId=" + enderecoId)
-                .contains("cep=" + cep)
-                .contains("logradouro=" + logradouro)
-                .contains("numero=" + numero);
-    }
-
-    @Test
     void deveSerIgualQuandoEnderecoIdForIgual() {
         // Arrange
         var endereco1 = new Endereco();

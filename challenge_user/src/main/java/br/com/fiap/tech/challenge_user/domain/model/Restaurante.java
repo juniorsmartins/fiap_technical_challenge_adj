@@ -2,16 +2,11 @@ package br.com.fiap.tech.challenge_user.domain.model;
 
 import br.com.fiap.tech.challenge_user.domain.exception.http409.OpeningTimeLaterClosingTimeException;
 import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.UUID;
 
-@NoArgsConstructor
-@Getter
-@Setter
 public final class Restaurante {
 
     private UUID restauranteId;
@@ -27,6 +22,9 @@ public final class Restaurante {
     private Endereco endereco;
 
     private Proprietario proprietario;
+
+    public Restaurante() {
+    }
 
     public Restaurante(
             UUID restauranteId, String nome, TipoCozinhaEnum tipoCozinhaEnum,
@@ -59,6 +57,66 @@ public final class Restaurante {
         if (this.horaFechamento != null && this.horaAbertura != null && this.horaFechamento.isBefore(this.horaAbertura)) {
             throw new OpeningTimeLaterClosingTimeException(this.horaFechamento.toString());
         }
+    }
+
+    public LocalTime getHoraAbertura() {
+        return horaAbertura;
+    }
+
+    public LocalTime getHoraFechamento() {
+        return horaFechamento;
+    }
+
+    public UUID getRestauranteId() {
+        return restauranteId;
+    }
+
+    public void setRestauranteId(UUID restauranteId) {
+        this.restauranteId = restauranteId;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public TipoCozinhaEnum getTipoCozinhaEnum() {
+        return tipoCozinhaEnum;
+    }
+
+    public void setTipoCozinhaEnum(TipoCozinhaEnum tipoCozinhaEnum) {
+        this.tipoCozinhaEnum = tipoCozinhaEnum;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Proprietario getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Proprietario proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Restaurante that = (Restaurante) o;
+        return Objects.equals(restauranteId, that.restauranteId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(restauranteId);
     }
 }
 
