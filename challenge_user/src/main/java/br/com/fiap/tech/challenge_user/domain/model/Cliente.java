@@ -1,10 +1,7 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
-import lombok.AllArgsConstructor;
-
 import java.util.UUID;
 
-@AllArgsConstructor
 public final class Cliente extends Usuario {
 
     private String numeroCartaoFidelidade;

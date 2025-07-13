@@ -1,15 +1,13 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
-import lombok.AllArgsConstructor;
-
 import java.util.UUID;
 
-@AllArgsConstructor
 public final class Proprietario extends Usuario {
 
     private String descricao;
 
-    public Proprietario() {}
+    public Proprietario() {
+    }
 
     public Proprietario(
             UUID usuarioId, String nome, String email, String login, String senha,
