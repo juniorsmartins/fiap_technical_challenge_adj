@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;

@@ -11,6 +11,9 @@ import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoRes
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.EnderecoMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.ProprietarioMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.RestauranteMapperImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

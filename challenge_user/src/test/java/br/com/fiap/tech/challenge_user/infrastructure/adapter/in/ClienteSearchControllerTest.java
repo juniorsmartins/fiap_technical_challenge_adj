@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.PageMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.PageMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;

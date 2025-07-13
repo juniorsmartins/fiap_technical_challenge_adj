@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.InputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;

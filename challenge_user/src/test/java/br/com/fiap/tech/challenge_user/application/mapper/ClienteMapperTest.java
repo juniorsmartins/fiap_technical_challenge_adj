@@ -7,6 +7,8 @@ import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.ClienteMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.EnderecoMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

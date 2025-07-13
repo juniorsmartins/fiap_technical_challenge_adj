@@ -1,6 +1,6 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.application.mapper.ProprietarioMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.presenters.ProprietarioMapper;
 import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;

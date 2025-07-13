@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.mapper;
+package br.com.fiap.tech.challenge_user.infrastructure.presenters;
 
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
