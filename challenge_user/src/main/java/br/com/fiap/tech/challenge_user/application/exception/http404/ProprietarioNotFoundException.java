@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.exception.http404;
+package br.com.fiap.tech.challenge_user.application.exception.http404;
 
 import java.io.Serial;
 import java.util.UUID;

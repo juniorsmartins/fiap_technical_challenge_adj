@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.domain.rule;
 
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByLoginOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.UsuarioNonUniqueLoginException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueLoginException;
 import br.com.fiap.tech.challenge_user.domain.model.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

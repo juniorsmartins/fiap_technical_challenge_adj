@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.domain.rule;
 
 import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByEmailOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.UsuarioNonUniqueEmailException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueEmailException;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import org.junit.jupiter.api.BeforeEach;

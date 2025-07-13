@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.exception.http500;
+package br.com.fiap.tech.challenge_user.application.exception.http500;
 
 import java.io.Serial;
 

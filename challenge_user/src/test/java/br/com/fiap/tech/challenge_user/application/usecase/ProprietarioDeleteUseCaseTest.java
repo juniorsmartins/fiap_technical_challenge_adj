@@ -2,8 +2,8 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.application.port.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.ProprietarioNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.ActiveOwnerBlocksDeletionException;
+import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.ActiveOwnerBlocksDeletionException;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
 import org.junit.jupiter.api.BeforeEach;

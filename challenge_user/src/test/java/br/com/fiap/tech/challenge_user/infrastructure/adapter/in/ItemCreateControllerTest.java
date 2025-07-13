@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
 import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.model.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ItemDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;

@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http500.RestauranteNonPersistenceException;
+import br.com.fiap.tech.challenge_user.application.exception.http500.RestauranteNonPersistenceException;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.RestauranteRepository;
 import lombok.NonNull;

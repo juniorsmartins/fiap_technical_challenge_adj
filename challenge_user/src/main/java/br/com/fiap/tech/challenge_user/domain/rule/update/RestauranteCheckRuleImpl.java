@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.domain.rule.update;
 
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;

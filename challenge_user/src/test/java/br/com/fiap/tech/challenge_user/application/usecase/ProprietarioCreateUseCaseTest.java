@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.UsuarioNonUniqueNomeException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;

@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.domain.model;
 
-import br.com.fiap.tech.challenge_user.domain.exception.http409.OpeningTimeLaterClosingTimeException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.OpeningTimeLaterClosingTimeException;
 import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
