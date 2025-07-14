@@ -2,9 +2,10 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.UsuarioNonPersistenceException;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.UsuarioRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioCreateAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

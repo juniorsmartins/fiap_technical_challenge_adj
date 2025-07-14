@@ -1,9 +1,9 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ItemDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ItemRepository;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;

@@ -2,8 +2,9 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UsuarioSenhaInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.SenhaDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ClienteSenhaController;
+import br.com.fiap.tech.challenge_user.application.dtos.in.SenhaDtoRequest;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

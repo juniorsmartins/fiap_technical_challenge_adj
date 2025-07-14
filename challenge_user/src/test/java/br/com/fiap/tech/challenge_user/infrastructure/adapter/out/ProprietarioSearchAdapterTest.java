@@ -1,9 +1,10 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ProprietarioRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ProprietarioSearchAdapter;
+import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ProprietarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

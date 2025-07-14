@@ -1,11 +1,11 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 

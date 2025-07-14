@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.interfaces.out;
 
-import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
+import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

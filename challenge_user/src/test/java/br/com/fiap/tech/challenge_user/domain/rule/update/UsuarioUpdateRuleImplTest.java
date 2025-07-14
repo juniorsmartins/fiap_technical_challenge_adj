@@ -2,8 +2,8 @@ package br.com.fiap.tech.challenge_user.domain.rule.update;
 
 import br.com.fiap.tech.challenge_user.domain.model.Endereco;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

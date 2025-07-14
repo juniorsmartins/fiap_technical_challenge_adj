@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInput
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 

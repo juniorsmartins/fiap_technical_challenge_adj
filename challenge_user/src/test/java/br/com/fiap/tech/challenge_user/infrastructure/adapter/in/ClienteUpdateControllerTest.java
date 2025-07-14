@@ -1,16 +1,17 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ClienteUpdateController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ClienteDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ClienteDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

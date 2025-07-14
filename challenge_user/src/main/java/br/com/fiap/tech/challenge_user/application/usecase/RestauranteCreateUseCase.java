@@ -1,11 +1,11 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteCheckRule;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 

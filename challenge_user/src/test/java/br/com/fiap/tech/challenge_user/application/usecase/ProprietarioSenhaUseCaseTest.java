@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

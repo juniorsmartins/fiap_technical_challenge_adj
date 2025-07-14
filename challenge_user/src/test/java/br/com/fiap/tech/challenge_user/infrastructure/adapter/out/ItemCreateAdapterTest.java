@@ -2,8 +2,9 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.ItemNonPersistenceException;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ItemRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemCreateAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

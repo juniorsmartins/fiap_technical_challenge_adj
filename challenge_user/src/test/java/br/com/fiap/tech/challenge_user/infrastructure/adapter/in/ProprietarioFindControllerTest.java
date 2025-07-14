@@ -1,12 +1,13 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioFindController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

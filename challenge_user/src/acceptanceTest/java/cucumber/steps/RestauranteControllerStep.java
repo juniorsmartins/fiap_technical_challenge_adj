@@ -1,16 +1,16 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.ProprietarioMapper;
+import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
 import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.*;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.*;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -27,7 +27,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.time.Instant;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;

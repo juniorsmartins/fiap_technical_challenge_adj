@@ -1,12 +1,13 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.PageMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioSearchController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PageMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

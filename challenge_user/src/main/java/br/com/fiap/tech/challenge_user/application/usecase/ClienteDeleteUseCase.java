@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;

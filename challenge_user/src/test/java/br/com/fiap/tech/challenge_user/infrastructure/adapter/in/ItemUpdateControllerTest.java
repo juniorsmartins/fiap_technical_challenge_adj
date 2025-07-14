@@ -1,14 +1,15 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ItemUpdateController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.model.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ItemDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

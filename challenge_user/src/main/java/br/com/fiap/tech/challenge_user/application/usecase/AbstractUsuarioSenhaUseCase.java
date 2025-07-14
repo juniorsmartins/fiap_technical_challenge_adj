@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
