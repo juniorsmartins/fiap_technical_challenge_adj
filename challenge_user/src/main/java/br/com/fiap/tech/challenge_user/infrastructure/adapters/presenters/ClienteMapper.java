@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
+import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;

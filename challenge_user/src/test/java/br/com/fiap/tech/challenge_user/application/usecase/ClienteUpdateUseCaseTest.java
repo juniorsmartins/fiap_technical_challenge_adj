@@ -4,11 +4,11 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.Entity
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.models.Cliente;
+import br.com.fiap.tech.challenge_user.domain.models.Endereco;
+import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
+import br.com.fiap.tech.challenge_user.domain.rules.update.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rules.update.UsuarioUpdateRule;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
 import org.junit.jupiter.api.BeforeEach;

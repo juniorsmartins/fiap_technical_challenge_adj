@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;
+import br.com.fiap.tech.challenge_user.domain.models.Item;
+import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

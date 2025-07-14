@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.model;
+package br.com.fiap.tech.challenge_user.domain.models;
 
 import java.util.UUID;
 

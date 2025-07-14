@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PageMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;
+import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

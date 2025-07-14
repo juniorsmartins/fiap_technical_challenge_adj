@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.dtos.out;
 
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 

@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.model;
+package br.com.fiap.tech.challenge_user.domain.models;
 
 import java.math.BigDecimal;
 import java.util.Objects;

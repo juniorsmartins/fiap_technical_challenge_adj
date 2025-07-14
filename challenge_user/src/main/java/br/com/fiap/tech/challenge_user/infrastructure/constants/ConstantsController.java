@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.constant;
+package br.com.fiap.tech.challenge_user.infrastructure.constants;
 
 public final class ConstantsController {
 

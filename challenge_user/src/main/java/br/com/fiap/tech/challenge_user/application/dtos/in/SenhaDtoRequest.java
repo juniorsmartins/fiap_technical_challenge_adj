@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
-import static br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsValidation.MAX_CARACTER_SENHA;
+import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.MAX_CARACTER_SENHA;
 
 @Schema(name = "SenhaDtoRequest", description = "Transporte de dados de entrada em requisições para troca de senha.")
 public record SenhaDtoRequest(

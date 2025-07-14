@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.rule;
+package br.com.fiap.tech.challenge_user.domain.rules;
 
 public interface UsuarioRulesStrategy<T> {
 

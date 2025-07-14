@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 
-import br.com.fiap.tech.challenge_user.domain.model.Item;
+import br.com.fiap.tech.challenge_user.domain.models.Item;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;

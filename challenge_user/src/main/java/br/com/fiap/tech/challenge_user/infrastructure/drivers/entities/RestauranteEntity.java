@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
 
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;
+import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
+import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import org.springframework.web.bind.annotation.RequestMapping;

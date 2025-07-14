@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.Entity
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Item;
+import br.com.fiap.tech.challenge_user.domain.models.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

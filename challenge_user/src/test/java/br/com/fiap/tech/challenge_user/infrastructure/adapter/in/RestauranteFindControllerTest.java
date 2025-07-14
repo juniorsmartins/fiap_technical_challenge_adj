@@ -4,10 +4,10 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.Resta
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.models.Endereco;
+import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;

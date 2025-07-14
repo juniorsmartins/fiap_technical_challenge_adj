@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.Clien
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
+import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;

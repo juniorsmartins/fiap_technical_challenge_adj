@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.RestauranteNonPersistenceException;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteCreateAdapter;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;

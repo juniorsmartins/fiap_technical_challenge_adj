@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-import static br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsValidation.*;
+import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.*;
 
 @Entity
 @Getter

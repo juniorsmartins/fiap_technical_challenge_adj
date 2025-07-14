@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputM
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.model.Item;
+import br.com.fiap.tech.challenge_user.domain.models.Item;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;

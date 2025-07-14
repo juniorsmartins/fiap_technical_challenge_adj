@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;

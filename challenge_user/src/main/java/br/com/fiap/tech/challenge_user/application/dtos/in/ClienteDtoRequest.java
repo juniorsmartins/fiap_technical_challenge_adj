@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import static br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsValidation.*;
+import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.*;
 
 @Schema(name = "ClienteDtoRequest", description = "Transportador de dados de entrada em requisições.")
 public record ClienteDtoRequest(

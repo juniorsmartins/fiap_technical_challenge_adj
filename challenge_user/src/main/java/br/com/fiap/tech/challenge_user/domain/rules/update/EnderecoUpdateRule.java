@@ -1,6 +1,6 @@
-package br.com.fiap.tech.challenge_user.domain.rule.update;
+package br.com.fiap.tech.challenge_user.domain.rules.update;
 
-import br.com.fiap.tech.challenge_user.domain.model.Usuario;
+import br.com.fiap.tech.challenge_user.domain.models.Usuario;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
 
 public interface EnderecoUpdateRule<T extends Usuario, E extends UsuarioEntity> {
