@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.port.out;
+package br.com.fiap.tech.challenge_user.application.interfaces.out;
 
 public interface DeleteOutputPort<E> {
 

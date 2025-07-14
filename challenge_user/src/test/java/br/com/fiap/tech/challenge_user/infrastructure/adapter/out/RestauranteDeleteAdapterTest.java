@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.port.out.DeleteOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;

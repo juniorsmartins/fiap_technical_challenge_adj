@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.ItemRepository;
 import lombok.NonNull;

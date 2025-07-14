@@ -7,7 +7,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

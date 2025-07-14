@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.application.port.in;
+package br.com.fiap.tech.challenge_user.application.interfaces.in;
 
 import java.util.UUID;
 

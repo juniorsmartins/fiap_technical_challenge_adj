@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.port.in.DeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import org.junit.jupiter.api.BeforeEach;

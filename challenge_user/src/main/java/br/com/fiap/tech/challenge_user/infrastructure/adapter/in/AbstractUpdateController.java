@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

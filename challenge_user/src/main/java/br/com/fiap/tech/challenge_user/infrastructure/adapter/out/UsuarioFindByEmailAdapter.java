@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByEmailOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByEmailOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.UsuarioRepository;
 import lombok.NonNull;

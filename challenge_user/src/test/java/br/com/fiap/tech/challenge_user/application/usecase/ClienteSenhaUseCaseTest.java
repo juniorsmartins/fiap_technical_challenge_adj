@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;

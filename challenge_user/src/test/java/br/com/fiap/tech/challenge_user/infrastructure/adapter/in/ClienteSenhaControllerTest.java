@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioSenhaInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UsuarioSenhaInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.in.SenhaDtoRequest;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;

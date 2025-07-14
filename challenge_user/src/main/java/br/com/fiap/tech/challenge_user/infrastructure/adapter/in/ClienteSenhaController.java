@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioSenhaInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UsuarioSenhaInputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

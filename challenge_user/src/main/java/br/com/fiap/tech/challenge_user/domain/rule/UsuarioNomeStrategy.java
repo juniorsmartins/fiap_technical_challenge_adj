@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.domain.rule;
 
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByNomeOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByNomeOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
 import br.com.fiap.tech.challenge_user.domain.model.Usuario;
 import lombok.RequiredArgsConstructor;

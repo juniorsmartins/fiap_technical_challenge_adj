@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.PageMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioSearchOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.port.out.DeleteOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.ActiveOwnerBlocksDeletionException;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;

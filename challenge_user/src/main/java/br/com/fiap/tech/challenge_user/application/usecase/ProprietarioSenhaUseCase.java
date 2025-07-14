@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.port.in.UsuarioSenhaInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UsuarioSenhaInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;

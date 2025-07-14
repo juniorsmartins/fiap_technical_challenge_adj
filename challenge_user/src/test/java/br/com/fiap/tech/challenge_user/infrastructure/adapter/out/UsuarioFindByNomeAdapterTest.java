@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioFindByNomeOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByNomeOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
 import br.com.fiap.tech.challenge_user.infrastructure.repository.UsuarioRepository;

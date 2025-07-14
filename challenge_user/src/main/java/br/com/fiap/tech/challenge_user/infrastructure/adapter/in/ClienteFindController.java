@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse
 import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
 import br.com.fiap.tech.challenge_user.domain.model.Cliente;
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

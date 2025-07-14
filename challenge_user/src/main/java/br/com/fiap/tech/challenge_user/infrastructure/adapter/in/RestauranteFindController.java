@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.presenters.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constant.ConstantsController;
 import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
