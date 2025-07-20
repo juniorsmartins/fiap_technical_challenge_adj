@@ -9,7 +9,7 @@ import br.com.fiap.tech.challenge_user.application.exception.http500.InternalSer
 import br.com.fiap.tech.challenge_user.domain.models.Item;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ class ItemUpdateControllerTest {
     private InputMapper<ItemDtoRequest, Item> inputMapper;
 
     @Mock
-    private OutputMapper<Item, ItemDtoResponse, ItemEntity> outputMapper;
+    private OutputMapper<Item, ItemDtoResponse, ItemDao> outputMapper;
 
     @Mock
     private UpdateInputPort<Item> updateInputPort;

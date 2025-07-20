@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = {ConstantsController.URI_PROPRIETARIO})
 public class ProprietarioCreateController
-        extends AbstractCreateController<ProprietarioDtoRequest, ProprietarioDtoResponse, Proprietario, ProprietarioEntity> {
+        extends AbstractCreateController<ProprietarioDtoRequest, ProprietarioDtoResponse, Proprietario, ProprietarioDao> {
 
     public ProprietarioCreateController(
             InputMapper<ProprietarioDtoRequest, Proprietario> inputMapper,
-            OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper,
+            OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputMapper,
             CreateInputPort<Proprietario> createInputPort) {
         super(inputMapper, outputMapper, createInputPort);
     }

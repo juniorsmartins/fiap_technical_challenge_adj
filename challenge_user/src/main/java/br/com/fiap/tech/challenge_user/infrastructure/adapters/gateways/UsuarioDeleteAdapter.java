@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioDeleteAdapter<E extends UsuarioEntity> implements DeleteOutputPort<E> {
+public class UsuarioDeleteAdapter<E extends UsuarioDao> implements DeleteOutputPort<E> {
 
     private final UsuarioRepository repository;
 

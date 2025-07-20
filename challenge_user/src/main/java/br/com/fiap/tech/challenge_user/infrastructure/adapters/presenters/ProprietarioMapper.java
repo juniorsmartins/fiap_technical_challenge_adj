@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,21 +14,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequest, Proprietario>,
-        OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity>,
-        EntityMapper<Proprietario, ProprietarioEntity>,
-        PageMapper<ProprietarioDtoResponse, ProprietarioEntity> {
+        OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao>,
+        EntityMapper<Proprietario, ProprietarioDao>,
+        PageMapper<ProprietarioDtoResponse, ProprietarioDao> {
 
     private final EnderecoMapper mapper;
 
     @Override
-    public ProprietarioEntity toEntity(Proprietario proprietario) {
+    public ProprietarioDao toEntity(Proprietario proprietario) {
         if (proprietario == null) {
             return null;
         }
 
         var endereco = mapper.toEnderecoEntity(proprietario.getEndereco());
 
-        return new ProprietarioEntity(
+        return new ProprietarioDao(
                 proprietario.getUsuarioId(),
                 proprietario.getNome(), proprietario.getEmail(), proprietario.getLogin(), proprietario.getSenha(),
                 endereco, proprietario.getDescricao(), null, null
@@ -36,7 +36,7 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
     }
 
     @Override
-    public Proprietario toDomain(ProprietarioEntity entity) {
+    public Proprietario toDomain(ProprietarioDao entity) {
         if (entity == null) {
             return null;
         }
@@ -78,7 +78,7 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
     }
 
     @Override
-    public ProprietarioDtoResponse toResponse(ProprietarioEntity entity) {
+    public ProprietarioDtoResponse toResponse(ProprietarioDao entity) {
         if (entity == null) {
             return null;
         }
@@ -93,7 +93,7 @@ public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequ
     }
 
     @Override
-    public Page<ProprietarioDtoResponse> toPageResponse(Page<ProprietarioEntity> entityPage) {
+    public Page<ProprietarioDtoResponse> toPageResponse(Page<ProprietarioDao> entityPage) {
 
         List<ProprietarioDtoResponse> dtos = entityPage.getContent()
                 .stream()

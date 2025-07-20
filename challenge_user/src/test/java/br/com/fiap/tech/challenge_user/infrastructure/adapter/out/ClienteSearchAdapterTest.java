@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ClienteSearchAdapter;
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,9 @@ class ClienteSearchAdapterTest {
 
     private final ClienteRepository repository;
 
-    private UsuarioSearchOutputPort<ClienteEntity> clienteSearchAdapter;
+    private UsuarioSearchOutputPort<ClienteDao> clienteSearchAdapter;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
 
     private UsuarioFiltroDto filtroDto;
 
@@ -45,20 +45,20 @@ class ClienteSearchAdapterTest {
 
         paginacao = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "usuarioId"));
 
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setNome("Charles Babbage");
-        clienteEntity.setEmail("babbage@email.com");
-        clienteEntity.setLogin("babbage");
-        clienteEntity.setSenha("babbage!123");
-        clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
+        clienteDao = new ClienteDao();
+        clienteDao.setNome("Charles Babbage");
+        clienteDao.setEmail("babbage@email.com");
+        clienteDao.setLogin("babbage");
+        clienteDao.setSenha("babbage!123");
+        clienteDao.setNumeroCartaoFidelidade("12345-6789-3245");
 
-        repository.save(clienteEntity);
+        repository.save(clienteDao);
     }
 
     @Test
     void devePesquisarClienteComSucessoPeloNome() {
         // Act
-        Page<ClienteEntity> result = clienteSearchAdapter.search(filtroDto, paginacao);
+        Page<ClienteDao> result = clienteSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -74,15 +74,15 @@ class ClienteSearchAdapterTest {
     void devePesquisarClientePorUsuarioId() {
         // Arrange
         var filtroDto = new UsuarioFiltroDto(
-                clienteEntity.getUsuarioId().toString(), null, null, null, null);
+                clienteDao.getUsuarioId().toString(), null, null, null, null);
 
         // Act
-        Page<ClienteEntity> result = clienteSearchAdapter.search(filtroDto, paginacao);
+        Page<ClienteDao> result = clienteSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
         assertEquals(1, result.getTotalElements());
-        assertEquals(clienteEntity.getUsuarioId(), result.getContent().getFirst().getUsuarioId());
+        assertEquals(clienteDao.getUsuarioId(), result.getContent().getFirst().getUsuarioId());
         assertEquals("Charles Babbage", result.getContent().getFirst().getNome());
     }
 
@@ -93,7 +93,7 @@ class ClienteSearchAdapterTest {
                 null, null, "babbage@email.com", null, null);
 
         // Act
-        Page<ClienteEntity> result = clienteSearchAdapter.search(filtroDto, paginacao);
+        Page<ClienteDao> result = clienteSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -109,7 +109,7 @@ class ClienteSearchAdapterTest {
                 null, null, null, "12345-6789-3245", null);
 
         // Act
-        Page<ClienteEntity> result = clienteSearchAdapter.search(filtroDto, paginacao);
+        Page<ClienteDao> result = clienteSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -125,7 +125,7 @@ class ClienteSearchAdapterTest {
                 null, "Nome inexistente", null, null, null);
 
         // Act
-        Page<ClienteEntity> result = clienteSearchAdapter.search(filtroDto, paginacao);
+        Page<ClienteDao> result = clienteSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);

@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.models.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,13 +24,13 @@ import static org.mockito.Mockito.*;
 class ItemUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Item, ItemEntity> entityMapper;
+    private EntityMapper<Item, ItemDao> entityMapper;
 
     @Mock
-    private CreateOutputPort<ItemEntity> createOutputPort;
+    private CreateOutputPort<ItemDao> createOutputPort;
 
     @Mock
-    private FindByIdOutputPort<ItemEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ItemDao> findByIdOutputPort;
 
     @InjectMocks
     private ItemUpdateUseCase itemUpdateUseCase;
@@ -39,7 +39,7 @@ class ItemUpdateUseCaseTest {
 
     private Item item;
 
-    private ItemEntity itemEntity;
+    private ItemDao itemDao;
 
     @BeforeEach
     void setUp() {
@@ -50,7 +50,7 @@ class ItemUpdateUseCaseTest {
                 "http://link-foto.com.br"
         );
 
-        itemEntity = new ItemEntity(
+        itemDao = new ItemDao(
                 itemId, "Pepsi", "Refrigerante", new BigDecimal("18.00"), false,
                 "http://link-foto-pepsi.com.br"
         );
@@ -64,13 +64,13 @@ class ItemUpdateUseCaseTest {
                 "http://link-foto-coca-zero.com.br"
         );
 
-        ItemEntity updatedEntity = new ItemEntity(
+        ItemDao updatedEntity = new ItemDao(
                 itemId, "Coca-Cola Zero", "Refrigerante sem açúcar", new BigDecimal("22.00"),
                 false, "http://link-foto-coca-zero.com.br"
         );
 
-        doReturn(Optional.of(itemEntity)).when(findByIdOutputPort).findById(itemId);
-        doReturn(updatedEntity).when(createOutputPort).save(any(ItemEntity.class));
+        doReturn(Optional.of(itemDao)).when(findByIdOutputPort).findById(itemId);
+        doReturn(updatedEntity).when(createOutputPort).save(any(ItemDao.class));
         doReturn(updatedItem).when(entityMapper).toDomain(updatedEntity);
 
         // Act
@@ -85,7 +85,7 @@ class ItemUpdateUseCaseTest {
         assertFalse(result.isEntrega());
         assertEquals("http://link-foto-coca-zero.com.br", result.getFoto());
         verify(findByIdOutputPort, times(1)).findById(itemId);
-        verify(createOutputPort, times(1)).save(any(ItemEntity.class));
+        verify(createOutputPort, times(1)).save(any(ItemDao.class));
         verify(entityMapper, times(1)).toDomain(updatedEntity);
         verifyNoMoreInteractions(findByIdOutputPort, createOutputPort, entityMapper);
     }

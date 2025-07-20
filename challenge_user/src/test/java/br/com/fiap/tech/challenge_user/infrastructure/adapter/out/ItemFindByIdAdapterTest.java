@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemFindByIdAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class ItemFindByIdAdapterTest {
 
     private final ItemRepository repository;
 
-    private FindByIdOutputPort<ItemEntity> itemFindByIdAdapter;
+    private FindByIdOutputPort<ItemDao> itemFindByIdAdapter;
 
     @Autowired
     ItemFindByIdAdapterTest(ItemRepository repository) {
@@ -36,7 +36,7 @@ class ItemFindByIdAdapterTest {
     @Test
     void deveEncontrarItemPorIdComSucesso() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setPreco(new BigDecimal("20.00"));
@@ -46,7 +46,7 @@ class ItemFindByIdAdapterTest {
         var itemId = savedEntity.getItemId();
 
         // Act
-        Optional<ItemEntity> result = itemFindByIdAdapter.findById(itemId);
+        Optional<ItemDao> result = itemFindByIdAdapter.findById(itemId);
 
         // Assert
         assertTrue(result.isPresent());
@@ -64,7 +64,7 @@ class ItemFindByIdAdapterTest {
         var itemId = UUID.randomUUID();
 
         // Act
-        Optional<ItemEntity> result = itemFindByIdAdapter.findById(itemId);
+        Optional<ItemDao> result = itemFindByIdAdapter.findById(itemId);
 
         // Assert
         assertFalse(result.isPresent());

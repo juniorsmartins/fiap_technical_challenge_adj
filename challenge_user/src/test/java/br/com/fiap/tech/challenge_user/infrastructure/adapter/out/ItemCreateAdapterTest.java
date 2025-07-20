@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.ItemNonPersistenceException;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemCreateAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class ItemCreateAdapterTest {
 
     private final ItemRepository repository;
 
-    private CreateOutputPort<ItemEntity> itemCreateAdapter;
+    private CreateOutputPort<ItemDao> itemCreateAdapter;
 
     @Autowired
     ItemCreateAdapterTest(ItemRepository repository) {
@@ -35,7 +35,7 @@ class ItemCreateAdapterTest {
     @Test
     void deveSalvarItemComSucesso() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setPreco(new BigDecimal("20.00"));
@@ -64,7 +64,7 @@ class ItemCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoNomeNulo() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setPreco(new BigDecimal("20.00"));
         itemEntity.setEntrega(true);
@@ -77,7 +77,7 @@ class ItemCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoDescricaoNulo() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setPreco(new BigDecimal("20.00"));
         itemEntity.setEntrega(true);
@@ -90,7 +90,7 @@ class ItemCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoPrecoNulo() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setEntrega(true);
@@ -103,7 +103,7 @@ class ItemCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoFotoNulo() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setPreco(new BigDecimal("20.00"));
@@ -116,7 +116,7 @@ class ItemCreateAdapterTest {
     @Test
     void deveGerarItemIdAutomaticamente() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setPreco(new BigDecimal("20.00"));

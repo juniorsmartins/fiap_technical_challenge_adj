@@ -7,9 +7,9 @@ import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,10 +27,10 @@ import static org.mockito.Mockito.*;
 class RestauranteCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Restaurante, RestauranteEntity> entityMapper;
+    private EntityMapper<Restaurante, RestauranteDao> entityMapper;
 
     @Mock
-    private CreateOutputPort<RestauranteEntity> createOutputPort;
+    private CreateOutputPort<RestauranteDao> createOutputPort;
 
     @Mock
     private RestauranteCheckRule restauranteCheckRule;
@@ -40,7 +40,7 @@ class RestauranteCreateUseCaseTest {
 
     private Restaurante restaurante;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
 
     @BeforeEach
     void setUp() {
@@ -67,33 +67,33 @@ class RestauranteCreateUseCaseTest {
         restaurante.setEndereco(endereco);
         restaurante.setProprietario(proprietario);
 
-        var proprietarioEntity = new ProprietarioEntity();
+        var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("joao");
 
-        var enderecoEntity = new EnderecoEntity();
+        var enderecoEntity = new EnderecoDao();
         enderecoEntity.setCep("12345-678");
         enderecoEntity.setLogradouro("Rua Exemplo");
         enderecoEntity.setNumero("123");
 
-        restauranteEntity = new RestauranteEntity();
-        restauranteEntity.setRestauranteId(restauranteId);
-        restauranteEntity.setNome("Restaurante Sabor");
-        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
-        restauranteEntity.setHoraAbertura(LocalTime.of(11, 0));
-        restauranteEntity.setHoraFechamento(LocalTime.of(23, 0));
-        restauranteEntity.setEndereco(enderecoEntity);
-        restauranteEntity.setProprietario(proprietarioEntity);
+        restauranteDao = new RestauranteDao();
+        restauranteDao.setRestauranteId(restauranteId);
+        restauranteDao.setNome("Restaurante Sabor");
+        restauranteDao.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
+        restauranteDao.setHoraAbertura(LocalTime.of(11, 0));
+        restauranteDao.setHoraFechamento(LocalTime.of(23, 0));
+        restauranteDao.setEndereco(enderecoEntity);
+        restauranteDao.setProprietario(proprietarioEntity);
     }
 
     @Test
     void deveCriarRestauranteQuandoValidacaoEhValida() {
         // Arrange
-        when(entityMapper.toEntity(restaurante)).thenReturn(restauranteEntity);
-        when(createOutputPort.save(restauranteEntity)).thenReturn(restauranteEntity);
-        when(entityMapper.toDomain(restauranteEntity)).thenReturn(restaurante);
+        when(entityMapper.toEntity(restaurante)).thenReturn(restauranteDao);
+        when(createOutputPort.save(restauranteDao)).thenReturn(restauranteDao);
+        when(entityMapper.toDomain(restauranteDao)).thenReturn(restaurante);
 
         // Act
         Restaurante result = restauranteCreateUseCase.create(restaurante);
@@ -103,8 +103,8 @@ class RestauranteCreateUseCaseTest {
         assertEquals(restaurante, result);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
         verify(entityMapper, times(1)).toEntity(restaurante);
-        verify(createOutputPort, times(1)).save(restauranteEntity);
-        verify(entityMapper, times(1)).toDomain(restauranteEntity);
+        verify(createOutputPort, times(1)).save(restauranteDao);
+        verify(entityMapper, times(1)).toDomain(restauranteDao);
         verifyNoMoreInteractions(restauranteCheckRule, entityMapper, createOutputPort);
     }
 

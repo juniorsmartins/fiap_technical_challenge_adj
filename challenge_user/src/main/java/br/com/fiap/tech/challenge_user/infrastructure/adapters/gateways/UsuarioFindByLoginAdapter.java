@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByLoginOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class UsuarioFindByLoginAdapter implements UsuarioFindByLoginOutputPort {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<UsuarioEntity> findByLogin(@NonNull final String login) {
+    public Optional<UsuarioDao> findByLogin(@NonNull final String login) {
 
         return repository.findByLogin(login);
     }

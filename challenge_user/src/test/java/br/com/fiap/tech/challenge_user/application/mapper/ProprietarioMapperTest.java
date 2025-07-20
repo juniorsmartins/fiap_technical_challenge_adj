@@ -5,8 +5,8 @@ import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EnderecoMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ class ProprietarioMapperTest {
 
     private Proprietario proprietario;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private Endereco endereco;
 
@@ -72,11 +72,11 @@ class ProprietarioMapperTest {
                 endereco, "Proprietário principal"
         );
 
-        var enderecoEntity = new EnderecoEntity(
+        var enderecoEntity = new EnderecoDao(
                 enderecoId, "01001-000", "Avenida Central", "1500"
         );
 
-        proprietarioEntity = new ProprietarioEntity(
+        proprietarioEntity = new ProprietarioDao(
                 usuarioId, "João Silva", "joao@email.com", "jsilva", "jsilva!123",
                 enderecoEntity, "Proprietário principal", dataHoraCriacao, dataHoraEdicao
         );

@@ -8,7 +8,7 @@ import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.domain.rules.update.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.domain.rules.update.UsuarioUpdateRule;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,19 +27,19 @@ import static org.mockito.Mockito.*;
 class ProprietarioUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Proprietario, ProprietarioEntity> entityMapper;
+    private EntityMapper<Proprietario, ProprietarioDao> entityMapper;
 
     @Mock
-    private CreateOutputPort<ProprietarioEntity> createOutputPort;
+    private CreateOutputPort<ProprietarioDao> createOutputPort;
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @Mock
-    private UsuarioUpdateRule<Proprietario, ProprietarioEntity> usuarioUpdateRule;
+    private UsuarioUpdateRule<Proprietario, ProprietarioDao> usuarioUpdateRule;
 
     @Mock
-    private EnderecoUpdateRule<Proprietario, ProprietarioEntity> enderecoUpdateRule;
+    private EnderecoUpdateRule<Proprietario, ProprietarioDao> enderecoUpdateRule;
 
     @Mock
     private UsuarioRulesStrategy<Proprietario> rule1;
@@ -51,7 +51,7 @@ class ProprietarioUpdateUseCaseTest {
 
     private Proprietario proprietario;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private UUID proprietarioId;
 
@@ -64,7 +64,7 @@ class ProprietarioUpdateUseCaseTest {
         proprietario.setEmail("joao@email.com");
         proprietario.setLogin("joao");
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");

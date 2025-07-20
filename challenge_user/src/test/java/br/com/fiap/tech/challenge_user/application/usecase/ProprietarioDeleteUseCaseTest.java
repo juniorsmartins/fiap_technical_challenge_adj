@@ -4,8 +4,8 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.ActiveOwnerBlocksDeletionException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,21 +26,21 @@ import static org.mockito.Mockito.*;
 class ProprietarioDeleteUseCaseTest {
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @Mock
-    private DeleteOutputPort<ProprietarioEntity> deleteOutputPort;
+    private DeleteOutputPort<ProprietarioDao> deleteOutputPort;
 
     @InjectMocks
     private ProprietarioDeleteUseCase proprietarioDeleteUseCase;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
     private UUID proprietarioId;
 
     @BeforeEach
     void setUp() {
         proprietarioId = UUID.randomUUID();
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");
@@ -65,7 +65,7 @@ class ProprietarioDeleteUseCaseTest {
     @Test
     void deveLancarActiveOwnerBlocksDeletionExceptionQuandoEntidadeTemRestaurantes() {
         // Arrange
-        proprietarioEntity.setRestaurantes(List.of(new RestauranteEntity()));
+        proprietarioEntity.setRestaurantes(List.of(new RestauranteDao()));
         doReturn(Optional.of(proprietarioEntity)).when(findByIdOutputPort).findById(proprietarioId);
 
         // Act & Assert

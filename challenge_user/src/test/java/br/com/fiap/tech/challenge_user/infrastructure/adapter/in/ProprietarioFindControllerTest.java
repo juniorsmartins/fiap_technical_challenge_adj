@@ -7,7 +7,7 @@ import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotF
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,17 +29,17 @@ import static org.mockito.Mockito.*;
 class ProprietarioFindControllerTest {
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper;
+    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputMapper;
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @InjectMocks
     private ProprietarioFindController proprietarioFindController;
 
     private UUID proprietarioId;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private ProprietarioDtoResponse proprietarioDtoResponse;
 
@@ -48,7 +48,7 @@ class ProprietarioFindControllerTest {
         proprietarioId = UUID.randomUUID();
         var enderecoId = UUID.randomUUID();
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");

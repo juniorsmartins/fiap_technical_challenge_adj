@@ -2,8 +2,8 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioFindByIdAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ class UsuarioFindByIdAdapterTest {
 
     private final UsuarioRepository repository;
 
-    private FindByIdOutputPort<ClienteEntity> clienteFindByIdAdapter;
+    private FindByIdOutputPort<ClienteDao> clienteFindByIdAdapter;
 
-    private FindByIdOutputPort<ProprietarioEntity> proprietarioFindByIdAdapter;
+    private FindByIdOutputPort<ProprietarioDao> proprietarioFindByIdAdapter;
 
     @Autowired
     UsuarioFindByIdAdapterTest(UsuarioRepository repository) {
@@ -38,7 +38,7 @@ class UsuarioFindByIdAdapterTest {
     @Test
     void deveEncontrarClienteExistentePorId() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");
@@ -52,7 +52,7 @@ class UsuarioFindByIdAdapterTest {
         // Assert
         assertTrue(result.isPresent(), "O cliente deve ser encontrado");
         var foundEntity = result.get();
-        assertInstanceOf(ClienteEntity.class, foundEntity, "A entidade deve ser do tipo ClienteEntity");
+        assertInstanceOf(ClienteDao.class, foundEntity, "A entidade deve ser do tipo ClienteEntity");
         assertEquals(savedEntity.getUsuarioId(), foundEntity.getUsuarioId());
         assertEquals("Charles Babbage", foundEntity.getNome());
         assertEquals("babbage@email.com", foundEntity.getEmail());
@@ -64,7 +64,7 @@ class UsuarioFindByIdAdapterTest {
     @Test
     void deveEncontrarProprietarioExistentePorId() {
         // Arrange
-        var proprietarioEntity = new ProprietarioEntity();
+        var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("jsilva");
@@ -78,7 +78,7 @@ class UsuarioFindByIdAdapterTest {
         // Assert
         assertTrue(result.isPresent(), "O proprietário deve ser encontrado");
         var foundEntity = result.get();
-        assertInstanceOf(ProprietarioEntity.class, foundEntity, "A entidade deve ser do tipo ProprietarioEntity");
+        assertInstanceOf(ProprietarioDao.class, foundEntity, "A entidade deve ser do tipo ProprietarioEntity");
         assertEquals(savedEntity.getUsuarioId(), foundEntity.getUsuarioId());
         assertEquals("João Silva", foundEntity.getNome());
         assertEquals("joao@email.com", foundEntity.getEmail());

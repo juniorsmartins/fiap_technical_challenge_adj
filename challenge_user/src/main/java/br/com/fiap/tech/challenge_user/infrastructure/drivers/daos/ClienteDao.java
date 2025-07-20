@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,26 +17,26 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public final class ClienteEntity extends UsuarioEntity {
+public final class ClienteDao extends UsuarioDao {
 
     @Column(name = "numero_cartao_fidelidade", nullable = true)
     private String numeroCartaoFidelidade;
 
-    public ClienteEntity(
+    public ClienteDao(
             String nome, String email, String login, String senha,
-            EnderecoEntity enderecoEntity, String numeroCartaoFidelidade,
+            EnderecoDao enderecoDao, String numeroCartaoFidelidade,
             Date dataHoraCriacao, Date dataHoraEdicao
     ) {
-        super(nome, email, login, senha, enderecoEntity, dataHoraCriacao, dataHoraEdicao);
+        super(nome, email, login, senha, enderecoDao, dataHoraCriacao, dataHoraEdicao);
         this.numeroCartaoFidelidade = numeroCartaoFidelidade;
     }
 
-    public ClienteEntity(
+    public ClienteDao(
             UUID usuarioId, String nome, String email, String login, String senha,
-            EnderecoEntity enderecoEntity, String numeroCartaoFidelidade,
+            EnderecoDao enderecoDao, String numeroCartaoFidelidade,
             Date dataHoraCriacao, Date dataHoraEdicao
     ) {
-        super(usuarioId, nome, email, login, senha, enderecoEntity, dataHoraCriacao, dataHoraEdicao);
+        super(usuarioId, nome, email, login, senha, enderecoDao, dataHoraCriacao, dataHoraEdicao);
         this.numeroCartaoFidelidade = numeroCartaoFidelidade;
     }
 }

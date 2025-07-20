@@ -13,7 +13,7 @@ import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteCreateController;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +39,7 @@ class RestauranteCreateControllerTest {
     private InputMapper<RestauranteDtoRequest, Restaurante> inputMapper;
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper;
+    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper;
 
     @Mock
     private CreateInputPort<Restaurante> createInputPort;

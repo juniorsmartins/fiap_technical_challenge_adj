@@ -4,18 +4,18 @@ import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInput
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.models.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class ItemDeleteUseCase extends AbstractDeleteUseCase<ItemEntity> implements DeleteByIdInputPort<Item> {
+public class ItemDeleteUseCase extends AbstractDeleteUseCase<ItemDao> implements DeleteByIdInputPort<Item> {
 
     public ItemDeleteUseCase(
-            FindByIdOutputPort<ItemEntity> findByIdOutputPort,
-            DeleteOutputPort<ItemEntity> deleteOutputPort) {
+            FindByIdOutputPort<ItemDao> findByIdOutputPort,
+            DeleteOutputPort<ItemDao> deleteOutputPort) {
         super(findByIdOutputPort, deleteOutputPort);
     }
 

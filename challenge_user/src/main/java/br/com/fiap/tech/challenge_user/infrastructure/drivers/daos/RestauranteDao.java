@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import jakarta.persistence.*;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"restauranteId"})
-public final class RestauranteEntity implements Serializable {
+public final class RestauranteDao implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -39,12 +39,12 @@ public final class RestauranteEntity implements Serializable {
     @Column(name = "hora_fechamento", nullable = false)
     private LocalTime horaFechamento;
 
-    @OneToOne(targetEntity = EnderecoEntity.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
+    @OneToOne(targetEntity = EnderecoDao.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", nullable = false, unique = true)
-    private EnderecoEntity endereco;
+    private EnderecoDao endereco;
 
-    @ManyToOne(targetEntity = ProprietarioEntity.class, fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(targetEntity = ProprietarioDao.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "proprietario_id", nullable = false)
-    private ProprietarioEntity proprietario;
+    private ProprietarioDao proprietario;
 }
 

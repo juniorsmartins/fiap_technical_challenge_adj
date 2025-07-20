@@ -8,9 +8,9 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EnderecoMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.RestauranteMapperImpl;
@@ -45,7 +45,7 @@ class RestauranteMapperTest {
 
     private Restaurante restaurante;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
 
     private Endereco endereco;
 
@@ -53,7 +53,7 @@ class RestauranteMapperTest {
 
     private Proprietario proprietario;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private ProprietarioDtoResponse proprietarioDtoResponse;
 
@@ -99,16 +99,16 @@ class RestauranteMapperTest {
                 proprietario
         );
 
-        var enderecoEntity = new EnderecoEntity(
+        var enderecoEntity = new EnderecoDao(
                 enderecoId, "01001-000", "Avenida Central", "1500"
         );
 
-        proprietarioEntity = new ProprietarioEntity(
+        proprietarioEntity = new ProprietarioDao(
                 proprietarioId, "João Silva", "joao@email.com", "jsilva", "jsilva!123",
                 enderecoEntity, "descrição", Date.from(Instant.now()), Date.from(Instant.now().plusSeconds(60000))
         );
 
-        restauranteEntity = new RestauranteEntity(
+        restauranteDao = new RestauranteDao(
                 restauranteId,
                 "Casa das Aves",
                 TipoCozinhaEnum.ITALIANA,
@@ -152,7 +152,7 @@ class RestauranteMapperTest {
     @Test
     void deveMapearRestauranteParaRestauranteEntity() {
         // Arrange
-        when(enderecoMapper.toEnderecoEntity(restaurante.getEndereco())).thenReturn(restauranteEntity.getEndereco());
+        when(enderecoMapper.toEnderecoEntity(restaurante.getEndereco())).thenReturn(restauranteDao.getEndereco());
         when(proprietarioMapper.toEntity(restaurante.getProprietario())).thenReturn(proprietarioEntity);
 
         // Act
@@ -165,7 +165,7 @@ class RestauranteMapperTest {
         assertThat(result.getTipoCozinhaEnum()).isEqualTo(restaurante.getTipoCozinhaEnum());
         assertThat(result.getHoraAbertura()).isEqualTo(restaurante.getHoraAbertura());
         assertThat(result.getHoraFechamento()).isEqualTo(restaurante.getHoraFechamento());
-        assertThat(result.getEndereco()).isEqualTo(restauranteEntity.getEndereco());
+        assertThat(result.getEndereco()).isEqualTo(restauranteDao.getEndereco());
         assertThat(result.getProprietario()).isEqualTo(proprietarioEntity);
         verify(enderecoMapper).toEnderecoEntity(restaurante.getEndereco());
         verify(proprietarioMapper).toEntity(restaurante.getProprietario());
@@ -175,23 +175,23 @@ class RestauranteMapperTest {
     @Test
     void deveMapearRestauranteEntityParaRestaurante() {
         // Arrange
-        when(enderecoMapper.toEndereco(restauranteEntity.getEndereco())).thenReturn(endereco);
-        when(proprietarioMapper.toDomain(restauranteEntity.getProprietario())).thenReturn(proprietario);
+        when(enderecoMapper.toEndereco(restauranteDao.getEndereco())).thenReturn(endereco);
+        when(proprietarioMapper.toDomain(restauranteDao.getProprietario())).thenReturn(proprietario);
 
         // Act
-        var result = restauranteMapper.toDomain(restauranteEntity);
+        var result = restauranteMapper.toDomain(restauranteDao);
 
         // Assert
         assertThat(result).isNotNull();
-        assertThat(result.getRestauranteId()).isEqualTo(restauranteEntity.getRestauranteId());
-        assertThat(result.getNome()).isEqualTo(restauranteEntity.getNome());
-        assertThat(result.getTipoCozinhaEnum()).isEqualTo(restauranteEntity.getTipoCozinhaEnum());
-        assertThat(result.getHoraAbertura()).isEqualTo(restauranteEntity.getHoraAbertura());
-        assertThat(result.getHoraFechamento()).isEqualTo(restauranteEntity.getHoraFechamento());
+        assertThat(result.getRestauranteId()).isEqualTo(restauranteDao.getRestauranteId());
+        assertThat(result.getNome()).isEqualTo(restauranteDao.getNome());
+        assertThat(result.getTipoCozinhaEnum()).isEqualTo(restauranteDao.getTipoCozinhaEnum());
+        assertThat(result.getHoraAbertura()).isEqualTo(restauranteDao.getHoraAbertura());
+        assertThat(result.getHoraFechamento()).isEqualTo(restauranteDao.getHoraFechamento());
         assertThat(result.getEndereco()).isEqualTo(endereco);
         assertThat(result.getProprietario()).isEqualTo(proprietario);
-        verify(enderecoMapper).toEndereco(restauranteEntity.getEndereco());
-        verify(proprietarioMapper).toDomain(restauranteEntity.getProprietario());
+        verify(enderecoMapper).toEndereco(restauranteDao.getEndereco());
+        verify(proprietarioMapper).toDomain(restauranteDao.getProprietario());
         verifyNoMoreInteractions(enderecoMapper, proprietarioMapper);
     }
 
@@ -221,25 +221,25 @@ class RestauranteMapperTest {
     @Test
     void deveMapearRestauranteEntityParaRestauranteDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(restauranteEntity.getEndereco())).thenReturn(enderecoDtoResponse);
-        when(proprietarioMapper.toResponse(restauranteEntity.getProprietario())).thenReturn(proprietarioDtoResponse);
+        when(enderecoMapper.toEnderecoDtoResponse(restauranteDao.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(proprietarioMapper.toResponse(restauranteDao.getProprietario())).thenReturn(proprietarioDtoResponse);
 
         // Act
-        var result = restauranteMapper.toResponse(restauranteEntity);
+        var result = restauranteMapper.toResponse(restauranteDao);
 
         // Assert
         assertThat(result).isNotNull();
-        assertThat(result.restauranteId()).isEqualTo(restauranteEntity.getRestauranteId());
-        assertThat(result.nome()).isEqualTo(restauranteEntity.getNome());
-        assertThat(result.tipoCozinhaEnum()).isEqualTo(restauranteEntity.getTipoCozinhaEnum());
-        assertThat(result.horaAbertura()).isEqualTo(restauranteEntity.getHoraAbertura());
-        assertThat(result.horaFechamento()).isEqualTo(restauranteEntity.getHoraFechamento());
+        assertThat(result.restauranteId()).isEqualTo(restauranteDao.getRestauranteId());
+        assertThat(result.nome()).isEqualTo(restauranteDao.getNome());
+        assertThat(result.tipoCozinhaEnum()).isEqualTo(restauranteDao.getTipoCozinhaEnum());
+        assertThat(result.horaAbertura()).isEqualTo(restauranteDao.getHoraAbertura());
+        assertThat(result.horaFechamento()).isEqualTo(restauranteDao.getHoraFechamento());
         assertThat(result.endereco()).isEqualTo(enderecoDtoResponse);
         assertThat(result.proprietario()).isEqualTo(proprietarioDtoResponse);
-        assertThat(result.horaAbertura()).isEqualTo(restauranteEntity.getHoraAbertura());
-        assertThat(result.horaFechamento()).isEqualTo(restauranteEntity.getHoraFechamento());
-        verify(enderecoMapper).toEnderecoDtoResponse(restauranteEntity.getEndereco());
-        verify(proprietarioMapper).toResponse(restauranteEntity.getProprietario());
+        assertThat(result.horaAbertura()).isEqualTo(restauranteDao.getHoraAbertura());
+        assertThat(result.horaFechamento()).isEqualTo(restauranteDao.getHoraFechamento());
+        verify(enderecoMapper).toEnderecoDtoResponse(restauranteDao.getEndereco());
+        verify(proprietarioMapper).toResponse(restauranteDao.getProprietario());
         verifyNoMoreInteractions(enderecoMapper, proprietarioMapper);
     }
 }

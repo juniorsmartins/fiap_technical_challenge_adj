@@ -3,19 +3,19 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UsuarioSenhaInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class ClienteSenhaUseCase extends AbstractUsuarioSenhaUseCase<ClienteEntity>
-        implements UsuarioSenhaInputPort<ClienteEntity> {
+public class ClienteSenhaUseCase extends AbstractUsuarioSenhaUseCase<ClienteDao>
+        implements UsuarioSenhaInputPort<ClienteDao> {
 
     public ClienteSenhaUseCase(
-            FindByIdOutputPort<ClienteEntity> findByIdOutputPort,
-            CreateOutputPort<ClienteEntity> createOutputPort) {
+            FindByIdOutputPort<ClienteDao> findByIdOutputPort,
+            CreateOutputPort<ClienteDao> createOutputPort) {
         super(findByIdOutputPort, createOutputPort);
     }
 

@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioSenhaUseCase<E extends UsuarioEntity> {
+public abstract class AbstractUsuarioSenhaUseCase<E extends UsuarioDao> {
 
     private final FindByIdOutputPort<E> findByIdOutputPort;
 

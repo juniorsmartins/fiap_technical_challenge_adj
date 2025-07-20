@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ProprietarioSearchAdapter;
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ProprietarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,9 @@ class ProprietarioSearchAdapterTest {
 
     private final ProprietarioRepository repository;
 
-    private UsuarioSearchOutputPort<ProprietarioEntity> proprietarioSearchAdapter;
+    private UsuarioSearchOutputPort<ProprietarioDao> proprietarioSearchAdapter;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private UsuarioFiltroDto filtroDto;
 
@@ -45,7 +45,7 @@ class ProprietarioSearchAdapterTest {
 
         paginacao = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "usuarioId"));
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("Alan Turing");
         proprietarioEntity.setEmail("turing@email.com");
         proprietarioEntity.setLogin("aturing");
@@ -58,7 +58,7 @@ class ProprietarioSearchAdapterTest {
     @Test
     void devePesquisarProprietarioComSucessoPeloNome() {
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -77,7 +77,7 @@ class ProprietarioSearchAdapterTest {
                 proprietarioEntity.getUsuarioId().toString(), null, null, null, null);
 
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -93,7 +93,7 @@ class ProprietarioSearchAdapterTest {
                 null, null, "turing@email.com", null, null);
 
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -109,7 +109,7 @@ class ProprietarioSearchAdapterTest {
                 null, null, null, null, "Proprietário principal");
 
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -125,7 +125,7 @@ class ProprietarioSearchAdapterTest {
                 null, "Nome Inexistente", null, null, null);
 
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -140,7 +140,7 @@ class ProprietarioSearchAdapterTest {
                 null, "Alan Turing", "turing@email.com", null, null);
 
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);
@@ -157,7 +157,7 @@ class ProprietarioSearchAdapterTest {
                 null, "Alan", null, null, "principal");
 
         // Act
-        Page<ProprietarioEntity> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
+        Page<ProprietarioDao> result = proprietarioSearchAdapter.search(filtroDto, paginacao);
 
         // Assert
         assertNotNull(result);

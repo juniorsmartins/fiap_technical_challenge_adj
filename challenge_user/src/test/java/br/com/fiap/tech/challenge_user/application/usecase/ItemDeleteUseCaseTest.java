@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,41 +23,41 @@ import static org.mockito.Mockito.*;
 class ItemDeleteUseCaseTest {
 
     @Mock
-    private FindByIdOutputPort<ItemEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ItemDao> findByIdOutputPort;
 
     @Mock
-    private DeleteOutputPort<ItemEntity> deleteOutputPort;
+    private DeleteOutputPort<ItemDao> deleteOutputPort;
 
     @InjectMocks
     private ItemDeleteUseCase itemDeleteUseCase;
 
     private UUID itemId;
 
-    private ItemEntity itemEntity;
+    private ItemDao itemDao;
 
     @BeforeEach
     void setUp() {
         itemId = UUID.randomUUID();
-        itemEntity = new ItemEntity();
-        itemEntity.setItemId(itemId);
-        itemEntity.setNome("Coca-Cola");
-        itemEntity.setDescricao("Refrigerante");
-        itemEntity.setPreco(new BigDecimal("20.00"));
-        itemEntity.setEntrega(true);
-        itemEntity.setFoto("http://link-foto.com.br");
+        itemDao = new ItemDao();
+        itemDao.setItemId(itemId);
+        itemDao.setNome("Coca-Cola");
+        itemDao.setDescricao("Refrigerante");
+        itemDao.setPreco(new BigDecimal("20.00"));
+        itemDao.setEntrega(true);
+        itemDao.setFoto("http://link-foto.com.br");
     }
 
     @Test
     void deveDeletarItemQuandoEntidadeEhEncontrada() {
         // Arrange
-        doReturn(Optional.of(itemEntity)).when(findByIdOutputPort).findById(itemId);
+        doReturn(Optional.of(itemDao)).when(findByIdOutputPort).findById(itemId);
 
         // Act
         itemDeleteUseCase.deleteById(itemId);
 
         // Assert
         verify(findByIdOutputPort, times(1)).findById(itemId);
-        verify(deleteOutputPort, times(1)).delete(itemEntity);
+        verify(deleteOutputPort, times(1)).delete(itemDao);
         verifyNoMoreInteractions(findByIdOutputPort, deleteOutputPort);
     }
 

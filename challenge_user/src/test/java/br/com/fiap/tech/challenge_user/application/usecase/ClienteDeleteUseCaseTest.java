@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,38 +22,38 @@ import static org.mockito.Mockito.*;
 class ClienteDeleteUseCaseTest {
 
     @Mock
-    private FindByIdOutputPort<ClienteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ClienteDao> findByIdOutputPort;
 
     @Mock
-    private DeleteOutputPort<ClienteEntity> deleteOutputPort;
+    private DeleteOutputPort<ClienteDao> deleteOutputPort;
 
     @InjectMocks
     private ClienteDeleteUseCase clienteDeleteUseCase;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
     private UUID clienteId;
 
     @BeforeEach
     void setUp() {
         clienteId = UUID.randomUUID();
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setUsuarioId(clienteId);
-        clienteEntity.setNome("Maria");
-        clienteEntity.setEmail("maria@email.com");
-        clienteEntity.setLogin("maria");
+        clienteDao = new ClienteDao();
+        clienteDao.setUsuarioId(clienteId);
+        clienteDao.setNome("Maria");
+        clienteDao.setEmail("maria@email.com");
+        clienteDao.setLogin("maria");
     }
 
     @Test
     void deveDeletarClienteQuandoEntidadeEhEncontrada() {
         // Arrange
-        doReturn(Optional.of(clienteEntity)).when(findByIdOutputPort).findById(clienteId);
+        doReturn(Optional.of(clienteDao)).when(findByIdOutputPort).findById(clienteId);
 
         // Act
         clienteDeleteUseCase.deleteById(clienteId);
 
         // Assert
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verify(deleteOutputPort, times(1)).delete(clienteEntity);
+        verify(deleteOutputPort, times(1)).delete(clienteDao);
         verifyNoMoreInteractions(findByIdOutputPort, deleteOutputPort);
     }
 

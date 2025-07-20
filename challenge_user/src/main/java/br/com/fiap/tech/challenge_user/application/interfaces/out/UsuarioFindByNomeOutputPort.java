@@ -1,11 +1,11 @@
 package br.com.fiap.tech.challenge_user.application.interfaces.out;
 
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 
 import java.util.Optional;
 
 public interface UsuarioFindByNomeOutputPort {
 
-    Optional<UsuarioEntity> findByNome(String nome);
+    Optional<UsuarioDao> findByNome(String nome);
 }
 

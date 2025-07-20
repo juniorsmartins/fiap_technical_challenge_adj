@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = {ConstantsController.URI_CLIENTE})
 public class ClienteCreateController
-        extends AbstractCreateController<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteEntity> {
+        extends AbstractCreateController<ClienteDtoRequest, ClienteDtoResponse, Cliente, ClienteDao> {
 
     public ClienteCreateController(
             InputMapper<ClienteDtoRequest, Cliente> inputMapper,
-            OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> outputMapper,
+            OutputMapper<Cliente, ClienteDtoResponse, ClienteDao> outputMapper,
             CreateInputPort<Cliente> createInputPort) {
         super(inputMapper, outputMapper, createInputPort);
     }

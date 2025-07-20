@@ -3,8 +3,8 @@ package br.com.fiap.tech.challenge_user.domain.rule.update;
 import br.com.fiap.tech.challenge_user.domain.models.Endereco;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.update.UsuarioUpdateRuleImpl;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +25,13 @@ import static org.mockito.Mockito.mockStatic;
 @ExtendWith(MockitoExtension.class)
 class UsuarioUpdateRuleImplTest {
 
-    private UsuarioUpdateRuleImpl<Proprietario, ProprietarioEntity> usuarioUpdateRule;
+    private UsuarioUpdateRuleImpl<Proprietario, ProprietarioDao> usuarioUpdateRule;
 
     private Proprietario proprietarioDomain;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
-    private EnderecoEntity enderecoEntity;
+    private EnderecoDao enderecoDao;
 
     private MockedStatic<BeanUtils> beanUtilsMock;
 
@@ -44,11 +44,11 @@ class UsuarioUpdateRuleImplTest {
         enderecoDomain.setLogradouro("Rua Teste");
         enderecoDomain.setNumero("123");
 
-        enderecoEntity = new EnderecoEntity();
-        enderecoEntity.setCep("98765-432");
-        enderecoEntity.setLogradouro("Rua Antiga");
-        enderecoEntity.setNumero("456");
-        enderecoEntity.setEnderecoId(UUID.randomUUID());
+        enderecoDao = new EnderecoDao();
+        enderecoDao.setCep("98765-432");
+        enderecoDao.setLogradouro("Rua Antiga");
+        enderecoDao.setNumero("456");
+        enderecoDao.setEnderecoId(UUID.randomUUID());
 
         proprietarioDomain = new Proprietario();
         proprietarioDomain.setUsuarioId(UUID.randomUUID());
@@ -58,7 +58,7 @@ class UsuarioUpdateRuleImplTest {
         proprietarioDomain.setSenha("senha123");
         proprietarioDomain.setEndereco(enderecoDomain);
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioDomain.getUsuarioId());
         proprietarioEntity.setNome("Antigo");
         proprietarioEntity.setEmail("antigo@email.com");
@@ -66,7 +66,7 @@ class UsuarioUpdateRuleImplTest {
         proprietarioEntity.setSenha("antiga123");
         proprietarioEntity.setDataHoraCriacao(new Date(0));
         proprietarioEntity.setDataHoraEdicao(new Date(0));
-        proprietarioEntity.setEndereco(enderecoEntity);
+        proprietarioEntity.setEndereco(enderecoDao);
         proprietarioEntity.setDescricao("Descrição Antiga");
 
         // Mockar BeanUtils
@@ -84,7 +84,7 @@ class UsuarioUpdateRuleImplTest {
         beanUtilsMock.when(() -> BeanUtils.copyProperties(any(), any(), eq("usuarioId"), eq("dataHoraCriacao"), eq("dataHoraEdicao"), eq("endereco")))
                 .thenAnswer(invocation -> {
                     Proprietario source = invocation.getArgument(0);
-                    ProprietarioEntity target = invocation.getArgument(1);
+                    ProprietarioDao target = invocation.getArgument(1);
                     target.setNome(source.getNome());
                     target.setEmail(source.getEmail());
                     target.setLogin(source.getLogin());
@@ -94,7 +94,7 @@ class UsuarioUpdateRuleImplTest {
                 });
 
         // Act
-        ProprietarioEntity result = usuarioUpdateRule.updateUser(proprietarioDomain, proprietarioEntity);
+        ProprietarioDao result = usuarioUpdateRule.updateUser(proprietarioDomain, proprietarioEntity);
 
         // Assert
         assertNotNull(result);
@@ -103,7 +103,7 @@ class UsuarioUpdateRuleImplTest {
         assertEquals(proprietarioDomain.getLogin(), result.getLogin());
         assertEquals(proprietarioDomain.getSenha(), result.getSenha());
         assertEquals(proprietarioDomain.getDescricao(), result.getDescricao());
-        assertEquals(enderecoEntity, result.getEndereco()); // Endereço não deve mudar
+        assertEquals(enderecoDao, result.getEndereco()); // Endereço não deve mudar
         assertEquals(proprietarioEntity.getUsuarioId(), result.getUsuarioId()); // usuarioId não deve mudar
         assertEquals(proprietarioEntity.getDataHoraCriacao(), result.getDataHoraCriacao()); // dataHoraCriacao não deve mudar
         assertEquals(proprietarioEntity.getDataHoraEdicao(), result.getDataHoraEdicao()); // dataHoraEdicao não deve mudar

@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByL
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueLoginException;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioLoginStrategy;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,7 +48,7 @@ class UsuarioLoginStrategyTest {
     @Test
     void deveNaoLancarExcecaoQuandoLoginExisteParaMesmoUsuario() {
         // Arrange
-        var existente = new ProprietarioEntity();
+        var existente = new ProprietarioDao();
         existente.setUsuarioId(usuarioId);
         existente.setLogin(login);
 
@@ -65,7 +65,7 @@ class UsuarioLoginStrategyTest {
     @Test
     void deveLancarExcecaoQuandoLoginExisteParaOutroUsuario() {
         // Arrange
-        var existente = new ProprietarioEntity();
+        var existente = new ProprietarioDao();
         existente.setUsuarioId(UUID.randomUUID());
         existente.setLogin(login);
 

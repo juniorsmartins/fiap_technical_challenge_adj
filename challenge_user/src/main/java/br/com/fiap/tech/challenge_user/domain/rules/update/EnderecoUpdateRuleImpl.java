@@ -1,13 +1,13 @@
 package br.com.fiap.tech.challenge_user.domain.rules.update;
 
 import br.com.fiap.tech.challenge_user.domain.models.Usuario;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class EnderecoUpdateRuleImpl<T extends Usuario, E extends UsuarioEntity> implements EnderecoUpdateRule<T, E> {
+public final class EnderecoUpdateRuleImpl<T extends Usuario, E extends UsuarioDao> implements EnderecoUpdateRule<T, E> {
 
     @Override
     public E updateAddress(T domain, E entity) {
@@ -18,7 +18,7 @@ public final class EnderecoUpdateRuleImpl<T extends Usuario, E extends UsuarioEn
 
         } else if (domain.getEndereco() != null && entity.getEndereco() == null) {
             // Cenário: Requisição com endereço e usuário sem endereço → Criar novo endereço
-            var enderecoEntity = new EnderecoEntity();
+            var enderecoEntity = new EnderecoDao();
             enderecoEntity.setCep(domain.getEndereco().getCep());
             enderecoEntity.setLogradouro(domain.getEndereco().getLogradouro());
             enderecoEntity.setNumero(domain.getEndereco().getNumero());

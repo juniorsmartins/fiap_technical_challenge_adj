@@ -1,10 +1,10 @@
 package br.com.fiap.tech.challenge_user.domain.rules.update;
 
 import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 
 public interface RestauranteCheckRule {
 
-    ProprietarioEntity checkProprietario(Restaurante restaurante);
+    ProprietarioDao checkProprietario(Restaurante restaurante);
 }
 

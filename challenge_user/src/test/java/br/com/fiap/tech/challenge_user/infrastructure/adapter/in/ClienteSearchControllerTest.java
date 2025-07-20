@@ -6,8 +6,8 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchO
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,10 +31,10 @@ import static org.mockito.Mockito.*;
 class ClienteSearchControllerTest {
 
     @Mock
-    private PageMapper<ClienteDtoResponse, ClienteEntity> mapper;
+    private PageMapper<ClienteDtoResponse, ClienteDao> mapper;
 
     @Mock
-    private UsuarioSearchOutputPort<ClienteEntity> finder;
+    private UsuarioSearchOutputPort<ClienteDao> finder;
 
     @InjectMocks
     private ClienteSearchController clienteSearchController;
@@ -43,7 +43,7 @@ class ClienteSearchControllerTest {
 
     private Pageable paginacao;
 
-    private Page<ClienteEntity> clienteEntityPage;
+    private Page<ClienteDao> clienteEntityPage;
 
     private Page<ClienteDtoResponse> clienteDtoResponsePage;
 
@@ -57,12 +57,12 @@ class ClienteSearchControllerTest {
 
         paginacao = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "usuarioId"));
 
-        var enderecoEntity = new EnderecoEntity();
+        var enderecoEntity = new EnderecoDao();
         enderecoEntity.setCep("01001-000");
         enderecoEntity.setLogradouro("Avenida Central");
         enderecoEntity.setNumero("1500");
 
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setUsuarioId(clienteId);
         clienteEntity.setNome("Robert Martin");
         clienteEntity.setEmail("martin@email.com");

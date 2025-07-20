@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -17,29 +17,29 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public final class ProprietarioEntity extends UsuarioEntity {
+public final class ProprietarioDao extends UsuarioDao {
 
     @Column(name = "descricao", nullable = true)
     private String descricao;
 
     @OneToMany(mappedBy = "proprietario", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = false)
-    private List<RestauranteEntity> restaurantes = new ArrayList<>();
+    private List<RestauranteDao> restaurantes = new ArrayList<>();
 
-    public ProprietarioEntity(
+    public ProprietarioDao(
             String nome, String email, String login, String senha,
-            EnderecoEntity enderecoEntity, String descricao,
+            EnderecoDao enderecoDao, String descricao,
             Date dataHoraCriacao, Date dataHoraEdicao
     ) {
-        super(nome, email, login, senha, enderecoEntity, dataHoraCriacao, dataHoraEdicao);
+        super(nome, email, login, senha, enderecoDao, dataHoraCriacao, dataHoraEdicao);
         this.descricao = descricao;
     }
 
-    public ProprietarioEntity(
+    public ProprietarioDao(
             UUID usuarioId, String nome, String email, String login, String senha,
-            EnderecoEntity enderecoEntity, String descricao,
+            EnderecoDao enderecoDao, String descricao,
             Date dataHoraCriacao, Date dataHoraEdicao
     ) {
-        super(usuarioId, nome, email, login, senha, enderecoEntity, dataHoraCriacao, dataHoraEdicao);
+        super(usuarioId, nome, email, login, senha, enderecoDao, dataHoraCriacao, dataHoraEdicao);
         this.descricao = descricao;
     }
 }

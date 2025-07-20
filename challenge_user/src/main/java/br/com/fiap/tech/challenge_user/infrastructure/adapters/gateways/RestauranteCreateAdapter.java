@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.RestauranteNonPersistenceException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.RestauranteRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class RestauranteCreateAdapter implements CreateOutputPort<RestauranteEntity> {
+public class RestauranteCreateAdapter implements CreateOutputPort<RestauranteDao> {
 
     private final RestauranteRepository repository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     @Modifying
     @Override
-    public RestauranteEntity save(@NonNull final RestauranteEntity restauranteEntity) {
+    public RestauranteDao save(@NonNull final RestauranteDao restauranteDao) {
 
         try {
-            return repository.saveAndFlush(restauranteEntity);
+            return repository.saveAndFlush(restauranteDao);
 
         } catch (DataIntegrityViolationException e) {
             throw new RestauranteNonPersistenceException(e.getMessage());

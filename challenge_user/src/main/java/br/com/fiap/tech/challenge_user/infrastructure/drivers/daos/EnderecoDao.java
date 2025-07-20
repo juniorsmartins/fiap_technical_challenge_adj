@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public final class EnderecoEntity implements Serializable {
+public final class EnderecoDao implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

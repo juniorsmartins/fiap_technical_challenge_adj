@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Cliente>,
-        OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity>,
-        EntityMapper<Cliente, ClienteEntity>,
-        PageMapper<ClienteDtoResponse, ClienteEntity> {
+        OutputMapper<Cliente, ClienteDtoResponse, ClienteDao>,
+        EntityMapper<Cliente, ClienteDao>,
+        PageMapper<ClienteDtoResponse, ClienteDao> {
 
     private final EnderecoMapper mapper;
 
@@ -35,21 +35,21 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
     }
 
     @Override
-    public ClienteEntity toEntity(Cliente cliente) {
+    public ClienteDao toEntity(Cliente cliente) {
         if (cliente == null) {
             return null;
         }
 
         var endereco = mapper.toEnderecoEntity(cliente.getEndereco());
 
-        return new ClienteEntity(
+        return new ClienteDao(
                 cliente.getUsuarioId(), cliente.getNome(), cliente.getEmail(), cliente.getLogin(), cliente.getSenha(),
                 endereco, cliente.getNumeroCartaoFidelidade(), null, null
         );
     }
 
     @Override
-    public Cliente toDomain(ClienteEntity entity) {
+    public Cliente toDomain(ClienteDao entity) {
         if (entity == null) {
             return null;
         }
@@ -77,7 +77,7 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
     }
 
     @Override
-    public ClienteDtoResponse toResponse(ClienteEntity entity) {
+    public ClienteDtoResponse toResponse(ClienteDao entity) {
         if (entity == null) {
             return null;
         }
@@ -92,7 +92,7 @@ public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Clien
     }
 
     @Override
-    public Page<ClienteDtoResponse> toPageResponse(Page<ClienteEntity> entityPage)  {
+    public Page<ClienteDtoResponse> toPageResponse(Page<ClienteDao> entityPage)  {
 
         List<ClienteDtoResponse> dtos = entityPage.getContent()
                 .stream()

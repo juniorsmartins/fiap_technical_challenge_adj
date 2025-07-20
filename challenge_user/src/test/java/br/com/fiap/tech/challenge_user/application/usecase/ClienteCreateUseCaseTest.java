@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
 import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,10 +23,10 @@ import static org.mockito.Mockito.*;
 class ClienteCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Cliente, ClienteEntity> entityMapper;
+    private EntityMapper<Cliente, ClienteDao> entityMapper;
 
     @Mock
-    private CreateOutputPort<ClienteEntity> createOutputPort;
+    private CreateOutputPort<ClienteDao> createOutputPort;
 
     @Mock
     private UsuarioRulesStrategy<Cliente> rule1;
@@ -39,7 +39,7 @@ class ClienteCreateUseCaseTest {
 
     private Cliente cliente;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
 
     @BeforeEach
     void setUp() {
@@ -50,11 +50,11 @@ class ClienteCreateUseCaseTest {
         cliente.setEmail("maria@email.com");
         cliente.setLogin("maria");
 
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setUsuarioId(usuarioId);
-        clienteEntity.setNome("Maria");
-        clienteEntity.setEmail("maria@email.com");
-        clienteEntity.setLogin("maria");
+        clienteDao = new ClienteDao();
+        clienteDao.setUsuarioId(usuarioId);
+        clienteDao.setNome("Maria");
+        clienteDao.setEmail("maria@email.com");
+        clienteDao.setLogin("maria");
 
         List<UsuarioRulesStrategy<Cliente>> rulesStrategy = List.of(rule1, rule2);
         clienteCreateUseCase = new ClienteCreateUseCase(entityMapper, createOutputPort, rulesStrategy);
@@ -63,9 +63,9 @@ class ClienteCreateUseCaseTest {
     @Test
     void deveCriarClienteQuandoRegrasSaoValidas() {
         // Arrange
-        when(entityMapper.toEntity(cliente)).thenReturn(clienteEntity);
-        when(createOutputPort.save(clienteEntity)).thenReturn(clienteEntity);
-        when(entityMapper.toDomain(clienteEntity)).thenReturn(cliente);
+        when(entityMapper.toEntity(cliente)).thenReturn(clienteDao);
+        when(createOutputPort.save(clienteDao)).thenReturn(clienteDao);
+        when(entityMapper.toDomain(clienteDao)).thenReturn(cliente);
 
         // Act
         Cliente result = clienteCreateUseCase.create(cliente);
@@ -76,8 +76,8 @@ class ClienteCreateUseCaseTest {
         verify(rule1, times(1)).executar(cliente);
         verify(rule2, times(1)).executar(cliente);
         verify(entityMapper, times(1)).toEntity(cliente);
-        verify(createOutputPort, times(1)).save(clienteEntity);
-        verify(entityMapper, times(1)).toDomain(clienteEntity);
+        verify(createOutputPort, times(1)).save(clienteDao);
+        verify(entityMapper, times(1)).toDomain(clienteDao);
         verifyNoMoreInteractions(rule1, rule2, entityMapper, createOutputPort);
     }
 

@@ -14,7 +14,7 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +37,7 @@ class RestauranteUpdateControllerTest {
     private InputMapper<RestauranteDtoRequest, Restaurante> inputMapper;
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper;
+    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper;
 
     @Mock
     private UpdateInputPort<Restaurante> updateInputPort;

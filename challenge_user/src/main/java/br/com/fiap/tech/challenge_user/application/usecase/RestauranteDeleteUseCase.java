@@ -4,19 +4,19 @@ import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInput
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class RestauranteDeleteUseCase extends AbstractDeleteUseCase<RestauranteEntity>
+public class RestauranteDeleteUseCase extends AbstractDeleteUseCase<RestauranteDao>
         implements DeleteByIdInputPort<Restaurante> {
 
     public RestauranteDeleteUseCase(
-            FindByIdOutputPort<RestauranteEntity> findByIdOutputPort,
-            DeleteOutputPort<RestauranteEntity> deleteOutputPort) {
+            FindByIdOutputPort<RestauranteDao> findByIdOutputPort,
+            DeleteOutputPort<RestauranteDao> deleteOutputPort) {
         super(findByIdOutputPort, deleteOutputPort);
     }
 

@@ -7,18 +7,18 @@ import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = {ConstantsController.URI_RESTAURANTE})
 public class RestauranteUpdateController
-        extends AbstractUpdateController<RestauranteDtoRequest, RestauranteDtoResponse, Restaurante, RestauranteEntity> {
+        extends AbstractUpdateController<RestauranteDtoRequest, RestauranteDtoResponse, Restaurante, RestauranteDao> {
 
     public RestauranteUpdateController(
             InputMapper<RestauranteDtoRequest, Restaurante> inputMapper,
-            OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper,
+            OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper,
             UpdateInputPort<Restaurante> updateInputPort) {
         super(inputMapper, outputMapper, updateInputPort);
     }

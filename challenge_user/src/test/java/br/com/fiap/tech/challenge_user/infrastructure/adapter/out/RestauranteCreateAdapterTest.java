@@ -4,9 +4,9 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.exception.http500.RestauranteNonPersistenceException;
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteCreateAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ProprietarioRepository;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.RestauranteRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,15 +25,15 @@ class RestauranteCreateAdapterTest {
 
     private final ProprietarioRepository proprietarioRepository;
 
-    private CreateOutputPort<RestauranteEntity> restauranteCreateAdapter;
+    private CreateOutputPort<RestauranteDao> restauranteCreateAdapter;
 
-    private EnderecoEntity enderecoEntity;
+    private EnderecoDao enderecoDao;
 
     private LocalTime horaAbertura;
 
     private LocalTime horaFechamento;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     @Autowired
     RestauranteCreateAdapterTest(RestauranteRepository repository, ProprietarioRepository proprietarioRepository) {
@@ -48,15 +48,15 @@ class RestauranteCreateAdapterTest {
 
         restauranteCreateAdapter = new RestauranteCreateAdapter(repository);
 
-        enderecoEntity = new EnderecoEntity();
-        enderecoEntity.setCep("01001-000");
-        enderecoEntity.setLogradouro("Avenida Central");
-        enderecoEntity.setNumero("1500");
+        enderecoDao = new EnderecoDao();
+        enderecoDao.setCep("01001-000");
+        enderecoDao.setLogradouro("Avenida Central");
+        enderecoDao.setNumero("1500");
 
         horaAbertura = LocalTime.of(8, 10, 10);
         horaFechamento = LocalTime.of(22, 0, 0);
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("jsilva");
@@ -69,12 +69,12 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveSalvarRestauranteComSucesso() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act
@@ -88,7 +88,7 @@ class RestauranteCreateAdapterTest {
         assertEquals(horaAbertura, savedEntity.getHoraAbertura());
         assertEquals(horaFechamento, savedEntity.getHoraFechamento());
         assertEquals(proprietarioEntity.getUsuarioId(), savedEntity.getProprietario().getUsuarioId());
-        assertEquals(enderecoEntity.getEnderecoId(), savedEntity.getEndereco().getEnderecoId());
+        assertEquals(enderecoDao.getEnderecoId(), savedEntity.getEndereco().getEnderecoId());
 
         // Verifica persistência no banco
         var persistedEntity = repository.findById(savedEntity.getRestauranteId());
@@ -99,11 +99,11 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoNomeNulo() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
@@ -113,11 +113,11 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoTipoCozinhaNulo() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
@@ -127,11 +127,11 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoHoraAberturaNulo() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
@@ -141,11 +141,11 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoHoraFechamentoNulo() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act & Assert
@@ -155,7 +155,7 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoEnderecoNulo() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
@@ -169,12 +169,12 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoProprietarioNulo() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
 
         // Act & Assert
         assertThrows(RestauranteNonPersistenceException.class, () -> restauranteCreateAdapter.save(restauranteEntity));
@@ -183,12 +183,12 @@ class RestauranteCreateAdapterTest {
     @Test
     void deveGerarRestauranteIdAutomaticamente() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         // Act

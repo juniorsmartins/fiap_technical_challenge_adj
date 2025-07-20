@@ -3,9 +3,9 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteFindByIdAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.EnderecoRepository;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ProprietarioRepository;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.RestauranteRepository;
@@ -28,11 +28,11 @@ class RestauranteFindByIdAdapterTest {
 
     private final EnderecoRepository enderecoRepository;
 
-    private FindByIdOutputPort<RestauranteEntity> restauranteFindByIdAdapter;
+    private FindByIdOutputPort<RestauranteDao> restauranteFindByIdAdapter;
 
-    private EnderecoEntity enderecoEntity;
+    private EnderecoDao enderecoDao;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private LocalTime horaAbertura;
 
@@ -55,13 +55,13 @@ class RestauranteFindByIdAdapterTest {
 
         restauranteFindByIdAdapter = new RestauranteFindByIdAdapter(restauranteRepository);
 
-        enderecoEntity = new EnderecoEntity();
-        enderecoEntity.setCep("01001-000");
-        enderecoEntity.setLogradouro("Avenida Central");
-        enderecoEntity.setNumero("1500");
-        enderecoRepository.save(enderecoEntity);
+        enderecoDao = new EnderecoDao();
+        enderecoDao.setCep("01001-000");
+        enderecoDao.setLogradouro("Avenida Central");
+        enderecoDao.setNumero("1500");
+        enderecoRepository.save(enderecoDao);
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("jsilva");
@@ -76,12 +76,12 @@ class RestauranteFindByIdAdapterTest {
     @Test
     void deveEncontrarRestauranteExistentePorId() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
 
         var savedEntity = restauranteRepository.save(restauranteEntity);
@@ -114,12 +114,12 @@ class RestauranteFindByIdAdapterTest {
     @Test
     void deveCarregarRelacionamentosAoEncontrarRestaurante() {
         // Arrange
-        var restauranteEntity = new RestauranteEntity();
+        var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
         restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
         restauranteEntity.setHoraAbertura(horaAbertura);
         restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoEntity);
+        restauranteEntity.setEndereco(enderecoDao);
         restauranteEntity.setProprietario(proprietarioEntity);
         var savedEntity = restauranteRepository.save(restauranteEntity);
 
@@ -130,7 +130,7 @@ class RestauranteFindByIdAdapterTest {
         assertTrue(result.isPresent(), "O restaurante deve ser encontrado");
         var foundEntity = result.get();
         assertNotNull(foundEntity.getEndereco(), "O endereço deve estar carregado");
-        assertEquals(enderecoEntity.getEnderecoId(), foundEntity.getEndereco().getEnderecoId());
+        assertEquals(enderecoDao.getEnderecoId(), foundEntity.getEndereco().getEnderecoId());
         assertEquals("Avenida Central", foundEntity.getEndereco().getLogradouro());
 
         assertNotNull(foundEntity.getProprietario(), "O proprietário deve estar carregado");

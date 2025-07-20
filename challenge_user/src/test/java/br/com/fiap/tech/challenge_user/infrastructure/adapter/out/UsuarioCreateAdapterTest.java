@@ -3,8 +3,8 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.UsuarioNonPersistenceException;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioCreateAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ class UsuarioCreateAdapterTest {
 
     private final UsuarioRepository repository;
 
-    private CreateOutputPort<ClienteEntity> clienteCreateAdapter;
+    private CreateOutputPort<ClienteDao> clienteCreateAdapter;
 
-    private CreateOutputPort<ProprietarioEntity> proprietarioCreateAdapter;
+    private CreateOutputPort<ProprietarioDao> proprietarioCreateAdapter;
 
     @Autowired
     UsuarioCreateAdapterTest(UsuarioRepository repository) {
@@ -37,7 +37,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveSalvarClienteComSucesso() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");
@@ -68,7 +68,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveSalvarProprietarioComSucesso() {
         // Arrange
-        var entity = new ProprietarioEntity();
+        var entity = new ProprietarioDao();
         entity.setNome("Charles Babbage");
         entity.setEmail("babbage@email.com");
         entity.setLogin("babbage");
@@ -99,7 +99,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoClienteComNomeNulo() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");
         clienteEntity.setSenha("babbage!123");
@@ -112,7 +112,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoProprietarioComNomeNulo() {
         // Arrange
-        var entity = new ProprietarioEntity();
+        var entity = new ProprietarioDao();
         entity.setEmail("babbage@email.com");
         entity.setLogin("babbage");
         entity.setSenha("babbage!123");
@@ -125,7 +125,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoClienteComEmailNulo() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setLogin("babbage");
         clienteEntity.setSenha("babbage!123");
@@ -138,7 +138,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoProprietarioComEmailNulo() {
         // Arrange
-        var entity = new ProprietarioEntity();
+        var entity = new ProprietarioDao();
         entity.setNome("Charles Babbage");
         entity.setLogin("babbage");
         entity.setSenha("babbage!123");
@@ -151,7 +151,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoClienteComLoginNulo() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setSenha("babbage!123");
@@ -164,7 +164,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoProprietarioComLoginNulo() {
         // Arrange
-        var entity = new ProprietarioEntity();
+        var entity = new ProprietarioDao();
         entity.setNome("Charles Babbage");
         entity.setEmail("babbage@email.com");
         entity.setSenha("babbage!123");
@@ -177,7 +177,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoClienteComSenhaNulo() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");
@@ -190,7 +190,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveLancarExcecaoQuandoProprietarioComSenhaNulo() {
         // Arrange
-        var entity = new ProprietarioEntity();
+        var entity = new ProprietarioDao();
         entity.setNome("Charles Babbage");
         entity.setEmail("babbage@email.com");
         entity.setLogin("babbage");
@@ -203,7 +203,7 @@ class UsuarioCreateAdapterTest {
     @Test
     void deveGerarUsuarioIdAutomaticamente() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");

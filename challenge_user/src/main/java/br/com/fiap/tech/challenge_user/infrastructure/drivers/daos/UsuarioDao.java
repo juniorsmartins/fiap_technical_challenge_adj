@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,7 @@ import static br.com.fiap.tech.challenge_user.infrastructure.constants.Constants
 @Setter
 @EqualsAndHashCode(of = {"usuarioId"}, callSuper = false)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class UsuarioEntity extends AbstractAuditingEntity implements Serializable {
+public abstract class UsuarioDao extends AbstractAuditingDao implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -39,19 +39,19 @@ public abstract class UsuarioEntity extends AbstractAuditingEntity implements Se
     @Column(name = "senha", length = MAX_CARACTER_SENHA, nullable = false)
     private String senha;
 
-    @OneToOne(targetEntity = EnderecoEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true, orphanRemoval = true)
+    @OneToOne(targetEntity = EnderecoDao.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", unique = true, nullable = true)
-    private EnderecoEntity endereco;
+    private EnderecoDao endereco;
 
-    protected UsuarioEntity() {
+    protected UsuarioDao() {
     }
 
-    public UsuarioEntity(
+    public UsuarioDao(
             String nome,
             String email,
             String login,
             String senha,
-            EnderecoEntity endereco) {
+            EnderecoDao endereco) {
         this.nome = nome;
         this.email = email;
         this.login = login;
@@ -59,12 +59,12 @@ public abstract class UsuarioEntity extends AbstractAuditingEntity implements Se
         this.endereco = endereco;
     }
 
-    public UsuarioEntity(
+    public UsuarioDao(
             String nome,
             String email,
             String login,
             String senha,
-            EnderecoEntity endereco,
+            EnderecoDao endereco,
             Date dataHoraCriacao,
             Date dataHoraEdicao) {
         this(nome, email, login, senha, endereco);
@@ -72,13 +72,13 @@ public abstract class UsuarioEntity extends AbstractAuditingEntity implements Se
         this.setDataHoraEdicao(dataHoraEdicao);
     }
 
-    public UsuarioEntity(
+    public UsuarioDao(
             UUID usuarioId,
             String nome,
             String email,
             String login,
             String senha,
-            EnderecoEntity endereco,
+            EnderecoDao endereco,
             Date dataHoraCriacao,
             Date dataHoraEdicao) {
         this(nome, email, login, senha, endereco, dataHoraCriacao, dataHoraEdicao);

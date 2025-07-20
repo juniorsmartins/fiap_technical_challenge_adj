@@ -3,8 +3,8 @@ package br.com.fiap.tech.challenge_user.domain.rule.update;
 import br.com.fiap.tech.challenge_user.domain.models.Endereco;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.update.EnderecoUpdateRuleImpl;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,15 +24,15 @@ import static org.mockito.Mockito.mockStatic;
 @ExtendWith(MockitoExtension.class)
 class EnderecoUpdateRuleImplTest {
 
-    private EnderecoUpdateRuleImpl<Proprietario, ProprietarioEntity> enderecoUpdateRule;
+    private EnderecoUpdateRuleImpl<Proprietario, ProprietarioDao> enderecoUpdateRule;
 
     private Proprietario proprietarioDomain;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private Endereco enderecoDomain;
 
-    private EnderecoEntity enderecoEntity;
+    private EnderecoDao enderecoDao;
 
     private MockedStatic<BeanUtils> beanUtilsMock;
 
@@ -45,11 +45,11 @@ class EnderecoUpdateRuleImplTest {
         enderecoDomain.setLogradouro("Rua Teste");
         enderecoDomain.setNumero("123");
 
-        enderecoEntity = new EnderecoEntity();
-        enderecoEntity.setCep("98765-432");
-        enderecoEntity.setLogradouro("Rua Antiga");
-        enderecoEntity.setNumero("456");
-        enderecoEntity.setEnderecoId(UUID.randomUUID());
+        enderecoDao = new EnderecoDao();
+        enderecoDao.setCep("98765-432");
+        enderecoDao.setLogradouro("Rua Antiga");
+        enderecoDao.setNumero("456");
+        enderecoDao.setEnderecoId(UUID.randomUUID());
 
         proprietarioDomain = new Proprietario();
         proprietarioDomain.setUsuarioId(UUID.randomUUID());
@@ -58,7 +58,7 @@ class EnderecoUpdateRuleImplTest {
         proprietarioDomain.setLogin("joao");
         proprietarioDomain.setSenha("senha123");
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioDomain.getUsuarioId());
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");
@@ -80,10 +80,10 @@ class EnderecoUpdateRuleImplTest {
     void deveRemoverEnderecoQuandoDomainSemEnderecoEEntityComEndereco() {
         // Arrange
         proprietarioDomain.setEndereco(null);
-        proprietarioEntity.setEndereco(enderecoEntity);
+        proprietarioEntity.setEndereco(enderecoDao);
 
         // Act
-        ProprietarioEntity result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
+        ProprietarioDao result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
 
         // Assert
         assertNotNull(result);
@@ -98,7 +98,7 @@ class EnderecoUpdateRuleImplTest {
         proprietarioEntity.setEndereco(null);
 
         // Act
-        ProprietarioEntity result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
+        ProprietarioDao result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
 
         // Assert
         assertNotNull(result);
@@ -114,12 +114,12 @@ class EnderecoUpdateRuleImplTest {
     void deveAtualizarEnderecoQuandoDomainEEntityPossuemEndereco() {
         // Arrange
         proprietarioDomain.setEndereco(enderecoDomain);
-        proprietarioEntity.setEndereco(enderecoEntity);
+        proprietarioEntity.setEndereco(enderecoDao);
 
         beanUtilsMock.when(() -> BeanUtils.copyProperties(any(), any(), eq("enderecoId")))
                 .thenAnswer(invocation -> {
                     Endereco source = invocation.getArgument(0);
-                    EnderecoEntity target = invocation.getArgument(1);
+                    EnderecoDao target = invocation.getArgument(1);
                     target.setCep(source.getCep());
                     target.setLogradouro(source.getLogradouro());
                     target.setNumero(source.getNumero());
@@ -127,7 +127,7 @@ class EnderecoUpdateRuleImplTest {
                 });
 
         // Act
-        ProprietarioEntity result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
+        ProprietarioDao result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
 
         // Assert
         assertNotNull(result);
@@ -135,8 +135,8 @@ class EnderecoUpdateRuleImplTest {
         assertEquals(enderecoDomain.getCep(), result.getEndereco().getCep());
         assertEquals(enderecoDomain.getLogradouro(), result.getEndereco().getLogradouro());
         assertEquals(enderecoDomain.getNumero(), result.getEndereco().getNumero());
-        assertEquals(enderecoEntity.getEnderecoId(), result.getEndereco().getEnderecoId());
-        beanUtilsMock.verify(() -> BeanUtils.copyProperties(enderecoDomain, enderecoEntity, "enderecoId"));
+        assertEquals(enderecoDao.getEnderecoId(), result.getEndereco().getEnderecoId());
+        beanUtilsMock.verify(() -> BeanUtils.copyProperties(enderecoDomain, enderecoDao, "enderecoId"));
         beanUtilsMock.verifyNoMoreInteractions();
     }
 
@@ -147,7 +147,7 @@ class EnderecoUpdateRuleImplTest {
         proprietarioEntity.setEndereco(null);
 
         // Act
-        ProprietarioEntity result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
+        ProprietarioDao result = enderecoUpdateRule.updateAddress(proprietarioDomain, proprietarioEntity);
 
         // Assert
         assertNotNull(result);

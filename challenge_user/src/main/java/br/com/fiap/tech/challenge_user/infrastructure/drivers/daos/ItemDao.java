@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"itemId"})
-public final class ItemEntity implements Serializable {
+public final class ItemDao implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

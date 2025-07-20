@@ -11,7 +11,7 @@ import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,17 +34,17 @@ import static org.mockito.Mockito.*;
 class RestauranteFindControllerTest {
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper;
+    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper;
 
     @Mock
-    private FindByIdOutputPort<RestauranteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<RestauranteDao> findByIdOutputPort;
 
     @InjectMocks
     private RestauranteFindController restauranteFindController;
 
     private UUID restauranteId;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
 
     private RestauranteDtoResponse restauranteDtoResponse;
 
@@ -73,12 +73,12 @@ class RestauranteFindControllerTest {
         restaurante.setEndereco(endereco);
         restaurante.setProprietario(proprietario);
 
-        restauranteEntity = new RestauranteEntity();
-        restauranteEntity.setRestauranteId(restauranteId);
-        restauranteEntity.setNome("Restaurante Sabor");
-        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
-        restauranteEntity.setHoraAbertura(LocalTime.of(11, 0));
-        restauranteEntity.setHoraFechamento(LocalTime.of(23, 0));
+        restauranteDao = new RestauranteDao();
+        restauranteDao.setRestauranteId(restauranteId);
+        restauranteDao.setNome("Restaurante Sabor");
+        restauranteDao.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
+        restauranteDao.setHoraAbertura(LocalTime.of(11, 0));
+        restauranteDao.setHoraFechamento(LocalTime.of(23, 0));
 
         var enderecoDtoResponse = new EnderecoDtoResponse(
                 enderecoId, "01001-000", "Avenida Central", "1500"
@@ -99,8 +99,8 @@ class RestauranteFindControllerTest {
     @Test
     void deveEncontrarRestauranteComSucesso() {
         // Arrange
-        doReturn(Optional.of(restauranteEntity)).when(findByIdOutputPort).findById(restauranteId);
-        doReturn(restauranteDtoResponse).when(outputMapper).toResponse(restauranteEntity);
+        doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
+        doReturn(restauranteDtoResponse).when(outputMapper).toResponse(restauranteDao);
 
         // Act
         ResponseEntity<RestauranteDtoResponse> response = restauranteFindController.findById(restauranteId);
@@ -110,7 +110,7 @@ class RestauranteFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(restauranteDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verify(outputMapper, times(1)).toResponse(restauranteEntity);
+        verify(outputMapper, times(1)).toResponse(restauranteDao);
         verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
     }
 

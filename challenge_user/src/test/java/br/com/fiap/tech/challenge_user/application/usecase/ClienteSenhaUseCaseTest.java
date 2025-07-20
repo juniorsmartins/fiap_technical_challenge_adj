@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,15 +23,15 @@ import static org.mockito.Mockito.*;
 class ClienteSenhaUseCaseTest {
 
     @Mock
-    private FindByIdOutputPort<ClienteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ClienteDao> findByIdOutputPort;
 
     @Mock
-    private CreateOutputPort<ClienteEntity> createOutputPort;
+    private CreateOutputPort<ClienteDao> createOutputPort;
 
     @InjectMocks
     private ClienteSenhaUseCase clienteSenhaUseCase;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
     private UUID usuarioId;
     private String senhaAntiga;
     private String senhaNova;
@@ -41,27 +41,27 @@ class ClienteSenhaUseCaseTest {
         usuarioId = UUID.randomUUID();
         senhaAntiga = "senha123";
         senhaNova = "novaSenha456";
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setUsuarioId(usuarioId);
-        clienteEntity.setNome("Maria");
-        clienteEntity.setEmail("maria@email.com");
-        clienteEntity.setLogin("maria");
-        clienteEntity.setSenha(senhaAntiga);
+        clienteDao = new ClienteDao();
+        clienteDao.setUsuarioId(usuarioId);
+        clienteDao.setNome("Maria");
+        clienteDao.setEmail("maria@email.com");
+        clienteDao.setLogin("maria");
+        clienteDao.setSenha(senhaAntiga);
     }
 
     @Test
     void deveAtualizarSenhaQuandoDadosSaoValidos() {
         // Arrange
-        doReturn(Optional.of(clienteEntity)).when(findByIdOutputPort).findById(usuarioId);
-        doReturn(clienteEntity).when(createOutputPort).save(clienteEntity);
+        doReturn(Optional.of(clienteDao)).when(findByIdOutputPort).findById(usuarioId);
+        doReturn(clienteDao).when(createOutputPort).save(clienteDao);
 
         // Act
         clienteSenhaUseCase.updatePassword(usuarioId, senhaAntiga, senhaNova);
 
         // Assert
-        assertEquals(senhaNova, clienteEntity.getSenha());
+        assertEquals(senhaNova, clienteDao.getSenha());
         verify(findByIdOutputPort, times(1)).findById(usuarioId);
-        verify(createOutputPort, times(1)).save(clienteEntity);
+        verify(createOutputPort, times(1)).save(clienteDao);
         verifyNoMoreInteractions(findByIdOutputPort, createOutputPort);
     }
 
@@ -69,7 +69,7 @@ class ClienteSenhaUseCaseTest {
     void deveLancarIncompatibleOldPasswordExceptionQuandoSenhaAntigaEhInvalida() {
         // Arrange
         String senhaAntigaInvalida = "senhaErrada";
-        doReturn(Optional.of(clienteEntity)).when(findByIdOutputPort).findById(usuarioId);
+        doReturn(Optional.of(clienteDao)).when(findByIdOutputPort).findById(usuarioId);
 
         // Act & Assert
         IncompatibleOldPasswordException exception = assertThrows(

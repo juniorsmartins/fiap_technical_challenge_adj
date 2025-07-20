@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -14,8 +14,8 @@ import java.util.UUID;
 
 @Mapper(componentModel = "spring", uses = {EnderecoMapper.class, ProprietarioMapper.class})
 public abstract class RestauranteMapper implements InputMapper<RestauranteDtoRequest, Restaurante>,
-        OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity>,
-        EntityMapper<Restaurante, RestauranteEntity> {
+        OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao>,
+        EntityMapper<Restaurante, RestauranteDao> {
 
     @Autowired
     private ProprietarioMapper proprietarioMapper;
@@ -26,11 +26,11 @@ public abstract class RestauranteMapper implements InputMapper<RestauranteDtoReq
 
     public abstract RestauranteDtoResponse toDtoResponse(Restaurante domain);
 
-    public abstract RestauranteDtoResponse toResponse(RestauranteEntity entity);
+    public abstract RestauranteDtoResponse toResponse(RestauranteDao entity);
 
-    public abstract RestauranteEntity toEntity(Restaurante domain);
+    public abstract RestauranteDao toEntity(Restaurante domain);
 
-    public abstract Restaurante toDomain(RestauranteEntity entity);
+    public abstract Restaurante toDomain(RestauranteDao entity);
 
     @Named("mapUuidToProprietario")
     public Proprietario map(UUID proprietarioId) {

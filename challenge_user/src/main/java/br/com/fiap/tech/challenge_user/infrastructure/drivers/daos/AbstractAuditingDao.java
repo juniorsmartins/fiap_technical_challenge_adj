@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.infrastructure.drivers.entities;
+package br.com.fiap.tech.challenge_user.infrastructure.drivers.daos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -17,7 +17,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public abstract class AbstractAuditingEntity implements Serializable {
+public abstract class AbstractAuditingDao implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

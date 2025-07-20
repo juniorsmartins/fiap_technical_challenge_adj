@@ -9,8 +9,8 @@ import br.com.fiap.tech.challenge_user.domain.models.Endereco;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.domain.rules.update.EnderecoUpdateRule;
 import br.com.fiap.tech.challenge_user.domain.rules.update.UsuarioUpdateRule;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,19 +29,19 @@ import static org.mockito.Mockito.*;
 class ClienteUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Cliente, ClienteEntity> entityMapper;
+    private EntityMapper<Cliente, ClienteDao> entityMapper;
 
     @Mock
-    private CreateOutputPort<ClienteEntity> createOutputPort;
+    private CreateOutputPort<ClienteDao> createOutputPort;
 
     @Mock
-    private FindByIdOutputPort<ClienteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ClienteDao> findByIdOutputPort;
 
     @Mock
-    private UsuarioUpdateRule<Cliente, ClienteEntity> usuarioUpdateRule;
+    private UsuarioUpdateRule<Cliente, ClienteDao> usuarioUpdateRule;
 
     @Mock
-    private EnderecoUpdateRule<Cliente, ClienteEntity> enderecoUpdateRule;
+    private EnderecoUpdateRule<Cliente, ClienteDao> enderecoUpdateRule;
 
     @Mock
     private UsuarioRulesStrategy<Cliente> rule1;
@@ -53,7 +53,7 @@ class ClienteUpdateUseCaseTest {
 
     private Cliente cliente;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
 
     private UUID clienteId;
 
@@ -71,14 +71,14 @@ class ClienteUpdateUseCaseTest {
                 endereco, "123456789"
         );
 
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setUsuarioId(clienteId);
-        clienteEntity.setNome("Maria");
-        clienteEntity.setEmail("maria@email.com");
-        clienteEntity.setLogin("maria");
-        clienteEntity.setSenha("maria123");
-        clienteEntity.setNumeroCartaoFidelidade("123456789");
-        clienteEntity.setEndereco(new EnderecoEntity(UUID.randomUUID(), "12345-678", "Rua Exemplo", "123"));
+        clienteDao = new ClienteDao();
+        clienteDao.setUsuarioId(clienteId);
+        clienteDao.setNome("Maria");
+        clienteDao.setEmail("maria@email.com");
+        clienteDao.setLogin("maria");
+        clienteDao.setSenha("maria123");
+        clienteDao.setNumeroCartaoFidelidade("123456789");
+        clienteDao.setEndereco(new EnderecoDao(UUID.randomUUID(), "12345-678", "Rua Exemplo", "123"));
 
         List<UsuarioRulesStrategy<Cliente>> rulesStrategy = List.of(rule1, rule2);
         clienteUpdateUseCase = new ClienteUpdateUseCase(
@@ -89,11 +89,11 @@ class ClienteUpdateUseCaseTest {
     @Test
     void deveAtualizarClienteQuandoDadosSaoValidos() {
         // Arrange
-        when(findByIdOutputPort.findById(clienteId)).thenReturn(Optional.of(clienteEntity));
-        when(usuarioUpdateRule.updateUser(cliente, clienteEntity)).thenReturn(clienteEntity);
-        when(enderecoUpdateRule.updateAddress(cliente, clienteEntity)).thenReturn(clienteEntity);
-        when(createOutputPort.save(clienteEntity)).thenReturn(clienteEntity);
-        when(entityMapper.toDomain(clienteEntity)).thenReturn(cliente);
+        when(findByIdOutputPort.findById(clienteId)).thenReturn(Optional.of(clienteDao));
+        when(usuarioUpdateRule.updateUser(cliente, clienteDao)).thenReturn(clienteDao);
+        when(enderecoUpdateRule.updateAddress(cliente, clienteDao)).thenReturn(clienteDao);
+        when(createOutputPort.save(clienteDao)).thenReturn(clienteDao);
+        when(entityMapper.toDomain(clienteDao)).thenReturn(cliente);
 
         // Act
         Cliente result = clienteUpdateUseCase.update(clienteId, cliente);
@@ -110,10 +110,10 @@ class ClienteUpdateUseCaseTest {
         verify(rule1, times(1)).executar(cliente);
         verify(rule2, times(1)).executar(cliente);
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verify(usuarioUpdateRule, times(1)).updateUser(cliente, clienteEntity);
-        verify(enderecoUpdateRule, times(1)).updateAddress(cliente, clienteEntity);
-        verify(createOutputPort, times(1)).save(clienteEntity);
-        verify(entityMapper, times(1)).toDomain(clienteEntity);
+        verify(usuarioUpdateRule, times(1)).updateUser(cliente, clienteDao);
+        verify(enderecoUpdateRule, times(1)).updateAddress(cliente, clienteDao);
+        verify(createOutputPort, times(1)).save(clienteDao);
+        verify(entityMapper, times(1)).toDomain(clienteDao);
         verifyNoMoreInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
     }
 

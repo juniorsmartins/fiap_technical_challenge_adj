@@ -5,17 +5,17 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutput
 import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = {ConstantsController.URI_RESTAURANTE})
-public class RestauranteFindController extends AbstractFindController<RestauranteDtoResponse, Restaurante, RestauranteEntity> {
+public class RestauranteFindController extends AbstractFindController<RestauranteDtoResponse, Restaurante, RestauranteDao> {
 
     public RestauranteFindController(
-            OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper,
-            FindByIdOutputPort<RestauranteEntity> findByIdOutputPort) {
+            OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper,
+            FindByIdOutputPort<RestauranteDao> findByIdOutputPort) {
         super(outputMapper, findByIdOutputPort);
     }
 }

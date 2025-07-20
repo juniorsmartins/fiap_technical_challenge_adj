@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemDeleteAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class ItemDeleteAdapterTest {
 
     private final ItemRepository repository;
 
-    private DeleteOutputPort<ItemEntity> itemDeleteAdapter;
+    private DeleteOutputPort<ItemDao> itemDeleteAdapter;
 
     @Autowired
     ItemDeleteAdapterTest(ItemRepository repository) {
@@ -35,7 +35,7 @@ class ItemDeleteAdapterTest {
     @Test
     void deveDeletarItemComSucesso() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");
         itemEntity.setPreco(new BigDecimal("20.00"));
@@ -54,7 +54,7 @@ class ItemDeleteAdapterTest {
     @Test
     void deveNaoLancarExcecaoQuandoDeletarItemNaoPersistido() {
         // Arrange
-        var itemEntity = new ItemEntity();
+        var itemEntity = new ItemDao();
         itemEntity.setItemId(UUID.randomUUID());
         itemEntity.setNome("Coca-Cola");
         itemEntity.setDescricao("Refrigerante");

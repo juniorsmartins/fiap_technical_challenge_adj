@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class ClienteDeleteUseCase extends AbstractDeleteUseCase<ClienteEntity>
+public class ClienteDeleteUseCase extends AbstractDeleteUseCase<ClienteDao>
         implements DeleteByIdInputPort<Cliente> {
 
     public ClienteDeleteUseCase(
-            FindByIdOutputPort<ClienteEntity> findByIdOutputPort,
-            DeleteOutputPort<ClienteEntity> deleteOutputPort) {
+            FindByIdOutputPort<ClienteDao> findByIdOutputPort,
+            DeleteOutputPort<ClienteDao> deleteOutputPort) {
         super(findByIdOutputPort, deleteOutputPort);
     }
 

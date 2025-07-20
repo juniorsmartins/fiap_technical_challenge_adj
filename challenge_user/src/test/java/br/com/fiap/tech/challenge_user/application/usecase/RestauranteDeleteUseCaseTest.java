@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,37 +22,37 @@ import static org.mockito.Mockito.*;
 class RestauranteDeleteUseCaseTest {
 
     @Mock
-    private FindByIdOutputPort<RestauranteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<RestauranteDao> findByIdOutputPort;
 
     @Mock
-    private DeleteOutputPort<RestauranteEntity> deleteOutputPort;
+    private DeleteOutputPort<RestauranteDao> deleteOutputPort;
 
     @InjectMocks
     private RestauranteDeleteUseCase restauranteDeleteUseCase;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
     private UUID restauranteId;
 
     @BeforeEach
     void setUp() {
         restauranteId = UUID.randomUUID();
-        restauranteEntity = new RestauranteEntity();
-        restauranteEntity.setRestauranteId(restauranteId);
-        restauranteEntity.setNome("Restaurante Sabor");
+        restauranteDao = new RestauranteDao();
+        restauranteDao.setRestauranteId(restauranteId);
+        restauranteDao.setNome("Restaurante Sabor");
         // Outros campos podem ser preenchidos conforme necessário
     }
 
     @Test
     void deveDeletarRestauranteQuandoEntidadeEhEncontrada() {
         // Arrange
-        doReturn(Optional.of(restauranteEntity)).when(findByIdOutputPort).findById(restauranteId);
+        doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
 
         // Act
         restauranteDeleteUseCase.deleteById(restauranteId);
 
         // Assert
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verify(deleteOutputPort, times(1)).delete(restauranteEntity);
+        verify(deleteOutputPort, times(1)).delete(restauranteDao);
         verifyNoMoreInteractions(findByIdOutputPort, deleteOutputPort);
     }
 

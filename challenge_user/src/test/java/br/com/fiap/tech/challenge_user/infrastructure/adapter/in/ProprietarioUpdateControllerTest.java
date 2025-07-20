@@ -11,7 +11,7 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +33,7 @@ class ProprietarioUpdateControllerTest {
     private InputMapper<ProprietarioDtoRequest, Proprietario> inputMapper;
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper;
+    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputMapper;
 
     @Mock
     private UpdateInputPort<Proprietario> updateInputPort;

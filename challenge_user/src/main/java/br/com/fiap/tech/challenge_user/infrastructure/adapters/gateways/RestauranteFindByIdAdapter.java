@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.RestauranteRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +13,13 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class RestauranteFindByIdAdapter implements FindByIdOutputPort<RestauranteEntity> {
+public class RestauranteFindByIdAdapter implements FindByIdOutputPort<RestauranteDao> {
 
     private final RestauranteRepository repository;
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<RestauranteEntity> findById(@NonNull final UUID id) {
+    public Optional<RestauranteDao> findById(@NonNull final UUID id) {
 
         return repository.findById(id);
     }

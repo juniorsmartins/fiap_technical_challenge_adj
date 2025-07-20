@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.drivers.specs;
 
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
@@ -10,7 +10,7 @@ import java.util.*;
 
 public final class ProprietarioSpecfication {
 
-    public static Specification<ProprietarioEntity> consultaDinamica(UsuarioFiltroDto filtro) {
+    public static Specification<ProprietarioDao> consultaDinamica(UsuarioFiltroDto filtro) {
 
         return ((root, query, criteriaBuilder) -> {
 

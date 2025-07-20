@@ -4,17 +4,17 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PageMa
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = {ConstantsController.URI_CLIENTE})
-public class ClienteSearchController extends AbstractUsuarioSearchController<ClienteDtoResponse, ClienteEntity> {
+public class ClienteSearchController extends AbstractUsuarioSearchController<ClienteDtoResponse, ClienteDao> {
 
     public ClienteSearchController(
-            PageMapper<ClienteDtoResponse, ClienteEntity> mapper,
-            UsuarioSearchOutputPort<ClienteEntity> outputPort) {
+            PageMapper<ClienteDtoResponse, ClienteDao> mapper,
+            UsuarioSearchOutputPort<ClienteDao> outputPort) {
         super(mapper, outputPort);
     }
 }

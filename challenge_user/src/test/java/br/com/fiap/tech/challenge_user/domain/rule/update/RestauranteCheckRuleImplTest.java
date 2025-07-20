@@ -6,7 +6,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutput
 import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,10 +24,10 @@ import static org.mockito.Mockito.*;
 class RestauranteCheckRuleImplTest {
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @Mock
-    private EntityMapper<Proprietario, ProprietarioEntity> mapper;
+    private EntityMapper<Proprietario, ProprietarioDao> mapper;
 
     @InjectMocks
     private RestauranteCheckRuleImpl restauranteCheckRule;
@@ -36,14 +36,14 @@ class RestauranteCheckRuleImplTest {
 
     private Restaurante restaurante;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private Proprietario proprietarioDomain;
 
     @BeforeEach
     void setUp() {
         proprietarioId = UUID.randomUUID();
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("Mads Torgersen");
 
@@ -62,7 +62,7 @@ class RestauranteCheckRuleImplTest {
         when(mapper.toDomain(proprietarioEntity)).thenReturn(proprietarioDomain);
 
         // Act
-        ProprietarioEntity result = restauranteCheckRule.checkProprietario(restaurante);
+        ProprietarioDao result = restauranteCheckRule.checkProprietario(restaurante);
 
         // Assert
         assertNotNull(result);

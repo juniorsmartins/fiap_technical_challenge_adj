@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class ItemDeleteAdapter implements DeleteOutputPort<ItemEntity> {
+public class ItemDeleteAdapter implements DeleteOutputPort<ItemDao> {
 
     private final ItemRepository repository;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Override
-    public void delete(@NonNull final ItemEntity entity) {
+    public void delete(@NonNull final ItemDao entity) {
 
         repository.delete(entity);
     }

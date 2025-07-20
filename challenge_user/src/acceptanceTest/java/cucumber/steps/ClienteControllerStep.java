@@ -5,8 +5,8 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.SenhaDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.EnderecoEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ClienteRepository;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.EnderecoRepository;
 import cucumber.config.ConstantsTest;
@@ -51,7 +51,7 @@ public final class ClienteControllerStep {
 
     private ClienteDtoResponse clienteDtoResponse;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
 
     private EnderecoDtoResponse enderecoDtoResponse;
 
@@ -81,21 +81,21 @@ public final class ClienteControllerStep {
         List<Map<String, String>> usuariosData = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> row : usuariosData) {
-            EnderecoEntity enderecoEntity = null;
+            EnderecoDao enderecoDao = null;
 
             if (!row.get("cep").isEmpty()) {
-                enderecoEntity = new EnderecoEntity();
-                enderecoEntity.setCep(row.get("cep"));
-                enderecoEntity.setLogradouro(row.get("logradouro"));
-                enderecoEntity.setNumero(row.get("numero"));
+                enderecoDao = new EnderecoDao();
+                enderecoDao.setCep(row.get("cep"));
+                enderecoDao.setLogradouro(row.get("logradouro"));
+                enderecoDao.setNumero(row.get("numero"));
             }
 
-            var clienteEntidade = new ClienteEntity(
+            var clienteEntidade = new ClienteDao(
                     row.get("nome"),
                     row.get("email"),
                     row.get("login"),
                     row.get("senha"),
-                    enderecoEntity,
+                    enderecoDao,
                     row.get("numeroCartaoFidelidade"),
                     Date.from(Instant.now()),
                     null
@@ -162,7 +162,7 @@ public final class ClienteControllerStep {
     public void o_cliente_no_database_possui_nome_e_email_e_login_e_senha_numero_cartao_fidelidade(
             String nome, String email, String login, String senha, String numeroCartaoFidelidade) {
 
-        var cliente = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
+        var cliente = clienteRepository.findById(clienteDao.getUsuarioId()).get();
 
         assertThat(cliente.getNome()).isEqualTo(nome);
         assertThat(cliente.getEmail()).isEqualTo(email);
@@ -174,8 +174,8 @@ public final class ClienteControllerStep {
     @Dado("um identificador ID de um cliente existente, com email {string}")
     public void um_identificador_id_de_um_cliente_existente_com_email(String email) {
 
-        clienteEntity = clienteRepository.findByEmail(email).get();
-        assertThat(clienteEntity).isNotNull();
+        clienteDao = clienteRepository.findByEmail(email).get();
+        assertThat(clienteDao).isNotNull();
     }
 
     @Quando("uma requisição Get for feita no método findById do ClienteController")
@@ -185,7 +185,7 @@ public final class ClienteControllerStep {
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                .get("/" + clienteEntity.getUsuarioId());
+                .get("/" + clienteDao.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -197,7 +197,7 @@ public final class ClienteControllerStep {
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                .delete("/" + clienteEntity.getUsuarioId());
+                .delete("/" + clienteDao.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -205,14 +205,14 @@ public final class ClienteControllerStep {
     @Entao("o Cliente foi apagado do banco de dados pelo ClienteController")
     public void o_cliente_foi_apagado_do_banco_de_dados_pelo_cliente_controller() {
 
-        var response = clienteRepository.findById(clienteEntity.getUsuarioId());
+        var response = clienteRepository.findById(clienteDao.getUsuarioId());
         assertThat(response).isEmpty();
     }
 
     @Entao("o Endereço foi apagado do banco de dados pelo ClienteController")
     public void o_endereco_foi_apagado_do_banco_de_dados_pelo_cliente_controller() {
 
-        var response = clienteRepository.findById(clienteEntity.getEndereco().getEnderecoId());
+        var response = clienteRepository.findById(clienteDao.getEndereco().getEnderecoId());
 
         assertThat(response).isEmpty();
     }
@@ -225,7 +225,7 @@ public final class ClienteControllerStep {
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .body(clienteDtoRequest)
                 .when()
-                .put("/" + clienteEntity.getUsuarioId());
+                .put("/" + clienteDao.getUsuarioId());
 
         assertThat(response).isNotNull();
     }
@@ -233,7 +233,7 @@ public final class ClienteControllerStep {
     @Dado("um identificador ID de um cliente inexistente")
     public void um_identificador_id_de_um_cliente_inexistente() {
 
-        clienteEntity = new ClienteEntity(
+        clienteDao = new ClienteDao(
                 UUID.randomUUID(),
                 "nomeTeste",
                 "emailTeste",
@@ -245,7 +245,7 @@ public final class ClienteControllerStep {
                 null
         );
 
-        assertThat(clienteEntity.getUsuarioId()).isNotNull();
+        assertThat(clienteDao.getUsuarioId()).isNotNull();
     }
 
     @Dado("um ClienteDtoRequest e EnderecoDtoRequest, com nome {string} e email {string} e login {string} e senha {string} e numeroCartaoFidelidade {string} e com cep {string} e logradouro {string} e número {string}")
@@ -294,9 +294,9 @@ public final class ClienteControllerStep {
     @Entao("sem Endereço salvo no database")
     public void sem_endereco_salvo_no_database() {
 
-        var usuarioAtualizado = clienteRepository.findById(clienteEntity.getUsuarioId()).get();
+        var usuarioAtualizado = clienteRepository.findById(clienteDao.getUsuarioId()).get();
 
-        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteEntity.getUsuarioId());
+        assertThat(usuarioAtualizado.getUsuarioId()).isEqualTo(clienteDao.getUsuarioId());
         assertThat(usuarioAtualizado.getEndereco()).isNull();
     }
 
@@ -389,7 +389,7 @@ public final class ClienteControllerStep {
             String senhaAntiga, String senhaNova) {
 
         senhaDtoRequest = new SenhaDtoRequest(
-                clienteEntity.getUsuarioId(), senhaAntiga, senhaNova);
+                clienteDao.getUsuarioId(), senhaAntiga, senhaNova);
 
         assertThat(senhaDtoRequest).isNotNull();
     }

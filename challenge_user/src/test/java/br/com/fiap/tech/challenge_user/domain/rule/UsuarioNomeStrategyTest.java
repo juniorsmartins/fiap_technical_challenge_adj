@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByN
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
 import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioNomeStrategy;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,7 +46,7 @@ class UsuarioNomeStrategyTest {
     @Test
     void deveNaoLancarExcecaoQuandoNomeExisteParaMesmoUsuario() {
         // Arrange
-        var existente = new ProprietarioEntity();
+        var existente = new ProprietarioDao();
         existente.setUsuarioId(usuarioId);
         existente.setNome(nome);
 
@@ -63,7 +63,7 @@ class UsuarioNomeStrategyTest {
     @Test
     void deveLancarExcecaoQuandoNomeExisteParaOutroUsuario() {
         // Arrange
-        var existente = new ProprietarioEntity();
+        var existente = new ProprietarioDao();
         existente.setUsuarioId(UUID.randomUUID());
         existente.setNome(nome);
 

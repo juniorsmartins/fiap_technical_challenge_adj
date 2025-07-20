@@ -2,8 +2,8 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioDeleteAdapter;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,9 +17,9 @@ class UsuarioDeleteAdapterTest {
 
     private final UsuarioRepository repository;
 
-    private DeleteOutputPort<ClienteEntity> clienteDeleteAdapter;
+    private DeleteOutputPort<ClienteDao> clienteDeleteAdapter;
 
-    private DeleteOutputPort<ProprietarioEntity> proprietarioDeleteAdapter;
+    private DeleteOutputPort<ProprietarioDao> proprietarioDeleteAdapter;
 
     @Autowired
     UsuarioDeleteAdapterTest(UsuarioRepository repository) {
@@ -36,7 +36,7 @@ class UsuarioDeleteAdapterTest {
     @Test
     void deveDeletarClienteComSucesso() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");
@@ -56,7 +56,7 @@ class UsuarioDeleteAdapterTest {
     @Test
     void deveIgnorarDelecaoDeClienteNaoPersistido() {
         // Arrange
-        var clienteEntity = new ClienteEntity();
+        var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
         clienteEntity.setEmail("babbage@email.com");
         clienteEntity.setLogin("babbage");
@@ -73,7 +73,7 @@ class UsuarioDeleteAdapterTest {
     @Test
     void deveDeletarProprietarioComSucesso() {
         // Arrange
-        var proprietarioEntity = new ProprietarioEntity();
+        var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("jsilva");
@@ -93,7 +93,7 @@ class UsuarioDeleteAdapterTest {
     @Test
     void deveIgnorarDelecaoDeProprietarioNaoPersistido() {
         // Arrange
-        var proprietarioEntity = new ProprietarioEntity();
+        var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("jsilva");

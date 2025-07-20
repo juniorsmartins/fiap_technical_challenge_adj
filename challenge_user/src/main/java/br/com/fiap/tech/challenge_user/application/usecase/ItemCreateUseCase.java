@@ -4,16 +4,16 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.Entity
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.models.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItemCreateUseCase extends AbstractCreateUseCase<Item, ItemEntity> implements CreateInputPort<Item> {
+public class ItemCreateUseCase extends AbstractCreateUseCase<Item, ItemDao> implements CreateInputPort<Item> {
 
     public ItemCreateUseCase(
-            EntityMapper<Item, ItemEntity> entityMapper,
-            CreateOutputPort<ItemEntity> createOutputPort) {
+            EntityMapper<Item, ItemDao> entityMapper,
+            CreateOutputPort<ItemDao> createOutputPort) {
         super(entityMapper, createOutputPort);
     }
 

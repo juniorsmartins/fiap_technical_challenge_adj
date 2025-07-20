@@ -7,7 +7,7 @@ import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotF
 import br.com.fiap.tech.challenge_user.domain.models.Cliente;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,17 +27,17 @@ import static org.mockito.Mockito.*;
 class ClienteFindControllerTest {
 
     @Mock
-    private OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> outputMapper;
+    private OutputMapper<Cliente, ClienteDtoResponse, ClienteDao> outputMapper;
 
     @Mock
-    private FindByIdOutputPort<ClienteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ClienteDao> findByIdOutputPort;
 
     @InjectMocks
     private ClienteFindController clienteFindController;
 
     private UUID clienteId;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
 
     private ClienteDtoResponse clienteDtoResponse;
 
@@ -46,13 +46,13 @@ class ClienteFindControllerTest {
         clienteId = UUID.randomUUID();
         var enderecoId = UUID.randomUUID();
 
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setUsuarioId(clienteId);
-        clienteEntity.setNome("Robert Martin");
-        clienteEntity.setEmail("martin@email.com");
-        clienteEntity.setLogin("rmartin");
-        clienteEntity.setSenha("rmartin!123");
-        clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
+        clienteDao = new ClienteDao();
+        clienteDao.setUsuarioId(clienteId);
+        clienteDao.setNome("Robert Martin");
+        clienteDao.setEmail("martin@email.com");
+        clienteDao.setLogin("rmartin");
+        clienteDao.setSenha("rmartin!123");
+        clienteDao.setNumeroCartaoFidelidade("12345-6789-3245");
 
         var enderecoDtoResponse = new EnderecoDtoResponse(
                 enderecoId, "01001-000", "Avenida Central", "1500"
@@ -67,8 +67,8 @@ class ClienteFindControllerTest {
     @Test
     void deveEncontrarClienteComSucesso() {
         // Arrange
-        doReturn(Optional.of(clienteEntity)).when(findByIdOutputPort).findById(clienteId);
-        doReturn(clienteDtoResponse).when(outputMapper).toResponse(clienteEntity);
+        doReturn(Optional.of(clienteDao)).when(findByIdOutputPort).findById(clienteId);
+        doReturn(clienteDtoResponse).when(outputMapper).toResponse(clienteDao);
 
         // Act
         ResponseEntity<ClienteDtoResponse> response = clienteFindController.findById(clienteId);
@@ -78,7 +78,7 @@ class ClienteFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(clienteDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verify(outputMapper, times(1)).toResponse(clienteEntity);
+        verify(outputMapper, times(1)).toResponse(clienteDao);
         verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
     }
 

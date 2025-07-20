@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByEmailOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class UsuarioFindByEmailAdapter implements UsuarioFindByEmailOutputPort {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<UsuarioEntity> findByEmail(@NonNull final String email) {
+    public Optional<UsuarioDao> findByEmail(@NonNull final String email) {
 
         return repository.findByEmail(email);
     }

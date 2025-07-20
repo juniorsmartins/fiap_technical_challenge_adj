@@ -7,18 +7,18 @@ import br.com.fiap.tech.challenge_user.domain.models.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = {ConstantsController.URI_ITENS})
 public class ItemUpdateController
-        extends AbstractUpdateController<ItemDtoRequest, ItemDtoResponse, Item, ItemEntity> {
+        extends AbstractUpdateController<ItemDtoRequest, ItemDtoResponse, Item, ItemDao> {
 
     public ItemUpdateController(
             InputMapper<ItemDtoRequest, Item> inputMapper,
-            OutputMapper<Item, ItemDtoResponse, ItemEntity> outputMapper,
+            OutputMapper<Item, ItemDtoResponse, ItemDao> outputMapper,
             UpdateInputPort<Item> updateInputPort) {
         super(inputMapper, outputMapper, updateInputPort);
     }
