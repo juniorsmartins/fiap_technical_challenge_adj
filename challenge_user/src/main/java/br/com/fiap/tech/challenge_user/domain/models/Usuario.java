@@ -1,7 +1,9 @@
 package br.com.fiap.tech.challenge_user.domain.models;
 
+import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoInvalidoException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoTamanhoLimitadoException;
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -116,6 +118,17 @@ public abstract class Usuario {
         }
         if (nome.length() > MAX_CARACTER_NOME) {
             throw new AtributoTamanhoLimitadoException(String.valueOf(MAX_CARACTER_NOME));
+        }
+    }
+
+    private void validarAtributoEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new AtributoObrigatorioException("email");
+        }
+        EmailValidator emailValidator = new EmailValidator();
+        emailValidator.initialize(null);
+        if (!emailValidator.isValid(email.trim(), null)) {
+            throw new AtributoInvalidoException("email");
         }
     }
 }

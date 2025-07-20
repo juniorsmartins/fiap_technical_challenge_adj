@@ -8,7 +8,7 @@ import java.io.Serial;
 public abstract sealed class RegraDeNegocioVioladaException extends RuntimeException
         permits UsuarioNonUniqueEmailException, UsuarioNonUniqueLoginException, UsuarioNonUniqueNomeException,
         IncompatibleOldPasswordException, ActiveOwnerBlocksDeletionException, OpeningTimeLaterClosingTimeException,
-        AtributoObrigatorioException, AtributoTamanhoLimitadoException {
+        AtributoObrigatorioException, AtributoTamanhoLimitadoException, AtributoInvalidoException {
 
     @Serial
     private static final long serialVersionUID = 1L;
