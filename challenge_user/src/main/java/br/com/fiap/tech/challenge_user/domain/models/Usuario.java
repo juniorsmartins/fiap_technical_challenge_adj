@@ -1,7 +1,12 @@
 package br.com.fiap.tech.challenge_user.domain.models;
 
+import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoTamanhoLimitadoException;
+
 import java.util.Objects;
 import java.util.UUID;
+
+import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.MAX_CARACTER_NOME;
 
 public abstract class Usuario {
 
@@ -30,6 +35,7 @@ public abstract class Usuario {
         this.login = login;
         this.senha = senha;
         this.endereco = endereco;
+        validarAtributoNome(nome);
     }
 
     public Usuario(UUID usuarioId,
@@ -40,6 +46,7 @@ public abstract class Usuario {
                    Endereco endereco) {
         this(nome, email, login, senha, endereco);
         this.usuarioId = usuarioId;
+        validarAtributoNome(nome);
     }
 
     public UUID getUsuarioId() {
@@ -55,6 +62,7 @@ public abstract class Usuario {
     }
 
     public void setNome(String nome) {
+        validarAtributoNome(nome);
         this.nome = nome;
     }
 
@@ -100,6 +108,15 @@ public abstract class Usuario {
     @Override
     public int hashCode() {
         return Objects.hashCode(usuarioId);
+    }
+
+    private void validarAtributoNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new AtributoObrigatorioException("nome");
+        }
+        if (nome.length() > MAX_CARACTER_NOME) {
+            throw new AtributoTamanhoLimitadoException(String.valueOf(MAX_CARACTER_NOME));
+        }
     }
 }
 
