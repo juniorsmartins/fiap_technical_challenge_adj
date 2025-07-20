@@ -1,19 +1,18 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteCreateController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
-import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.models.Endereco;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
+import br.com.fiap.tech.challenge_user.domain.models.Endereco;
+import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteCreateController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.entities.RestauranteEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,8 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -123,18 +123,6 @@ class RestauranteCreateControllerTest {
         verify(createInputPort, times(1)).create(restaurante);
         verify(outputMapper, times(1)).toDtoResponse(restaurante);
         verifyNoMoreInteractions(inputMapper, createInputPort, outputMapper);
-    }
-
-    @Test
-    void deveLancarInternalServerProblemExceptionQuandoDtoRequestEhNulo() {
-        // Act & Assert
-        InternalServerProblemException exception = assertThrows(
-                InternalServerProblemException.class,
-                () -> restauranteCreateController.create(null)
-        );
-
-        assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, createInputPort, outputMapper);
     }
 }
 

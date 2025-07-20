@@ -41,23 +41,23 @@ public final class Restaurante {
 
         validarAtributoNome(nome);
         validarAtributoTipoCozinhaEnum(tipoCozinhaEnum);
-        validarAtributosHora(horaAbertura);
-        validarAtributosHora(horaFechamento);
-        checkHoraFuncionamento();
+        validarAtributosHora("horaAbertura", horaAbertura);
+        validarAtributosHora("horaFechamento", horaFechamento);
+        checkHoraFuncionamento(horaAbertura, horaFechamento);
         validarAtributosEndereco(endereco);
         validarAtributosProprietario(proprietario);
     }
 
     public void setHoraAbertura(LocalTime horaAbertura) {
         this.horaAbertura = horaAbertura;
-        validarAtributosHora(horaAbertura);
-        this.checkHoraFuncionamento();
+        validarAtributosHora("horaAbertura", horaAbertura);
+        this.checkHoraFuncionamento(horaAbertura, this.horaFechamento);
     }
 
     public void setHoraFechamento(LocalTime horaFim) {
         this.horaFechamento = horaFim;
-        validarAtributosHora(horaFim);
-        this.checkHoraFuncionamento();
+        validarAtributosHora("horaFechamento", horaFechamento);
+        this.checkHoraFuncionamento(this.horaAbertura, horaFim);
     }
 
     public LocalTime getHoraAbertura() {
@@ -136,15 +136,15 @@ public final class Restaurante {
         }
     }
 
-    private void validarAtributosHora(LocalTime hora) {
-        if (hora == null) {
-            throw new AtributoObrigatorioException("horaAbertura ou horaFechamento");
+    private void checkHoraFuncionamento(LocalTime horaAbertura, LocalTime horaFechamento) {
+        if (horaAbertura != null && horaFechamento != null && horaFechamento.isBefore(horaAbertura)) {
+            throw new OpeningTimeLaterClosingTimeException(horaAbertura + " e " + horaFechamento);
         }
     }
 
-    private void checkHoraFuncionamento() {
-        if (this.horaFechamento != null && this.horaAbertura != null && this.horaFechamento.isBefore(this.horaAbertura)) {
-            throw new OpeningTimeLaterClosingTimeException(this.horaFechamento.toString());
+    private void validarAtributosHora(String nomeAtributo, LocalTime hora) {
+        if (hora == null) {
+            throw new AtributoObrigatorioException(nomeAtributo);
         }
     }
 
