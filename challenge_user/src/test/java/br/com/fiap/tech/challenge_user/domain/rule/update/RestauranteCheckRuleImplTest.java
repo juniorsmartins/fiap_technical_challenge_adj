@@ -88,18 +88,5 @@ class RestauranteCheckRuleImplTest {
         verifyNoInteractions(mapper);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
-
-    @Test
-    void deveLancarNullPointerExceptionQuandoProprietarioEhNulo() {
-        // Arrange
-        restaurante.setProprietario(null);
-
-        // Act & Assert
-        assertThrows(
-                NullPointerException.class,
-                () -> restauranteCheckRule.checkProprietario(restaurante)
-        );
-        verifyNoInteractions(findByIdOutputPort, mapper);
-    }
 }
 

@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge_user.domain.models;
 
+import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.OpeningTimeLaterClosingTimeException;
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
 
@@ -38,25 +39,25 @@ public final class Restaurante {
         this.endereco = endereco;
         this.proprietario = proprietario;
 
-        this.checkHoraFuncionamento();
+        validarAtributoNome(nome);
+        validarAtributoTipoCozinhaEnum(tipoCozinhaEnum);
+        validarAtributosHora(horaAbertura);
+        validarAtributosHora(horaFechamento);
+        checkHoraFuncionamento();
+        validarAtributosEndereco(endereco);
+        validarAtributosProprietario(proprietario);
     }
 
     public void setHoraAbertura(LocalTime horaAbertura) {
         this.horaAbertura = horaAbertura;
+        validarAtributosHora(horaAbertura);
         this.checkHoraFuncionamento();
     }
 
-    public void setHoraFechamento(LocalTime horarioFim) {
-
-        this.horaFechamento = horarioFim;
+    public void setHoraFechamento(LocalTime horaFim) {
+        this.horaFechamento = horaFim;
+        validarAtributosHora(horaFim);
         this.checkHoraFuncionamento();
-    }
-
-    private void checkHoraFuncionamento() {
-
-        if (this.horaFechamento != null && this.horaAbertura != null && this.horaFechamento.isBefore(this.horaAbertura)) {
-            throw new OpeningTimeLaterClosingTimeException(this.horaFechamento.toString());
-        }
     }
 
     public LocalTime getHoraAbertura() {
@@ -81,6 +82,7 @@ public final class Restaurante {
 
     public void setNome(String nome) {
         this.nome = nome;
+        validarAtributoNome(nome);
     }
 
     public TipoCozinhaEnum getTipoCozinhaEnum() {
@@ -89,6 +91,7 @@ public final class Restaurante {
 
     public void setTipoCozinhaEnum(TipoCozinhaEnum tipoCozinhaEnum) {
         this.tipoCozinhaEnum = tipoCozinhaEnum;
+        validarAtributoTipoCozinhaEnum(tipoCozinhaEnum);
     }
 
     public Endereco getEndereco() {
@@ -97,6 +100,7 @@ public final class Restaurante {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+        validarAtributosEndereco(endereco);
     }
 
     public Proprietario getProprietario() {
@@ -105,6 +109,7 @@ public final class Restaurante {
 
     public void setProprietario(Proprietario proprietario) {
         this.proprietario = proprietario;
+        validarAtributosProprietario(proprietario);
     }
 
     @Override
@@ -117,6 +122,42 @@ public final class Restaurante {
     @Override
     public int hashCode() {
         return Objects.hashCode(restauranteId);
+    }
+
+    private void validarAtributoNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new AtributoObrigatorioException("nome");
+        }
+    }
+
+    private void validarAtributoTipoCozinhaEnum(TipoCozinhaEnum tipoCozinhaEnum) {
+        if (tipoCozinhaEnum == null) {
+            throw new AtributoObrigatorioException("tipoCozinhaEnum");
+        }
+    }
+
+    private void validarAtributosHora(LocalTime hora) {
+        if (hora == null) {
+            throw new AtributoObrigatorioException("horaAbertura ou horaFechamento");
+        }
+    }
+
+    private void checkHoraFuncionamento() {
+        if (this.horaFechamento != null && this.horaAbertura != null && this.horaFechamento.isBefore(this.horaAbertura)) {
+            throw new OpeningTimeLaterClosingTimeException(this.horaFechamento.toString());
+        }
+    }
+
+    private void validarAtributosEndereco(Endereco endereco) {
+        if (endereco == null) {
+            throw new AtributoObrigatorioException("endereco");
+        }
+    }
+
+    private void validarAtributosProprietario(Proprietario proprietario) {
+        if (proprietario == null) {
+            throw new AtributoObrigatorioException("proprietario");
+        }
     }
 }
 

@@ -97,36 +97,6 @@ class RestauranteTest {
     }
 
     @Test
-    void deveCriarRestauranteComHoraAberturaNula() {
-        // Arrange
-        horaAbertura = null;
-
-        // Act
-        Restaurante restaurante = new Restaurante(
-                restauranteId, nome, tipoCozinha, horaAbertura, horaFechamento, endereco, proprietario
-        );
-
-        // Assert
-        assertNull(restaurante.getHoraAbertura());
-        assertEquals(horaFechamento, restaurante.getHoraFechamento());
-    }
-
-    @Test
-    void deveCriarRestauranteComHoraFechamentoNula() {
-        // Arrange
-        horaFechamento = null;
-
-        // Act
-        Restaurante restaurante = new Restaurante(
-                restauranteId, nome, tipoCozinha, horaAbertura, horaFechamento, endereco, proprietario
-        );
-
-        // Assert
-        assertNull(restaurante.getHoraFechamento());
-        assertEquals(horaAbertura, restaurante.getHoraAbertura());
-    }
-
-    @Test
     void deveDefinirHoraFechamentoValida() {
         // Arrange
         Restaurante restaurante = new Restaurante(
@@ -170,35 +140,6 @@ class RestauranteTest {
                 () -> restaurante.setHoraFechamento(novaHoraFechamento)
         );
         assertEquals(novaHoraFechamento.toString(), exception.getValor());
-    }
-
-    @Test
-    void deveDefinirHoraFechamentoNula() {
-        // Arrange
-        Restaurante restaurante = new Restaurante(
-                restauranteId, nome, tipoCozinha, horaAbertura, horaFechamento, endereco, proprietario
-        );
-
-        // Act
-        restaurante.setHoraFechamento(null);
-
-        // Assert
-        assertNull(restaurante.getHoraFechamento());
-    }
-
-    @Test
-    void deveDefinirHoraFechamentoComHoraAberturaNula() {
-        // Arrange
-        Restaurante restaurante = new Restaurante(
-                restauranteId, nome, tipoCozinha, null, horaFechamento, endereco, proprietario
-        );
-        LocalTime novaHoraFechamento = LocalTime.of(22, 0, 0);
-
-        // Act
-        restaurante.setHoraFechamento(novaHoraFechamento);
-
-        // Assert
-        assertEquals(novaHoraFechamento, restaurante.getHoraFechamento());
     }
 }
 
