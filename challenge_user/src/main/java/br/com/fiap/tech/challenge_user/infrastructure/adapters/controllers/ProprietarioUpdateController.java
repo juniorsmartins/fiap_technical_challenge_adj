@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsControl
 import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;

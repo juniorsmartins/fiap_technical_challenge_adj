@@ -2,7 +2,10 @@ package br.com.fiap.tech.challenge_user.domain.models;
 
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.OpeningTimeLaterClosingTimeException;
-import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

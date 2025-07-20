@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.Entity
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import lombok.NonNull;

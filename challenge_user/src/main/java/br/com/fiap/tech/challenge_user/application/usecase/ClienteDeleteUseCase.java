@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
-import br.com.fiap.tech.challenge_user.domain.models.Cliente;
+import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;

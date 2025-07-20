@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge_user.domain.models;
 
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
+import br.com.fiap.tech.challenge_user.domain.entities.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

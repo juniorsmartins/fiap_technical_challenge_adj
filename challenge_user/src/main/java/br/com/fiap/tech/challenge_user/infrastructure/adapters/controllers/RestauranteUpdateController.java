@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;

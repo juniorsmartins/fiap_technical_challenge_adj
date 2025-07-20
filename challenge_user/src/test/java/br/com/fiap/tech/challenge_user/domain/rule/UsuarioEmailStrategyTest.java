@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.domain.rule;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByEmailOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueEmailException;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioEmailStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;

@@ -5,8 +5,8 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputM
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.models.Cliente;
-import br.com.fiap.tech.challenge_user.domain.models.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;

@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.models.Item;
+import br.com.fiap.tech.challenge_user.domain.entities.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

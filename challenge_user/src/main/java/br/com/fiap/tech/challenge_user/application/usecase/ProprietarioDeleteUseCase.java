@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPo
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.ActiveOwnerBlocksDeletionException;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

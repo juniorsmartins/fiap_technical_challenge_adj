@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsControl
 import br.com.fiap.tech.challenge_user.application.dtos.in.ClienteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
-import br.com.fiap.tech.challenge_user.domain.models.Cliente;
+import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;

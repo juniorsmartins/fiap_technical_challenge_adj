@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
-import br.com.fiap.tech.challenge_user.domain.models.Endereco;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;

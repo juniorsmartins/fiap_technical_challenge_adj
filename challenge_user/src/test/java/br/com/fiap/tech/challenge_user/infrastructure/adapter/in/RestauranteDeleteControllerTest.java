@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteDeleteController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

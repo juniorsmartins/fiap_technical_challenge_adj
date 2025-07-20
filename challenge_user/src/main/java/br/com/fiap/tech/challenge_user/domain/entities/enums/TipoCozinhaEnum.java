@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.models.enums;
+package br.com.fiap.tech.challenge_user.domain.entities.enums;
 
 import lombok.Getter;
 

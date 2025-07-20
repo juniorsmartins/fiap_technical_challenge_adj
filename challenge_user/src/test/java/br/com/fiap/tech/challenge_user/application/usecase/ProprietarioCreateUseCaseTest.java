@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;

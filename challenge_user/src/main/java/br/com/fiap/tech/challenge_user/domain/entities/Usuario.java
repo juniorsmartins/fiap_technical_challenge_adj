@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge_user.domain.models;
+package br.com.fiap.tech.challenge_user.domain.entities;
 
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoInvalidoException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;

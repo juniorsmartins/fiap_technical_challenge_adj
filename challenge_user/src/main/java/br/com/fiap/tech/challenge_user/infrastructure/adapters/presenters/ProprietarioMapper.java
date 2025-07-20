@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
 import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;

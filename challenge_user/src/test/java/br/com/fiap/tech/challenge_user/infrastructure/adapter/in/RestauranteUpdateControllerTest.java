@@ -5,10 +5,10 @@ import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputM
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.models.Endereco;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;

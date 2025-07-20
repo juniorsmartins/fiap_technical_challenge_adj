@@ -1,8 +1,8 @@
-package br.com.fiap.tech.challenge_user.domain.models;
+package br.com.fiap.tech.challenge_user.domain.entities;
 
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
 import br.com.fiap.tech.challenge_user.application.exception.http409.OpeningTimeLaterClosingTimeException;
-import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
 
 import java.time.LocalTime;
 import java.util.Objects;

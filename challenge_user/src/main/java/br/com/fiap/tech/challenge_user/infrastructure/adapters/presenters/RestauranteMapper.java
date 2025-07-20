@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;

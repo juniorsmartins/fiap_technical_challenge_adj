@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.domain.rules.update;
 
-import br.com.fiap.tech.challenge_user.domain.models.Usuario;
+import br.com.fiap.tech.challenge_user.domain.entities.Usuario;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

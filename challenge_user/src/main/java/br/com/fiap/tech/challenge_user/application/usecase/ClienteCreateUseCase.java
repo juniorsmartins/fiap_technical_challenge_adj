@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.models.Cliente;
+import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import lombok.NonNull;

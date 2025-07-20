@@ -2,10 +2,10 @@ package br.com.fiap.tech.challenge_user.application.usecase;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.models.Endereco;
-import br.com.fiap.tech.challenge_user.domain.models.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.models.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
