@@ -8,8 +8,7 @@ import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import java.util.Objects;
 import java.util.UUID;
 
-import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.MAX_CARACTER_LOGIN;
-import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.MAX_CARACTER_NOME;
+import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.*;
 
 public abstract class Usuario {
 
@@ -41,6 +40,7 @@ public abstract class Usuario {
         validarAtributoNome(nome);
         validarAtributoEmail(email);
         validarAtributoLogin(login);
+        validarAtributoSenha(senha);
     }
 
     public Usuario(UUID usuarioId,
@@ -54,6 +54,7 @@ public abstract class Usuario {
         validarAtributoNome(nome);
         validarAtributoEmail(email);
         validarAtributoLogin(login);
+        validarAtributoSenha(senha);
     }
 
     public UUID getUsuarioId() {
@@ -97,6 +98,7 @@ public abstract class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+        validarAtributoSenha(senha);
     }
 
     public Endereco getEndereco() {
@@ -145,6 +147,15 @@ public abstract class Usuario {
         }
         if (nome.length() > MAX_CARACTER_LOGIN) {
             throw new AtributoTamanhoLimitadoException(String.valueOf(MAX_CARACTER_LOGIN));
+        }
+    }
+
+    private void validarAtributoSenha(String senha) {
+        if (senha == null || senha.isBlank()) {
+            throw new AtributoObrigatorioException("senha");
+        }
+        if (senha.length() > MAX_CARACTER_SENHA) {
+            throw new AtributoTamanhoLimitadoException(String.valueOf(MAX_CARACTER_SENHA));
         }
     }
 }
