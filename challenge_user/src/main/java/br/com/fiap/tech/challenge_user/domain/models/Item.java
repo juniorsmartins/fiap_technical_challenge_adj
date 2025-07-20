@@ -32,6 +32,7 @@ public final class Item {
         validarAtributoNome(nome);
         validarAtributoPreco(preco);
         validarAtributoFoto(foto);
+        validarAtributoDescricao(descricao);
     }
 
     public Item(UUID itemId, String nome, String descricao, BigDecimal preco, boolean entrega, String foto) {
@@ -40,6 +41,7 @@ public final class Item {
         validarAtributoNome(nome);
         validarAtributoPreco(preco);
         validarAtributoFoto(foto);
+        validarAtributoDescricao(descricao);
     }
 
     public UUID getItemId() {
@@ -65,6 +67,7 @@ public final class Item {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+        validarAtributoDescricao(descricao);
     }
 
     public BigDecimal getPreco() {
@@ -108,6 +111,12 @@ public final class Item {
     private void validarAtributoNome(String nome) {
         if (nome == null || nome.isBlank()) {
             throw new AtributoObrigatorioException("nome");
+        }
+    }
+
+    private void validarAtributoDescricao(String descricao) {
+        if (descricao == null || descricao.isBlank()) {
+            throw new AtributoObrigatorioException("descrição");
         }
     }
 
