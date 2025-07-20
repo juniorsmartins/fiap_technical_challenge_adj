@@ -40,9 +40,9 @@ class UsuarioLoginStrategyTest {
         login = "joao";
         usuario = new Proprietario();
         usuario.setUsuarioId(usuarioId);
-        usuario.setLogin(login);
+        usuario.setNome("João Trump");
         usuario.setEmail("joao@email.com");
-        usuario.setNome("João");
+        usuario.setLogin(login);
     }
 
     @Test

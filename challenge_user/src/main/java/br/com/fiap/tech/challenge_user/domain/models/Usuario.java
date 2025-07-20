@@ -8,6 +8,7 @@ import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import java.util.Objects;
 import java.util.UUID;
 
+import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.MAX_CARACTER_LOGIN;
 import static br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsValidation.MAX_CARACTER_NOME;
 
 public abstract class Usuario {
@@ -38,6 +39,8 @@ public abstract class Usuario {
         this.senha = senha;
         this.endereco = endereco;
         validarAtributoNome(nome);
+        validarAtributoEmail(email);
+        validarAtributoLogin(login);
     }
 
     public Usuario(UUID usuarioId,
@@ -49,6 +52,8 @@ public abstract class Usuario {
         this(nome, email, login, senha, endereco);
         this.usuarioId = usuarioId;
         validarAtributoNome(nome);
+        validarAtributoEmail(email);
+        validarAtributoLogin(login);
     }
 
     public UUID getUsuarioId() {
@@ -73,6 +78,7 @@ public abstract class Usuario {
     }
 
     public void setEmail(String email) {
+        validarAtributoEmail(email);
         this.email = email;
     }
 
@@ -82,6 +88,7 @@ public abstract class Usuario {
 
     public void setLogin(String login) {
         this.login = login;
+        validarAtributoLogin(login);
     }
 
     public String getSenha() {
@@ -129,6 +136,15 @@ public abstract class Usuario {
         emailValidator.initialize(null);
         if (!emailValidator.isValid(email.trim(), null)) {
             throw new AtributoInvalidoException("email");
+        }
+    }
+
+    private void validarAtributoLogin(String login) {
+        if (login == null || login.isBlank()) {
+            throw new AtributoObrigatorioException("login");
+        }
+        if (nome.length() > MAX_CARACTER_LOGIN) {
+            throw new AtributoTamanhoLimitadoException(String.valueOf(MAX_CARACTER_LOGIN));
         }
     }
 }
