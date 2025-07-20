@@ -1,5 +1,7 @@
 package br.com.fiap.tech.challenge_user.domain.models;
 
+import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
@@ -27,11 +29,17 @@ public final class Item {
         this.preco = preco;
         this.entrega = entrega;
         this.foto = foto;
+        validarAtributoNome(nome);
+        validarAtributoPreco(preco);
+        validarAtributoFoto(foto);
     }
 
     public Item(UUID itemId, String nome, String descricao, BigDecimal preco, boolean entrega, String foto) {
         this(nome, descricao, preco, entrega, foto);
         this.itemId = itemId;
+        validarAtributoNome(nome);
+        validarAtributoPreco(preco);
+        validarAtributoFoto(foto);
     }
 
     public UUID getItemId() {
@@ -48,6 +56,7 @@ public final class Item {
 
     public void setNome(String nome) {
         this.nome = nome;
+        validarAtributoNome(nome);
     }
 
     public String getDescricao() {
@@ -64,6 +73,7 @@ public final class Item {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+        validarAtributoPreco(preco);
     }
 
     public boolean isEntrega() {
@@ -80,6 +90,7 @@ public final class Item {
 
     public void setFoto(String foto) {
         this.foto = foto;
+        validarAtributoFoto(foto);
     }
 
     @Override
@@ -92,6 +103,24 @@ public final class Item {
     @Override
     public int hashCode() {
         return Objects.hashCode(itemId);
+    }
+
+    private void validarAtributoNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new AtributoObrigatorioException("nome");
+        }
+    }
+
+    private void validarAtributoPreco(BigDecimal preco) {
+        if (preco == null) {
+            throw new AtributoObrigatorioException("preço");
+        }
+    }
+
+    private void validarAtributoFoto(String foto) {
+        if (foto == null || foto.isBlank()) {
+            throw new AtributoObrigatorioException("foto");
+        }
     }
 }
 
