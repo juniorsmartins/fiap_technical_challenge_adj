@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ClienteFindController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 class ClienteFindControllerTest {
 
     @Mock
-    private OutputMapper<Cliente, ClienteDtoResponse, ClienteDao> outputMapper;
+    private OutputPresenter<Cliente, ClienteDtoResponse, ClienteDao> outputPresenter;
 
     @Mock
     private FindByIdOutputPort<ClienteDao> findByIdOutputPort;
@@ -68,7 +68,7 @@ class ClienteFindControllerTest {
     void deveEncontrarClienteComSucesso() {
         // Arrange
         doReturn(Optional.of(clienteDao)).when(findByIdOutputPort).findById(clienteId);
-        doReturn(clienteDtoResponse).when(outputMapper).toResponse(clienteDao);
+        doReturn(clienteDtoResponse).when(outputPresenter).toResponse(clienteDao);
 
         // Act
         ResponseEntity<ClienteDtoResponse> response = clienteFindController.findById(clienteId);
@@ -78,8 +78,8 @@ class ClienteFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(clienteDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verify(outputMapper, times(1)).toResponse(clienteDao);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(clienteDao);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -95,7 +95,7 @@ class ClienteFindControllerTest {
 
         assertEquals(clienteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

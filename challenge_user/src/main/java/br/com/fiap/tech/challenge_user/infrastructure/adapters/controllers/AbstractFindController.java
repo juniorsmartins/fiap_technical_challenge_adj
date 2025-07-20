@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractFindController<O, T, E> {
 
-    private final OutputMapper<T, O, E> outputMapper;
+    private final OutputPresenter<T, O, E> outputPresenter;
 
     private final FindByIdOutputPort<E> findByIdOutputPort;
 
@@ -50,7 +50,7 @@ public abstract class AbstractFindController<O, T, E> {
             @PathVariable(name = "id") final UUID id) {
 
         var response = findByIdOutputPort.findById(id)
-                .map(outputMapper::toResponse)
+                .map(outputPresenter::toResponse)
                 .orElseThrow(() -> {
                     log.error("AbstractFindController - Recurso não encontrado por id: {}.", id);
                     return new RecursoNotFoundException(id);

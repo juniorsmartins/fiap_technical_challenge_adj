@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 class RestauranteUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Restaurante, RestauranteDao> entityMapper;
+    private DaoPresenter<Restaurante, RestauranteDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<RestauranteDao> createOutputPort;
@@ -104,7 +104,7 @@ class RestauranteUpdateUseCaseTest {
         doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
         doReturn(proprietarioEntity).when(restauranteCheckRule).checkProprietario(restaurante);
         doReturn(restauranteDao).when(createOutputPort).save(restauranteDao);
-        doReturn(restaurante).when(entityMapper).toDomain(restauranteDao);
+        doReturn(restaurante).when(daoPresenter).toDomain(restauranteDao);
 
         // Act
         Restaurante result = restauranteUpdateUseCase.update(restauranteId, restaurante);
@@ -115,8 +115,8 @@ class RestauranteUpdateUseCaseTest {
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
         verify(createOutputPort, times(1)).save(restauranteDao);
-        verify(entityMapper, times(1)).toDomain(restauranteDao);
-        verifyNoMoreInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, entityMapper);
+        verify(daoPresenter, times(1)).toDomain(restauranteDao);
+        verifyNoMoreInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -132,7 +132,7 @@ class RestauranteUpdateUseCaseTest {
 
         assertEquals(restauranteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verifyNoInteractions(restauranteCheckRule, createOutputPort, entityMapper);
+        verifyNoInteractions(restauranteCheckRule, createOutputPort, daoPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 
@@ -151,7 +151,7 @@ class RestauranteUpdateUseCaseTest {
         assertEquals("Proprietário inválido", exception.getMessage());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verifyNoInteractions(createOutputPort, entityMapper);
+        verifyNoInteractions(createOutputPort, daoPresenter);
         verifyNoMoreInteractions(findByIdOutputPort, restauranteCheckRule);
     }
 
@@ -162,7 +162,7 @@ class RestauranteUpdateUseCaseTest {
                 NullPointerException.class,
                 () -> restauranteUpdateUseCase.update(null, restaurante)
         );
-        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, entityMapper);
+        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -172,7 +172,7 @@ class RestauranteUpdateUseCaseTest {
                 NullPointerException.class,
                 () -> restauranteUpdateUseCase.update(restauranteId, null)
         );
-        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, entityMapper);
+        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, daoPresenter);
     }
 }
 

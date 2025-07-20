@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface EnderecoMapper {
+public interface EnderecoPresenter {
 
     @Mapping(target = "enderecoId", ignore = true)
     Endereco toEndereco(EnderecoDtoRequest enderecoDtoRequest);

@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioFindController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
 class ProprietarioFindControllerTest {
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputMapper;
+    private OutputPresenter<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputPresenter;
 
     @Mock
     private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
@@ -70,7 +70,7 @@ class ProprietarioFindControllerTest {
     void deveEncontrarProprietarioComSucesso() {
         // Arrange
         doReturn(Optional.of(proprietarioEntity)).when(findByIdOutputPort).findById(proprietarioId);
-        doReturn(proprietarioDtoResponse).when(outputMapper).toResponse(proprietarioEntity);
+        doReturn(proprietarioDtoResponse).when(outputPresenter).toResponse(proprietarioEntity);
 
         // Act
         ResponseEntity<ProprietarioDtoResponse> response = proprietarioFindController.findById(proprietarioId);
@@ -80,8 +80,8 @@ class ProprietarioFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(proprietarioDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(proprietarioId);
-        verify(outputMapper, times(1)).toResponse(proprietarioEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(proprietarioEntity);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -97,7 +97,7 @@ class ProprietarioFindControllerTest {
 
         assertEquals(proprietarioId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(proprietarioId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
@@ -16,10 +16,10 @@ public class RestauranteCreateUseCase extends AbstractCreateUseCase<Restaurante,
     private final RestauranteCheckRule restauranteCheckRule;
 
     public RestauranteCreateUseCase(
-            EntityMapper<Restaurante, RestauranteDao> entityMapper,
+            DaoPresenter<Restaurante, RestauranteDao> daoPresenter,
             CreateOutputPort<RestauranteDao> createOutputPort,
             RestauranteCheckRule restauranteCheckRule) {
-        super(entityMapper, createOutputPort);
+        super(daoPresenter, createOutputPort);
         this.restauranteCheckRule = restauranteCheckRule;
     }
 

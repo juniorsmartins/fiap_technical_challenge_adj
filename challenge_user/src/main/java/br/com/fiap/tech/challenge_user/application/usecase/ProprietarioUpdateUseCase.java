@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
@@ -26,13 +26,13 @@ public final class ProprietarioUpdateUseCase extends AbstractUpdateUseCase<Propr
     private final EnderecoUpdateRule<Proprietario, ProprietarioDao> enderecoUpdateRule;
 
     public ProprietarioUpdateUseCase(
-            EntityMapper<Proprietario, ProprietarioDao> entityMapper,
+            DaoPresenter<Proprietario, ProprietarioDao> daoPresenter,
             CreateOutputPort<ProprietarioDao> createOutputPort,
             FindByIdOutputPort<ProprietarioDao> findByIdOutputPort,
             UsuarioUpdateRule<Proprietario, ProprietarioDao> usuarioUpdateRule,
             EnderecoUpdateRule<Proprietario, ProprietarioDao> enderecoUpdateRule,
             List<UsuarioRulesStrategy<Proprietario>> rulesStrategies) {
-        super(entityMapper, createOutputPort, findByIdOutputPort);
+        super(daoPresenter, createOutputPort, findByIdOutputPort);
         this.rulesStrategy = rulesStrategies;
         this.usuarioUpdateRule = usuarioUpdateRule;
         this.enderecoUpdateRule = enderecoUpdateRule;

@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
@@ -17,10 +17,10 @@ public class ItemCreateController
         extends AbstractCreateController<ItemDtoRequest, ItemDtoResponse, Item, ItemDao> {
 
     public ItemCreateController(
-            InputMapper<ItemDtoRequest, Item> inputMapper,
-            OutputMapper<Item, ItemDtoResponse, ItemDao> outputMapper,
+            InputPresenter<ItemDtoRequest, Item> inputPresenter,
+            OutputPresenter<Item, ItemDtoResponse, ItemDao> outputPresenter,
             CreateInputPort<Item> createInputPort) {
-        super(inputMapper, outputMapper, createInputPort);
+        super(inputPresenter, outputPresenter, createInputPort);
     }
 }
 

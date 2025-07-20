@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters;
 
-public interface OutputMapper<T, O, E> {
+public interface OutputPresenter<T, O, E> {
 
     O toDtoResponse(T domain);
 

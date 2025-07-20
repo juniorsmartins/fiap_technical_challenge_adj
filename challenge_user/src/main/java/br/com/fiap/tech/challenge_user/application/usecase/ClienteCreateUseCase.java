@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
@@ -18,10 +18,10 @@ public class ClienteCreateUseCase extends AbstractCreateUseCase<Cliente, Cliente
     private final List<UsuarioRulesStrategy<Cliente>> rulesStrategy;
 
     public ClienteCreateUseCase(
-            EntityMapper<Cliente, ClienteDao> entityMapper,
+            DaoPresenter<Cliente, ClienteDao> daoPresenter,
             CreateOutputPort<ClienteDao> createOutputPort,
             List<UsuarioRulesStrategy<Cliente>> rulesStrategy) {
-        super(entityMapper, createOutputPort);
+        super(daoPresenter, createOutputPort);
         this.rulesStrategy = rulesStrategy;
     }
 

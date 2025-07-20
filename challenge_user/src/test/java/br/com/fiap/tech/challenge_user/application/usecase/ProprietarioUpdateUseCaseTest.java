@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 class ProprietarioUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Proprietario, ProprietarioDao> entityMapper;
+    private DaoPresenter<Proprietario, ProprietarioDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<ProprietarioDao> createOutputPort;
@@ -72,7 +72,7 @@ class ProprietarioUpdateUseCaseTest {
 
         List<UsuarioRulesStrategy<Proprietario>> rulesStrategy = List.of(rule1, rule2);
         proprietarioUpdateUseCase = new ProprietarioUpdateUseCase(
-                entityMapper,
+                daoPresenter,
                 createOutputPort,
                 findByIdOutputPort,
                 usuarioUpdateRule,
@@ -88,7 +88,7 @@ class ProprietarioUpdateUseCaseTest {
         doReturn(proprietarioEntity).when(usuarioUpdateRule).updateUser(proprietario, proprietarioEntity);
         doReturn(proprietarioEntity).when(enderecoUpdateRule).updateAddress(proprietario, proprietarioEntity);
         doReturn(proprietarioEntity).when(createOutputPort).save(proprietarioEntity);
-        doReturn(proprietario).when(entityMapper).toDomain(proprietarioEntity);
+        doReturn(proprietario).when(daoPresenter).toDomain(proprietarioEntity);
 
         // Act
         Proprietario result = proprietarioUpdateUseCase.update(proprietarioId, proprietario);
@@ -102,8 +102,8 @@ class ProprietarioUpdateUseCaseTest {
         verify(usuarioUpdateRule, times(1)).updateUser(proprietario, proprietarioEntity);
         verify(enderecoUpdateRule, times(1)).updateAddress(proprietario, proprietarioEntity);
         verify(createOutputPort, times(1)).save(proprietarioEntity);
-        verify(entityMapper, times(1)).toDomain(proprietarioEntity);
-        verifyNoMoreInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
+        verify(daoPresenter, times(1)).toDomain(proprietarioEntity);
+        verifyNoMoreInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -119,7 +119,7 @@ class ProprietarioUpdateUseCaseTest {
 
         assertThat(exception.getId()).isEqualTo(proprietarioId);
         verify(findByIdOutputPort, times(1)).findById(proprietarioId);
-        verifyNoInteractions(rule1, rule2, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
+        verifyNoInteractions(rule1, rule2, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -129,7 +129,7 @@ class ProprietarioUpdateUseCaseTest {
                 NullPointerException.class,
                 () -> proprietarioUpdateUseCase.update(null, proprietario)
         );
-        verifyNoInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
+        verifyNoInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -139,7 +139,7 @@ class ProprietarioUpdateUseCaseTest {
                 NullPointerException.class,
                 () -> proprietarioUpdateUseCase.update(proprietarioId, null)
         );
-        verifyNoInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, entityMapper);
+        verifyNoInteractions(rule1, rule2, findByIdOutputPort, usuarioUpdateRule, enderecoUpdateRule, createOutputPort, daoPresenter);
     }
 }
 

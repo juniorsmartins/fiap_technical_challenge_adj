@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 class ItemCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Item, ItemDao> entityMapper;
+    private DaoPresenter<Item, ItemDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<ItemDao> createOutputPort;
@@ -51,9 +51,9 @@ class ItemCreateUseCaseTest {
     @Test
     void deveCriarItemComSucesso() {
         // Arrange
-        doReturn(itemDao).when(entityMapper).toEntity(item);
+        doReturn(itemDao).when(daoPresenter).toEntity(item);
         doReturn(itemDao).when(createOutputPort).save(itemDao);
-        doReturn(item).when(entityMapper).toDomain(itemDao);
+        doReturn(item).when(daoPresenter).toDomain(itemDao);
 
         // Act
         Item result = itemCreateUseCase.create(item);
@@ -66,10 +66,10 @@ class ItemCreateUseCaseTest {
         assertEquals(new BigDecimal("20.00"), result.getPreco());
         assertTrue(result.isEntrega());
         assertEquals("http://link-foto.com.br", result.getFoto());
-        verify(entityMapper, times(1)).toEntity(item);
+        verify(daoPresenter, times(1)).toEntity(item);
         verify(createOutputPort, times(1)).save(itemDao);
-        verify(entityMapper, times(1)).toDomain(itemDao);
-        verifyNoMoreInteractions(entityMapper, createOutputPort);
+        verify(daoPresenter, times(1)).toDomain(itemDao);
+        verifyNoMoreInteractions(daoPresenter, createOutputPort);
     }
 }
 

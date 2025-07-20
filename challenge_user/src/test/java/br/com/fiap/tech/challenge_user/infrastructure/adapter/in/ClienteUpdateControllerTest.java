@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ClienteUpdateController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
@@ -30,10 +30,10 @@ import static org.mockito.Mockito.*;
 class ClienteUpdateControllerTest {
 
     @Mock
-    private InputMapper<ClienteDtoRequest, Cliente> inputMapper;
+    private InputPresenter<ClienteDtoRequest, Cliente> inputPresenter;
 
     @Mock
-    private OutputMapper<Cliente, ClienteDtoResponse, ClienteDao> outputMapper;
+    private OutputPresenter<Cliente, ClienteDtoResponse, ClienteDao> outputPresenter;
 
     @Mock
     private UpdateInputPort<Cliente> updateInputPort;
@@ -83,9 +83,9 @@ class ClienteUpdateControllerTest {
     @Test
     void deveAtualizarClienteComSucesso() {
         // Arrange
-        doReturn(cliente).when(inputMapper).toDomainIn(clienteDtoRequest);
+        doReturn(cliente).when(inputPresenter).toDomainIn(clienteDtoRequest);
         doReturn(cliente).when(updateInputPort).update(clienteId, cliente);
-        doReturn(clienteDtoResponse).when(outputMapper).toDtoResponse(cliente);
+        doReturn(clienteDtoResponse).when(outputPresenter).toDtoResponse(cliente);
 
         // Act
         ResponseEntity<ClienteDtoResponse> response = clienteUpdateController.update(clienteId, clienteDtoRequest);
@@ -94,10 +94,10 @@ class ClienteUpdateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(clienteDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(clienteDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(clienteDtoRequest);
         verify(updateInputPort, times(1)).update(clienteId, cliente);
-        verify(outputMapper, times(1)).toDtoResponse(cliente);
-        verifyNoMoreInteractions(inputMapper, updateInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(cliente);
+        verifyNoMoreInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 
     @Test
@@ -108,7 +108,7 @@ class ClienteUpdateControllerTest {
                 () -> clienteUpdateController.update(clienteId, null)
         );
         assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, updateInputPort, outputMapper);
+        verifyNoInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 }
 

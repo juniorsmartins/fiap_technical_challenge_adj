@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUpdateUseCase<T, E> {
 
-    private final EntityMapper<T, E> entityMapper;
+    private final DaoPresenter<T, E> daoPresenter;
 
     private final CreateOutputPort<E> createOutputPort;
 
@@ -26,7 +26,7 @@ public abstract class AbstractUpdateUseCase<T, E> {
         return findByIdOutputPort.findById(id)
                 .map(entity -> this.rulesUpdate(id, usuario, entity))
                 .map(createOutputPort::save)
-                .map(entityMapper::toDomain)
+                .map(daoPresenter::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractUpdateService - Recurso não encontrado por id: {}.", id);
                     return new RecursoNotFoundException(id);

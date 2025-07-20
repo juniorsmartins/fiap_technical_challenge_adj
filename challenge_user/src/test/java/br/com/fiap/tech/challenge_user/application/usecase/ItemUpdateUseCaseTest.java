@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 class ItemUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Item, ItemDao> entityMapper;
+    private DaoPresenter<Item, ItemDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<ItemDao> createOutputPort;
@@ -71,7 +71,7 @@ class ItemUpdateUseCaseTest {
 
         doReturn(Optional.of(itemDao)).when(findByIdOutputPort).findById(itemId);
         doReturn(updatedEntity).when(createOutputPort).save(any(ItemDao.class));
-        doReturn(updatedItem).when(entityMapper).toDomain(updatedEntity);
+        doReturn(updatedItem).when(daoPresenter).toDomain(updatedEntity);
 
         // Act
         Item result = itemUpdateUseCase.update(itemId, updatedItem);
@@ -86,8 +86,8 @@ class ItemUpdateUseCaseTest {
         assertEquals("http://link-foto-coca-zero.com.br", result.getFoto());
         verify(findByIdOutputPort, times(1)).findById(itemId);
         verify(createOutputPort, times(1)).save(any(ItemDao.class));
-        verify(entityMapper, times(1)).toDomain(updatedEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, createOutputPort, entityMapper);
+        verify(daoPresenter, times(1)).toDomain(updatedEntity);
+        verifyNoMoreInteractions(findByIdOutputPort, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -103,7 +103,7 @@ class ItemUpdateUseCaseTest {
 
         assertEquals(itemId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(itemId);
-        verifyNoInteractions(createOutputPort, entityMapper);
+        verifyNoInteractions(createOutputPort, daoPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 
@@ -115,7 +115,7 @@ class ItemUpdateUseCaseTest {
                 () -> itemUpdateUseCase.update(null, item)
         );
 
-        verifyNoInteractions(findByIdOutputPort, createOutputPort, entityMapper);
+        verifyNoInteractions(findByIdOutputPort, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -126,7 +126,7 @@ class ItemUpdateUseCaseTest {
                 () -> itemUpdateUseCase.update(itemId, null)
         );
 
-        verifyNoInteractions(findByIdOutputPort, createOutputPort, entityMapper);
+        verifyNoInteractions(findByIdOutputPort, createOutputPort, daoPresenter);
     }
 }
 

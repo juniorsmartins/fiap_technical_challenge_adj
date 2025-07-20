@@ -13,12 +13,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public final class ClienteMapper implements InputMapper<ClienteDtoRequest, Cliente>,
-        OutputMapper<Cliente, ClienteDtoResponse, ClienteDao>,
-        EntityMapper<Cliente, ClienteDao>,
-        PageMapper<ClienteDtoResponse, ClienteDao> {
+public final class ClientePresenter implements InputPresenter<ClienteDtoRequest, Cliente>,
+        OutputPresenter<Cliente, ClienteDtoResponse, ClienteDao>,
+        DaoPresenter<Cliente, ClienteDao>,
+        PagePresenter<ClienteDtoResponse, ClienteDao> {
 
-    private final EnderecoMapper mapper;
+    private final EnderecoPresenter mapper;
 
     @Override
     public Cliente toDomainIn(ClienteDtoRequest dto) {

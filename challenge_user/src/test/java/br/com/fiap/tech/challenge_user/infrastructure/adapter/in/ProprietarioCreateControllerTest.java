@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioCreateController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
@@ -32,10 +32,10 @@ import static org.mockito.Mockito.*;
 class ProprietarioCreateControllerTest {
 
     @Mock
-    private InputMapper<ProprietarioDtoRequest, Proprietario> inputMapper;
+    private InputPresenter<ProprietarioDtoRequest, Proprietario> inputPresenter;
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputMapper;
+    private OutputPresenter<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputPresenter;
 
     @Mock
     private CreateInputPort<Proprietario> createInputPort;
@@ -84,9 +84,9 @@ class ProprietarioCreateControllerTest {
     @Test
     void deveCriarProprietarioComSucesso() {
         // Arrange
-        doReturn(proprietario).when(inputMapper).toDomainIn(proprietarioDtoRequest);
+        doReturn(proprietario).when(inputPresenter).toDomainIn(proprietarioDtoRequest);
         doReturn(proprietario).when(createInputPort).create(proprietario);
-        doReturn(proprietarioDtoResponse).when(outputMapper).toDtoResponse(proprietario);
+        doReturn(proprietarioDtoResponse).when(outputPresenter).toDtoResponse(proprietario);
 
         // Act
         ResponseEntity<ProprietarioDtoResponse> response = proprietarioCreateController.create(proprietarioDtoRequest);
@@ -95,10 +95,10 @@ class ProprietarioCreateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(proprietarioDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(proprietarioDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(proprietarioDtoRequest);
         verify(createInputPort, times(1)).create(proprietario);
-        verify(outputMapper, times(1)).toDtoResponse(proprietario);
-        verifyNoMoreInteractions(inputMapper, createInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(proprietario);
+        verifyNoMoreInteractions(inputPresenter, createInputPort, outputPresenter);
     }
 
     @Test
@@ -110,7 +110,7 @@ class ProprietarioCreateControllerTest {
         );
 
         assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, createInputPort, outputMapper);
+        verifyNoInteractions(inputPresenter, createInputPort, outputPresenter);
     }
 }
 

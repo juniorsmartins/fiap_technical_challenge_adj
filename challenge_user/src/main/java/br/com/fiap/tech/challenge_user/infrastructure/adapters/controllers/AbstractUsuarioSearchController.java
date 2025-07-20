@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PageMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PagePresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +28,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public abstract class AbstractUsuarioSearchController<O, E> {
 
-    private final PageMapper<O, E> pageMapper;
+    private final PagePresenter<O, E> pagePresenter;
 
     private final UsuarioSearchOutputPort<E> outputPort;
 
@@ -55,7 +55,7 @@ public abstract class AbstractUsuarioSearchController<O, E> {
 
         var response = Optional.of(filtroDto)
                 .map(filtro -> outputPort.search(filtro, paginacao))
-                .map(pageMapper::toPageResponse)
+                .map(pagePresenter::toPageResponse)
                 .orElseThrow();
 
         return ResponseEntity

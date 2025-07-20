@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioUpdateController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
@@ -30,10 +30,10 @@ import static org.mockito.Mockito.*;
 class ProprietarioUpdateControllerTest {
 
     @Mock
-    private InputMapper<ProprietarioDtoRequest, Proprietario> inputMapper;
+    private InputPresenter<ProprietarioDtoRequest, Proprietario> inputPresenter;
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputMapper;
+    private OutputPresenter<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputPresenter;
 
     @Mock
     private UpdateInputPort<Proprietario> updateInputPort;
@@ -84,9 +84,9 @@ class ProprietarioUpdateControllerTest {
     @Test
     void deveAtualizarProprietarioComSucesso() {
         // Arrange
-        doReturn(proprietario).when(inputMapper).toDomainIn(proprietarioDtoRequest);
+        doReturn(proprietario).when(inputPresenter).toDomainIn(proprietarioDtoRequest);
         doReturn(proprietario).when(updateInputPort).update(proprietarioId, proprietario);
-        doReturn(proprietarioDtoResponse).when(outputMapper).toDtoResponse(proprietario);
+        doReturn(proprietarioDtoResponse).when(outputPresenter).toDtoResponse(proprietario);
 
         // Act
         ResponseEntity<ProprietarioDtoResponse> response = proprietarioUpdateController.update(proprietarioId, proprietarioDtoRequest);
@@ -95,10 +95,10 @@ class ProprietarioUpdateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(proprietarioDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(proprietarioDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(proprietarioDtoRequest);
         verify(updateInputPort, times(1)).update(proprietarioId, proprietario);
-        verify(outputMapper, times(1)).toDtoResponse(proprietario);
-        verifyNoMoreInteractions(inputMapper, updateInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(proprietario);
+        verifyNoMoreInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 
     @Test
@@ -110,7 +110,7 @@ class ProprietarioUpdateControllerTest {
         );
 
         assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, updateInputPort, outputMapper);
+        verifyNoInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 }
 

@@ -4,7 +4,7 @@ import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsControl
 import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClienteFindController extends AbstractFindController<ClienteDtoResponse, Cliente, ClienteDao> {
 
     public ClienteFindController(
-            OutputMapper<Cliente, ClienteDtoResponse, ClienteDao> outputMapper,
+            OutputPresenter<Cliente, ClienteDtoResponse, ClienteDao> outputPresenter,
             FindByIdOutputPort<ClienteDao> findByIdOutputPort) {
-        super(outputMapper, findByIdOutputPort);
+        super(outputPresenter, findByIdOutputPort);
     }
 }
 

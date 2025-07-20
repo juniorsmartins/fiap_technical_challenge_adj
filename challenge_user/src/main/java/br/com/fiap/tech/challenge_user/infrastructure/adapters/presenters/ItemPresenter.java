@@ -8,9 +8,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface ItemMapper extends InputMapper<ItemDtoRequest, Item>,
-        OutputMapper<Item, ItemDtoResponse,
-                ItemDao>, EntityMapper<Item, ItemDao> {
+public interface ItemPresenter extends InputPresenter<ItemDtoRequest, Item>,
+        OutputPresenter<Item, ItemDtoResponse,
+                        ItemDao>, DaoPresenter<Item, ItemDao> {
 
     @Mapping(target = "itemId", ignore = true)
     Item toDomainIn(ItemDtoRequest dto);

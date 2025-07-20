@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
 import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 class RestauranteCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Restaurante, RestauranteDao> entityMapper;
+    private DaoPresenter<Restaurante, RestauranteDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<RestauranteDao> createOutputPort;
@@ -91,9 +91,9 @@ class RestauranteCreateUseCaseTest {
     @Test
     void deveCriarRestauranteQuandoValidacaoEhValida() {
         // Arrange
-        when(entityMapper.toEntity(restaurante)).thenReturn(restauranteDao);
+        when(daoPresenter.toEntity(restaurante)).thenReturn(restauranteDao);
         when(createOutputPort.save(restauranteDao)).thenReturn(restauranteDao);
-        when(entityMapper.toDomain(restauranteDao)).thenReturn(restaurante);
+        when(daoPresenter.toDomain(restauranteDao)).thenReturn(restaurante);
 
         // Act
         Restaurante result = restauranteCreateUseCase.create(restaurante);
@@ -102,10 +102,10 @@ class RestauranteCreateUseCaseTest {
         assertNotNull(result);
         assertEquals(restaurante, result);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verify(entityMapper, times(1)).toEntity(restaurante);
+        verify(daoPresenter, times(1)).toEntity(restaurante);
         verify(createOutputPort, times(1)).save(restauranteDao);
-        verify(entityMapper, times(1)).toDomain(restauranteDao);
-        verifyNoMoreInteractions(restauranteCheckRule, entityMapper, createOutputPort);
+        verify(daoPresenter, times(1)).toDomain(restauranteDao);
+        verifyNoMoreInteractions(restauranteCheckRule, daoPresenter, createOutputPort);
     }
 
     @Test
@@ -121,7 +121,7 @@ class RestauranteCreateUseCaseTest {
         );
         assertEquals("Proprietário inválido", exception.getMessage());
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verifyNoInteractions(entityMapper, createOutputPort);
+        verifyNoInteractions(daoPresenter, createOutputPort);
     }
 
     @Test
@@ -131,7 +131,7 @@ class RestauranteCreateUseCaseTest {
                 NullPointerException.class,
                 () -> restauranteCreateUseCase.create(null)
         );
-        verifyNoInteractions(restauranteCheckRule, entityMapper, createOutputPort);
+        verifyNoInteractions(restauranteCheckRule, daoPresenter, createOutputPort);
     }
 }
 

@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
 import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 class ProprietarioCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Proprietario, ProprietarioDao> entityMapper;
+    private DaoPresenter<Proprietario, ProprietarioDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<ProprietarioDao> createOutputPort;
@@ -57,15 +57,15 @@ class ProprietarioCreateUseCaseTest {
         proprietarioEntity.setLogin("joao");
 
         List<UsuarioRulesStrategy<Proprietario>> rulesStrategy = List.of(rule1, rule2);
-        proprietarioCreateUseCase = new ProprietarioCreateUseCase(entityMapper, createOutputPort, rulesStrategy);
+        proprietarioCreateUseCase = new ProprietarioCreateUseCase(daoPresenter, createOutputPort, rulesStrategy);
     }
 
     @Test
     void deveCriarProprietarioQuandoRegrasSaoValidas() {
         // Arrange
-        when(entityMapper.toEntity(proprietario)).thenReturn(proprietarioEntity);
+        when(daoPresenter.toEntity(proprietario)).thenReturn(proprietarioEntity);
         when(createOutputPort.save(proprietarioEntity)).thenReturn(proprietarioEntity);
-        when(entityMapper.toDomain(proprietarioEntity)).thenReturn(proprietario);
+        when(daoPresenter.toDomain(proprietarioEntity)).thenReturn(proprietario);
 
         // Act
         Proprietario result = proprietarioCreateUseCase.create(proprietario);
@@ -75,10 +75,10 @@ class ProprietarioCreateUseCaseTest {
         assertEquals(proprietario, result);
         verify(rule1, times(1)).executar(proprietario);
         verify(rule2, times(1)).executar(proprietario);
-        verify(entityMapper, times(1)).toEntity(proprietario);
+        verify(daoPresenter, times(1)).toEntity(proprietario);
         verify(createOutputPort, times(1)).save(proprietarioEntity);
-        verify(entityMapper, times(1)).toDomain(proprietarioEntity);
-        verifyNoMoreInteractions(rule1, rule2, entityMapper, createOutputPort);
+        verify(daoPresenter, times(1)).toDomain(proprietarioEntity);
+        verifyNoMoreInteractions(rule1, rule2, daoPresenter, createOutputPort);
     }
 
     @Test
@@ -93,7 +93,7 @@ class ProprietarioCreateUseCaseTest {
         );
         assertEquals("João", exception.getValor());
         verify(rule1, times(1)).executar(proprietario);
-        verifyNoInteractions(rule2, entityMapper, createOutputPort);
+        verifyNoInteractions(rule2, daoPresenter, createOutputPort);
     }
 
     @Test
@@ -103,6 +103,6 @@ class ProprietarioCreateUseCaseTest {
                 NullPointerException.class,
                 () -> proprietarioCreateUseCase.create(null)
         );
-        verifyNoInteractions(rule1, rule2, entityMapper, createOutputPort);
+        verifyNoInteractions(rule1, rule2, daoPresenter, createOutputPort);
     }
 }

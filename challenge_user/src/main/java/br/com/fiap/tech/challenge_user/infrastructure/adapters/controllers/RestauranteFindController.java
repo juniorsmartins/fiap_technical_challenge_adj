@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestauranteFindController extends AbstractFindController<RestauranteDtoResponse, Restaurante, RestauranteDao> {
 
     public RestauranteFindController(
-            OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper,
+            OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao> outputPresenter,
             FindByIdOutputPort<RestauranteDao> findByIdOutputPort) {
-        super(outputMapper, findByIdOutputPort);
+        super(outputPresenter, findByIdOutputPort);
     }
 }
 

@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.domain.rule.update;
 
 import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRuleImpl;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
@@ -27,7 +27,7 @@ class RestauranteCheckRuleImplTest {
     private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @Mock
-    private EntityMapper<Proprietario, ProprietarioDao> mapper;
+    private DaoPresenter<Proprietario, ProprietarioDao> mapper;
 
     @InjectMocks
     private RestauranteCheckRuleImpl restauranteCheckRule;

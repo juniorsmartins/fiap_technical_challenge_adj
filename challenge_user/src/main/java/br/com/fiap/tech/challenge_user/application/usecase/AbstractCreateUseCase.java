@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +14,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public abstract class AbstractCreateUseCase<T, E> {
 
-    private final EntityMapper<T, E> entityMapper;
+    private final DaoPresenter<T, E> daoPresenter;
 
     private final CreateOutputPort<E> createOutputPort;
 
     public T create(final T usuario) {
 
         return Optional.of(usuario)
-                .map(entityMapper::toEntity)
+                .map(daoPresenter::toEntity)
                 .map(createOutputPort::save)
-                .map(entityMapper::toDomain)
+                .map(daoPresenter::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractCreateService - Erro interno do servidor no método create.");
                     return new InternalServerProblemException();

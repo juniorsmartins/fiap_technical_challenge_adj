@@ -553,7 +553,7 @@ Conformidade: AbstractCreateController depende de interfaces como CreateInputPor
 implementações concretas são injetadas via injeção de dependências. Isso respeita o DIP, pois o controller (módulo de alto nível) 
 não depende diretamente de classes concretas.
 
-Exemplo: No método create de AbstractCreateController, a lógica utiliza createInputPort.create e outputMapper.toDtoResponse, sem
+Exemplo: No método create de AbstractCreateController, a lógica utiliza createInputPort.create e outputPresenter.toDtoResponse, sem
 conhecer as implementações específicas.
 
 Conformidade: Em AbstractCreateUseCase, dependências como EntityMapper<T, E>, CreateOutputPort<E> e FindByIdOutputPort<E> são 

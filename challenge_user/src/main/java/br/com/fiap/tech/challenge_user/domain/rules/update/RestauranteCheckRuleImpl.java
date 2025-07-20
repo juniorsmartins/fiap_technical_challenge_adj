@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.domain.rules.update;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
@@ -16,7 +16,7 @@ public final class RestauranteCheckRuleImpl implements RestauranteCheckRule {
 
     private final FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
-    private final EntityMapper<Proprietario, ProprietarioDao> mapper;
+    private final DaoPresenter<Proprietario, ProprietarioDao> mapper;
 
     @Override
     public ProprietarioDao checkProprietario(@NonNull final Restaurante restaurante) {

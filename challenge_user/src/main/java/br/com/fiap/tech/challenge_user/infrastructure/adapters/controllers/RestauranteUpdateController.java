@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
@@ -17,10 +17,10 @@ public class RestauranteUpdateController
         extends AbstractUpdateController<RestauranteDtoRequest, RestauranteDtoResponse, Restaurante, RestauranteDao> {
 
     public RestauranteUpdateController(
-            InputMapper<RestauranteDtoRequest, Restaurante> inputMapper,
-            OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper,
+            InputPresenter<RestauranteDtoRequest, Restaurante> inputPresenter,
+            OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao> outputPresenter,
             UpdateInputPort<Restaurante> updateInputPort) {
-        super(inputMapper, outputMapper, updateInputPort);
+        super(inputPresenter, outputPresenter, updateInputPort);
     }
 }
 

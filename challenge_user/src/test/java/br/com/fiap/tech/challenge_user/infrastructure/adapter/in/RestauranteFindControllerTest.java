@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteFindController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
 class RestauranteFindControllerTest {
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper;
+    private OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao> outputPresenter;
 
     @Mock
     private FindByIdOutputPort<RestauranteDao> findByIdOutputPort;
@@ -100,7 +100,7 @@ class RestauranteFindControllerTest {
     void deveEncontrarRestauranteComSucesso() {
         // Arrange
         doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
-        doReturn(restauranteDtoResponse).when(outputMapper).toResponse(restauranteDao);
+        doReturn(restauranteDtoResponse).when(outputPresenter).toResponse(restauranteDao);
 
         // Act
         ResponseEntity<RestauranteDtoResponse> response = restauranteFindController.findById(restauranteId);
@@ -110,8 +110,8 @@ class RestauranteFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(restauranteDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verify(outputMapper, times(1)).toResponse(restauranteDao);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(restauranteDao);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -127,7 +127,7 @@ class RestauranteFindControllerTest {
 
         assertEquals(restauranteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

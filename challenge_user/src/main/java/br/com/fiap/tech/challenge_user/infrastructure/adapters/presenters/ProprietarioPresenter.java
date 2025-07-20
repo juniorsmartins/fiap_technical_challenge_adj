@@ -13,12 +13,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public final class ProprietarioMapper implements InputMapper<ProprietarioDtoRequest, Proprietario>,
-        OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioDao>,
-        EntityMapper<Proprietario, ProprietarioDao>,
-        PageMapper<ProprietarioDtoResponse, ProprietarioDao> {
+public final class ProprietarioPresenter implements InputPresenter<ProprietarioDtoRequest, Proprietario>,
+        OutputPresenter<Proprietario, ProprietarioDtoResponse, ProprietarioDao>,
+        DaoPresenter<Proprietario, ProprietarioDao>,
+        PagePresenter<ProprietarioDtoResponse, ProprietarioDao> {
 
-    private final EnderecoMapper mapper;
+    private final EnderecoPresenter mapper;
 
     @Override
     public ProprietarioDao toEntity(Proprietario proprietario) {

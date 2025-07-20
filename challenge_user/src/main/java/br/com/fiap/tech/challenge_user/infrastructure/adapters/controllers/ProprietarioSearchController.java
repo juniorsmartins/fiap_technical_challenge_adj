@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PageMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PagePresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
 import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
@@ -14,7 +14,7 @@ public class ProprietarioSearchController
         extends AbstractUsuarioSearchController<ProprietarioDtoResponse, ProprietarioDao> {
 
     public ProprietarioSearchController(
-            PageMapper<ProprietarioDtoResponse, ProprietarioDao> mapper,
+            PagePresenter<ProprietarioDtoResponse, ProprietarioDao> mapper,
             UsuarioSearchOutputPort<ProprietarioDao> outputPort) {
         super(mapper, outputPort);
     }

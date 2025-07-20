@@ -7,8 +7,8 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ClienteMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EnderecoMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ClientePresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EnderecoPresenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,10 +30,10 @@ import static org.mockito.Mockito.*;
 class ClienteMapperTest {
 
     @Mock
-    private EnderecoMapper enderecoMapper;
+    private EnderecoPresenter enderecoPresenter;
 
     @InjectMocks
-    private ClienteMapper clienteMapper;
+    private ClientePresenter clienteMapper;
 
     private ClienteDtoRequest clienteDtoRequest;
     private Cliente cliente;
@@ -85,7 +85,7 @@ class ClienteMapperTest {
     @Test
     void deveMapearClienteDtoRequestParaCliente() {
         // Arrange
-        when(enderecoMapper.toEndereco(clienteDtoRequest.endereco())).thenReturn(endereco);
+        when(enderecoPresenter.toEndereco(clienteDtoRequest.endereco())).thenReturn(endereco);
 
         // Act
         var result = clienteMapper.toDomainIn(clienteDtoRequest);
@@ -99,14 +99,14 @@ class ClienteMapperTest {
         assertThat(result.getSenha()).isEqualTo(clienteDtoRequest.senha());
         assertThat(result.getEndereco()).isEqualTo(endereco);
         assertThat(result.getNumeroCartaoFidelidade()).isEqualTo(clienteDtoRequest.numeroCartaoFidelidade());
-        verify(enderecoMapper).toEndereco(clienteDtoRequest.endereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEndereco(clienteDtoRequest.endereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearClienteParaClienteEntity() {
         // Arrange
-        when(enderecoMapper.toEnderecoEntity(cliente.getEndereco())).thenReturn(clienteDao.getEndereco());
+        when(enderecoPresenter.toEnderecoEntity(cliente.getEndereco())).thenReturn(clienteDao.getEndereco());
 
         // Act
         var result = clienteMapper.toEntity(cliente);
@@ -122,14 +122,14 @@ class ClienteMapperTest {
         assertThat(result.getNumeroCartaoFidelidade()).isEqualTo(cliente.getNumeroCartaoFidelidade());
         assertThat(result.getDataHoraCriacao()).isNull();
         assertThat(result.getDataHoraEdicao()).isNull();
-        verify(enderecoMapper).toEnderecoEntity(cliente.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoEntity(cliente.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearClienteEntityParaCliente() {
         // Arrange
-        when(enderecoMapper.toEndereco(clienteDao.getEndereco())).thenReturn(endereco);
+        when(enderecoPresenter.toEndereco(clienteDao.getEndereco())).thenReturn(endereco);
 
         // Act
         var result = clienteMapper.toDomain(clienteDao);
@@ -143,14 +143,14 @@ class ClienteMapperTest {
         assertThat(result.getSenha()).isEqualTo(clienteDao.getSenha());
         assertThat(result.getEndereco()).isEqualTo(endereco);
         assertThat(result.getNumeroCartaoFidelidade()).isEqualTo(clienteDao.getNumeroCartaoFidelidade());
-        verify(enderecoMapper).toEndereco(clienteDao.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEndereco(clienteDao.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearClienteParaClienteDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(cliente.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(enderecoPresenter.toEnderecoDtoResponse(cliente.getEndereco())).thenReturn(enderecoDtoResponse);
 
         // Act
         var result = clienteMapper.toDtoResponse(cliente);
@@ -166,14 +166,14 @@ class ClienteMapperTest {
         assertThat(result.numeroCartaoFidelidade()).isEqualTo(cliente.getNumeroCartaoFidelidade());
         assertThat(result.dataHoraCriacao()).isNull();
         assertThat(result.dataHoraEdicao()).isNull();
-        verify(enderecoMapper).toEnderecoDtoResponse(cliente.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoDtoResponse(cliente.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearClienteEntityParaClienteDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(clienteDao.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(enderecoPresenter.toEnderecoDtoResponse(clienteDao.getEndereco())).thenReturn(enderecoDtoResponse);
 
         // Act
         var result = clienteMapper.toResponse(clienteDao);
@@ -189,14 +189,14 @@ class ClienteMapperTest {
         assertThat(result.dataHoraEdicao()).isEqualTo(clienteDao.getDataHoraEdicao());
         assertThat(result.endereco()).isEqualTo(enderecoDtoResponse);
         assertThat(result.numeroCartaoFidelidade()).isEqualTo(clienteDao.getNumeroCartaoFidelidade());
-        verify(enderecoMapper).toEnderecoDtoResponse(clienteDao.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoDtoResponse(clienteDao.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearPageClienteEntityParaPageClienteDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(clienteDao.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(enderecoPresenter.toEnderecoDtoResponse(clienteDao.getEndereco())).thenReturn(enderecoDtoResponse);
         var page = new PageImpl<>(List.of(clienteDao), PageRequest.of(0, 10), 1);
 
         // Act
@@ -218,8 +218,8 @@ class ClienteMapperTest {
         assertThat(resultDto.dataHoraEdicao()).isEqualTo(clienteDao.getDataHoraEdicao());
         assertThat(resultDto.endereco()).isEqualTo(enderecoDtoResponse);
         assertThat(resultDto.numeroCartaoFidelidade()).isEqualTo(clienteDao.getNumeroCartaoFidelidade());
-        verify(enderecoMapper).toEnderecoDtoResponse(clienteDao.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoDtoResponse(clienteDao.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 }
 

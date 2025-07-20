@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", uses = {EnderecoMapper.class, ProprietarioMapper.class})
-public abstract class RestauranteMapper implements InputMapper<RestauranteDtoRequest, Restaurante>,
-        OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao>,
-        EntityMapper<Restaurante, RestauranteDao> {
+@Mapper(componentModel = "spring", uses = {EnderecoPresenter.class, ProprietarioPresenter.class})
+public abstract class RestaurantePresenter implements InputPresenter<RestauranteDtoRequest, Restaurante>,
+        OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao>,
+        DaoPresenter<Restaurante, RestauranteDao> {
 
     @Autowired
-    private ProprietarioMapper proprietarioMapper;
+    private ProprietarioPresenter proprietarioMapper;
 
     @Mapping(target = "restauranteId", ignore = true)
     @Mapping(target = "proprietario", source = "proprietario", qualifiedByName = "mapUuidToProprietario")

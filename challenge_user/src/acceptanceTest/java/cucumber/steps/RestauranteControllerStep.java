@@ -5,7 +5,7 @@ import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest
 import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
 import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
 import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioPresenter;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
@@ -72,7 +72,7 @@ public final class RestauranteControllerStep {
 
     private EnderecoDtoResponse enderecoDtoResponse;
 
-    private ProprietarioMapper proprietarioMapper;
+    private ProprietarioPresenter proprietarioMapper;
 
     @Before
     public void setUp() {

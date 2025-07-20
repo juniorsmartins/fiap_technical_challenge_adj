@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EntityMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http409.UsuarioNonUniqueNomeException;
 import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 class ClienteCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Cliente, ClienteDao> entityMapper;
+    private DaoPresenter<Cliente, ClienteDao> daoPresenter;
 
     @Mock
     private CreateOutputPort<ClienteDao> createOutputPort;
@@ -57,15 +57,15 @@ class ClienteCreateUseCaseTest {
         clienteDao.setLogin("maria");
 
         List<UsuarioRulesStrategy<Cliente>> rulesStrategy = List.of(rule1, rule2);
-        clienteCreateUseCase = new ClienteCreateUseCase(entityMapper, createOutputPort, rulesStrategy);
+        clienteCreateUseCase = new ClienteCreateUseCase(daoPresenter, createOutputPort, rulesStrategy);
     }
 
     @Test
     void deveCriarClienteQuandoRegrasSaoValidas() {
         // Arrange
-        when(entityMapper.toEntity(cliente)).thenReturn(clienteDao);
+        when(daoPresenter.toEntity(cliente)).thenReturn(clienteDao);
         when(createOutputPort.save(clienteDao)).thenReturn(clienteDao);
-        when(entityMapper.toDomain(clienteDao)).thenReturn(cliente);
+        when(daoPresenter.toDomain(clienteDao)).thenReturn(cliente);
 
         // Act
         Cliente result = clienteCreateUseCase.create(cliente);
@@ -75,10 +75,10 @@ class ClienteCreateUseCaseTest {
         assertEquals(cliente, result);
         verify(rule1, times(1)).executar(cliente);
         verify(rule2, times(1)).executar(cliente);
-        verify(entityMapper, times(1)).toEntity(cliente);
+        verify(daoPresenter, times(1)).toEntity(cliente);
         verify(createOutputPort, times(1)).save(clienteDao);
-        verify(entityMapper, times(1)).toDomain(clienteDao);
-        verifyNoMoreInteractions(rule1, rule2, entityMapper, createOutputPort);
+        verify(daoPresenter, times(1)).toDomain(clienteDao);
+        verifyNoMoreInteractions(rule1, rule2, daoPresenter, createOutputPort);
     }
 
     @Test
@@ -93,7 +93,7 @@ class ClienteCreateUseCaseTest {
         );
         assertEquals("Maria", exception.getValor());
         verify(rule1, times(1)).executar(cliente);
-        verifyNoInteractions(rule2, entityMapper, createOutputPort);
+        verifyNoInteractions(rule2, daoPresenter, createOutputPort);
     }
 
     @Test
@@ -103,7 +103,7 @@ class ClienteCreateUseCaseTest {
                 NullPointerException.class,
                 () -> clienteCreateUseCase.create(null)
         );
-        verifyNoInteractions(rule1, rule2, entityMapper, createOutputPort);
+        verifyNoInteractions(rule1, rule2, daoPresenter, createOutputPort);
     }
 }
 

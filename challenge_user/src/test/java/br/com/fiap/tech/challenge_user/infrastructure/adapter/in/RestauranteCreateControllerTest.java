@@ -11,8 +11,8 @@ import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
 import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
 import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
 import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteCreateController;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,10 +36,10 @@ import static org.mockito.Mockito.*;
 class RestauranteCreateControllerTest {
 
     @Mock
-    private InputMapper<RestauranteDtoRequest, Restaurante> inputMapper;
+    private InputPresenter<RestauranteDtoRequest, Restaurante> inputPresenter;
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteDao> outputMapper;
+    private OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao> outputPresenter;
 
     @Mock
     private CreateInputPort<Restaurante> createInputPort;
@@ -108,9 +108,9 @@ class RestauranteCreateControllerTest {
     @Test
     void deveCriarRestauranteComSucesso() {
         // Arrange
-        doReturn(restaurante).when(inputMapper).toDomainIn(restauranteDtoRequest);
+        doReturn(restaurante).when(inputPresenter).toDomainIn(restauranteDtoRequest);
         doReturn(restaurante).when(createInputPort).create(restaurante);
-        doReturn(restauranteDtoResponse).when(outputMapper).toDtoResponse(restaurante);
+        doReturn(restauranteDtoResponse).when(outputPresenter).toDtoResponse(restaurante);
 
         // Act
         ResponseEntity<RestauranteDtoResponse> response = restauranteCreateController.create(restauranteDtoRequest);
@@ -119,10 +119,10 @@ class RestauranteCreateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(restauranteDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(restauranteDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(restauranteDtoRequest);
         verify(createInputPort, times(1)).create(restaurante);
-        verify(outputMapper, times(1)).toDtoResponse(restaurante);
-        verifyNoMoreInteractions(inputMapper, createInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(restaurante);
+        verifyNoMoreInteractions(inputPresenter, createInputPort, outputPresenter);
     }
 }
 

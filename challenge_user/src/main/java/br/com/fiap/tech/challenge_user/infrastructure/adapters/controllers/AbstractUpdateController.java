@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
 import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputMapper;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,9 +28,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUpdateController<I, O, T, E> {
 
-    private final InputMapper<I, T> inputMapper;
+    private final InputPresenter<I, T> inputPresenter;
 
-    private final OutputMapper<T, O, E> outputMapper;
+    private final OutputPresenter<T, O, E> outputPresenter;
 
     private final UpdateInputPort<T> updateInputPort;
 
@@ -69,9 +69,9 @@ public abstract class AbstractUpdateController<I, O, T, E> {
             @RequestBody @Valid I dtoRequest) {
 
         var response = Optional.ofNullable(dtoRequest)
-                .map(inputMapper::toDomainIn)
+                .map(inputPresenter::toDomainIn)
                 .map(domain -> updateInputPort.update(id, domain))
-                .map(outputMapper::toDtoResponse)
+                .map(outputPresenter::toDtoResponse)
                 .orElseThrow(() -> {
                     log.error("AbstractUpdateController - Erro interno do servidor no método update.");
                     return new InternalServerProblemException();

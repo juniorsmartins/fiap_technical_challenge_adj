@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers;
 
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputMapper;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
 import br.com.fiap.tech.challenge_user.domain.entities.Item;
 import br.com.fiap.tech.challenge_user.infrastructure.constants.ConstantsController;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemFindController extends AbstractFindController<ItemDtoResponse, Item, ItemDao> {
 
     public ItemFindController(
-            OutputMapper<Item, ItemDtoResponse, ItemDao> outputMapper,
+            OutputPresenter<Item, ItemDtoResponse, ItemDao> outputPresenter,
             FindByIdOutputPort<ItemDao> findByIdOutputPort) {
-        super(outputMapper, findByIdOutputPort);
+        super(outputPresenter, findByIdOutputPort);
     }
 }
 
