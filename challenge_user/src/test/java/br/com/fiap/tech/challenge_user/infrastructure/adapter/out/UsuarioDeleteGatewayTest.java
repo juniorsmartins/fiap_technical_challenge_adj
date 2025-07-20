@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioDeleteAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioDeleteGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class UsuarioDeleteAdapterTest {
+class UsuarioDeleteGatewayTest {
 
     private final UsuarioRepository repository;
 
@@ -22,15 +22,15 @@ class UsuarioDeleteAdapterTest {
     private DeleteOutputPort<ProprietarioDao> proprietarioDeleteAdapter;
 
     @Autowired
-    UsuarioDeleteAdapterTest(UsuarioRepository repository) {
+    UsuarioDeleteGatewayTest(UsuarioRepository repository) {
         this.repository = repository;
     }
 
     @BeforeEach
     void setUp() {
         repository.deleteAll();
-        clienteDeleteAdapter = new UsuarioDeleteAdapter<>(repository);
-        proprietarioDeleteAdapter = new UsuarioDeleteAdapter<>(repository);
+        clienteDeleteAdapter = new UsuarioDeleteGateway<>(repository);
+        proprietarioDeleteAdapter = new UsuarioDeleteGateway<>(repository);
     }
 
     @Test

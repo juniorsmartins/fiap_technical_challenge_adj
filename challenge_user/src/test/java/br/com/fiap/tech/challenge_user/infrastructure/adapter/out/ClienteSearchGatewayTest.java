@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ClienteSearchAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ClienteSearchGateway;
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ClienteRepository;
@@ -17,7 +17,7 @@ import org.springframework.data.domain.Sort;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ClienteSearchAdapterTest {
+class ClienteSearchGatewayTest {
 
     private final ClienteRepository repository;
 
@@ -30,7 +30,7 @@ class ClienteSearchAdapterTest {
     private Pageable paginacao;
 
     @Autowired
-    ClienteSearchAdapterTest(ClienteRepository repository) {
+    ClienteSearchGatewayTest(ClienteRepository repository) {
         this.repository = repository;
     }
 
@@ -38,7 +38,7 @@ class ClienteSearchAdapterTest {
     void setUp() {
         repository.deleteAll();
 
-        clienteSearchAdapter = new ClienteSearchAdapter(repository);
+        clienteSearchAdapter = new ClienteSearchGateway(repository);
 
         filtroDto = new UsuarioFiltroDto(
                 null, "Charles Babbage", null, null, null);

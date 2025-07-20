@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ProprietarioSearchAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ProprietarioSearchGateway;
 import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ProprietarioRepository;
@@ -17,7 +17,7 @@ import org.springframework.data.domain.Sort;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ProprietarioSearchAdapterTest {
+class ProprietarioSearchGatewayTest {
 
     private final ProprietarioRepository repository;
 
@@ -30,7 +30,7 @@ class ProprietarioSearchAdapterTest {
     private Pageable paginacao;
 
     @Autowired
-    ProprietarioSearchAdapterTest(ProprietarioRepository repository) {
+    ProprietarioSearchGatewayTest(ProprietarioRepository repository) {
         this.repository = repository;
     }
 
@@ -38,7 +38,7 @@ class ProprietarioSearchAdapterTest {
     void setUp() {
         repository.deleteAll();
 
-        proprietarioSearchAdapter = new ProprietarioSearchAdapter(repository);
+        proprietarioSearchAdapter = new ProprietarioSearchGateway(repository);
 
         filtroDto = new UsuarioFiltroDto(
                 null, "Alan Turing", null, null, null);

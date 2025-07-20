@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.UsuarioNonPersistenceException;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioCreateAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioCreateGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class UsuarioCreateAdapterTest {
+class UsuarioCreateGatewayTest {
 
     private final UsuarioRepository repository;
 
@@ -23,15 +23,15 @@ class UsuarioCreateAdapterTest {
     private CreateOutputPort<ProprietarioDao> proprietarioCreateAdapter;
 
     @Autowired
-    UsuarioCreateAdapterTest(UsuarioRepository repository) {
+    UsuarioCreateGatewayTest(UsuarioRepository repository) {
         this.repository = repository;
     }
 
     @BeforeEach
     void setUp() {
         repository.deleteAll();
-        clienteCreateAdapter = new UsuarioCreateAdapter<>(repository);
-        proprietarioCreateAdapter = new UsuarioCreateAdapter<>(repository);
+        clienteCreateAdapter = new UsuarioCreateGateway<>(repository);
+        proprietarioCreateAdapter = new UsuarioCreateGateway<>(repository);
     }
 
     @Test

@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class RestauranteFindByIdAdapter implements FindByIdOutputPort<RestauranteDao> {
+public class RestauranteFindByIdGateway implements FindByIdOutputPort<RestauranteDao> {
 
     private final RestauranteRepository repository;
 

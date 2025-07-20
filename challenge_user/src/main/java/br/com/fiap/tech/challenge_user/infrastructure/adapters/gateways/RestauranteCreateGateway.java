@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.exception.http500.ItemNonPersistenceException;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
-import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
+import br.com.fiap.tech.challenge_user.application.exception.http500.RestauranteNonPersistenceException;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.RestauranteRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,20 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class ItemCreateAdapter implements CreateOutputPort<ItemDao> {
+public class RestauranteCreateGateway implements CreateOutputPort<RestauranteDao> {
 
-    private final ItemRepository repository;
+    private final RestauranteRepository repository;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     @Modifying
     @Override
-    public ItemDao save(@NonNull final ItemDao entity) {
+    public RestauranteDao save(@NonNull final RestauranteDao restauranteDao) {
 
         try {
-            return repository.saveAndFlush(entity);
+            return repository.saveAndFlush(restauranteDao);
 
         } catch (DataIntegrityViolationException e) {
-            throw new ItemNonPersistenceException(e.getMessage());
+            throw new RestauranteNonPersistenceException(e.getMessage());
         }
     }
 }

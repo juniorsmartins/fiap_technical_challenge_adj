@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioFindByEmailAdapter implements UsuarioFindByEmailOutputPort {
+public class UsuarioFindByEmailGateway implements UsuarioFindByEmailOutputPort {
 
     private final UsuarioRepository repository;
 

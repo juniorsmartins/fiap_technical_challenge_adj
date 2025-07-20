@@ -3,7 +3,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.RestauranteNonPersistenceException;
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteCreateAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteCreateGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
@@ -19,7 +19,7 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class RestauranteCreateAdapterTest {
+class RestauranteCreateGatewayTest {
 
     private final RestauranteRepository repository;
 
@@ -36,7 +36,7 @@ class RestauranteCreateAdapterTest {
     private ProprietarioDao proprietarioEntity;
 
     @Autowired
-    RestauranteCreateAdapterTest(RestauranteRepository repository, ProprietarioRepository proprietarioRepository) {
+    RestauranteCreateGatewayTest(RestauranteRepository repository, ProprietarioRepository proprietarioRepository) {
         this.repository = repository;
         this.proprietarioRepository = proprietarioRepository;
     }
@@ -46,7 +46,7 @@ class RestauranteCreateAdapterTest {
         repository.deleteAll();
         proprietarioRepository.deleteAll();
 
-        restauranteCreateAdapter = new RestauranteCreateAdapter(repository);
+        restauranteCreateAdapter = new RestauranteCreateGateway(repository);
 
         enderecoDao = new EnderecoDao();
         enderecoDao.setCep("01001-000");

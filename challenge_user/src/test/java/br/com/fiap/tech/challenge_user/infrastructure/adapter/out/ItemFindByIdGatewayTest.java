@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemFindByIdAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemFindByIdGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,21 +16,21 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ItemFindByIdAdapterTest {
+class ItemFindByIdGatewayTest {
 
     private final ItemRepository repository;
 
     private FindByIdOutputPort<ItemDao> itemFindByIdAdapter;
 
     @Autowired
-    ItemFindByIdAdapterTest(ItemRepository repository) {
+    ItemFindByIdGatewayTest(ItemRepository repository) {
         this.repository = repository;
     }
 
     @BeforeEach
     void setUp() {
         repository.deleteAll();
-        itemFindByIdAdapter = new ItemFindByIdAdapter(repository);
+        itemFindByIdAdapter = new ItemFindByIdGateway(repository);
     }
 
     @Test

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ProprietarioSearchAdapter implements UsuarioSearchOutputPort<ProprietarioDao> {
+public class ProprietarioSearchGateway implements UsuarioSearchOutputPort<ProprietarioDao> {
 
     private final ProprietarioRepository repository;
 

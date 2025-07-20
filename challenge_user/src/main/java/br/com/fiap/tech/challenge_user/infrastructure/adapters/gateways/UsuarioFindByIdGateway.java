@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioFindByIdAdapter<E extends UsuarioDao> implements FindByIdOutputPort<E> {
+public class UsuarioFindByIdGateway<E extends UsuarioDao> implements FindByIdOutputPort<E> {
 
     private final UsuarioRepository repository;
 

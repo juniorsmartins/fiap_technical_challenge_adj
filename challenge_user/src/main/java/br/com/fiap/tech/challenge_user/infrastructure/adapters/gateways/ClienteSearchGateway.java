@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ClienteSearchAdapter implements UsuarioSearchOutputPort<ClienteDao> {
+public class ClienteSearchGateway implements UsuarioSearchOutputPort<ClienteDao> {
 
     private final ClienteRepository repository;
 

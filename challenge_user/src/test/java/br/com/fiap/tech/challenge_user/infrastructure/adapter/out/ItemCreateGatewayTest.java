@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
 import br.com.fiap.tech.challenge_user.application.exception.http500.ItemNonPersistenceException;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemCreateAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemCreateGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,21 +15,21 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ItemCreateAdapterTest {
+class ItemCreateGatewayTest {
 
     private final ItemRepository repository;
 
     private CreateOutputPort<ItemDao> itemCreateAdapter;
 
     @Autowired
-    ItemCreateAdapterTest(ItemRepository repository) {
+    ItemCreateGatewayTest(ItemRepository repository) {
         this.repository = repository;
     }
 
     @BeforeEach
     void setUp() {
         repository.deleteAll();
-        itemCreateAdapter = new ItemCreateAdapter(repository);
+        itemCreateAdapter = new ItemCreateGateway(repository);
     }
 
     @Test

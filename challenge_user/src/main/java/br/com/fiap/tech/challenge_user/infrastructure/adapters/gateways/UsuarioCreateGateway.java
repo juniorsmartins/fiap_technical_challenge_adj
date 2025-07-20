@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class UsuarioCreateAdapter<E extends UsuarioDao> implements CreateOutputPort<E> {
+public class UsuarioCreateGateway<E extends UsuarioDao> implements CreateOutputPort<E> {
 
     private final UsuarioRepository repository;
 

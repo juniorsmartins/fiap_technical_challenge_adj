@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByNomeOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioFindByNomeAdapter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioFindByLoginOutputPort;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.UsuarioFindByLoginGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.UsuarioRepository;
@@ -13,25 +13,25 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class UsuarioFindByNomeAdapterTest {
+class UsuarioFindByLoginGatewayTest {
 
     private final UsuarioRepository repository;
 
-    private UsuarioFindByNomeOutputPort usuarioFindByNomeAdapter;
+    private UsuarioFindByLoginOutputPort usuarioFindByLoginAdapter;
 
     @Autowired
-    UsuarioFindByNomeAdapterTest(UsuarioRepository repository) {
+    UsuarioFindByLoginGatewayTest(UsuarioRepository repository) {
         this.repository = repository;
     }
 
     @BeforeEach
     void setUp() {
         repository.deleteAll();
-        usuarioFindByNomeAdapter = new UsuarioFindByNomeAdapter(repository);
+        usuarioFindByLoginAdapter = new UsuarioFindByLoginGateway(repository);
     }
 
     @Test
-    void deveEncontrarClienteExistentePorNome() {
+    void deveEncontrarClienteExistentePorLogin() {
         // Arrange
         var clienteEntity = new ClienteDao();
         clienteEntity.setNome("Charles Babbage");
@@ -42,7 +42,7 @@ class UsuarioFindByNomeAdapterTest {
         repository.save(clienteEntity);
 
         // Act
-        var result = usuarioFindByNomeAdapter.findByNome("Charles Babbage");
+        var result = usuarioFindByLoginAdapter.findByLogin("babbage");
 
         // Assert
         assertTrue(result.isPresent(), "O cliente deve ser encontrado");
@@ -56,7 +56,7 @@ class UsuarioFindByNomeAdapterTest {
     }
 
     @Test
-    void deveEncontrarProprietarioExistentePorNome() {
+    void deveEncontrarProprietarioExistentePorLogin() {
         // Arrange
         var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
@@ -67,7 +67,7 @@ class UsuarioFindByNomeAdapterTest {
         repository.save(proprietarioEntity);
 
         // Act
-        var result = usuarioFindByNomeAdapter.findByNome("João Silva");
+        var result = usuarioFindByLoginAdapter.findByLogin("jsilva");
 
         // Assert
         assertTrue(result.isPresent(), "O proprietário deve ser encontrado");
@@ -81,15 +81,15 @@ class UsuarioFindByNomeAdapterTest {
     }
 
     @Test
-    void deveRetornarVazioParaNomeInexistente() {
+    void deveRetornarVazioParaLoginInexistente() {
         // Arrange
-        var nonExistentNome = "Nome Inexistente";
+        var nonExistentLogin = "inexistente";
 
         // Act
-        var result = usuarioFindByNomeAdapter.findByNome(nonExistentNome);
+        var result = usuarioFindByLoginAdapter.findByLogin(nonExistentLogin);
 
         // Assert
-        assertFalse(result.isPresent(), "Não deve encontrar usuário com nome inexistente");
+        assertFalse(result.isPresent(), "Não deve encontrar usuário com login inexistente");
     }
 }
 

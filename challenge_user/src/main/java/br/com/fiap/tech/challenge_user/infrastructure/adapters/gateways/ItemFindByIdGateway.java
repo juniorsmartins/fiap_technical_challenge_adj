@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class ItemFindByIdAdapter implements FindByIdOutputPort<ItemDao> {
+public class ItemFindByIdGateway implements FindByIdOutputPort<ItemDao> {
 
     private final ItemRepository repository;
 

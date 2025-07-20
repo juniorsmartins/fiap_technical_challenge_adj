@@ -1,8 +1,8 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
-import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
 import br.com.fiap.tech.challenge_user.domain.models.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteFindByIdAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.RestauranteDeleteGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
@@ -15,12 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalTime;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class RestauranteFindByIdAdapterTest {
+class RestauranteDeleteGatewayTest {
 
     private final RestauranteRepository restauranteRepository;
 
@@ -28,7 +27,7 @@ class RestauranteFindByIdAdapterTest {
 
     private final EnderecoRepository enderecoRepository;
 
-    private FindByIdOutputPort<RestauranteDao> restauranteFindByIdAdapter;
+    private DeleteOutputPort<RestauranteDao> restauranteDeleteAdapter;
 
     private EnderecoDao enderecoDao;
 
@@ -39,9 +38,9 @@ class RestauranteFindByIdAdapterTest {
     private LocalTime horaFechamento;
 
     @Autowired
-    RestauranteFindByIdAdapterTest(RestauranteRepository restauranteRepository,
-                                   ProprietarioRepository proprietarioRepository,
-                                   EnderecoRepository enderecoRepository) {
+    RestauranteDeleteGatewayTest(RestauranteRepository restauranteRepository,
+                                 ProprietarioRepository proprietarioRepository,
+                                 EnderecoRepository enderecoRepository) {
         this.restauranteRepository = restauranteRepository;
         this.proprietarioRepository = proprietarioRepository;
         this.enderecoRepository = enderecoRepository;
@@ -51,15 +50,6 @@ class RestauranteFindByIdAdapterTest {
     void setUp() {
         restauranteRepository.deleteAll();
         proprietarioRepository.deleteAll();
-        enderecoRepository.deleteAll();
-
-        restauranteFindByIdAdapter = new RestauranteFindByIdAdapter(restauranteRepository);
-
-        enderecoDao = new EnderecoDao();
-        enderecoDao.setCep("01001-000");
-        enderecoDao.setLogradouro("Avenida Central");
-        enderecoDao.setNumero("1500");
-        enderecoRepository.save(enderecoDao);
 
         proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setNome("João Silva");
@@ -67,52 +57,22 @@ class RestauranteFindByIdAdapterTest {
         proprietarioEntity.setLogin("jsilva");
         proprietarioEntity.setSenha("jsilva!123");
         proprietarioEntity.setDescricao("Proprietário principal");
+
         proprietarioRepository.save(proprietarioEntity);
+
+        restauranteDeleteAdapter = new RestauranteDeleteGateway(restauranteRepository);
+
+        enderecoDao = new EnderecoDao();
+        enderecoDao.setCep("01001-000");
+        enderecoDao.setLogradouro("Avenida Central");
+        enderecoDao.setNumero("1500");
 
         horaAbertura = LocalTime.of(8, 10, 10);
         horaFechamento = LocalTime.of(22, 0, 0);
     }
 
     @Test
-    void deveEncontrarRestauranteExistentePorId() {
-        // Arrange
-        var restauranteEntity = new RestauranteDao();
-        restauranteEntity.setNome("Restaurante Sabor");
-        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
-        restauranteEntity.setHoraAbertura(horaAbertura);
-        restauranteEntity.setHoraFechamento(horaFechamento);
-        restauranteEntity.setEndereco(enderecoDao);
-        restauranteEntity.setProprietario(proprietarioEntity);
-
-        var savedEntity = restauranteRepository.save(restauranteEntity);
-
-        // Act
-        var result = restauranteFindByIdAdapter.findById(savedEntity.getRestauranteId());
-
-        // Assert
-        assertTrue(result.isPresent(), "O restaurante deve ser encontrado");
-        var foundEntity = result.get();
-        assertEquals(savedEntity.getRestauranteId(), foundEntity.getRestauranteId());
-        assertEquals("Restaurante Sabor", foundEntity.getNome());
-        assertEquals(TipoCozinhaEnum.CARNIVORA, foundEntity.getTipoCozinhaEnum());
-        assertEquals(horaAbertura, foundEntity.getHoraAbertura());
-        assertEquals(horaFechamento, foundEntity.getHoraFechamento());
-    }
-
-    @Test
-    void deveRetornarVazioParaRestauranteInexistente() {
-        // Arrange
-        var nonExistentId = UUID.randomUUID();
-
-        // Act
-        var result = restauranteFindByIdAdapter.findById(nonExistentId);
-
-        // Assert
-        assertFalse(result.isPresent(), "Não deve encontrar restaurante com ID inexistente");
-    }
-
-    @Test
-    void deveCarregarRelacionamentosAoEncontrarRestaurante() {
+    void deveDeletarRestauranteComSucesso() {
         // Arrange
         var restauranteEntity = new RestauranteDao();
         restauranteEntity.setNome("Restaurante Sabor");
@@ -124,18 +84,56 @@ class RestauranteFindByIdAdapterTest {
         var savedEntity = restauranteRepository.save(restauranteEntity);
 
         // Act
-        var result = restauranteFindByIdAdapter.findById(savedEntity.getRestauranteId());
+        restauranteDeleteAdapter.delete(savedEntity);
 
         // Assert
-        assertTrue(result.isPresent(), "O restaurante deve ser encontrado");
-        var foundEntity = result.get();
-        assertNotNull(foundEntity.getEndereco(), "O endereço deve estar carregado");
-        assertEquals(enderecoDao.getEnderecoId(), foundEntity.getEndereco().getEnderecoId());
-        assertEquals("Avenida Central", foundEntity.getEndereco().getLogradouro());
+        var persistedEntity = restauranteRepository.findById(savedEntity.getRestauranteId());
+        assertFalse(persistedEntity.isPresent(), "O restaurante deve ser removido do banco");
+    }
 
-        assertNotNull(foundEntity.getProprietario(), "O proprietário deve estar carregado");
-        assertEquals(proprietarioEntity.getUsuarioId(), foundEntity.getProprietario().getUsuarioId());
-        assertEquals("João Silva", foundEntity.getProprietario().getNome());
+    @Test
+    void deveIgnorarDelecaoDeRestauranteNaoPersistido() {
+        // Arrange
+        var restauranteEntity = new RestauranteDao();
+        restauranteEntity.setNome("Restaurante Sabor");
+        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
+        restauranteEntity.setHoraAbertura(horaAbertura);
+        restauranteEntity.setHoraFechamento(horaFechamento);
+        restauranteEntity.setEndereco(enderecoDao);
+        restauranteEntity.setProprietario(proprietarioEntity);
+
+        // Act
+        restauranteDeleteAdapter.delete(restauranteEntity);
+
+        // Assert
+        assertEquals(0, restauranteRepository.count(), "O banco deve permanecer vazio");
+    }
+
+    @Test
+    void deveDeletarRestauranteEEnderecoSemAfetarProprietario() {
+        // Arrange
+        var restauranteEntity = new RestauranteDao();
+        restauranteEntity.setNome("Restaurante Sabor");
+        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.CARNIVORA);
+        restauranteEntity.setHoraAbertura(horaAbertura);
+        restauranteEntity.setHoraFechamento(horaFechamento);
+        restauranteEntity.setEndereco(enderecoDao);
+        restauranteEntity.setProprietario(proprietarioEntity);
+        var savedEntity = restauranteRepository.save(restauranteEntity);
+
+        // Act
+        restauranteDeleteAdapter.delete(savedEntity);
+
+        // Assert
+        var persistedRestaurante = restauranteRepository.findById(savedEntity.getRestauranteId());
+        assertFalse(persistedRestaurante.isPresent(), "O restaurante deve ser removido do banco.");
+
+        var persistedEndereco = enderecoRepository.findById(savedEntity.getEndereco().getEnderecoId());
+        assertFalse(persistedEndereco.isPresent(), "O endereço deve ser removido do banco.");
+
+        var persistedProprietario = proprietarioRepository.findById(savedEntity.getProprietario().getUsuarioId());
+        assertTrue(persistedProprietario.isPresent(), "O proprietário não deve ser afetado.");
+        assertEquals("João Silva", persistedProprietario.get().getNome());
     }
 }
 

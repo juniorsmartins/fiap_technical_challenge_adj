@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.out;
 
 import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemDeleteAdapter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.gateways.ItemDeleteGateway;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,21 +15,21 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ItemDeleteAdapterTest {
+class ItemDeleteGatewayTest {
 
     private final ItemRepository repository;
 
     private DeleteOutputPort<ItemDao> itemDeleteAdapter;
 
     @Autowired
-    ItemDeleteAdapterTest(ItemRepository repository) {
+    ItemDeleteGatewayTest(ItemRepository repository) {
         this.repository = repository;
     }
 
     @BeforeEach
     void setUp() {
         repository.deleteAll();
-        itemDeleteAdapter = new ItemDeleteAdapter(repository);
+        itemDeleteAdapter = new ItemDeleteGateway(repository);
     }
 
     @Test
