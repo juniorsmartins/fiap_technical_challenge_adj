@@ -1,14 +1,14 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.SenhaDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.EnderecoRepository;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ProprietarioRepository;
+import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.SenhaDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.EnderecoRepository;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ProprietarioRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -53,7 +53,7 @@ public final class ProprietarioControllerStep {
 
     private EnderecoDtoResponse enderecoDtoResponse;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private SenhaDtoRequest senhaDtoRequest;
 
@@ -81,21 +81,21 @@ public final class ProprietarioControllerStep {
         List<Map<String, String>> usuariosData = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> row : usuariosData) {
-            EnderecoEntity enderecoEntity = null;
+            EnderecoDao enderecoDao = null;
 
             if (!row.get("cep").isEmpty()) {
-                enderecoEntity = new EnderecoEntity();
-                enderecoEntity.setCep(row.get("cep"));
-                enderecoEntity.setLogradouro(row.get("logradouro"));
-                enderecoEntity.setNumero(row.get("numero"));
+                enderecoDao = new EnderecoDao();
+                enderecoDao.setCep(row.get("cep"));
+                enderecoDao.setLogradouro(row.get("logradouro"));
+                enderecoDao.setNumero(row.get("numero"));
             }
 
-            var proprietarioEntidade = new ProprietarioEntity(
+            var proprietarioEntidade = new ProprietarioDao(
                     row.get("nome"),
                     row.get("email"),
                     row.get("login"),
                     row.get("senha"),
-                    enderecoEntity,
+                    enderecoDao,
                     row.get("descricao"),
                     Date.from(Instant.now()),
                     null
@@ -218,7 +218,7 @@ public final class ProprietarioControllerStep {
     @Dado("um identificador ID de um proprietario inexistente")
     public void um_identificador_id_de_um_proprietario_inexistente() {
 
-        proprietarioEntity = new ProprietarioEntity(
+        proprietarioEntity = new ProprietarioDao(
                 UUID.randomUUID(),
                 "nomeTeste",
                 "emailTeste",

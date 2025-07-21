@@ -1,12 +1,12 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteCheckRule;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -14,17 +14,17 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public final class RestauranteUpdateUseCase extends AbstractUpdateUseCase<Restaurante, RestauranteEntity>
+public final class RestauranteUpdateUseCase extends AbstractUpdateUseCase<Restaurante, RestauranteDao>
         implements UpdateInputPort<Restaurante> {
 
     private final RestauranteCheckRule restauranteCheckRule;
 
     public RestauranteUpdateUseCase(
-            EntityMapper<Restaurante, RestauranteEntity> entityMapper,
-            CreateOutputPort<RestauranteEntity> createOutputPort,
-            FindByIdOutputPort<RestauranteEntity> findByIdOutputPort,
+            DaoPresenter<Restaurante, RestauranteDao> daoPresenter,
+            CreateOutputPort<RestauranteDao> createOutputPort,
+            FindByIdOutputPort<RestauranteDao> findByIdOutputPort,
             RestauranteCheckRule restauranteCheckRule) {
-        super(entityMapper, createOutputPort, findByIdOutputPort);
+        super(daoPresenter, createOutputPort, findByIdOutputPort);
         this.restauranteCheckRule = restauranteCheckRule;
     }
 
@@ -35,7 +35,7 @@ public final class RestauranteUpdateUseCase extends AbstractUpdateUseCase<Restau
     }
 
     @Override
-    public RestauranteEntity rulesUpdate(UUID id, Restaurante domain, RestauranteEntity entity) {
+    public RestauranteDao rulesUpdate(UUID id, Restaurante domain, RestauranteDao entity) {
 
         domain.setRestauranteId(id);
         var proprietarioEntity = restauranteCheckRule.checkProprietario(domain);

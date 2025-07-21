@@ -1,10 +1,10 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,15 +23,15 @@ import static org.mockito.Mockito.*;
 class ProprietarioSenhaUseCaseTest {
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @Mock
-    private CreateOutputPort<ProprietarioEntity> createOutputPort;
+    private CreateOutputPort<ProprietarioDao> createOutputPort;
 
     @InjectMocks
     private ProprietarioSenhaUseCase proprietarioSenhaUseCase;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
     private UUID usuarioId;
     private String senhaAntiga;
     private String senhaNova;
@@ -41,7 +41,7 @@ class ProprietarioSenhaUseCaseTest {
         usuarioId = UUID.randomUUID();
         senhaAntiga = "senha123";
         senhaNova = "novaSenha456";
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(usuarioId);
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");

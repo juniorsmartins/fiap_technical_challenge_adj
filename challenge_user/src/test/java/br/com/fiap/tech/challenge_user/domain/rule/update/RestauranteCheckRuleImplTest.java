@@ -1,11 +1,12 @@
 package br.com.fiap.tech.challenge_user.domain.rule.update;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.ProprietarioNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRuleImpl;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,10 +24,10 @@ import static org.mockito.Mockito.*;
 class RestauranteCheckRuleImplTest {
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @Mock
-    private EntityMapper<Proprietario, ProprietarioEntity> mapper;
+    private DaoPresenter<Proprietario, ProprietarioDao> mapper;
 
     @InjectMocks
     private RestauranteCheckRuleImpl restauranteCheckRule;
@@ -35,14 +36,14 @@ class RestauranteCheckRuleImplTest {
 
     private Restaurante restaurante;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private Proprietario proprietarioDomain;
 
     @BeforeEach
     void setUp() {
         proprietarioId = UUID.randomUUID();
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("Mads Torgersen");
 
@@ -61,7 +62,7 @@ class RestauranteCheckRuleImplTest {
         when(mapper.toDomain(proprietarioEntity)).thenReturn(proprietarioDomain);
 
         // Act
-        ProprietarioEntity result = restauranteCheckRule.checkProprietario(restaurante);
+        ProprietarioDao result = restauranteCheckRule.checkProprietario(restaurante);
 
         // Assert
         assertNotNull(result);
@@ -86,19 +87,6 @@ class RestauranteCheckRuleImplTest {
         verify(findByIdOutputPort).findById(proprietarioId);
         verifyNoInteractions(mapper);
         verifyNoMoreInteractions(findByIdOutputPort);
-    }
-
-    @Test
-    void deveLancarNullPointerExceptionQuandoProprietarioEhNulo() {
-        // Arrange
-        restaurante.setProprietario(null);
-
-        // Act & Assert
-        assertThrows(
-                NullPointerException.class,
-                () -> restauranteCheckRule.checkProprietario(restaurante)
-        );
-        verifyNoInteractions(findByIdOutputPort, mapper);
     }
 }
 

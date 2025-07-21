@@ -1,12 +1,13 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ClienteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ClienteFindController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ClienteDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,17 +27,17 @@ import static org.mockito.Mockito.*;
 class ClienteFindControllerTest {
 
     @Mock
-    private OutputMapper<Cliente, ClienteDtoResponse, ClienteEntity> outputMapper;
+    private OutputPresenter<Cliente, ClienteDtoResponse, ClienteDao> outputPresenter;
 
     @Mock
-    private FindByIdOutputPort<ClienteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ClienteDao> findByIdOutputPort;
 
     @InjectMocks
     private ClienteFindController clienteFindController;
 
     private UUID clienteId;
 
-    private ClienteEntity clienteEntity;
+    private ClienteDao clienteDao;
 
     private ClienteDtoResponse clienteDtoResponse;
 
@@ -45,13 +46,13 @@ class ClienteFindControllerTest {
         clienteId = UUID.randomUUID();
         var enderecoId = UUID.randomUUID();
 
-        clienteEntity = new ClienteEntity();
-        clienteEntity.setUsuarioId(clienteId);
-        clienteEntity.setNome("Robert Martin");
-        clienteEntity.setEmail("martin@email.com");
-        clienteEntity.setLogin("rmartin");
-        clienteEntity.setSenha("rmartin!123");
-        clienteEntity.setNumeroCartaoFidelidade("12345-6789-3245");
+        clienteDao = new ClienteDao();
+        clienteDao.setUsuarioId(clienteId);
+        clienteDao.setNome("Robert Martin");
+        clienteDao.setEmail("martin@email.com");
+        clienteDao.setLogin("rmartin");
+        clienteDao.setSenha("rmartin!123");
+        clienteDao.setNumeroCartaoFidelidade("12345-6789-3245");
 
         var enderecoDtoResponse = new EnderecoDtoResponse(
                 enderecoId, "01001-000", "Avenida Central", "1500"
@@ -66,8 +67,8 @@ class ClienteFindControllerTest {
     @Test
     void deveEncontrarClienteComSucesso() {
         // Arrange
-        doReturn(Optional.of(clienteEntity)).when(findByIdOutputPort).findById(clienteId);
-        doReturn(clienteDtoResponse).when(outputMapper).toResponse(clienteEntity);
+        doReturn(Optional.of(clienteDao)).when(findByIdOutputPort).findById(clienteId);
+        doReturn(clienteDtoResponse).when(outputPresenter).toResponse(clienteDao);
 
         // Act
         ResponseEntity<ClienteDtoResponse> response = clienteFindController.findById(clienteId);
@@ -77,8 +78,8 @@ class ClienteFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(clienteDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verify(outputMapper, times(1)).toResponse(clienteEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(clienteDao);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -94,7 +95,7 @@ class ClienteFindControllerTest {
 
         assertEquals(clienteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(clienteId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

@@ -1,12 +1,12 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.port.in.DeleteByIdInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.DeleteOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.ProprietarioNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.ActiveOwnerBlocksDeletionException;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.DeleteByIdInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.DeleteOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.ProprietarioNotFoundException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.ActiveOwnerBlocksDeletionException;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProprietarioDeleteUseCase implements DeleteByIdInputPort<Proprietario> {
 
-    private final FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private final FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
-    private final DeleteOutputPort<ProprietarioEntity> deleteOutputPort;
+    private final DeleteOutputPort<ProprietarioDao> deleteOutputPort;
 
     @Transactional
     public void deleteById(@NonNull final UUID id) {
@@ -37,7 +37,7 @@ public class ProprietarioDeleteUseCase implements DeleteByIdInputPort<Proprietar
                 });
     }
 
-    private void checkActiveOwner(ProprietarioEntity entity) {
+    private void checkActiveOwner(ProprietarioDao entity) {
 
         if (!entity.getRestaurantes().isEmpty()) {
             throw new ActiveOwnerBlocksDeletionException(entity.getUsuarioId().toString());
