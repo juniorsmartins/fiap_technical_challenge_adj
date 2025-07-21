@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class AbstractUpdateUseCase<T, E> {
 
-    private final EntityMapper<T, E> entityMapper;
+    private final DaoPresenter<T, E> daoPresenter;
 
     private final CreateOutputPort<E> createOutputPort;
 
@@ -26,7 +26,7 @@ public abstract class AbstractUpdateUseCase<T, E> {
         return findByIdOutputPort.findById(id)
                 .map(entity -> this.rulesUpdate(id, usuario, entity))
                 .map(createOutputPort::save)
-                .map(entityMapper::toDomain)
+                .map(daoPresenter::toDomain)
                 .orElseThrow(() -> {
                     log.error("AbstractUpdateService - Recurso não encontrado por id: {}.", id);
                     return new RecursoNotFoundException(id);

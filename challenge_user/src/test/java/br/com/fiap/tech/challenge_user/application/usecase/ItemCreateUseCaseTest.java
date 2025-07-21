@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.domain.entities.Item;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,17 +21,17 @@ import static org.mockito.Mockito.*;
 class ItemCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Item, ItemEntity> entityMapper;
+    private DaoPresenter<Item, ItemDao> daoPresenter;
 
     @Mock
-    private CreateOutputPort<ItemEntity> createOutputPort;
+    private CreateOutputPort<ItemDao> createOutputPort;
 
     @InjectMocks
     private ItemCreateUseCase itemCreateUseCase;
 
     private Item item;
 
-    private ItemEntity itemEntity;
+    private ItemDao itemDao;
 
     @BeforeEach
     void setUp() {
@@ -42,7 +42,7 @@ class ItemCreateUseCaseTest {
                 "http://link-foto.com.br"
         );
 
-        itemEntity = new ItemEntity(
+        itemDao = new ItemDao(
                 itemId, "Coca-Cola", "Refrigerante", new BigDecimal("20.00"), true,
                 "http://link-foto.com.br"
         );
@@ -51,9 +51,9 @@ class ItemCreateUseCaseTest {
     @Test
     void deveCriarItemComSucesso() {
         // Arrange
-        doReturn(itemEntity).when(entityMapper).toEntity(item);
-        doReturn(itemEntity).when(createOutputPort).save(itemEntity);
-        doReturn(item).when(entityMapper).toDomain(itemEntity);
+        doReturn(itemDao).when(daoPresenter).toEntity(item);
+        doReturn(itemDao).when(createOutputPort).save(itemDao);
+        doReturn(item).when(daoPresenter).toDomain(itemDao);
 
         // Act
         Item result = itemCreateUseCase.create(item);
@@ -66,10 +66,10 @@ class ItemCreateUseCaseTest {
         assertEquals(new BigDecimal("20.00"), result.getPreco());
         assertTrue(result.isEntrega());
         assertEquals("http://link-foto.com.br", result.getFoto());
-        verify(entityMapper, times(1)).toEntity(item);
-        verify(createOutputPort, times(1)).save(itemEntity);
-        verify(entityMapper, times(1)).toDomain(itemEntity);
-        verifyNoMoreInteractions(entityMapper, createOutputPort);
+        verify(daoPresenter, times(1)).toEntity(item);
+        verify(createOutputPort, times(1)).save(itemDao);
+        verify(daoPresenter, times(1)).toDomain(itemDao);
+        verifyNoMoreInteractions(daoPresenter, createOutputPort);
     }
 }
 

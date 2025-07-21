@@ -1,12 +1,13 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.PageMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.UsuarioSearchOutputPort;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.filter.UsuarioFiltroDto;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioSearchController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.PagePresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.UsuarioSearchOutputPort;
+import br.com.fiap.tech.challenge_user.application.dtos.filters.UsuarioFiltroDto;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,10 +29,10 @@ import static org.mockito.Mockito.*;
 class ProprietarioSearchControllerTest {
 
     @Mock
-    private PageMapper<ProprietarioDtoResponse, ProprietarioEntity> mapper;
+    private PagePresenter<ProprietarioDtoResponse, ProprietarioDao> mapper;
 
     @Mock
-    private UsuarioSearchOutputPort<ProprietarioEntity> finder;
+    private UsuarioSearchOutputPort<ProprietarioDao> finder;
 
     @InjectMocks
     private ProprietarioSearchController proprietarioSearchController;
@@ -40,7 +41,7 @@ class ProprietarioSearchControllerTest {
 
     private Pageable paginacao;
 
-    private Page<ProprietarioEntity> proprietarioEntityPage;
+    private Page<ProprietarioDao> proprietarioEntityPage;
 
     private Page<ProprietarioDtoResponse> proprietarioDtoResponsePage;
 
@@ -54,12 +55,12 @@ class ProprietarioSearchControllerTest {
 
         paginacao = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "usuarioId"));
 
-        var enderecoEntity = new EnderecoEntity();
+        var enderecoEntity = new EnderecoDao();
         enderecoEntity.setCep("01001-000");
         enderecoEntity.setLogradouro("Avenida Central");
         enderecoEntity.setNumero("1500");
 
-        var proprietarioEntity = new ProprietarioEntity();
+        var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");

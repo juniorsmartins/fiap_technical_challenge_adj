@@ -1,9 +1,9 @@
 package cucumber.steps;
 
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ItemDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.repository.ItemRepository;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.repositories.ItemRepository;
 import cucumber.config.ConstantsTest;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -45,7 +45,7 @@ public final class ItemControllerStep {
 
     private ItemDtoResponse itemDtoResponse;
 
-    private ItemEntity itemEntity;
+    private ItemDao itemDao;
 
     @Before
     public void setUp() {
@@ -73,7 +73,7 @@ public final class ItemControllerStep {
 
         for (Map<String, String> row : itensData) {
 
-            var entidade = new ItemEntity(
+            var entidade = new ItemDao(
                     null,
                     row.get("nome"),
                     row.get("descricao"),
@@ -146,9 +146,9 @@ public final class ItemControllerStep {
     @Dado("um identificador ID de um Item existente, com nome {string}")
     public void um_identificador_id_de_um_item_existente_com_nome(String nome) {
 
-        itemEntity = itemRepository.findByNome(nome).get();
+        itemDao = itemRepository.findByNome(nome).get();
 
-        assertThat(itemEntity).isNotNull();
+        assertThat(itemDao).isNotNull();
     }
 
     @Quando("uma requisição Get for feita no método findById do ItemController")
@@ -158,7 +158,7 @@ public final class ItemControllerStep {
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                .get("/" + itemEntity.getItemId());
+                .get("/" + itemDao.getItemId());
 
         assertThat(response).isNotNull();
     }
@@ -170,7 +170,7 @@ public final class ItemControllerStep {
                 .given().spec(requestSpecification)
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .when()
-                .delete("/" + itemEntity.getItemId());
+                .delete("/" + itemDao.getItemId());
 
         assertThat(response).isNotNull();
     }
@@ -178,7 +178,7 @@ public final class ItemControllerStep {
     @Entao("o Item foi apagado do banco de dados pelo ItemController")
     public void o_item_foi_apagado_do_banco_de_dados_pelo_item_controller() {
 
-        var response = itemRepository.findById(itemEntity.getItemId());
+        var response = itemRepository.findById(itemDao.getItemId());
 
         assertThat(response).isEmpty();
     }
@@ -191,7 +191,7 @@ public final class ItemControllerStep {
                 .contentType(ConstantsTest.CONTENT_TYPE_JSON)
                 .body(itemDtoRequest)
                 .when()
-                .put("/" + itemEntity.getItemId());
+                .put("/" + itemDao.getItemId());
 
         assertThat(response).isNotNull();
     }
@@ -199,12 +199,12 @@ public final class ItemControllerStep {
     @Dado("um identificador ID de um Item inexistente")
     public void um_identificador_id_de_um_item_inexistente() {
 
-        itemEntity = new ItemEntity(
+        itemDao = new ItemDao(
                 UUID.randomUUID(), "Cerveja", "Bebida alcoólica",
                 new BigDecimal("15.00"), true, "link-foto"
         );
 
-        assertThat(itemEntity.getItemId()).isNotNull();
+        assertThat(itemDao.getItemId()).isNotNull();
     }
 }
 

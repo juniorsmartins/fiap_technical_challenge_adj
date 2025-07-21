@@ -1,12 +1,13 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioFindController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,17 +29,17 @@ import static org.mockito.Mockito.*;
 class ProprietarioFindControllerTest {
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper;
+    private OutputPresenter<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputPresenter;
 
     @Mock
-    private FindByIdOutputPort<ProprietarioEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ProprietarioDao> findByIdOutputPort;
 
     @InjectMocks
     private ProprietarioFindController proprietarioFindController;
 
     private UUID proprietarioId;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private ProprietarioDtoResponse proprietarioDtoResponse;
 
@@ -47,7 +48,7 @@ class ProprietarioFindControllerTest {
         proprietarioId = UUID.randomUUID();
         var enderecoId = UUID.randomUUID();
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João Silva");
         proprietarioEntity.setEmail("joao@email.com");
@@ -69,7 +70,7 @@ class ProprietarioFindControllerTest {
     void deveEncontrarProprietarioComSucesso() {
         // Arrange
         doReturn(Optional.of(proprietarioEntity)).when(findByIdOutputPort).findById(proprietarioId);
-        doReturn(proprietarioDtoResponse).when(outputMapper).toResponse(proprietarioEntity);
+        doReturn(proprietarioDtoResponse).when(outputPresenter).toResponse(proprietarioEntity);
 
         // Act
         ResponseEntity<ProprietarioDtoResponse> response = proprietarioFindController.findById(proprietarioId);
@@ -79,8 +80,8 @@ class ProprietarioFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(proprietarioDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(proprietarioId);
-        verify(outputMapper, times(1)).toResponse(proprietarioEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(proprietarioEntity);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -96,7 +97,7 @@ class ProprietarioFindControllerTest {
 
         assertEquals(proprietarioId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(proprietarioId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

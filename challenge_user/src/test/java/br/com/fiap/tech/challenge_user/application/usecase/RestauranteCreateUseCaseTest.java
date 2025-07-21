@@ -1,15 +1,15 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteCheckRule;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,10 +27,10 @@ import static org.mockito.Mockito.*;
 class RestauranteCreateUseCaseTest {
 
     @Mock
-    private EntityMapper<Restaurante, RestauranteEntity> entityMapper;
+    private DaoPresenter<Restaurante, RestauranteDao> daoPresenter;
 
     @Mock
-    private CreateOutputPort<RestauranteEntity> createOutputPort;
+    private CreateOutputPort<RestauranteDao> createOutputPort;
 
     @Mock
     private RestauranteCheckRule restauranteCheckRule;
@@ -40,7 +40,7 @@ class RestauranteCreateUseCaseTest {
 
     private Restaurante restaurante;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
 
     @BeforeEach
     void setUp() {
@@ -67,33 +67,33 @@ class RestauranteCreateUseCaseTest {
         restaurante.setEndereco(endereco);
         restaurante.setProprietario(proprietario);
 
-        var proprietarioEntity = new ProprietarioEntity();
+        var proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");
         proprietarioEntity.setLogin("joao");
 
-        var enderecoEntity = new EnderecoEntity();
+        var enderecoEntity = new EnderecoDao();
         enderecoEntity.setCep("12345-678");
         enderecoEntity.setLogradouro("Rua Exemplo");
         enderecoEntity.setNumero("123");
 
-        restauranteEntity = new RestauranteEntity();
-        restauranteEntity.setRestauranteId(restauranteId);
-        restauranteEntity.setNome("Restaurante Sabor");
-        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
-        restauranteEntity.setHoraAbertura(LocalTime.of(11, 0));
-        restauranteEntity.setHoraFechamento(LocalTime.of(23, 0));
-        restauranteEntity.setEndereco(enderecoEntity);
-        restauranteEntity.setProprietario(proprietarioEntity);
+        restauranteDao = new RestauranteDao();
+        restauranteDao.setRestauranteId(restauranteId);
+        restauranteDao.setNome("Restaurante Sabor");
+        restauranteDao.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
+        restauranteDao.setHoraAbertura(LocalTime.of(11, 0));
+        restauranteDao.setHoraFechamento(LocalTime.of(23, 0));
+        restauranteDao.setEndereco(enderecoEntity);
+        restauranteDao.setProprietario(proprietarioEntity);
     }
 
     @Test
     void deveCriarRestauranteQuandoValidacaoEhValida() {
         // Arrange
-        when(entityMapper.toEntity(restaurante)).thenReturn(restauranteEntity);
-        when(createOutputPort.save(restauranteEntity)).thenReturn(restauranteEntity);
-        when(entityMapper.toDomain(restauranteEntity)).thenReturn(restaurante);
+        when(daoPresenter.toEntity(restaurante)).thenReturn(restauranteDao);
+        when(createOutputPort.save(restauranteDao)).thenReturn(restauranteDao);
+        when(daoPresenter.toDomain(restauranteDao)).thenReturn(restaurante);
 
         // Act
         Restaurante result = restauranteCreateUseCase.create(restaurante);
@@ -102,10 +102,10 @@ class RestauranteCreateUseCaseTest {
         assertNotNull(result);
         assertEquals(restaurante, result);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verify(entityMapper, times(1)).toEntity(restaurante);
-        verify(createOutputPort, times(1)).save(restauranteEntity);
-        verify(entityMapper, times(1)).toDomain(restauranteEntity);
-        verifyNoMoreInteractions(restauranteCheckRule, entityMapper, createOutputPort);
+        verify(daoPresenter, times(1)).toEntity(restaurante);
+        verify(createOutputPort, times(1)).save(restauranteDao);
+        verify(daoPresenter, times(1)).toDomain(restauranteDao);
+        verifyNoMoreInteractions(restauranteCheckRule, daoPresenter, createOutputPort);
     }
 
     @Test
@@ -121,7 +121,7 @@ class RestauranteCreateUseCaseTest {
         );
         assertEquals("Proprietário inválido", exception.getMessage());
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verifyNoInteractions(entityMapper, createOutputPort);
+        verifyNoInteractions(daoPresenter, createOutputPort);
     }
 
     @Test
@@ -131,7 +131,7 @@ class RestauranteCreateUseCaseTest {
                 NullPointerException.class,
                 () -> restauranteCreateUseCase.create(null)
         );
-        verifyNoInteractions(restauranteCheckRule, entityMapper, createOutputPort);
+        verifyNoInteractions(restauranteCheckRule, daoPresenter, createOutputPort);
     }
 }
 

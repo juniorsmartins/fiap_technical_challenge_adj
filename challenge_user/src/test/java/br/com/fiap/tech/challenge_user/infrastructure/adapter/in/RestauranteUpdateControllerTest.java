@@ -1,19 +1,20 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.RestauranteDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteUpdateController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.RestauranteDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,10 +34,10 @@ import static org.mockito.Mockito.*;
 class RestauranteUpdateControllerTest {
 
     @Mock
-    private InputMapper<RestauranteDtoRequest, Restaurante> inputMapper;
+    private InputPresenter<RestauranteDtoRequest, Restaurante> inputPresenter;
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper;
+    private OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao> outputPresenter;
 
     @Mock
     private UpdateInputPort<Restaurante> updateInputPort;
@@ -101,9 +102,9 @@ class RestauranteUpdateControllerTest {
     @Test
     void deveAtualizarRestauranteComSucesso() {
         // Arrange
-        doReturn(restaurante).when(inputMapper).toDomainIn(restauranteDtoRequest);
+        doReturn(restaurante).when(inputPresenter).toDomainIn(restauranteDtoRequest);
         doReturn(restaurante).when(updateInputPort).update(restauranteId, restaurante);
-        doReturn(restauranteDtoResponse).when(outputMapper).toDtoResponse(restaurante);
+        doReturn(restauranteDtoResponse).when(outputPresenter).toDtoResponse(restaurante);
 
         // Act
         ResponseEntity<RestauranteDtoResponse> response = restauranteUpdateController.update(restauranteId, restauranteDtoRequest);
@@ -112,10 +113,10 @@ class RestauranteUpdateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(restauranteDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(restauranteDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(restauranteDtoRequest);
         verify(updateInputPort, times(1)).update(restauranteId, restaurante);
-        verify(outputMapper, times(1)).toDtoResponse(restaurante);
-        verifyNoMoreInteractions(inputMapper, updateInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(restaurante);
+        verifyNoMoreInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 
     @Test
@@ -127,7 +128,7 @@ class RestauranteUpdateControllerTest {
         );
 
         assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, updateInputPort, outputMapper);
+        verifyNoInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 }
 

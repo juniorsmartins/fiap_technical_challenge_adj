@@ -1,14 +1,14 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Cliente;
-import br.com.fiap.tech.challenge_user.domain.rule.UsuarioRulesStrategy;
-import br.com.fiap.tech.challenge_user.domain.rule.update.EnderecoUpdateRule;
-import br.com.fiap.tech.challenge_user.domain.rule.update.UsuarioUpdateRule;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ClienteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
+import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
+import br.com.fiap.tech.challenge_user.domain.rules.update.EnderecoUpdateRule;
+import br.com.fiap.tech.challenge_user.domain.rules.update.UsuarioUpdateRule;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -16,23 +16,23 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public final class ClienteUpdateUseCase extends AbstractUpdateUseCase<Cliente, ClienteEntity>
+public final class ClienteUpdateUseCase extends AbstractUpdateUseCase<Cliente, ClienteDao>
         implements UpdateInputPort<Cliente> {
 
     private final List<UsuarioRulesStrategy<Cliente>> rulesStrategy;
 
-    private final UsuarioUpdateRule<Cliente, ClienteEntity> usuarioUpdateRule;
+    private final UsuarioUpdateRule<Cliente, ClienteDao> usuarioUpdateRule;
 
-    private final EnderecoUpdateRule<Cliente, ClienteEntity> enderecoUpdateRule;
+    private final EnderecoUpdateRule<Cliente, ClienteDao> enderecoUpdateRule;
 
     public ClienteUpdateUseCase(
-            EntityMapper<Cliente, ClienteEntity> entityMapper,
-            CreateOutputPort<ClienteEntity> createOutputPort,
-            FindByIdOutputPort<ClienteEntity> findByIdOutputPort,
-            UsuarioUpdateRule<Cliente, ClienteEntity> usuarioUpdateRule,
-            EnderecoUpdateRule<Cliente, ClienteEntity> enderecoUpdateRule,
+            DaoPresenter<Cliente, ClienteDao> daoPresenter,
+            CreateOutputPort<ClienteDao> createOutputPort,
+            FindByIdOutputPort<ClienteDao> findByIdOutputPort,
+            UsuarioUpdateRule<Cliente, ClienteDao> usuarioUpdateRule,
+            EnderecoUpdateRule<Cliente, ClienteDao> enderecoUpdateRule,
             List<UsuarioRulesStrategy<Cliente>> rulesStrategy) {
-        super(entityMapper, createOutputPort, findByIdOutputPort);
+        super(daoPresenter, createOutputPort, findByIdOutputPort);
         this.rulesStrategy = rulesStrategy;
         this.usuarioUpdateRule = usuarioUpdateRule;
         this.enderecoUpdateRule = enderecoUpdateRule;
@@ -45,7 +45,7 @@ public final class ClienteUpdateUseCase extends AbstractUpdateUseCase<Cliente, C
     }
 
     @Override
-    public ClienteEntity rulesUpdate(UUID id, Cliente domain, ClienteEntity entity) {
+    public ClienteDao rulesUpdate(UUID id, Cliente domain, ClienteDao entity) {
 
         domain.setUsuarioId(id);
         rulesStrategy.forEach(rule -> rule.executar(domain));

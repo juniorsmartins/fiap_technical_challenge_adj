@@ -1,16 +1,17 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.RestauranteDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.RestauranteFindController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.RestauranteDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,17 +34,17 @@ import static org.mockito.Mockito.*;
 class RestauranteFindControllerTest {
 
     @Mock
-    private OutputMapper<Restaurante, RestauranteDtoResponse, RestauranteEntity> outputMapper;
+    private OutputPresenter<Restaurante, RestauranteDtoResponse, RestauranteDao> outputPresenter;
 
     @Mock
-    private FindByIdOutputPort<RestauranteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<RestauranteDao> findByIdOutputPort;
 
     @InjectMocks
     private RestauranteFindController restauranteFindController;
 
     private UUID restauranteId;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
 
     private RestauranteDtoResponse restauranteDtoResponse;
 
@@ -72,12 +73,12 @@ class RestauranteFindControllerTest {
         restaurante.setEndereco(endereco);
         restaurante.setProprietario(proprietario);
 
-        restauranteEntity = new RestauranteEntity();
-        restauranteEntity.setRestauranteId(restauranteId);
-        restauranteEntity.setNome("Restaurante Sabor");
-        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
-        restauranteEntity.setHoraAbertura(LocalTime.of(11, 0));
-        restauranteEntity.setHoraFechamento(LocalTime.of(23, 0));
+        restauranteDao = new RestauranteDao();
+        restauranteDao.setRestauranteId(restauranteId);
+        restauranteDao.setNome("Restaurante Sabor");
+        restauranteDao.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
+        restauranteDao.setHoraAbertura(LocalTime.of(11, 0));
+        restauranteDao.setHoraFechamento(LocalTime.of(23, 0));
 
         var enderecoDtoResponse = new EnderecoDtoResponse(
                 enderecoId, "01001-000", "Avenida Central", "1500"
@@ -98,8 +99,8 @@ class RestauranteFindControllerTest {
     @Test
     void deveEncontrarRestauranteComSucesso() {
         // Arrange
-        doReturn(Optional.of(restauranteEntity)).when(findByIdOutputPort).findById(restauranteId);
-        doReturn(restauranteDtoResponse).when(outputMapper).toResponse(restauranteEntity);
+        doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
+        doReturn(restauranteDtoResponse).when(outputPresenter).toResponse(restauranteDao);
 
         // Act
         ResponseEntity<RestauranteDtoResponse> response = restauranteFindController.findById(restauranteId);
@@ -109,8 +110,8 @@ class RestauranteFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(restauranteDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verify(outputMapper, times(1)).toResponse(restauranteEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(restauranteDao);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -126,7 +127,7 @@ class RestauranteFindControllerTest {
 
         assertEquals(restauranteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

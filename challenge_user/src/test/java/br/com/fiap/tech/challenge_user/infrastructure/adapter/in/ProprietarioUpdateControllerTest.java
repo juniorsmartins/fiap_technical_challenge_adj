@@ -1,16 +1,17 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ProprietarioDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ProprietarioUpdateController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ProprietarioDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,10 +30,10 @@ import static org.mockito.Mockito.*;
 class ProprietarioUpdateControllerTest {
 
     @Mock
-    private InputMapper<ProprietarioDtoRequest, Proprietario> inputMapper;
+    private InputPresenter<ProprietarioDtoRequest, Proprietario> inputPresenter;
 
     @Mock
-    private OutputMapper<Proprietario, ProprietarioDtoResponse, ProprietarioEntity> outputMapper;
+    private OutputPresenter<Proprietario, ProprietarioDtoResponse, ProprietarioDao> outputPresenter;
 
     @Mock
     private UpdateInputPort<Proprietario> updateInputPort;
@@ -83,9 +84,9 @@ class ProprietarioUpdateControllerTest {
     @Test
     void deveAtualizarProprietarioComSucesso() {
         // Arrange
-        doReturn(proprietario).when(inputMapper).toDomainIn(proprietarioDtoRequest);
+        doReturn(proprietario).when(inputPresenter).toDomainIn(proprietarioDtoRequest);
         doReturn(proprietario).when(updateInputPort).update(proprietarioId, proprietario);
-        doReturn(proprietarioDtoResponse).when(outputMapper).toDtoResponse(proprietario);
+        doReturn(proprietarioDtoResponse).when(outputPresenter).toDtoResponse(proprietario);
 
         // Act
         ResponseEntity<ProprietarioDtoResponse> response = proprietarioUpdateController.update(proprietarioId, proprietarioDtoRequest);
@@ -94,10 +95,10 @@ class ProprietarioUpdateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(proprietarioDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(proprietarioDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(proprietarioDtoRequest);
         verify(updateInputPort, times(1)).update(proprietarioId, proprietario);
-        verify(outputMapper, times(1)).toDtoResponse(proprietario);
-        verifyNoMoreInteractions(inputMapper, updateInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(proprietario);
+        verifyNoMoreInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 
     @Test
@@ -109,7 +110,7 @@ class ProprietarioUpdateControllerTest {
         );
 
         assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, updateInputPort, outputMapper);
+        verifyNoInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 }
 

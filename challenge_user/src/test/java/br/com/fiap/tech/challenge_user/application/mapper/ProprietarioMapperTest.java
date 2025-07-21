@@ -1,12 +1,14 @@
 package br.com.fiap.tech.challenge_user.application.mapper;
 
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.EnderecoDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ProprietarioDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.EnderecoDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.application.dtos.in.EnderecoDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ProprietarioDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.EnderecoDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.EnderecoPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.ProprietarioPresenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,16 +30,16 @@ import static org.mockito.Mockito.*;
 class ProprietarioMapperTest {
 
     @Mock
-    private EnderecoMapper enderecoMapper;
+    private EnderecoPresenter enderecoPresenter;
 
     @InjectMocks
-    private ProprietarioMapper proprietarioMapper;
+    private ProprietarioPresenter proprietarioMapper;
 
     private ProprietarioDtoRequest proprietarioDtoRequest;
 
     private Proprietario proprietario;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private Endereco endereco;
 
@@ -70,11 +72,11 @@ class ProprietarioMapperTest {
                 endereco, "Proprietário principal"
         );
 
-        var enderecoEntity = new EnderecoEntity(
+        var enderecoEntity = new EnderecoDao(
                 enderecoId, "01001-000", "Avenida Central", "1500"
         );
 
-        proprietarioEntity = new ProprietarioEntity(
+        proprietarioEntity = new ProprietarioDao(
                 usuarioId, "João Silva", "joao@email.com", "jsilva", "jsilva!123",
                 enderecoEntity, "Proprietário principal", dataHoraCriacao, dataHoraEdicao
         );
@@ -87,7 +89,7 @@ class ProprietarioMapperTest {
     @Test
     void deveMapearProprietarioDtoRequestParaProprietario() {
         // Arrange
-        when(enderecoMapper.toEndereco(proprietarioDtoRequest.endereco())).thenReturn(endereco);
+        when(enderecoPresenter.toEndereco(proprietarioDtoRequest.endereco())).thenReturn(endereco);
 
         // Act
         var result = proprietarioMapper.toDomainIn(proprietarioDtoRequest);
@@ -101,14 +103,14 @@ class ProprietarioMapperTest {
         assertThat(result.getSenha()).isEqualTo(proprietarioDtoRequest.senha());
         assertThat(result.getEndereco()).isEqualTo(endereco);
         assertThat(result.getDescricao()).isEqualTo(proprietarioDtoRequest.descricao());
-        verify(enderecoMapper).toEndereco(proprietarioDtoRequest.endereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEndereco(proprietarioDtoRequest.endereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearProprietarioParaProprietarioEntity() {
         // Arrange
-        when(enderecoMapper.toEnderecoEntity(proprietario.getEndereco())).thenReturn(proprietarioEntity.getEndereco());
+        when(enderecoPresenter.toEnderecoEntity(proprietario.getEndereco())).thenReturn(proprietarioEntity.getEndereco());
 
         // Act
         var result = proprietarioMapper.toEntity(proprietario);
@@ -124,14 +126,14 @@ class ProprietarioMapperTest {
         assertThat(result.getDescricao()).isEqualTo(proprietario.getDescricao());
         assertThat(result.getDataHoraCriacao()).isNull();
         assertThat(result.getDataHoraEdicao()).isNull();
-        verify(enderecoMapper).toEnderecoEntity(proprietario.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoEntity(proprietario.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearProprietarioEntityParaProprietario() {
         // Arrange
-        when(enderecoMapper.toEndereco(proprietarioEntity.getEndereco())).thenReturn(endereco);
+        when(enderecoPresenter.toEndereco(proprietarioEntity.getEndereco())).thenReturn(endereco);
 
         // Act
         var result = proprietarioMapper.toDomain(proprietarioEntity);
@@ -145,14 +147,14 @@ class ProprietarioMapperTest {
         assertThat(result.getSenha()).isEqualTo(proprietarioEntity.getSenha());
         assertThat(result.getEndereco()).isEqualTo(endereco);
         assertThat(result.getDescricao()).isEqualTo(proprietarioEntity.getDescricao());
-        verify(enderecoMapper).toEndereco(proprietarioEntity.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEndereco(proprietarioEntity.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearProprietarioParaProprietarioDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(proprietario.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(enderecoPresenter.toEnderecoDtoResponse(proprietario.getEndereco())).thenReturn(enderecoDtoResponse);
 
         // Act
         var result = proprietarioMapper.toDtoResponse(proprietario);
@@ -168,14 +170,14 @@ class ProprietarioMapperTest {
         assertThat(result.descricao()).isEqualTo(proprietario.getDescricao());
         assertThat(result.dataHoraCriacao()).isNull();
         assertThat(result.dataHoraEdicao()).isNull();
-        verify(enderecoMapper).toEnderecoDtoResponse(proprietario.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoDtoResponse(proprietario.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearProprietarioEntityParaProprietarioDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(proprietarioEntity.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(enderecoPresenter.toEnderecoDtoResponse(proprietarioEntity.getEndereco())).thenReturn(enderecoDtoResponse);
 
         // Act
         var result = proprietarioMapper.toResponse(proprietarioEntity);
@@ -191,14 +193,14 @@ class ProprietarioMapperTest {
         assertThat(result.dataHoraEdicao()).isEqualTo(proprietarioEntity.getDataHoraEdicao());
         assertThat(result.endereco()).isEqualTo(enderecoDtoResponse);
         assertThat(result.descricao()).isEqualTo(proprietarioEntity.getDescricao());
-        verify(enderecoMapper).toEnderecoDtoResponse(proprietarioEntity.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoDtoResponse(proprietarioEntity.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 
     @Test
     void deveMapearPageProprietarioEntityParaPageProprietarioDtoResponse() {
         // Arrange
-        when(enderecoMapper.toEnderecoDtoResponse(proprietarioEntity.getEndereco())).thenReturn(enderecoDtoResponse);
+        when(enderecoPresenter.toEnderecoDtoResponse(proprietarioEntity.getEndereco())).thenReturn(enderecoDtoResponse);
         var page = new PageImpl<>(List.of(proprietarioEntity), PageRequest.of(0, 10), 1);
 
         // Act
@@ -220,8 +222,8 @@ class ProprietarioMapperTest {
         assertThat(resultDto.dataHoraEdicao()).isEqualTo(proprietarioEntity.getDataHoraEdicao());
         assertThat(resultDto.endereco()).isEqualTo(enderecoDtoResponse);
         assertThat(resultDto.descricao()).isEqualTo(proprietarioEntity.getDescricao());
-        verify(enderecoMapper).toEnderecoDtoResponse(proprietarioEntity.getEndereco());
-        verifyNoMoreInteractions(enderecoMapper);
+        verify(enderecoPresenter).toEnderecoDtoResponse(proprietarioEntity.getEndereco());
+        verifyNoMoreInteractions(enderecoPresenter);
     }
 }
 

@@ -1,17 +1,17 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Endereco;
-import br.com.fiap.tech.challenge_user.domain.model.Proprietario;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.model.enums.TipoCozinhaEnum;
-import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteCheckRule;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.EnderecoEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ProprietarioEntity;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.entities.Endereco;
+import br.com.fiap.tech.challenge_user.domain.entities.Proprietario;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.entities.enums.TipoCozinhaEnum;
+import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.EnderecoDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ProprietarioDao;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,13 +30,13 @@ import static org.mockito.Mockito.*;
 class RestauranteUpdateUseCaseTest {
 
     @Mock
-    private EntityMapper<Restaurante, RestauranteEntity> entityMapper;
+    private DaoPresenter<Restaurante, RestauranteDao> daoPresenter;
 
     @Mock
-    private CreateOutputPort<RestauranteEntity> createOutputPort;
+    private CreateOutputPort<RestauranteDao> createOutputPort;
 
     @Mock
-    private FindByIdOutputPort<RestauranteEntity> findByIdOutputPort;
+    private FindByIdOutputPort<RestauranteDao> findByIdOutputPort;
 
     @Mock
     private RestauranteCheckRule restauranteCheckRule;
@@ -46,9 +46,9 @@ class RestauranteUpdateUseCaseTest {
 
     private Restaurante restaurante;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteDao restauranteDao;
 
-    private ProprietarioEntity proprietarioEntity;
+    private ProprietarioDao proprietarioEntity;
 
     private UUID restauranteId;
 
@@ -63,7 +63,7 @@ class RestauranteUpdateUseCaseTest {
         proprietario.setEmail("joao@email.com");
         proprietario.setLogin("joao");
 
-        proprietarioEntity = new ProprietarioEntity();
+        proprietarioEntity = new ProprietarioDao();
         proprietarioEntity.setUsuarioId(proprietarioId);
         proprietarioEntity.setNome("João");
         proprietarioEntity.setEmail("joao@email.com");
@@ -74,10 +74,10 @@ class RestauranteUpdateUseCaseTest {
         endereco.setLogradouro("Rua Exemplo");
         endereco.setNumero("123");
 
-        EnderecoEntity enderecoEntity = new EnderecoEntity();
-        enderecoEntity.setCep("12345-678");
-        enderecoEntity.setLogradouro("Rua Exemplo");
-        enderecoEntity.setNumero("123");
+        EnderecoDao enderecoDao = new EnderecoDao();
+        enderecoDao.setCep("12345-678");
+        enderecoDao.setLogradouro("Rua Exemplo");
+        enderecoDao.setNumero("123");
 
         restaurante = new Restaurante();
         restaurante.setRestauranteId(restauranteId);
@@ -88,23 +88,23 @@ class RestauranteUpdateUseCaseTest {
         restaurante.setEndereco(endereco);
         restaurante.setProprietario(proprietario);
 
-        restauranteEntity = new RestauranteEntity();
-        restauranteEntity.setRestauranteId(restauranteId);
-        restauranteEntity.setNome("Restaurante Sabor");
-        restauranteEntity.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
-        restauranteEntity.setHoraAbertura(LocalTime.of(11, 0));
-        restauranteEntity.setHoraFechamento(LocalTime.of(23, 0));
-        restauranteEntity.setEndereco(enderecoEntity);
-        restauranteEntity.setProprietario(proprietarioEntity);
+        restauranteDao = new RestauranteDao();
+        restauranteDao.setRestauranteId(restauranteId);
+        restauranteDao.setNome("Restaurante Sabor");
+        restauranteDao.setTipoCozinhaEnum(TipoCozinhaEnum.ITALIANA);
+        restauranteDao.setHoraAbertura(LocalTime.of(11, 0));
+        restauranteDao.setHoraFechamento(LocalTime.of(23, 0));
+        restauranteDao.setEndereco(enderecoDao);
+        restauranteDao.setProprietario(proprietarioEntity);
     }
 
     @Test
     void deveAtualizarRestauranteQuandoDadosSaoValidos() {
         // Arrange
-        doReturn(Optional.of(restauranteEntity)).when(findByIdOutputPort).findById(restauranteId);
+        doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
         doReturn(proprietarioEntity).when(restauranteCheckRule).checkProprietario(restaurante);
-        doReturn(restauranteEntity).when(createOutputPort).save(restauranteEntity);
-        doReturn(restaurante).when(entityMapper).toDomain(restauranteEntity);
+        doReturn(restauranteDao).when(createOutputPort).save(restauranteDao);
+        doReturn(restaurante).when(daoPresenter).toDomain(restauranteDao);
 
         // Act
         Restaurante result = restauranteUpdateUseCase.update(restauranteId, restaurante);
@@ -114,9 +114,9 @@ class RestauranteUpdateUseCaseTest {
         assertEquals(restaurante, result);
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verify(createOutputPort, times(1)).save(restauranteEntity);
-        verify(entityMapper, times(1)).toDomain(restauranteEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, entityMapper);
+        verify(createOutputPort, times(1)).save(restauranteDao);
+        verify(daoPresenter, times(1)).toDomain(restauranteDao);
+        verifyNoMoreInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -132,7 +132,7 @@ class RestauranteUpdateUseCaseTest {
 
         assertEquals(restauranteId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
-        verifyNoInteractions(restauranteCheckRule, createOutputPort, entityMapper);
+        verifyNoInteractions(restauranteCheckRule, createOutputPort, daoPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 
@@ -140,7 +140,7 @@ class RestauranteUpdateUseCaseTest {
     void deveLancarExcecaoQuandoCheckProprietarioFalha() {
         // Arrange
         IllegalArgumentException exceptionToThrow = new IllegalArgumentException("Proprietário inválido");
-        doReturn(Optional.of(restauranteEntity)).when(findByIdOutputPort).findById(restauranteId);
+        doReturn(Optional.of(restauranteDao)).when(findByIdOutputPort).findById(restauranteId);
         doThrow(exceptionToThrow).when(restauranteCheckRule).checkProprietario(restaurante);
 
         // Act & Assert
@@ -151,7 +151,7 @@ class RestauranteUpdateUseCaseTest {
         assertEquals("Proprietário inválido", exception.getMessage());
         verify(findByIdOutputPort, times(1)).findById(restauranteId);
         verify(restauranteCheckRule, times(1)).checkProprietario(restaurante);
-        verifyNoInteractions(createOutputPort, entityMapper);
+        verifyNoInteractions(createOutputPort, daoPresenter);
         verifyNoMoreInteractions(findByIdOutputPort, restauranteCheckRule);
     }
 
@@ -162,7 +162,7 @@ class RestauranteUpdateUseCaseTest {
                 NullPointerException.class,
                 () -> restauranteUpdateUseCase.update(null, restaurante)
         );
-        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, entityMapper);
+        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, daoPresenter);
     }
 
     @Test
@@ -172,7 +172,7 @@ class RestauranteUpdateUseCaseTest {
                 NullPointerException.class,
                 () -> restauranteUpdateUseCase.update(restauranteId, null)
         );
-        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, entityMapper);
+        verifyNoInteractions(findByIdOutputPort, restauranteCheckRule, createOutputPort, daoPresenter);
     }
 }
 

@@ -1,11 +1,12 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.model.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ItemFindController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.domain.entities.Item;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,17 +27,17 @@ import static org.mockito.Mockito.*;
 class ItemFindControllerTest {
 
     @Mock
-    private OutputMapper<Item, ItemDtoResponse, ItemEntity> outputMapper;
+    private OutputPresenter<Item, ItemDtoResponse, ItemDao> outputPresenter;
 
     @Mock
-    private FindByIdOutputPort<ItemEntity> findByIdOutputPort;
+    private FindByIdOutputPort<ItemDao> findByIdOutputPort;
 
     @InjectMocks
     private ItemFindController itemFindController;
 
     private UUID itemId;
 
-    private ItemEntity itemEntity;
+    private ItemDao itemDao;
 
     private ItemDtoResponse itemDtoResponse;
 
@@ -44,7 +45,7 @@ class ItemFindControllerTest {
     void setUp() {
         itemId = UUID.randomUUID();
 
-        itemEntity = new ItemEntity(itemId, "Coca-Cola", "Refrigerante",
+        itemDao = new ItemDao(itemId, "Coca-Cola", "Refrigerante",
                 new BigDecimal("20.00"), true, "http://link-foto.com.br");
 
         itemDtoResponse = new ItemDtoResponse(
@@ -56,8 +57,8 @@ class ItemFindControllerTest {
     @Test
     void deveEncontrarItemComSucesso() {
         // Arrange
-        doReturn(Optional.of(itemEntity)).when(findByIdOutputPort).findById(itemId);
-        doReturn(itemDtoResponse).when(outputMapper).toResponse(itemEntity);
+        doReturn(Optional.of(itemDao)).when(findByIdOutputPort).findById(itemId);
+        doReturn(itemDtoResponse).when(outputPresenter).toResponse(itemDao);
 
         // Act
         ResponseEntity<ItemDtoResponse> response = itemFindController.findById(itemId);
@@ -67,8 +68,8 @@ class ItemFindControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(itemDtoResponse, response.getBody());
         verify(findByIdOutputPort, times(1)).findById(itemId);
-        verify(outputMapper, times(1)).toResponse(itemEntity);
-        verifyNoMoreInteractions(findByIdOutputPort, outputMapper);
+        verify(outputPresenter, times(1)).toResponse(itemDao);
+        verifyNoMoreInteractions(findByIdOutputPort, outputPresenter);
     }
 
     @Test
@@ -84,7 +85,7 @@ class ItemFindControllerTest {
 
         assertEquals(itemId, exception.getId());
         verify(findByIdOutputPort, times(1)).findById(itemId);
-        verifyNoInteractions(outputMapper);
+        verifyNoInteractions(outputPresenter);
         verifyNoMoreInteractions(findByIdOutputPort);
     }
 }

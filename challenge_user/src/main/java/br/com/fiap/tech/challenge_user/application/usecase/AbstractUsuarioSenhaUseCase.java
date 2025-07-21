@@ -1,10 +1,10 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.FindByIdOutputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.UsuarioNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.exception.http409.IncompatibleOldPasswordException;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.UsuarioEntity;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.FindByIdOutputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.UsuarioNotFoundException;
+import br.com.fiap.tech.challenge_user.application.exception.http409.IncompatibleOldPasswordException;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.UsuarioDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractUsuarioSenhaUseCase<E extends UsuarioEntity> {
+public abstract class AbstractUsuarioSenhaUseCase<E extends UsuarioDao> {
 
     private final FindByIdOutputPort<E> findByIdOutputPort;
 

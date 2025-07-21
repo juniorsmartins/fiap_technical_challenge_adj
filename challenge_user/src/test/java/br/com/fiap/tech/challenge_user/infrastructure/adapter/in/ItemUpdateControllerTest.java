@@ -1,14 +1,15 @@
 package br.com.fiap.tech.challenge_user.infrastructure.adapter.in;
 
-import br.com.fiap.tech.challenge_user.application.mapper.InputMapper;
-import br.com.fiap.tech.challenge_user.application.mapper.OutputMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.UpdateInputPort;
-import br.com.fiap.tech.challenge_user.domain.exception.http404.RecursoNotFoundException;
-import br.com.fiap.tech.challenge_user.domain.exception.http500.InternalServerProblemException;
-import br.com.fiap.tech.challenge_user.domain.model.Item;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.in.ItemDtoRequest;
-import br.com.fiap.tech.challenge_user.infrastructure.dto.out.ItemDtoResponse;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.ItemEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.controllers.ItemUpdateController;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.InputPresenter;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.OutputPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.UpdateInputPort;
+import br.com.fiap.tech.challenge_user.application.exception.http404.RecursoNotFoundException;
+import br.com.fiap.tech.challenge_user.application.exception.http500.InternalServerProblemException;
+import br.com.fiap.tech.challenge_user.domain.entities.Item;
+import br.com.fiap.tech.challenge_user.application.dtos.in.ItemDtoRequest;
+import br.com.fiap.tech.challenge_user.application.dtos.out.ItemDtoResponse;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ItemDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,10 +29,10 @@ import static org.mockito.Mockito.*;
 class ItemUpdateControllerTest {
 
     @Mock
-    private InputMapper<ItemDtoRequest, Item> inputMapper;
+    private InputPresenter<ItemDtoRequest, Item> inputPresenter;
 
     @Mock
-    private OutputMapper<Item, ItemDtoResponse, ItemEntity> outputMapper;
+    private OutputPresenter<Item, ItemDtoResponse, ItemDao> outputPresenter;
 
     @Mock
     private UpdateInputPort<Item> updateInputPort;
@@ -70,9 +71,9 @@ class ItemUpdateControllerTest {
     @Test
     void deveAtualizarItemComSucesso() {
         // Arrange
-        doReturn(item).when(inputMapper).toDomainIn(itemDtoRequest);
+        doReturn(item).when(inputPresenter).toDomainIn(itemDtoRequest);
         doReturn(item).when(updateInputPort).update(itemId, item);
-        doReturn(itemDtoResponse).when(outputMapper).toDtoResponse(item);
+        doReturn(itemDtoResponse).when(outputPresenter).toDtoResponse(item);
 
         // Act
         ResponseEntity<ItemDtoResponse> response = itemUpdateController.update(itemId, itemDtoRequest);
@@ -81,10 +82,10 @@ class ItemUpdateControllerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(itemDtoResponse, response.getBody());
-        verify(inputMapper, times(1)).toDomainIn(itemDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(itemDtoRequest);
         verify(updateInputPort, times(1)).update(itemId, item);
-        verify(outputMapper, times(1)).toDtoResponse(item);
-        verifyNoMoreInteractions(inputMapper, updateInputPort, outputMapper);
+        verify(outputPresenter, times(1)).toDtoResponse(item);
+        verifyNoMoreInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 
     @Test
@@ -96,13 +97,13 @@ class ItemUpdateControllerTest {
         );
 
         assertEquals("exception.internal.server.error", exception.getMessage());
-        verifyNoInteractions(inputMapper, updateInputPort, outputMapper);
+        verifyNoInteractions(inputPresenter, updateInputPort, outputPresenter);
     }
 
     @Test
     void deveLancarRecursoNotFoundExceptionQuandoItemNaoEncontrado() {
         // Arrange
-        doReturn(item).when(inputMapper).toDomainIn(itemDtoRequest);
+        doReturn(item).when(inputPresenter).toDomainIn(itemDtoRequest);
         doThrow(new RecursoNotFoundException(itemId)).when(updateInputPort).update(itemId, item);
 
         // Act & Assert
@@ -112,10 +113,10 @@ class ItemUpdateControllerTest {
         );
 
         assertEquals(itemId, exception.getId());
-        verify(inputMapper, times(1)).toDomainIn(itemDtoRequest);
+        verify(inputPresenter, times(1)).toDomainIn(itemDtoRequest);
         verify(updateInputPort, times(1)).update(itemId, item);
-        verifyNoInteractions(outputMapper);
-        verifyNoMoreInteractions(inputMapper, updateInputPort);
+        verifyNoInteractions(outputPresenter);
+        verifyNoMoreInteractions(inputPresenter, updateInputPort);
     }
 }
 

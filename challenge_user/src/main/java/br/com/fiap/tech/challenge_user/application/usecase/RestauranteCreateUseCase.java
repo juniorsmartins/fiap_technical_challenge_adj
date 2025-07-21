@@ -1,25 +1,25 @@
 package br.com.fiap.tech.challenge_user.application.usecase;
 
-import br.com.fiap.tech.challenge_user.application.mapper.EntityMapper;
-import br.com.fiap.tech.challenge_user.application.port.in.CreateInputPort;
-import br.com.fiap.tech.challenge_user.application.port.out.CreateOutputPort;
-import br.com.fiap.tech.challenge_user.domain.model.Restaurante;
-import br.com.fiap.tech.challenge_user.domain.rule.update.RestauranteCheckRule;
-import br.com.fiap.tech.challenge_user.infrastructure.entity.RestauranteEntity;
+import br.com.fiap.tech.challenge_user.infrastructure.adapters.presenters.DaoPresenter;
+import br.com.fiap.tech.challenge_user.application.interfaces.in.CreateInputPort;
+import br.com.fiap.tech.challenge_user.application.interfaces.out.CreateOutputPort;
+import br.com.fiap.tech.challenge_user.domain.entities.Restaurante;
+import br.com.fiap.tech.challenge_user.domain.rules.update.RestauranteCheckRule;
+import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.RestauranteDao;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RestauranteCreateUseCase extends AbstractCreateUseCase<Restaurante, RestauranteEntity>
+public class RestauranteCreateUseCase extends AbstractCreateUseCase<Restaurante, RestauranteDao>
         implements CreateInputPort<Restaurante> {
 
     private final RestauranteCheckRule restauranteCheckRule;
 
     public RestauranteCreateUseCase(
-            EntityMapper<Restaurante, RestauranteEntity> entityMapper,
-            CreateOutputPort<RestauranteEntity> createOutputPort,
+            DaoPresenter<Restaurante, RestauranteDao> daoPresenter,
+            CreateOutputPort<RestauranteDao> createOutputPort,
             RestauranteCheckRule restauranteCheckRule) {
-        super(entityMapper, createOutputPort);
+        super(daoPresenter, createOutputPort);
         this.restauranteCheckRule = restauranteCheckRule;
     }
 
