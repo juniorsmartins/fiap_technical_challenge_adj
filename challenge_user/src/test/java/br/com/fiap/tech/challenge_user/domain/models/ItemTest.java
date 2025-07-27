@@ -3,6 +3,8 @@ package br.com.fiap.tech.challenge_user.domain.models;
 import br.com.fiap.tech.challenge_user.application.exception.http409.AtributoObrigatorioException;
 import br.com.fiap.tech.challenge_user.domain.entities.Item;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -14,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ItemTest {
+
+    // FIRST(Fast, Isolated. Repeatable, Self-validation e Timely / Rápido, Isolado, Repetível, Autovalidável e Oportuno)
 
     private UUID itemId;
 
@@ -37,73 +41,95 @@ class ItemTest {
         foto = "pizza_margherita.jpg";
     }
 
-    @Test
-    void deveCriarItemComConstrutorVazio() {
-        Item item = new Item();
-        assertNull(item.getItemId());
-        assertNull(item.getNome());
-        assertNull(item.getDescricao());
-        assertNull(item.getPreco());
-        assertFalse(item.isEntrega()); // Valor padrão de boolean
-        assertNull(item.getFoto());
+    @Nested
+    @DisplayName("Item - testes de construtor")
+    class construtorTest{
+
+        @Test
+        @DisplayName("construtor vazio")
+        void deveCriarItemComConstrutorVazio() {
+            Item item = new Item();
+            assertNull(item.getItemId());
+            assertNull(item.getNome());
+            assertNull(item.getDescricao());
+            assertNull(item.getPreco());
+            assertFalse(item.isEntrega()); // Valor padrão de boolean
+            assertNull(item.getFoto());
+        }
+
+        @Test
+        @DisplayName("construtor com 5 parâmetros")
+        void deveCriarItemComConstrutorCincoParametros() {
+            Item item = new Item(nome, descricao, preco, entrega, foto);
+            assertNull(item.getItemId()); // itemId não é definido neste construtor
+            assertEquals(nome, item.getNome());
+            assertEquals(descricao, item.getDescricao());
+            assertEquals(preco, item.getPreco());
+            assertEquals(entrega, item.isEntrega());
+            assertEquals(foto, item.getFoto());
+        }
+
+        @Test
+        @DisplayName("construtor com 6 parâmetros")
+        void deveCriarItemComConstrutorSeisParametros() {
+            Item item = new Item(itemId, nome, descricao, preco, entrega, foto);
+            assertEquals(itemId, item.getItemId());
+            assertEquals(nome, item.getNome());
+            assertEquals(descricao, item.getDescricao());
+            assertEquals(preco, item.getPreco());
+            assertEquals(entrega, item.isEntrega());
+            assertEquals(foto, item.getFoto());
+        }
     }
 
-    @Test
-    void deveCriarItemComConstrutorCincoParametros() {
-        Item item = new Item(nome, descricao, preco, entrega, foto);
-        assertNull(item.getItemId()); // itemId não é definido neste construtor
-        assertEquals(nome, item.getNome());
-        assertEquals(descricao, item.getDescricao());
-        assertEquals(preco, item.getPreco());
-        assertEquals(entrega, item.isEntrega());
-        assertEquals(foto, item.getFoto());
+    @Nested
+    @DisplayName("Item - testes de nome")
+    class nomeTest {
+
+        @Test
+        @DisplayName("nome nulo")
+        void deveLancarExcecaoQuandoNomeEhNuloNoConstrutor() {
+            AtributoObrigatorioException exception = assertThrows(
+                    AtributoObrigatorioException.class,
+                    () -> new Item(itemId, null, descricao, preco, entrega, foto)
+            );
+            assertEquals("nome", exception.getValor());
+        }
+
+        @Test
+        @DisplayName("nome em branco")
+        void deveLancarExcecaoQuandoNomeEhEmBrancoNoConstrutor() {
+            AtributoObrigatorioException exception = assertThrows(
+                    AtributoObrigatorioException.class,
+                    () -> new Item(itemId, "   ", descricao, preco, entrega, foto)
+            );
+            assertEquals("nome", exception.getValor());
+        }
     }
 
-    @Test
-    void deveCriarItemComConstrutorSeisParametros() {
-        Item item = new Item(itemId, nome, descricao, preco, entrega, foto);
-        assertEquals(itemId, item.getItemId());
-        assertEquals(nome, item.getNome());
-        assertEquals(descricao, item.getDescricao());
-        assertEquals(preco, item.getPreco());
-        assertEquals(entrega, item.isEntrega());
-        assertEquals(foto, item.getFoto());
-    }
+    @Nested
+    @DisplayName("Item - testes de descrição")
+    class descricaoTest {
 
-    @Test
-    void deveLancarExcecaoQuandoNomeEhNuloNoConstrutor() {
-        AtributoObrigatorioException exception = assertThrows(
-                AtributoObrigatorioException.class,
-                () -> new Item(itemId, null, descricao, preco, entrega, foto)
-        );
-        assertEquals("nome", exception.getValor());
-    }
+        @Test
+        @DisplayName("descrição nula")
+        void deveLancarExcecaoQuandoDescricaoEhNulaNoConstrutor() {
+            AtributoObrigatorioException exception = assertThrows(
+                    AtributoObrigatorioException.class,
+                    () -> new Item(itemId, nome, null, preco, entrega, foto)
+            );
+            assertEquals("descrição", exception.getValor());
+        }
 
-    @Test
-    void deveLancarExcecaoQuandoNomeEhEmBrancoNoConstrutor() {
-        AtributoObrigatorioException exception = assertThrows(
-                AtributoObrigatorioException.class,
-                () -> new Item(itemId, "   ", descricao, preco, entrega, foto)
-        );
-        assertEquals("nome", exception.getValor());
-    }
-
-    @Test
-    void deveLancarExcecaoQuandoDescricaoEhNulaNoConstrutor() {
-        AtributoObrigatorioException exception = assertThrows(
-                AtributoObrigatorioException.class,
-                () -> new Item(itemId, nome, null, preco, entrega, foto)
-        );
-        assertEquals("descrição", exception.getValor());
-    }
-
-    @Test
-    void deveLancarExcecaoQuandoDescricaoEhEmBrancoNoConstrutor() {
-        AtributoObrigatorioException exception = assertThrows(
-                AtributoObrigatorioException.class,
-                () -> new Item(itemId, nome, "   ", preco, entrega, foto)
-        );
-        assertEquals("descrição", exception.getValor());
+        @Test
+        @DisplayName("descrição em branco")
+        void deveLancarExcecaoQuandoDescricaoEhEmBrancoNoConstrutor() {
+            AtributoObrigatorioException exception = assertThrows(
+                    AtributoObrigatorioException.class,
+                    () -> new Item(itemId, nome, "   ", preco, entrega, foto)
+            );
+            assertEquals("descrição", exception.getValor());
+        }
     }
 
     @Test
@@ -179,21 +205,31 @@ class ItemTest {
 
     @Test
     void deveLancarExcecaoQuandoNomeEhNuloNoSetter() {
+        // Arrange (padrão triplo A - Arrange/Action/Assert)
         Item item = new Item();
+
+        // Action
         AtributoObrigatorioException exception = assertThrows(
                 AtributoObrigatorioException.class,
                 () -> item.setNome(null)
         );
+
+        // Assert
         assertEquals("nome", exception.getValor());
     }
 
     @Test
     void deveLancarExcecaoQuandoNomeEhEmBrancoNoSetter() {
+        // Arrange
         Item item = new Item();
+
+        // Action
         AtributoObrigatorioException exception = assertThrows(
                 AtributoObrigatorioException.class,
                 () -> item.setNome("   ")
         );
+
+        // Assert
         assertEquals("nome", exception.getValor());
     }
 
