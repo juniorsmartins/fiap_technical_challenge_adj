@@ -84,7 +84,7 @@ interfaces abstratas (OutputPort).
 
 #### Diagrama da Arquitetura
 
-![TechChallenge3](docs/DiagramaTechChallenge-v6.png)
+![TechChallenge3](docs/DiagramaTechChallenge-v8.png)
 
 Imagem de autoria do responsável pelo projeto. Desenvolvida por meio do software StarUML. 
 
@@ -651,9 +651,9 @@ regras que garantes que tais propriedades sejam únicas.
 
 O arquivo de coleções de teste do Postman está neste diretório: https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
 
-[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v6.postman_collection.json)  
-
-ou aqui: https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v6.postman_collection.json
+[Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v8.postman_collection.json)  
+ 
+ou aqui: https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v8.postman_collection.json
 
 #### Descrição dos Testes Manuais
 
@@ -696,7 +696,7 @@ exceções.
 O projeto possui um submódulo, chamado acceptanceTest, para os testes de integração/aceitação. Esses testes foram construídos via BDD/TDD 
 com Cucumber. Bem como também há testes unitários construídos com JUnit e Mockito e H2, com cobertura de testes acima de 80%. 
 
-![TechChallenge3](docs/CoberturaTestes.png)
+![TechChallenge3](docs/CoberturaDeTestes-v8.png)
 
 
 ## Autoria
