@@ -638,11 +638,10 @@ regras que garantes que tais propriedades sejam únicas.
 
 #### Link para a Collection do Postman
 
-O arquivo de coleções de teste do Postman está neste diretório: https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
+O arquivo de coleções de teste do Postman está no diretório "postman": 
+https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/postman
 
 [Link para baixar coleção do Postman - Clique aqui](postman/TechChallenge-ADJ-v8.postman_collection.json)  
- 
-ou aqui: https://github.com/juniorsmartins/fiap_technical_challenge_adj/blob/master/postman/TechChallenge-ADJ-v8.postman_collection.json
 
 #### Descrição dos Testes Manuais
 
