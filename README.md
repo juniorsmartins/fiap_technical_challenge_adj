@@ -664,7 +664,14 @@ para execução. A aplicação possui um arquivo, chamado import.sql, responsáv
 
 [Link para o repositório do código](https://github.com/juniorsmartins/fiap_technical_challenge_adj)
 
-https://github.com/juniorsmartins/fiap_technical_challenge_adj
+https://github.com/juniorsmartins/fiap_technical_challenge_adj 
+
+
+## Vídeos
+
+O vídeo de apresentação e complementares estão no diretório "video" - na raíz do projeto. Entre no diretório para ter acesso.
+
+[Ou pode tentar acessar pelo link do diretório](https://github.com/juniorsmartins/fiap_technical_challenge_adj/tree/master/video)
 
 
 ## Notas
