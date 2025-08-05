@@ -7,6 +7,7 @@ import br.com.fiap.tech.challenge_user.domain.entities.Cliente;
 import br.com.fiap.tech.challenge_user.domain.rules.UsuarioRulesStrategy;
 import br.com.fiap.tech.challenge_user.infrastructure.drivers.daos.ClienteDao;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -61,6 +62,7 @@ class ClienteCreateUseCaseTest {
     }
 
     @Test
+    @DisplayName("Create - regras válidas")
     void deveCriarClienteQuandoRegrasSaoValidas() {
         // Arrange
         when(daoPresenter.toEntity(cliente)).thenReturn(clienteDao);
@@ -82,27 +84,33 @@ class ClienteCreateUseCaseTest {
     }
 
     @Test
+    @DisplayName("Create - exceção por regra falha")
     void deveLancarExcecaoQuandoRegraFalha() {
         // Arrange
         doThrow(new UsuarioNonUniqueNomeException("Maria")).when(rule1).executar(cliente);
 
-        // Act & Assert
+        // Act
         UsuarioNonUniqueNomeException exception = assertThrows(
                 UsuarioNonUniqueNomeException.class,
                 () -> clienteCreateUseCase.create(cliente)
         );
+
+        // Assert
         assertEquals("Maria", exception.getValor());
         verify(rule1, times(1)).executar(cliente);
         verifyNoInteractions(rule2, daoPresenter, createOutputPort);
     }
 
     @Test
+    @DisplayName("Create - exceção por valor nulo")
     void deveLancarNullPointerExceptionQuandoUsuarioEhNulo() {
-        // Act & Assert
+        // Act
         assertThrows(
                 NullPointerException.class,
                 () -> clienteCreateUseCase.create(null)
         );
+
+        // Assert
         verifyNoInteractions(rule1, rule2, daoPresenter, createOutputPort);
     }
 }
