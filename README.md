@@ -10,8 +10,9 @@ Equipe: Junior Martins (rm364241)
 4. Configuração do Projeto;
 5. Qualidade do Código;
 6. Collections para Teste;
-7. Notas;
-8. Autoria.
+7. Vídeos;
+8. Notas;
+9. Autoria.
 
 
 ## Introdução
