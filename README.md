@@ -59,28 +59,17 @@ para documentação e testes automatizados
 
 #### Descrição da Arquitetura 
 
-- Ports and Adapters (Arquitetura Hexagonal):
-
-A aplicação utiliza o padrão Ports and Adapters, onde as portas definem contratos entre camadas.
-
-Portas de Entrada: Interfaces com sufixo InputPort permitem que a camada de Infraestrutura acesse a lógica 
-de negócio.
-
-Portas de Saída: Interfaces com o sufixo OutputPort permitem que a camada de negócio acesse a persistência 
-sem depender de detalhes de implementação.
-
-Adaptadores: classes com o sufixo Controller (adaptadores de entrada) traduzem requisições HTTP em chamadas 
-às portas de entrada, enquanto classes com sufixo Adapter (adaptadores de saída) traduzem chamadas das 
-portas de saída em operações de banco de dados.
-
 - Clean Architecture:
 
-A aplicação segue princípios da Clean Architecture, com as regras de negócio (Application e Domain) no 
-centro, independente de detalhes de infraestrutura. A persistência e a apresentação são externas e dependem 
-do núcleo por meio de interfaces.
-
-Exemplo: A lógica de negócio não depende diretamente de Spring Data JPA ou do framework HTTP, mas de 
-interfaces abstratas (OutputPort).
+A Arquitetura Limpa (Clean Architecture), proposta por Robert C. Martin, é um 
+conjunto de princípios para criar sistemas de software robustos, escaláveis e 
+fáceis de manter. Ela organiza o código em camadas concêntricas, priorizando a 
+separação de responsabilidades. No centro, estão as entidades, que representam 
+as regras de negócio principais. Ao redor, camadas como casos de uso definem a 
+lógica da aplicação, enquanto interfaces e frameworks ficam nas camadas 
+externas. A comunicação entre camadas segue a dependência inversa, onde camadas 
+internas não conhecem as externas. Isso promove flexibilidade, testabilidade e 
+independência de tecnologias externas.
 
 #### Diagrama da Arquitetura
 
